@@ -621,7 +621,11 @@ justify-content:center;
 
 margin-top:50px;
 
-animation:fade .8s;
+opacity:0;
+
+transform:translateY(120px) scale(.8);
+
+transition:1.2s ease;
 
 }
 
@@ -700,5 +704,74 @@ background:#b99229;
 color:white;
 
 cursor:pointer;
+
+}
+#memoryViewer.show{
+
+display:flex;
+
+opacity:1;
+
+transform:translateY(0) scale(1);
+
+}
+
+#chest{
+
+position:relative;
+
+font-size:140px;
+
+cursor:pointer;
+
+transition:.6s;
+
+animation:float 3s infinite ease-in-out;
+
+}
+
+#chest.open{
+
+transform:scale(1.08);
+
+filter:drop-shadow(0 0 25px gold);
+
+}
+
+#chest::after{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+
+bottom:35px;
+
+transform:translateX(-50%);
+
+width:20px;
+
+height:20px;
+
+background:rgba(255,215,0,.6);
+
+border-radius:50%;
+
+filter:blur(12px);
+
+opacity:0;
+
+transition:.8s;
+
+}
+
+#chest.open::after{
+
+opacity:1;
+
+width:160px;
+
+height:160px;
 
 }
