@@ -262,9 +262,24 @@ openButton.addEventListener("click",()=>{
 
         setTimeout(() => {
 
-    document.getElementById("memoryViewer").style.display = "flex";
+    chest.classList.add("open");
 
-},1200);
+},300);
+
+setTimeout(() => {
+
+    const viewer =
+    document.getElementById("memoryViewer");
+
+    viewer.style.display = "flex";
+
+    setTimeout(()=>{
+
+        viewer.classList.add("show");
+
+    },50);
+
+},1000);
     },1200);
 
 });
