@@ -87,11 +87,13 @@ function unlockWebsite(){
 
         passwordPage.classList.remove("active");
 
-        setTimeout(()=>{
+       setTimeout(()=>{
 
-            welcomePage.classList.add("active");
+    welcomePage.classList.add("active");
 
-        },500);
+    startTyping();
+
+},500);
 
     }
 
