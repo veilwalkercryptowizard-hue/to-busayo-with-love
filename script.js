@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
 
         },400);
 
-      },3000);   
+      },800);   
 
 });
 
@@ -290,28 +290,7 @@ openButton.addEventListener("click",()=>{
     },1000);
 
 });
-    setTimeout(()=>{
 
-        chest.classList.add("open");
-
-    },300);
-
-    setTimeout(()=>{
-
-        const viewer =
-        document.getElementById("memoryViewer");
-
-        viewer.style.display="flex";
-
-        setTimeout(()=>{
-
-            viewer.classList.add("show");
-
-        },50);
-
-    },1000);
-
-});
 /* =========================
 MEMORIES
 ========================= */
