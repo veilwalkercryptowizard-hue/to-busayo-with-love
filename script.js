@@ -1,129 +1,227 @@
-/* =====================================
+/* ==========================================
    TO BUSAYO, WITH LOVE
+   VERSION 2
    SCRIPT.JS
-===================================== */
+========================================== */
 
-// -------------------------------
-// Elements
-// -------------------------------
+"use strict";
 
-const loadingScreen = document.getElementById("loading-screen");
-const passwordPage = document.getElementById("password-page");
-const welcomePage = document.getElementById("welcome-page");
+/* ==========================================
+   ELEMENTS
+========================================== */
 
-const unlockButton = document.getElementById("unlockButton");
-const passwordInput = document.getElementById("password");
-const error = document.getElementById("error");
+const pages = {
 
-const beginJourney = document.getElementById("beginJourney");
+    loading: document.getElementById("loading-screen"),
 
-const music = document.getElementById("bgMusic");
+    password: document.getElementById("password-page"),
 
-// -------------------------------
-// Loading Screen
-// -------------------------------
+    welcome: document.getElementById("welcome-page"),
 
-window.addEventListener("load", () => {
+    memory: document.getElementById("memoryPage"),
 
-    setTimeout(() => {
+    gallery: document.getElementById("galleryPage"),
 
-        loadingScreen.style.opacity = "0";
+    reasons: document.getElementById("reasonsPage"),
 
-        setTimeout(() => {
+    letter: document.getElementById("letterPage"),
 
-            loadingScreen.style.display = "none";
+    ending: document.getElementById("endingPage")
 
-        },400);
+};
 
-      },800);   
+const passwordInput =
+document.getElementById("password");
+
+const unlockButton =
+document.getElementById("unlockButton");
+
+const error =
+document.getElementById("error");
+
+const music =
+document.getElementById("bgMusic");
+
+const beginJourney =
+document.getElementById("beginJourney");
+
+/* ==========================================
+   CURRENT PAGE
+========================================== */
+
+let currentPage = 0;
+
+/* ==========================================
+   PAGE ORDER
+========================================== */
+
+const pageOrder = [
+
+    "password",
+
+    "welcome",
+
+    "memory",
+
+    "gallery",
+
+    "reasons",
+
+    "letter",
+
+    "ending"
+
+];
+
+/* ==========================================
+   SHOW PAGE
+========================================== */
+
+function showPage(pageName){
+
+    Object.values(pages).forEach(page=>{
+
+        if(page){
+
+            page.classList.remove("active");
+
+        }
+
+    });
+
+    pages[pageName].classList.add("active");
+
+}
+
+/* ==========================================
+   NEXT PAGE
+========================================== */
+
+function nextPage(){
+
+    if(currentPage < pageOrder.length-1){
+
+        currentPage++;
+
+        showPage(pageOrder[currentPage]);
+
+    }
+
+}
+
+/* ==========================================
+   PREVIOUS PAGE
+========================================== */
+
+function previousPage(){
+
+    if(currentPage > 0){
+
+        currentPage--;
+
+        showPage(pageOrder[currentPage]);
+
+    }
+
+}
+
+/* ==========================================
+   LOADING SCREEN
+========================================== */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        pages.loading.style.opacity="0";
+
+        setTimeout(()=>{
+
+            pages.loading.style.display="none";
+
+            showPage("password");
+
+        },300);
+
+    },500);
 
 });
 
-// -------------------------------
-// Music Fade In
-// -------------------------------
+/* ==========================================
+   MUSIC
+========================================== */
 
 function startMusic(){
 
     music.volume = 0;
 
-    music.play()
-.then(()=>{
-
-console.log("Music started");
-
-})
-.catch((error)=>{
-
-console.log("Music blocked", error);
-
-});
+    music.play().catch(()=>{});
 
     let volume = 0;
 
     const fade = setInterval(()=>{
 
-        if(volume < 1){
+        volume += 0.05;
 
-            volume += 0.05;
+        if(volume >= 1){
 
-            music.volume = volume;
-
-        }else{
+            volume = 1;
 
             clearInterval(fade);
 
         }
 
+        music.volume = volume;
+
     },150);
 
 }
 
-// -------------------------------
-// Password
-// -------------------------------
+/* ==========================================
+   PASSWORD
+========================================== */
 
 function unlockWebsite(){
 
-    const pass = passwordInput.value.trim().toLowerCase();
+    const pass =
 
-    if(
-        pass === "july"
-    ){
+    passwordInput.value
 
-        error.innerHTML = "";
+    .trim()
+
+    .toLowerCase();
+
+    if(pass==="july"){
+
+        error.textContent="";
 
         startMusic();
 
-        passwordPage.classList.remove("active");
+        currentPage=1;
 
-       setTimeout(()=>{
+        showPage("welcome");
 
-    welcomePage.classList.add("active");
-
-    startTyping();
-
-},500);
+        startTyping();
 
     }
 
     else{
 
-        error.innerHTML =
-        "🤍 Wrong password. Try again.";
+        error.textContent=
+
+        "🤍 Wrong password.";
 
     }
 
 }
 
-unlockButton.addEventListener(
-"click",
-unlockWebsite
-);
+unlockButton.onclick = unlockWebsite;
 
 passwordInput.addEventListener(
-"keypress",
-function(e){
+
+"keydown",
+
+e=>{
 
 if(e.key==="Enter"){
 
@@ -131,277 +229,205 @@ unlockWebsite();
 
 }
 
-});
+}
 
-// -------------------------------
-// Begin Journey
-// -------------------------------
+);
 
-beginJourney.addEventListener("click",()=>{
+/* ==========================================
+   STORY ENGINE
+========================================== */
 
-    const transition =
+const chapters = [
+
+    {
+        id: "welcome",
+        title: "Chapter One"
+    },
+
+    {
+        id: "memory",
+        title: "The Keepsake Chest"
+    },
+
+    {
+        id: "gallery",
+        title: "Our Little Album"
+    },
+
+    {
+        id: "reasons",
+        title: "Twenty Three Reasons"
+    },
+
+    {
+        id: "letter",
+        title: "One Last Thing"
+    },
+
+    {
+        id: "ending",
+        title: "Happy Birthday"
+    }
+
+];
+
+
+/* ==========================================
+   GO TO PAGE
+========================================== */
+
+function goTo(page){
+
+    Object.values(pages).forEach(p=>{
+
+        p.classList.remove("active");
+
+    });
+
+    pages[page].classList.add("active");
+
+}
+
+
+/* ==========================================
+   PAGE TRANSITION
+========================================== */
+
+function transition(nextPage){
+
+    const transitionScreen =
     document.getElementById("chapterTransition");
 
-    transition.classList.add("show");
+    transitionScreen.classList.add("show");
 
     setTimeout(()=>{
 
-        welcomePage.classList.remove("active");
+        goTo(nextPage);
 
-        transition.classList.remove("show");
+    },700);
 
-        // Chapter Two starts here
+    setTimeout(()=>{
 
-        document
-.getElementById("memoryPage")
-.classList.add("active");
-    },3000);
+        transitionScreen.classList.remove("show");
 
-});
-/* =========================
-Typing Animation
-========================= */
-
-const title =
-"Happy Birthday\nBusayo 🤍";
-
-const paragraph =
-"Every beautiful journey begins with a single memory.\nToday is all about celebrating you.";
-
-function typeText(element,text,speed,callback){
-
-    let i=0;
-
-    element.innerHTML="";
-
-    const timer=setInterval(()=>{
-
-        if(i<text.length){
-
-            if(text.charAt(i)==="\n"){
-
-                element.innerHTML+="<br>";
-
-            }else{
-
-                element.innerHTML+=text.charAt(i);
-
-            }
-
-            i++;
-
-        }else{
-
-            clearInterval(timer);
-
-            if(callback){
-
-                callback();
-
-            }
-
-        }
-
-    },speed);
+    },1400);
 
 }
 
-function startTyping(){
+/* ==========================================
+   BEGIN JOURNEY
+========================================== */
 
-    const titleElement=
-    document.getElementById("typingTitle");
+beginJourney.onclick = ()=>{
 
-    const textElement=
-    document.getElementById("typingText");
+    currentPage = 2;
 
-    const button=
-    document.getElementById("beginJourney");
+    transition("memory");
 
-    button.style.opacity="0";
+};
 
-    typeText(
-
-        titleElement,
-
-        title,
-
-        30,
-
-        ()=>{
-
-            typeText(
-
-                textElement,
-
-                paragraph,
-
-                18,
-
-                ()=>{
-
-                    button.style.transition="1s";
-
-                    button.style.opacity="1";
-
-                }
-
-            );
-
-        }
-
-    );
-
-}
-/* ===========================
-CHEST
-=========================== */
+/* ==========================================
+   TREASURE CHEST
+========================================== */
 
 const chest =
 document.getElementById("chest");
 
-const openButton =
+const openChest =
 document.getElementById("openChest");
 
-openButton.addEventListener("click",()=>{
+let chestOpened = false;
 
-    chest.style.transform = "scale(1.15)";
+openChest.onclick = ()=>{
+
+    if(chestOpened) return;
+
+    chestOpened = true;
+
+    chest.classList.add("open");
+
+    openChest.disabled = true;
 
     setTimeout(()=>{
 
-        chest.classList.add("open");
+        currentPage = 3;
 
-        openButton.style.display = "none";
+        transition("gallery");
 
-    },300);
+        loadMemory();
 
-    setTimeout(()=>{
+    },2200);
 
-        const viewer =
-        document.getElementById("memoryViewer");
+};
 
-        viewer.style.display = "flex";
+/* ==========================================
+   MEMORY GALLERY
+========================================== */
 
-        setTimeout(()=>{
+let currentMemory = 0;
 
-            viewer.classList.add("show");
-
-        },50);
-
-    },1000);
-
-});
-
-/* =========================
-MEMORIES
-========================= */
-
-const memories=[
-
-{
-
-image:"photo1.jpg",
-
-title:"The Beginning",
-
-caption:"Every beautiful story begins with one unforgettable smile."
-
-},
-
-{
-
-image:"photo2.jpg",
-
-title:"Another Beautiful Moment",
-
-caption:"Every memory with you became another reason to smile."
-
-},
-
-{
-
-image:"photo3.jpg",
-
-title:"A Moment Worth Keeping",
-
-caption:"Some moments deserve to live forever."
-
-}
-
-];
-
-let currentMemory=0;
-
-const memoryImage=
+const image =
 document.getElementById("memoryImage");
 
-const memoryTitle=
+const title =
 document.getElementById("memoryTitle");
 
-const memoryCaption=
+const caption =
 document.getElementById("memoryCaption");
 
-function loadMemory(direction="next"){
+const counter =
+document.getElementById("memoryCounter");
 
-const card =
-document.querySelector(".polaroid");
+function loadMemory(){
 
-card.classList.remove(
-"show",
-"next",
-"previous"
-);
+    image.src =
+    memories[currentMemory].image;
 
-card.classList.add(direction);
+    title.textContent =
+    memories[currentMemory].title;
 
-setTimeout(()=>{
+    caption.textContent =
+    memories[currentMemory].caption;
 
-memoryImage.src=
-memories[currentMemory].image;
+    counter.textContent =
 
-memoryTitle.innerHTML=
-memories[currentMemory].title;
-
-memoryCaption.innerHTML=
-memories[currentMemory].caption;
-
-card.classList.remove(
-"next",
-"previous"
-);
-
-card.classList.add("show");
-
-},400);
+    `Memory ${currentMemory+1}
+    of ${memories.length}`;
 
 }
 
-document.getElementById("nextMemory").onclick=()=>{
+document
+.getElementById("nextMemory")
+.onclick=()=>{
 
-currentMemory++;
+    currentMemory++;
 
-if(currentMemory>=memories.length){
+    if(currentMemory>=memories.length){
 
-currentMemory=0;
+        currentPage = 4;
 
-}
+        transition("reasons");
 
-loadMemory("next");
+        return;
+
+    }
+
+    loadMemory();
 
 };
 
-document.getElementById("previousMemory").onclick=()=>{
 
-currentMemory--;
 
-if(currentMemory<0){
+document
+.getElementById("previousMemory")
+.onclick=()=>{
 
-currentMemory=
-memories.length-1;
+    if(currentMemory>0){
 
-}
+        currentMemory--;
 
-loadMemory("previous");
+        loadMemory();
+
+    }
 
 };
-
-loadMemory("next");
