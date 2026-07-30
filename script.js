@@ -260,8 +260,11 @@ openButton.addEventListener("click",()=>{
 
     setTimeout(()=>{
 
-        alert("📸 The first memory will rise here...");
+        setTimeout(() => {
 
+    document.getElementById("memoryViewer").style.display = "flex";
+
+},1200);
     },1200);
 
 });
