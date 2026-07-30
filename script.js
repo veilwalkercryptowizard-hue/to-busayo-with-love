@@ -129,9 +129,22 @@ unlockWebsite();
 
 beginJourney.addEventListener("click",()=>{
 
-    alert(
-"🚧 Chapter Two (The Keepsake Chest) is coming next!"
-    );
+    const transition =
+    document.getElementById("chapterTransition");
+
+    transition.classList.add("show");
+
+    setTimeout(()=>{
+
+        welcomePage.classList.remove("active");
+
+        transition.classList.remove("show");
+
+        // Chapter Two starts here
+
+        alert("🎁 The Keepsake Chest is loading...");
+
+    },3000);
 
 });
 /* =========================
