@@ -332,7 +332,20 @@ document.getElementById("memoryTitle");
 const memoryCaption=
 document.getElementById("memoryCaption");
 
-function loadMemory(){
+function loadMemory(direction="next"){
+
+const card =
+document.querySelector(".polaroid");
+
+card.classList.remove(
+"show",
+"next",
+"previous"
+);
+
+card.classList.add(direction);
+
+setTimeout(()=>{
 
 memoryImage.src=
 memories[currentMemory].image;
@@ -342,6 +355,15 @@ memories[currentMemory].title;
 
 memoryCaption.innerHTML=
 memories[currentMemory].caption;
+
+card.classList.remove(
+"next",
+"previous"
+);
+
+card.classList.add("show");
+
+},400);
 
 }
 
@@ -355,7 +377,7 @@ currentMemory=0;
 
 }
 
-loadMemory();
+loadMemory("next");
 
 };
 
@@ -370,6 +392,6 @@ memories.length-1;
 
 }
 
-loadMemory();
+loadMemory("previous");
 
 };
