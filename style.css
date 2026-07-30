@@ -320,3 +320,93 @@ padding:30px;
 }
 
 }
+/* Hide website until password is correct */
+#website{
+    display:none;
+}
+
+/* Sections */
+.section{
+    padding:80px 10%;
+}
+
+/* Gallery */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.photo-card{
+    overflow:hidden;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.photo-card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    display:block;
+    transition:.4s;
+}
+
+.photo-card img:hover{
+    transform:scale(1.05);
+}
+
+/* Timeline */
+.timeline{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.timeline-card{
+    flex:1;
+    min-width:250px;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+/* Letter */
+.letter{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    line-height:1.8;
+}
+
+/* Reasons */
+.reasons li{
+    margin:15px 0;
+    font-size:18px;
+}
+
+/* Password layout with cover image */
+.password-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.cover-image img{
+    width:350px;
+    border-radius:20px;
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+@media(max-width:768px){
+    .password-container{
+        flex-direction:column;
+    }
+
+    .cover-image img{
+        width:90%;
+    }
+}
