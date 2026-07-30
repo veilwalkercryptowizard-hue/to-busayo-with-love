@@ -829,3 +829,26 @@ POLAROID ANIMATIONS
     text-align:center;
 
 }
+/* ===========================
+MEMORY FADE
+=========================== */
+
+.fade-out{
+
+    opacity:0;
+
+    transform:scale(.95);
+
+    transition:.5s ease;
+
+}
+
+.fade-in{
+
+    opacity:1;
+
+    transform:scale(1);
+
+    transition:.5s ease;
+
+}
