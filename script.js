@@ -15,6 +15,7 @@ function checkPassword() {
     ) {
         document.getElementById("password-screen").style.display = "none";
         document.getElementById("website").style.display = "block";
+        document.getElementById("bgMusic").play();
         window.scrollTo(0, 0);
     } else {
         document.getElementById("error").innerHTML =
