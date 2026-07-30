@@ -33,7 +33,9 @@ window.addEventListener("load", () => {
 
             loadingScreen.style.display = "none";
 
-        },800);
+        },400);
+
+      },3000);   
 
 });
 
@@ -223,7 +225,7 @@ function startTyping(){
 
         title,
 
-        70,
+        30,
 
         ()=>{
 
@@ -233,7 +235,7 @@ function startTyping(){
 
                 paragraph,
 
-                35,
+                18,
 
                 ()=>{
 
@@ -262,26 +264,22 @@ document.getElementById("openChest");
 
 openButton.addEventListener("click",()=>{
 
-    chest.style.transform="scale(1.15)";
-    openButton.addEventListener("click",()=>{
-
-    chest.style.transform="scale(1.15)";
+    chest.style.transform = "scale(1.15)";
 
     setTimeout(()=>{
 
         chest.classList.add("open");
 
-       openButton.style.display="none";
+        openButton.style.display = "none";
 
     },300);
-
 
     setTimeout(()=>{
 
         const viewer =
         document.getElementById("memoryViewer");
 
-        viewer.style.display="flex";
+        viewer.style.display = "flex";
 
         setTimeout(()=>{
 
