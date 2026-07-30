@@ -609,3 +609,96 @@ transform:translateY(0);
 }
 
 }
+/* =========================
+POLAROID
+========================= */
+
+#memoryViewer{
+
+display:none;
+
+justify-content:center;
+
+margin-top:50px;
+
+animation:fade .8s;
+
+}
+
+.polaroid{
+
+background:white;
+
+padding:20px;
+
+border-radius:12px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+width:340px;
+
+text-align:center;
+
+transform:rotate(-2deg);
+
+transition:.5s;
+
+}
+
+.polaroid:hover{
+
+transform:rotate(0deg) scale(1.03);
+
+}
+
+.polaroid img{
+
+width:100%;
+
+border-radius:6px;
+
+display:block;
+
+}
+
+.polaroid h3{
+
+margin-top:18px;
+
+font-family:'Playfair Display',serif;
+
+}
+
+.polaroid p{
+
+margin-top:10px;
+
+color:#666;
+
+}
+
+.memoryButtons{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:25px;
+
+}
+
+.memoryButtons button{
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:30px;
+
+background:#b99229;
+
+color:white;
+
+cursor:pointer;
+
+}
