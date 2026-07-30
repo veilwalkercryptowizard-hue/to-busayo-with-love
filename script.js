@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
 
         },1000);
 
-    },2500);
+    },1000);
 
 });
 
@@ -47,7 +47,17 @@ function startMusic(){
 
     music.volume = 0;
 
-    music.play().catch(()=>{});
+    music.play()
+.then(()=>{
+
+console.log("Music started");
+
+})
+.catch((error)=>{
+
+console.log("Music blocked", error);
+
+});
 
     let volume = 0;
 
