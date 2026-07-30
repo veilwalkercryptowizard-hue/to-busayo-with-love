@@ -1115,3 +1115,35 @@ SCROLLBAR
     background:#f4f4f4;
 
 }
+
+.envelope{
+
+    transition:.35s;
+
+}
+
+.envelope.opened{
+
+    background:#f8f1dc;
+
+    transform:scale(1.05);
+
+}
+
+.envelope.opened:hover{
+
+    transform:scale(1.08);
+
+}
+
+#reasonsPage small{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#999;
+
+    font-size:16px;
+
+}
