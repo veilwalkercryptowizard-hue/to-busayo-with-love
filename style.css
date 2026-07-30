@@ -1,7 +1,6 @@
-/* =====================================
-   TO BUSAYO, WITH LOVE 🤍
-   STYLE.CSS - PART 1
-===================================== */
+/* =========================
+   TO BUSAYO, WITH LOVE
+========================= */
 
 *{
     margin:0;
@@ -11,79 +10,126 @@
 
 html,
 body{
+
     width:100%;
     height:100%;
-    overflow:hidden;          /* No scrolling */
+    overflow:hidden;
+
     font-family:'Poppins',sans-serif;
-    background:#f8f5ef;
+
+    background:#f8f6f1;
+
+    color:#222;
+
 }
 
-/* =====================================
-LOADING SCREEN
-===================================== */
+/* =========================
+LOADING
+========================= */
 
 #loading-screen{
+
     position:fixed;
+
     inset:0;
-    background:#f8f5ef;
+
+    background:#f8f6f1;
+
     display:flex;
+
+    flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
+
     z-index:9999;
+
     transition:1s;
+
 }
 
-.loader-content{
-    text-align:center;
-}
+#loading-screen h1{
 
-.loader-content h1{
-    font-size:48px;
-    color:#b8860b;
     font-family:'Playfair Display',serif;
+
+    font-size:60px;
+
+    color:#b99229;
+
     margin-bottom:20px;
+
 }
 
-.loader-content p{
+#loading-screen p{
+
     color:#666;
+
     font-size:18px;
+
 }
 
-/* =====================================
+/* =========================
 PAGES
-===================================== */
+========================= */
 
 .page{
-    width:100vw;
-    height:100vh;
+
+    position:absolute;
+
+    inset:0;
 
     display:none;
 
     justify-content:center;
+
     align-items:center;
 
-    position:absolute;
-    top:0;
-    left:0;
-
     padding:50px;
+
+    animation:fade .8s;
+
 }
 
 .page.active{
+
     display:flex;
+
 }
 
-/* =====================================
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* =========================
 PASSWORD PAGE
-===================================== */
+========================= */
 
 .password-wrapper{
 
     width:90%;
 
-    max-width:1350px;
+    max-width:1300px;
 
-    height:80vh;
+    height:82vh;
+
+    display:flex;
 
     background:white;
 
@@ -91,19 +137,15 @@ PASSWORD PAGE
 
     overflow:hidden;
 
-    display:flex;
-
-    box-shadow:0 25px 60px rgba(0,0,0,.12);
+    box-shadow:0 25px 60px rgba(0,0,0,.10);
 
 }
 
-/* LEFT SIDE */
+/* LEFT */
 
-.image-side{
+.photo-side{
 
     flex:1;
-
-    background:#eee;
 
     display:flex;
 
@@ -111,21 +153,23 @@ PASSWORD PAGE
 
     align-items:center;
 
+    background:#faf8f4;
+
     padding:25px;
 
 }
 
-.image-side img{
+.photo-side img{
 
-    width:100%;
+    max-width:100%;
 
-    height:100%;
+    max-height:100%;
 
-    object-fit:contain;      /* NEVER crop */
+    object-fit:contain;
 
 }
 
-/* RIGHT SIDE */
+/* RIGHT */
 
 .login-side{
 
@@ -143,9 +187,9 @@ PASSWORD PAGE
 
 .login-side h5{
 
-    color:#caa52d;
+    color:#b99229;
 
-    letter-spacing:3px;
+    letter-spacing:4px;
 
     margin-bottom:15px;
 
@@ -153,7 +197,7 @@ PASSWORD PAGE
 
 .login-side h1{
 
-    font-size:52px;
+    font-size:55px;
 
     font-family:'Playfair Display',serif;
 
@@ -195,7 +239,7 @@ PASSWORD PAGE
 
     border-radius:50px;
 
-    background:#caa52d;
+    background:#b99229;
 
     color:white;
 
@@ -211,15 +255,7 @@ PASSWORD PAGE
 
     transform:translateY(-4px);
 
-    background:#b58f19;
-
-}
-
-.hint{
-
-    margin-top:20px;
-
-    font-size:15px;
+    background:#a07d20;
 
 }
 
@@ -229,35 +265,33 @@ PASSWORD PAGE
 
     margin-top:20px;
 
-    font-weight:600;
-
 }
 
-/* =====================================
-WELCOME PAGE
-===================================== */
+/* =========================
+WELCOME
+========================= */
 
-.chapter{
+.content{
+
+    max-width:900px;
 
     text-align:center;
 
-    max-width:850px;
-
 }
 
-.chapter h5{
+.content h5{
 
-    color:#caa52d;
+    color:#b99229;
 
-    letter-spacing:4px;
+    letter-spacing:5px;
 
     margin-bottom:20px;
 
 }
 
-.chapter h1{
+.content h1{
 
-    font-size:70px;
+    font-size:80px;
 
     font-family:'Playfair Display',serif;
 
@@ -265,24 +299,23 @@ WELCOME PAGE
 
 }
 
-.chapter p{
+.content p{
 
     font-size:22px;
 
-    line-height:1.8;
-
     color:#666;
+
+    line-height:1.8;
 
 }
 
-/* =====================================
-BUTTONS
-===================================== */
+.navigation{
 
-.nextBtn,
-#restart{
+    margin-top:60px;
 
-    margin-top:45px;
+}
+
+.navigation button{
 
     padding:18px 45px;
 
@@ -290,11 +323,11 @@ BUTTONS
 
     border-radius:50px;
 
-    background:#caa52d;
+    background:#b99229;
 
     color:white;
 
-    font-size:17px;
+    font-size:18px;
 
     cursor:pointer;
 
@@ -302,58 +335,15 @@ BUTTONS
 
 }
 
-.nextBtn:hover,
-#restart:hover{
+.navigation button:hover{
 
-    transform:translateY(-5px);
-
-    background:#b58f19;
+    transform:translateY(-4px);
 
 }
 
-/* =====================================
-PROGRESS DOTS
-===================================== */
-
-#progress{
-
-    position:fixed;
-
-    top:25px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    gap:12px;
-
-    z-index:2000;
-
-}
-
-.dot{
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    background:#d9d9d9;
-
-}
-
-.dot.active{
-
-    background:#caa52d;
-
-}
-
-/* =====================================
-MOBILE
-===================================== */
+/* =========================
+RESPONSIVE
+========================= */
 
 @media(max-width:900px){
 
@@ -361,27 +351,25 @@ MOBILE
 
     flex-direction:column;
 
-    height:auto;
-
     width:95%;
+
+    height:auto;
 
 }
 
-.image-side{
+.photo-side{
 
     height:45vh;
 
-    padding:15px;
-
 }
 
-.image-side img{
+.photo-side img{
 
     width:100%;
 
     height:100%;
 
-    object-fit:contain;   /* Still no cropping */
+    object-fit:contain;
 
 }
 
@@ -397,13 +385,13 @@ MOBILE
 
 }
 
-.chapter h1{
+.content h1{
 
-    font-size:42px;
+    font-size:46px;
 
 }
 
-.chapter p{
+.content p{
 
     font-size:18px;
 
