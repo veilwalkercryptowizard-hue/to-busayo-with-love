@@ -1,40 +1,41 @@
 /* ==========================================
-   TO BUSAYO, WITH LOVE
-   VERSION 2
-   SCRIPT.JS
+TO BUSAYO, WITH LOVE
+SCRIPT.JS V2
 ========================================== */
 
-"use strict";
 
 /* ==========================================
-   ELEMENTS
+ELEMENTS
 ========================================== */
 
 const pages = {
 
-    loading: document.getElementById("loading-screen"),
+    password : document.getElementById("password-page"),
 
-    password: document.getElementById("password-page"),
+    welcome : document.getElementById("welcome-page"),
 
-    welcome: document.getElementById("welcome-page"),
+    memory : document.getElementById("memoryPage"),
 
-    memory: document.getElementById("memoryPage"),
+    gallery : document.getElementById("galleryPage"),
 
-    gallery: document.getElementById("galleryPage"),
+    film : document.getElementById("filmPage"),
 
-    reasons: document.getElementById("reasonsPage"),
+    reasons : document.getElementById("reasonsPage"),
 
-    letter: document.getElementById("letterPage"),
+    letter : document.getElementById("letterPage"),
 
-    ending: document.getElementById("endingPage")
+    ending : document.getElementById("endingPage")
 
 };
 
-const passwordInput =
-document.getElementById("password");
+const loadingScreen =
+document.getElementById("loading-screen");
 
 const unlockButton =
 document.getElementById("unlockButton");
+
+const passwordInput =
+document.getElementById("password");
 
 const error =
 document.getElementById("error");
@@ -45,145 +46,70 @@ document.getElementById("bgMusic");
 const beginJourney =
 document.getElementById("beginJourney");
 
-/* ==========================================
-   CURRENT PAGE
-========================================== */
+const transition =
+document.getElementById("chapterTransition");
 
-let currentPage = 0;
+const transitionChapter =
+document.getElementById("transitionChapter");
 
-/* ==========================================
-   PAGE ORDER
-========================================== */
-
-const pageOrder = [
-
-    "password",
-
-    "welcome",
-
-    "memory",
-
-    "gallery",
-
-    "reasons",
-
-    "letter",
-
-    "ending"
-
-];
+const transitionTitle =
+document.getElementById("transitionTitle");
 
 /* ==========================================
-   SHOW PAGE
-========================================== */
-
-function showPage(pageName){
-
-    Object.values(pages).forEach(page=>{
-
-        if(page){
-
-            page.classList.remove("active");
-
-        }
-
-    });
-
-    pages[pageName].classList.add("active");
-
-}
-
-/* ==========================================
-   NEXT PAGE
-========================================== */
-
-function nextPage(){
-
-    if(currentPage < pageOrder.length-1){
-
-        currentPage++;
-
-        showPage(pageOrder[currentPage]);
-
-    }
-
-}
-
-/* ==========================================
-   PREVIOUS PAGE
-========================================== */
-
-function previousPage(){
-
-    if(currentPage > 0){
-
-        currentPage--;
-
-        showPage(pageOrder[currentPage]);
-
-    }
-
-}
-
-/* ==========================================
-   LOADING SCREEN
+LOADING
 ========================================== */
 
 window.addEventListener("load",()=>{
 
     setTimeout(()=>{
 
-        pages.loading.style.opacity="0";
+        loadingScreen.style.opacity="0";
 
         setTimeout(()=>{
 
-            pages.loading.style.display="none";
+            loadingScreen.style.display="none";
 
-            showPage("password");
-
-        },300);
+        },500);
 
     },500);
 
 });
 
 /* ==========================================
-   MUSIC
+MUSIC
 ========================================== */
 
 function startMusic(){
 
-    music.volume = 0;
+    music.volume=0;
 
     music.play().catch(()=>{});
 
-    let volume = 0;
+    let volume=0;
 
-    const fade = setInterval(()=>{
+    const fade=setInterval(()=>{
 
-        volume += 0.05;
+        volume+=0.05;
 
-        if(volume >= 1){
+        music.volume=volume;
 
-            volume = 1;
+        if(volume>=1){
 
             clearInterval(fade);
 
         }
-
-        music.volume = volume;
 
     },150);
 
 }
 
 /* ==========================================
-   PASSWORD
+PASSWORD
 ========================================== */
 
 function unlockWebsite(){
 
-    const pass =
+    const pass=
 
     passwordInput.value
 
@@ -196,8 +122,6 @@ function unlockWebsite(){
         error.textContent="";
 
         startMusic();
-
-        currentPage=1;
 
         showPage("welcome");
 
@@ -215,11 +139,13 @@ function unlockWebsite(){
 
 }
 
-unlockButton.onclick = unlockWebsite;
+unlockButton.onclick=
+
+unlockWebsite;
 
 passwordInput.addEventListener(
 
-"keydown",
+"keypress",
 
 e=>{
 
@@ -229,54 +155,13 @@ unlockWebsite();
 
 }
 
-}
-
-);
+});
 
 /* ==========================================
-   STORY ENGINE
+PAGE ENGINE
 ========================================== */
 
-const chapters = [
-
-    {
-        id: "welcome",
-        title: "Chapter One"
-    },
-
-    {
-        id: "memory",
-        title: "The Keepsake Chest"
-    },
-
-    {
-        id: "gallery",
-        title: "Our Little Album"
-    },
-
-    {
-        id: "reasons",
-        title: "Twenty Three Reasons"
-    },
-
-    {
-        id: "letter",
-        title: "One Last Thing"
-    },
-
-    {
-        id: "ending",
-        title: "Happy Birthday"
-    }
-
-];
-
-
-/* ==========================================
-   GO TO PAGE
-========================================== */
-
-function goTo(page){
+function showPage(page){
 
     Object.values(pages).forEach(p=>{
 
@@ -288,46 +173,78 @@ function goTo(page){
 
 }
 
-
 /* ==========================================
-   PAGE TRANSITION
+TRANSITIONS
 ========================================== */
 
-function transition(nextPage){
+function chapterTransition(
 
-    const transitionScreen =
-    document.getElementById("chapterTransition");
+chapter,
 
-    transitionScreen.classList.add("show");
+title,
+
+nextPage
+
+){
+
+    transitionChapter.textContent=
+
+    chapter;
+
+    transitionTitle.textContent=
+
+    title;
+
+    transition.classList.add("show");
 
     setTimeout(()=>{
 
-        goTo(nextPage);
+        showPage(nextPage);
 
     },700);
 
     setTimeout(()=>{
 
-        transitionScreen.classList.remove("show");
+        transition.classList.remove("show");
 
-    },1400);
+    },1500);
 
 }
 
 /* ==========================================
-   BEGIN JOURNEY
+BEGIN JOURNEY
 ========================================== */
 
-beginJourney.onclick = ()=>{
+beginJourney.onclick=()=>{
 
-    currentPage = 2;
+    chapterTransition(
 
-    transition("memory");
+        "CHAPTER TWO",
+
+        "The Keepsake Chest",
+
+        "memory"
+
+    );
 
 };
 
 /* ==========================================
-   TREASURE CHEST
+RESTART
+========================================== */
+
+document
+
+.getElementById("restartJourney")
+
+.onclick=()=>{
+
+location.reload();
+
+};
+
+/* ==========================================
+TREASURE CHEST
 ========================================== */
 
 const chest =
@@ -338,7 +255,7 @@ document.getElementById("openChest");
 
 let chestOpened = false;
 
-openChest.onclick = ()=>{
+openChest.onclick = () => {
 
     if(chestOpened) return;
 
@@ -348,11 +265,19 @@ openChest.onclick = ()=>{
 
     openChest.disabled = true;
 
+    openChest.textContent = "Opening...";
+
     setTimeout(()=>{
 
-        currentPage = 3;
+        chapterTransition(
 
-        transition("gallery");
+            "CHAPTER THREE",
+
+            "Our Little Memories",
+
+            "gallery"
+
+        );
 
         loadMemory();
 
@@ -361,52 +286,58 @@ openChest.onclick = ()=>{
 };
 
 /* ==========================================
-   MEMORY GALLERY
+MEMORY GALLERY
 ========================================== */
 
 let currentMemory = 0;
 
-const image =
+const memoryImage =
 document.getElementById("memoryImage");
 
-const title =
+const memoryTitle =
 document.getElementById("memoryTitle");
 
-const caption =
+const memoryCaption =
 document.getElementById("memoryCaption");
 
-const counter =
+const memoryCounter =
 document.getElementById("memoryCounter");
 
 function loadMemory(){
 
-    image.src =
-    memories[currentMemory].image;
+    const memory = memories[currentMemory];
 
-    title.textContent =
-    memories[currentMemory].title;
+    memoryImage.src = memory.image;
 
-    caption.textContent =
-    memories[currentMemory].caption;
+    memoryTitle.textContent = memory.title;
 
-    counter.textContent =
+    memoryCaption.textContent = memory.caption;
 
-    `Memory ${currentMemory+1}
-    of ${memories.length}`;
+    memoryCounter.textContent =
+
+    `Memory ${currentMemory + 1} of ${memories.length}`;
 
 }
 
 document
 .getElementById("nextMemory")
-.onclick=()=>{
+.onclick = ()=>{
 
     currentMemory++;
 
-    if(currentMemory>=memories.length){
+    if(currentMemory >= memories.length){
 
-        currentPage = 4;
+        chapterTransition(
 
-        transition("reasons");
+            "CHAPTER FOUR",
+
+            "A Walk Through Our Moments",
+
+            "film"
+
+        );
+
+        buildFilmStrip();
 
         return;
 
@@ -416,13 +347,11 @@ document
 
 };
 
-
-
 document
 .getElementById("previousMemory")
-.onclick=()=>{
+.onclick = ()=>{
 
-    if(currentMemory>0){
+    if(currentMemory > 0){
 
         currentMemory--;
 
@@ -431,3 +360,217 @@ document
     }
 
 };
+
+/* ==========================================
+FILM STRIP
+========================================== */
+
+const filmStrip =
+document.getElementById("filmStrip");
+
+function buildFilmStrip(){
+
+    filmStrip.innerHTML = "";
+
+    memories.forEach(memory=>{
+
+        const frame =
+        document.createElement("div");
+
+        frame.className = "film-frame";
+
+        frame.innerHTML = `
+
+            <img src="${memory.image}">
+
+        `;
+
+        filmStrip.appendChild(frame);
+
+    });
+
+}
+
+document
+.getElementById("filmNext")
+.onclick = ()=>{
+
+    chapterTransition(
+
+        "CHAPTER FIVE",
+
+        "23 Reasons",
+
+        "reasons"
+
+    );
+
+    createReasons();
+
+};
+
+document
+.getElementById("filmPrevious")
+.onclick = ()=>{
+
+    chapterTransition(
+
+        "CHAPTER THREE",
+
+        "Our Little Memories",
+
+        "gallery"
+
+    );
+
+};
+
+/* ==========================================
+23 REASONS
+========================================== */
+
+const reasonsGrid =
+document.getElementById("reasonsGrid");
+
+const reasonModal =
+document.getElementById("reasonModal");
+
+const reasonText =
+document.getElementById("reasonText");
+
+const closeReason =
+document.getElementById("closeReason");
+
+let openedReasons = 0;
+
+function createReasons(){
+
+    reasonsGrid.innerHTML="";
+
+    reasons.forEach((reason,index)=>{
+
+        const envelope =
+        document.createElement("div");
+
+        envelope.className="envelope";
+
+        envelope.innerHTML="💌";
+
+        envelope.onclick=()=>{
+
+            openReason(
+
+                reason,
+
+                envelope
+
+            );
+
+        };
+
+        reasonsGrid.appendChild(envelope);
+
+    });
+
+}
+
+function openReason(reason,envelope){
+
+    reasonModal.style.display="flex";
+
+    reasonText.textContent=reason;
+
+    if(!envelope.classList.contains("opened")){
+
+        envelope.classList.add("opened");
+
+        envelope.innerHTML="🤍";
+
+        openedReasons++;
+
+        updateReasonProgress();
+
+    }
+
+}
+
+closeReason.onclick=()=>{
+
+    reasonModal.style.display="none";
+
+};
+
+window.onclick=(event)=>{
+
+    if(event.target===reasonModal){
+
+        reasonModal.style.display="none";
+
+    }
+
+};
+
+function updateReasonProgress(){
+
+    const title=
+
+    document.querySelector(
+
+    "#reasonsPage h1"
+
+    );
+
+    title.innerHTML=
+
+    `Twenty-Three Reasons
+
+    <br>
+
+    <small>
+
+    ${openedReasons} of
+
+    ${reasons.length}
+
+    opened
+
+    </small>`;
+
+}
+
+document
+
+.getElementById("toLetter")
+
+.onclick=()=>{
+
+    chapterTransition(
+
+        "CHAPTER SIX",
+
+        "One Last Thing...",
+
+        "letter"
+
+    );
+
+};
+
+document
+
+.getElementById("backToFilm")
+
+.onclick=()=>{
+
+    chapterTransition(
+
+        "CHAPTER FOUR",
+
+        "A Walk Through Our Moments",
+
+        "film"
+
+    );
+
+};
+
