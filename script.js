@@ -142,8 +142,9 @@ beginJourney.addEventListener("click",()=>{
 
         // Chapter Two starts here
 
-        alert("🎁 The Keepsake Chest is loading...");
-
+        document
+.getElementById("memoryPage")
+.classList.add("active");
     },3000);
 
 });
