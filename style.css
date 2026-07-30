@@ -496,3 +496,116 @@ CHAPTER TRANSITION
     text-align:center;
 
 }
+/* ===========================
+MEMORY PAGE
+=========================== */
+
+.memory-container{
+
+text-align:center;
+
+max-width:900px;
+
+margin:auto;
+
+}
+
+.memory-container h2{
+
+letter-spacing:6px;
+
+color:#b99229;
+
+margin-bottom:20px;
+
+}
+
+.memory-container h1{
+
+font-family:'Playfair Display',serif;
+
+font-size:65px;
+
+margin-bottom:25px;
+
+}
+
+.memory-container p{
+
+font-size:22px;
+
+line-height:1.8;
+
+color:#666;
+
+margin-bottom:60px;
+
+}
+
+#chest{
+
+font-size:140px;
+
+cursor:pointer;
+
+transition:.5s;
+
+animation:float 3s infinite ease-in-out;
+
+}
+
+#chest:hover{
+
+transform:scale(1.08);
+
+}
+
+#openChest{
+
+margin-top:40px;
+
+padding:18px 45px;
+
+border:none;
+
+border-radius:50px;
+
+background:#b99229;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+#openChest:hover{
+
+transform:translateY(-4px);
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
