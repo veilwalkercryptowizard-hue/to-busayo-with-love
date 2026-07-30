@@ -273,6 +273,8 @@ openButton.addEventListener("click",()=>{
 
         chest.classList.add("open");
 
+       openButton.style.display="none";
+
     },300);
 
 
