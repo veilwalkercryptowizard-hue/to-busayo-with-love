@@ -132,3 +132,97 @@ beginJourney.addEventListener("click",()=>{
     );
 
 });
+/* =========================
+Typing Animation
+========================= */
+
+const title =
+"Happy Birthday\nBusayo 🤍";
+
+const paragraph =
+"Every beautiful journey begins with a single memory.\nToday is all about celebrating you.";
+
+function typeText(element,text,speed,callback){
+
+    let i=0;
+
+    element.innerHTML="";
+
+    const timer=setInterval(()=>{
+
+        if(i<text.length){
+
+            if(text.charAt(i)==="\n"){
+
+                element.innerHTML+="<br>";
+
+            }else{
+
+                element.innerHTML+=text.charAt(i);
+
+            }
+
+            i++;
+
+        }else{
+
+            clearInterval(timer);
+
+            if(callback){
+
+                callback();
+
+            }
+
+        }
+
+    },speed);
+
+}
+
+function startTyping(){
+
+    const titleElement=
+    document.getElementById("typingTitle");
+
+    const textElement=
+    document.getElementById("typingText");
+
+    const button=
+    document.getElementById("beginJourney");
+
+    button.style.opacity="0";
+
+    typeText(
+
+        titleElement,
+
+        title,
+
+        70,
+
+        ()=>{
+
+            typeText(
+
+                textElement,
+
+                paragraph,
+
+                35,
+
+                ()=>{
+
+                    button.style.transition="1s";
+
+                    button.style.opacity="1";
+
+                }
+
+            );
+
+        }
+
+    );
+
+}
