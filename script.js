@@ -255,32 +255,28 @@ document.getElementById("openChest");
 openButton.addEventListener("click",()=>{
 
     chest.style.transform="scale(1.15)";
-
     chest.innerHTML="✨📦✨";
 
     setTimeout(()=>{
 
-        setTimeout(() => {
+        chest.classList.add("open");
 
-    chest.classList.add("open");
-
-},300);
-
-setTimeout(() => {
-
-    const viewer =
-    document.getElementById("memoryViewer");
-
-    viewer.style.display = "flex";
+    },300);
 
     setTimeout(()=>{
 
-        viewer.classList.add("show");
+        const viewer =
+        document.getElementById("memoryViewer");
 
-    },50);
+        viewer.style.display="flex";
 
-},1000);
-    },1200);
+        setTimeout(()=>{
+
+            viewer.classList.add("show");
+
+        },50);
+
+    },1000);
 
 });
 /* =========================
@@ -395,3 +391,5 @@ memories.length-1;
 loadMemory("previous");
 
 };
+
+loadMemory("next");
