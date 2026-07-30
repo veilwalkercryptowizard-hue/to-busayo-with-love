@@ -33,9 +33,7 @@ window.addEventListener("load", () => {
 
             loadingScreen.style.display = "none";
 
-        },1000);
-
-    },1000);
+        },800);
 
 });
 
