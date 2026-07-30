@@ -268,3 +268,93 @@ openButton.addEventListener("click",()=>{
     },1200);
 
 });
+/* =========================
+MEMORIES
+========================= */
+
+const memories=[
+
+{
+
+image:"photo1.jpg",
+
+title:"The Beginning",
+
+caption:"Every beautiful story begins with one unforgettable smile."
+
+},
+
+{
+
+image:"photo2.jpg",
+
+title:"Another Beautiful Moment",
+
+caption:"Every memory with you became another reason to smile."
+
+},
+
+{
+
+image:"photo3.jpg",
+
+title:"A Moment Worth Keeping",
+
+caption:"Some moments deserve to live forever."
+
+}
+
+];
+
+let currentMemory=0;
+
+const memoryImage=
+document.getElementById("memoryImage");
+
+const memoryTitle=
+document.getElementById("memoryTitle");
+
+const memoryCaption=
+document.getElementById("memoryCaption");
+
+function loadMemory(){
+
+memoryImage.src=
+memories[currentMemory].image;
+
+memoryTitle.innerHTML=
+memories[currentMemory].title;
+
+memoryCaption.innerHTML=
+memories[currentMemory].caption;
+
+}
+
+document.getElementById("nextMemory").onclick=()=>{
+
+currentMemory++;
+
+if(currentMemory>=memories.length){
+
+currentMemory=0;
+
+}
+
+loadMemory();
+
+};
+
+document.getElementById("previousMemory").onclick=()=>{
+
+currentMemory--;
+
+if(currentMemory<0){
+
+currentMemory=
+memories.length-1;
+
+}
+
+loadMemory();
+
+};
