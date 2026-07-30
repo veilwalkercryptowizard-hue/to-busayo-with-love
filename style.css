@@ -775,3 +775,44 @@ width:160px;
 height:160px;
 
 }
+/* =========================
+POLAROID ANIMATIONS
+========================= */
+
+.polaroid{
+
+    transition:
+    transform .6s ease,
+    opacity .6s ease;
+
+}
+
+.polaroid.next{
+
+    transform:
+    translateX(120px)
+    rotate(8deg);
+
+    opacity:0;
+
+}
+
+.polaroid.previous{
+
+    transform:
+    translateX(-120px)
+    rotate(-8deg);
+
+    opacity:0;
+
+}
+
+.polaroid.show{
+
+    transform:
+    translateX(0)
+    rotate(-2deg);
+
+    opacity:1;
+
+}
