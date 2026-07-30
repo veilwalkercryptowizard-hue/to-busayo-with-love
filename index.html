@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>To Busayo, With Love 🤍</title>
@@ -12,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 
@@ -20,23 +21,9 @@
 
 <body>
 
-<!-- =========================
-BACKGROUND MUSIC
-========================== -->
-
-<audio id="bgMusic" loop>
-
-<source src="BrunoMars.mp3" type="audio/mpeg">
-
-</audio>
-
-<!-- =========================
-LOADING SCREEN
-========================== -->
+<!-- LOADING -->
 
 <div id="loading-screen">
-
-<div class="loader-content">
 
 <h1>To Busayo, With Love 🤍</h1>
 
@@ -44,17 +31,21 @@ LOADING SCREEN
 
 </div>
 
-</div>
+<!-- MUSIC -->
 
-<!-- =========================
-PASSWORD PAGE
-========================== -->
+<audio id="bgMusic" loop>
+
+<source src="BrunoMars.mp3" type="audio/mpeg">
+
+</audio>
+
+<!-- PASSWORD PAGE -->
 
 <section id="password-page" class="page active">
 
 <div class="password-wrapper">
 
-<div class="image-side">
+<div class="photo-side">
 
 <img src="cover.jpg" alt="Busayo">
 
@@ -64,7 +55,7 @@ PASSWORD PAGE
 
 <h5>CHAPTER ONE</h5>
 
-<h1>Unlock My Surprise 🤍</h1>
+<h1>Unlock My Surprise</h1>
 
 <p>
 
@@ -84,7 +75,7 @@ What's my birth month?
 
 </p>
 
-<button onclick="checkPassword()">
+<button id="unlockButton">
 
 Unlock My Surprise →
 
@@ -98,63 +89,37 @@ Unlock My Surprise →
 
 </section>
 
-<!-- =========================
-PROGRESS DOTS
-========================== -->
+<!-- WELCOME PAGE -->
 
-<div id="progress">
+<section id="welcome-page" class="page">
 
-<span class="dot active"></span>
+<div class="content">
 
-<span class="dot"></span>
+<h5>
 
-<span class="dot"></span>
+CHAPTER ONE
 
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-</div>
-
-<!-- =========================
-STORY CONTAINER
-========================== -->
-
-<div id="story">
-
-<!-- PAGE 1 -->
-
-<section class="page" id="welcome-page">
-
-<div class="chapter">
-
-<h5>CHAPTER TWO</h5>
+</h5>
 
 <h1>
 
-Our Journey Begins
+Happy Birthday
+
+Busayo 🤍
 
 </h1>
 
 <p>
 
-Happy Birthday Busayo.
+Every beautiful journey begins with a single memory.
 
-Today isn't just another birthday.
-
-Today is about celebrating you.
+Today is all about celebrating you.
 
 </p>
 
-<button class="nextBtn">
+<div class="navigation">
+
+<button id="beginJourney">
 
 Begin Our Journey →
 
@@ -162,249 +127,9 @@ Begin Our Journey →
 
 </div>
 
-</section>
-
-<!-- PAGE 2 -->
-
-<section class="page" id="memorybox-page">
-
-<div class="chapter">
-
-<h5>CHAPTER THREE</h5>
-
-<h1>
-
-Our Memories
-
-</h1>
-
-<p>
-
-Some memories are too precious to rush.
-
-</p>
-
-<button class="nextBtn">
-
-Open The Memory Box →
-
-</button>
-
 </div>
 
 </section>
-
-<!-- PAGE 3 -->
-
-<section class="page" id="memorybook-page">
-
-<div class="chapter">
-
-<h5>CHAPTER FOUR</h5>
-
-<h1>
-
-Memory Book
-
-</h1>
-
-<p>
-
-Every page tells another beautiful story.
-
-</p>
-
-<button class="nextBtn">
-
-Turn The Next Page →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- PAGE 4 -->
-
-<section class="page" id="if-page">
-
-<div class="chapter">
-
-<h5>CHAPTER FIVE</h5>
-
-<h1>
-
-If Busayo Were...
-
-</h1>
-
-<p>
-
-Let's imagine you through beautiful little metaphors.
-
-</p>
-
-<button class="nextBtn">
-
-Continue →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- PAGE 5 -->
-
-<section class="page" id="letter-page">
-
-<div class="chapter">
-
-<h5>CHAPTER SIX</h5>
-
-<h1>
-
-A Letter To You
-
-</h1>
-
-<p>
-
-Some words are easier written than spoken.
-
-</p>
-
-<button class="nextBtn">
-
-Open The Letter →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- PAGE 6 -->
-
-<section class="page" id="reasons-page">
-
-<div class="chapter">
-
-<h5>CHAPTER SEVEN</h5>
-
-<h1>
-
-23 Reasons You're Amazing
-
-</h1>
-
-<p>
-
-One reason at a time.
-
-</p>
-
-<button class="nextBtn">
-
-Reveal The First Reason →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- PAGE 7 -->
-
-<section class="page" id="cake-page">
-
-<div class="chapter">
-
-<h5>CHAPTER EIGHT</h5>
-
-<h1>
-
-Make A Wish
-
-</h1>
-
-<p>
-
-One more surprise awaits...
-
-</p>
-
-<button class="nextBtn">
-
-Celebrate →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- PAGE 8 -->
-
-<section class="page" id="gift-page">
-
-<div class="chapter">
-
-<h5>CHAPTER NINE</h5>
-
-<h1>
-
-One Last Surprise
-
-</h1>
-
-<p>
-
-Open your gift.
-
-</p>
-
-<button class="nextBtn">
-
-Open Gift →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- PAGE 9 -->
-
-<section class="page" id="ending-page">
-
-<div class="chapter">
-
-<h5>FINAL CHAPTER</h5>
-
-<h1>
-
-Until Next Time...
-
-</h1>
-
-<p>
-
-Every beautiful story deserves another read.
-
-</p>
-
-<button id="restart">
-
-Relive Our Memories ❤️
-
-</button>
-
-</div>
-
-</section>
-
-</div>
 
 <script src="script.js"></script>
 
