@@ -1,6 +1,12 @@
-/* =========================
+/* =====================================================
    TO BUSAYO, WITH LOVE
-========================= */
+   VERSION 2
+   PART 1
+===================================================== */
+
+/* ===========================
+RESET
+=========================== */
 
 *{
     margin:0;
@@ -17,61 +23,26 @@ body{
 
     font-family:'Poppins',sans-serif;
 
-    background:#f8f6f1;
+    background:#f7f3ea;
 
     color:#222;
 
 }
 
-/* =========================
-LOADING
-========================= */
+/* ===========================
+BACKGROUND
+=========================== */
 
-#loading-screen{
+body{
 
-    position:fixed;
-
-    inset:0;
-
-    background:#f8f6f1;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:9999;
-
-    transition:4s;
+    background:
+    radial-gradient(circle at top,#fffdf8,#f7f3ea);
 
 }
 
-#loading-screen h1{
-
-    font-family:'Playfair Display',serif;
-
-    font-size:60px;
-
-    color:#b99229;
-
-    margin-bottom:20px;
-
-}
-
-#loading-screen p{
-
-    color:#666;
-
-    font-size:18px;
-
-}
-
-/* =========================
+/* ===========================
 PAGES
-========================= */
+=========================== */
 
 .page{
 
@@ -87,7 +58,7 @@ PAGES
 
     padding:50px;
 
-    animation:fade .8s;
+    animation:pageFade .8s ease;
 
 }
 
@@ -97,55 +68,37 @@ PAGES
 
 }
 
-@keyframes fade{
+@keyframes pageFade{
 
-from{
+    from{
 
-opacity:0;
+        opacity:0;
 
-transform:translateY(40px);
+        transform:translateY(30px);
 
-}
+    }
 
-to{
+    to{
 
-opacity:1;
+        opacity:1;
 
-transform:translateY(0);
+        transform:translateY(0);
 
-}
-
-}
-
-/* =========================
-PASSWORD PAGE
-========================= */
-
-.password-wrapper{
-
-    width:90%;
-
-    max-width:1300px;
-
-    height:82vh;
-
-    display:flex;
-
-    background:white;
-
-    border-radius:25px;
-
-    overflow:hidden;
-
-    box-shadow:0 25px 60px rgba(0,0,0,.10);
+    }
 
 }
 
-/* LEFT */
+/* ===========================
+LOADING SCREEN
+=========================== */
 
-.photo-side{
+#loading-screen{
 
-    flex:1;
+    position:fixed;
+
+    inset:0;
+
+    background:#f7f3ea;
 
     display:flex;
 
@@ -153,23 +106,96 @@ PASSWORD PAGE
 
     align-items:center;
 
-    background:#faf8f4;
+    z-index:99999;
 
-    padding:25px;
+    transition:.3s;
+
+}
+
+.loading-content{
+
+    text-align:center;
+
+}
+
+.loading-content h1{
+
+    font-size:64px;
+
+    font-family:'Playfair Display',serif;
+
+    color:#b58c28;
+
+    margin-bottom:15px;
+
+}
+
+.loading-content p{
+
+    color:#777;
+
+    font-size:20px;
+
+    letter-spacing:2px;
+
+}
+
+/* ===========================
+PASSWORD PAGE
+=========================== */
+
+.password-wrapper{
+
+    width:min(1300px,95vw);
+
+    height:min(760px,88vh);
+
+    display:flex;
+
+    background:white;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 30px 70px rgba(0,0,0,.12);
+
+}
+
+/* ===========================
+PHOTO SIDE
+=========================== */
+
+.photo-side{
+
+    flex:1;
+
+    background:#f4efe3;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
 
 }
 
 .photo-side img{
 
-    max-width:100%;
+    width:100%;
 
-    max-height:100%;
+    height:100%;
 
     object-fit:contain;
 
 }
 
-/* RIGHT */
+/* ===========================
+LOGIN SIDE
+=========================== */
 
 .login-side{
 
@@ -185,41 +211,57 @@ PASSWORD PAGE
 
 }
 
-.login-side h5{
+.chapter-tag{
 
-    color:#b99229;
+    color:#b58c28;
 
     letter-spacing:4px;
 
-    margin-bottom:15px;
-
-}
-
-.login-side h1{
-
-    font-size:55px;
-
-    font-family:'Playfair Display',serif;
+    font-size:14px;
 
     margin-bottom:20px;
 
 }
 
+.login-side h1{
+
+    font-size:58px;
+
+    font-family:'Playfair Display',serif;
+
+    margin-bottom:20px;
+
+    line-height:1.15;
+
+}
+
 .login-side p{
 
-    line-height:1.8;
-
     color:#666;
+
+    line-height:1.9;
+
+    margin-bottom:25px;
+
+}
+
+.hint{
+
+    color:#999;
+
+    margin-top:12px;
+
+    display:block;
 
 }
 
 .login-side input{
 
-    margin-top:35px;
+    margin-top:25px;
 
     padding:18px;
 
-    border-radius:12px;
+    border-radius:15px;
 
     border:1px solid #ddd;
 
@@ -227,35 +269,49 @@ PASSWORD PAGE
 
     outline:none;
 
+    transition:.3s;
+
 }
 
-.login-side button{
+.login-side input:focus{
 
-    margin-top:25px;
+    border-color:#b58c28;
 
-    padding:18px;
+    box-shadow:0 0 0 3px rgba(181,140,40,.15);
+
+}
+
+/* ===========================
+BUTTONS
+=========================== */
+
+.primary-button{
+
+    margin-top:30px;
+
+    padding:18px 36px;
 
     border:none;
 
     border-radius:50px;
 
-    background:#b99229;
+    background:#b58c28;
 
     color:white;
 
-    cursor:pointer;
-
     font-size:17px;
+
+    cursor:pointer;
 
     transition:.35s;
 
 }
 
-.login-side button:hover{
+.primary-button:hover{
 
     transform:translateY(-4px);
 
-    background:#a07d20;
+    background:#a67f20;
 
 }
 
@@ -263,87 +319,907 @@ PASSWORD PAGE
 
     color:#c0392b;
 
-    margin-top:20px;
+    margin-top:18px;
+
+    font-weight:500;
 
 }
 
-/* =========================
-WELCOME
-========================= */
+/* ===========================
+WELCOME PAGE
+=========================== */
 
-.content{
+.story-container{
 
-    max-width:900px;
+    width:min(900px,95vw);
 
     text-align:center;
 
 }
 
-.content h5{
+.progress{
 
-    color:#b99229;
+    width:240px;
 
-    letter-spacing:5px;
+    height:7px;
+
+    background:#ece4d4;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    margin:0 auto 40px;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    background:#b58c28;
+
+    transition:.8s;
+
+}
+
+.story-container h1{
+
+    font-size:72px;
+
+    font-family:'Playfair Display',serif;
+
+    margin-bottom:25px;
+
+}
+
+.story-container p{
+
+    font-size:22px;
+
+    line-height:1.9;
+
+    color:#666;
+
+}
+
+#typingTitle{
+
+    min-height:130px;
+
+}
+
+#typingText{
+
+    min-height:90px;
+
+}
+
+/* ===========================
+CHAPTER TRANSITION
+=========================== */
+
+#chapterTransition{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#111;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.5s;
+
+    z-index:9999;
+
+}
+
+#chapterTransition.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.transition-content h2{
+
+    color:#d4af37;
+
+    letter-spacing:6px;
 
     margin-bottom:20px;
 
 }
 
-.content h1{
-
-    font-size:80px;
+.transition-content h1{
 
     font-family:'Playfair Display',serif;
 
-    margin-bottom:30px;
+    font-size:64px;
 
 }
 
-.content p{
+/* =====================================================
+   VERSION 2
+   PART 2
+   TREASURE CHEST + MEMORY GALLERY
+=====================================================*/
 
-    font-size:22px;
+/* ===========================
+CHAPTER TWO
+=========================== */
+
+#memoryPage{
+
+    background:
+    radial-gradient(circle at top,#fffdf8,#f7f3ea);
+
+}
+
+.treasure-area{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:60px 0;
+
+}
+
+/* ===========================
+TREASURE CHEST
+=========================== */
+
+.treasure-chest{
+
+    position:relative;
+
+    width:240px;
+
+    height:180px;
+
+    cursor:pointer;
+
+    transition:.7s ease;
+
+}
+
+.treasure-chest:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* Chest Body */
+
+.chest-body{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:240px;
+
+    height:120px;
+
+    background:linear-gradient(#8d5a24,#6e4317);
+
+    border-radius:0 0 18px 18px;
+
+    border:5px solid #d4af37;
+
+    overflow:hidden;
+
+}
+
+/* Wooden Lines */
+
+.chest-body::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        transparent 26px,
+
+        rgba(255,255,255,.08) 26px,
+
+        rgba(255,255,255,.08) 30px
+
+    );
+
+}
+
+/* Lid */
+
+.chest-lid{
+
+    position:absolute;
+
+    top:0;
+
+    width:240px;
+
+    height:75px;
+
+    background:linear-gradient(#9d6b30,#74441a);
+
+    border-radius:25px 25px 0 0;
+
+    border:5px solid #d4af37;
+
+    transform-origin:bottom center;
+
+    transition:1s ease;
+
+}
+
+/* Lock */
+
+.chest-lock{
+
+    position:absolute;
+
+    left:50%;
+
+    top:60px;
+
+    transform:translateX(-50%);
+
+    width:34px;
+
+    height:48px;
+
+    background:#d4af37;
+
+    border-radius:6px;
+
+    z-index:5;
+
+}
+
+/* Glow */
+
+.gold-light{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:30px;
+
+    height:30px;
+
+    border-radius:50%;
+
+    background:gold;
+
+    filter:blur(20px);
+
+    opacity:0;
+
+    transition:1s;
+
+}
+
+/* Open State */
+
+.treasure-chest.open .chest-lid{
+
+    transform:
+
+    rotateX(-120deg);
+
+}
+
+.treasure-chest.open .gold-light{
+
+    width:250px;
+
+    height:250px;
+
+    opacity:.8;
+
+}
+
+/* ===========================
+MEMORY VIEWER
+=========================== */
+
+#galleryPage{
+
+    background:
+
+    radial-gradient(circle,#fffdf9,#f7f3ea);
+
+}
+
+#memoryViewer{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:45px 0;
+
+}
+
+/* ===========================
+POLAROID
+=========================== */
+
+.polaroid{
+
+    position:relative;
+
+    width:420px;
+
+    background:white;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.18);
+
+    transform:rotate(-2deg);
+
+    transition:.6s ease;
+
+}
+
+.polaroid:hover{
+
+    transform:
+
+    rotate(0deg)
+
+    scale(1.02);
+
+}
+
+/* Tape */
+
+.photo-tape{
+
+    position:absolute;
+
+    width:90px;
+
+    height:26px;
+
+    background:
+
+    rgba(255,255,220,.75);
+
+    top:-10px;
+
+    transform:rotate(-10deg);
+
+}
+
+.photo-tape.right{
+
+    right:15px;
+
+    transform:rotate(10deg);
+
+}
+
+.photo-tape.left{
+
+    left:15px;
+
+}
+
+.polaroid img{
+
+    width:100%;
+
+    height:500px;
+
+    object-fit:contain;
+
+    background:#f3f3f3;
+
+    border-radius:6px;
+
+}
+
+.polaroid h3{
+
+    margin-top:18px;
+
+    font-family:'Playfair Display',serif;
+
+    font-size:28px;
+
+}
+
+.polaroid p{
+
+    margin-top:12px;
 
     color:#666;
 
-    line-height:1.8;
+    line-height:1.7;
 
 }
 
-.navigation{
+/* ===========================
+COUNTER
+=========================== */
 
-    margin-top:60px;
+#memoryCounter{
+
+    color:#b58c28;
+
+    font-weight:600;
+
+    margin-bottom:25px;
 
 }
 
-.navigation button{
+/* ===========================
+NAVIGATION
+=========================== */
 
-    padding:18px 45px;
+.navigationButtons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    margin-top:30px;
+
+}
+
+.navigationButtons button{
+
+    padding:16px 32px;
 
     border:none;
 
-    border-radius:50px;
+    border-radius:40px;
 
-    background:#b99229;
+    background:#b58c28;
 
     color:white;
-
-    font-size:18px;
 
     cursor:pointer;
 
     transition:.35s;
 
+    font-size:16px;
+
 }
 
-.navigation button:hover{
+.navigationButtons button:hover{
+
+    background:#a47b1b;
 
     transform:translateY(-4px);
 
 }
 
-/* =========================
+/* ===========================
+MEMORY ANIMATION
+=========================== */
+
+.memory-enter{
+
+    animation:memoryIn .7s ease;
+
+}
+
+@keyframes memoryIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(80px)
+
+        rotate(-8deg);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0)
+
+        rotate(-2deg);
+
+    }
+
+}
+
+/* =====================================================
+   VERSION 2
+   PART 3
+   ENVELOPES • LETTER • ENDING • MOBILE
+=====================================================*/
+
+
+/* ===========================
+23 ENVELOPES
+=========================== */
+
+#reasonsGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+
+    gap:25px;
+
+    width:min(900px,95vw);
+
+    margin:45px auto;
+
+}
+
+.envelope{
+
+    height:110px;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    position:relative;
+
+    cursor:pointer;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+
+    transition:.35s;
+
+    overflow:hidden;
+
+}
+
+.envelope:hover{
+
+    transform:
+    translateY(-8px)
+    scale(1.04);
+
+}
+
+.envelope::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        transparent 49%,
+        #efe5cf 50%
+    );
+
+}
+
+.envelope span{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-size:28px;
+
+    z-index:2;
+
+}
+
+/* Open */
+
+.envelope.open{
+
+    background:#fff9ef;
+
+}
+
+.envelope.open::before{
+
+    display:none;
+
+}
+
+.reasonText{
+
+    padding:15px;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    color:#555;
+
+    text-align:center;
+
+}
+
+
+/* ===========================
+LETTER
+=========================== */
+
+#letterEnvelope{
+
+    width:180px;
+
+    height:120px;
+
+    margin:40px auto;
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    cursor:pointer;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.15);
+
+    transition:.5s;
+
+}
+
+#letterEnvelope:hover{
+
+    transform:
+    translateY(-6px);
+
+}
+
+#letterEnvelope p{
+
+    margin-top:10px;
+
+    color:#777;
+
+}
+
+#letterPaper{
+
+    display:none;
+
+    width:min(760px,92vw);
+
+    background:white;
+
+    padding:45px;
+
+    border-radius:18px;
+
+    margin:40px auto;
+
+    box-shadow:
+
+    0 20px 60px rgba(0,0,0,.15);
+
+    animation:paperOpen .8s ease;
+
+}
+
+#letterPaper.show{
+
+    display:block;
+
+}
+
+#letterPaper h2{
+
+    font-family:
+
+    'Playfair Display',serif;
+
+    margin-bottom:25px;
+
+}
+
+#letterText{
+
+    white-space:pre-line;
+
+    line-height:2;
+
+    color:#555;
+
+    font-size:18px;
+
+}
+
+@keyframes paperOpen{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        scale(.85);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        scale(1);
+
+    }
+
+}
+
+
+/* ===========================
+ENDING
+=========================== */
+
+.ending{
+
+    text-align:center;
+
+}
+
+.heartContainer{
+
+    margin:60px 0;
+
+    font-size:42px;
+
+    animation:
+
+    heartsFloat 3s ease-in-out infinite;
+
+}
+
+@keyframes heartsFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-15px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ===========================
+FILM STRIP
+=========================== */
+
+#filmStrip{
+
+    display:flex;
+
+    gap:18px;
+
+    overflow:hidden;
+
+    justify-content:center;
+
+    margin:45px auto;
+
+    flex-wrap:wrap;
+
+}
+
+.filmFrame{
+
+    width:150px;
+
+    background:#111;
+
+    padding:8px;
+
+    border-radius:8px;
+
+}
+
+.filmFrame img{
+
+    width:100%;
+
+    height:200px;
+
+    object-fit:cover;
+
+}
+
+
+/* ===========================
+PAGE NAVIGATION
+=========================== */
+
+.pageNavigation{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    width:min(900px,95vw);
+
+    margin:40px auto 0;
+
+}
+
+
+/* ===========================
 RESPONSIVE
-========================= */
+=========================== */
 
 @media(max-width:900px){
 
@@ -351,15 +1227,13 @@ RESPONSIVE
 
     flex-direction:column;
 
-    width:95%;
-
     height:auto;
 
 }
 
 .photo-side{
 
-    height:45vh;
+    height:42vh;
 
 }
 
@@ -385,471 +1259,117 @@ RESPONSIVE
 
 }
 
-.content h1{
+.story-container h1{
 
-    font-size:46px;
+    font-size:42px;
 
 }
 
-.content p{
+.story-container p{
 
     font-size:18px;
 
 }
 
-}
-/* =========================
-Typing Animation
-========================= */
-
-#typingTitle{
-
-    min-height:120px;
-
-}
-
-#typingText{
-
-    min-height:80px;
-
-}
-
-.cursor{
-
-    display:inline-block;
-
-    animation:blink .8s infinite;
-
-}
-
-@keyframes blink{
-
-0%{
-opacity:1;
-}
-
-50%{
-opacity:0;
-}
-
-100%{
-opacity:1;
-}
-
-}
-/* =========================
-CHAPTER TRANSITION
-========================= */
-
-#chapterTransition{
-
-    position:fixed;
-
-    inset:0;
-
-    background:#111;
-
-    color:white;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:5s;
-
-    z-index:99999;
-
-}
-
-#chapterTransition.show{
-
-    opacity:1;
-
-    visibility:visible;
-
-}
-
-#chapterTransition h2{
-
-    color:#d4af37;
-
-    letter-spacing:6px;
-
-    margin-bottom:20px;
-
-}
-
-#chapterTransition h1{
-
-    font-family:'Playfair Display',serif;
-
-    font-size:60px;
-
-    text-align:center;
-
-}
-/* ===========================
-MEMORY PAGE
-=========================== */
-
-.memory-container{
-
-text-align:center;
-
-max-width:900px;
-
-margin:auto;
-
-}
-
-.memory-container h2{
-
-letter-spacing:6px;
-
-color:#b99229;
-
-margin-bottom:20px;
-
-}
-
-.memory-container h1{
-
-font-family:'Playfair Display',serif;
-
-font-size:65px;
-
-margin-bottom:25px;
-
-}
-
-.memory-container p{
-
-font-size:22px;
-
-line-height:1.8;
-
-color:#666;
-
-margin-bottom:60px;
-
-}
-
-#chest{
-
-font-size:140px;
-
-cursor:pointer;
-
-transition:.5s;
-
-animation:float 3s infinite ease-in-out;
-
-}
-
-#chest:hover{
-
-transform:scale(1.08);
-
-}
-
-#openChest{
-
-margin-top:40px;
-
-padding:18px 45px;
-
-border:none;
-
-border-radius:50px;
-
-background:#b99229;
-
-color:white;
-
-font-size:18px;
-
-cursor:pointer;
-
-transition:.35s;
-
-}
-
-#openChest:hover{
-
-transform:translateY(-4px);
-
-}
-
-@keyframes float{
-
-0%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-15px);
-
-}
-
-100%{
-
-transform:translateY(0);
-
-}
-
-}
-/* =========================
-POLAROID
-========================= */
-
-#memoryViewer{
-
-display:none;
-
-justify-content:center;
-
-margin-top:50px;
-
-opacity:0;
-
-transform:translateY(120px) scale(.8);
-
-transition:1.2s ease;
-
-}
-
 .polaroid{
 
-background:white;
-
-padding:18px;
-
-border-radius:12px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-width:420px;
-
-max-width:90vw;
-
-text-align:center;
-
-transform:rotate(-2deg);
-
-transition:.5s;
+    width:92vw;
 
 }
 
 .polaroid img{
 
-width:100%;
-
-height:480px;
-
-object-fit:contain;
-
-background:#f6f6f6;
-
-border-radius:6px;
-
-display:block;
-
-}
-.polaroid h3{
-
-margin-top:18px;
-
-font-family:'Playfair Display',serif;
+    height:360px;
 
 }
 
-.polaroid p{
+.navigationButtons{
 
-margin-top:10px;
-
-color:#666;
+    flex-direction:column;
 
 }
 
-.memoryButtons{
+.navigationButtons button{
 
-display:flex;
-
-justify-content:space-between;
-
-margin-top:25px;
+    width:100%;
 
 }
 
-.memoryButtons button{
+#reasonsGrid{
 
-padding:12px 20px;
+    grid-template-columns:
 
-border:none;
-
-border-radius:30px;
-
-background:#b99229;
-
-color:white;
-
-cursor:pointer;
-
-}
-#memoryViewer.show{
-
-display:flex;
-
-opacity:1;
-
-transform:translateY(0) scale(1);
+    repeat(2,1fr);
 
 }
 
-#chest{
+#filmStrip{
 
-position:relative;
-
-font-size:140px;
-
-cursor:pointer;
-
-transition:.6s;
-
-animation:float 3s infinite ease-in-out;
+    gap:12px;
 
 }
 
-#chest.open{
+.filmFrame{
 
-transform:scale(1.08);
-
-filter:drop-shadow(0 0 25px gold);
+    width:110px;
 
 }
 
-#chest::after{
+.filmFrame img{
 
-content:"";
-
-position:absolute;
-
-left:50%;
-
-bottom:35px;
-
-transform:translateX(-50%);
-
-width:20px;
-
-height:20px;
-
-background:rgba(255,215,0,.6);
-
-border-radius:50%;
-
-filter:blur(12px);
-
-opacity:0;
-
-transition:.8s;
+    height:150px;
 
 }
 
-#chest.open::after{
-
-opacity:1;
-
-width:160px;
-
-height:160px;
-
-}
-/* =========================
-POLAROID ANIMATIONS
-========================= */
-
-.polaroid{
-
-    transition:
-    transform .6s ease,
-    opacity .6s ease;
-
 }
 
-.polaroid.next{
 
-    transform:
-    translateX(120px)
-    rotate(8deg);
-
-    opacity:0;
-
-}
-
-.polaroid.previous{
-
-    transform:
-    translateX(-120px)
-    rotate(-8deg);
-
-    opacity:0;
-
-}
-
-.polaroid.show{
-
-    transform:
-    translateX(0)
-    rotate(-2deg);
-
-    opacity:1;
-
-}
-.memory-note{
-
-    margin-top:15px;
-
-    font-family:'Caveat',cursive;
-
-    font-size:28px;
-
-    color:#777;
-
-    text-align:center;
-
-}
 /* ===========================
-MEMORY FADE
+SMALL PHONES
 =========================== */
 
-.fade-out{
+@media(max-width:500px){
 
-    opacity:0;
+.loading-content h1{
 
-    transform:scale(.95);
-
-    transition:.5s ease;
+    font-size:42px;
 
 }
 
-.fade-in{
+.story-container h1{
 
-    opacity:1;
+    font-size:34px;
 
-    transform:scale(1);
+}
 
-    transition:.5s ease;
+.login-side{
+
+    padding:25px;
+
+}
+
+.progress{
+
+    width:170px;
+
+}
+
+.chapter-tag{
+
+    font-size:12px;
+
+}
+
+.story-container p{
+
+    font-size:16px;
+
+}
+
+.primary-button{
+
+    width:100%;
+
+}
 
 }
