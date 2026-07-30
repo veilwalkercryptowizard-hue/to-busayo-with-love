@@ -242,3 +242,26 @@ function startTyping(){
     );
 
 }
+/* ===========================
+CHEST
+=========================== */
+
+const chest =
+document.getElementById("chest");
+
+const openButton =
+document.getElementById("openChest");
+
+openButton.addEventListener("click",()=>{
+
+    chest.style.transform="scale(1.15)";
+
+    chest.innerHTML="✨📦✨";
+
+    setTimeout(()=>{
+
+        alert("📸 The first memory will rise here...");
+
+    },1200);
+
+});
