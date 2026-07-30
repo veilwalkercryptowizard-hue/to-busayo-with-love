@@ -4,60 +4,90 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>To Busayo, With Love ❤️</title>
+<title>To Busayo, With Love 🤍</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
+
+<!-- =========================
+BACKGROUND MUSIC
+========================== -->
+
 <audio id="bgMusic" loop>
-    <source src="BrunoMars.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+
+<source src="BrunoMars.mp3" type="audio/mpeg">
+
 </audio>
+
+<!-- =========================
+LOADING SCREEN
+========================== -->
+
 <div id="loading-screen">
 
-<div class="loader"></div>
-
-<h2>Preparing something beautiful...</h2>
-
-</div>
-
-<div id="password-screen">
-
-<div class="password-container">
-
-<div class="cover-image">
-<img src="cover.jpg" alt="Busayo">
-</div>
-
-<div class="password-box">
+<div class="loader-content">
 
 <h1>To Busayo, With Love 🤍</h1>
 
-<p>Enter the password to begin.</p>
+<p>Preparing something beautiful...</p>
+
+</div>
+
+</div>
+
+<!-- =========================
+PASSWORD PAGE
+========================== -->
+
+<section id="password-page" class="page active">
+
+<div class="password-wrapper">
+
+<div class="image-side">
+
+<img src="cover.jpg" alt="Busayo">
+
+</div>
+
+<div class="login-side">
+
+<h5>CHAPTER ONE</h5>
+
+<h1>Unlock My Surprise 🤍</h1>
+
+<p>
+
+Every beautiful journey begins with a single page.
+
+</p>
 
 <input
 type="password"
 id="password"
-placeholder="Password">
+placeholder="Enter Password">
 
 <p class="hint">
+
 Hint:
 What's my birth month?
+
 </p>
 
 <button onclick="checkPassword()">
-Enter
+
+Unlock My Surprise →
+
 </button>
 
 <p id="error"></p>
@@ -66,277 +96,315 @@ Enter
 
 </div>
 
-<div id="website">
+</section>
 
-<nav>
+<!-- =========================
+PROGRESS DOTS
+========================== -->
 
-<h2>Busayo ✨</h2>
+<div id="progress">
 
-<ul>
+<span class="dot active"></span>
 
-<li><a href="#hero">Home</a></li>
+<span class="dot"></span>
 
-<li><a href="#gallery">Gallery</a></li>
+<span class="dot"></span>
 
-<li><a href="#timeline">Timeline</a></li>
+<span class="dot"></span>
 
-<li><a href="#letter">Letter</a></li>
+<span class="dot"></span>
 
-<li><a href="#special">Special</a></li>
+<span class="dot"></span>
 
-</ul>
+<span class="dot"></span>
 
-</nav>
+<span class="dot"></span>
 
-<section
-id="hero"
-class="hero">
+<span class="dot"></span>
+
+</div>
+
+<!-- =========================
+STORY CONTAINER
+========================== -->
+
+<div id="story">
+
+<!-- PAGE 1 -->
+
+<section class="page" id="welcome-page">
+
+<div class="chapter">
+
+<h5>CHAPTER TWO</h5>
 
 <h1>
-Happy Birthday Busayo
-🤍
+
+Our Journey Begins
+
 </h1>
-
-<p>
-
-A little corner of the internet made just for you.
-
-</p>
-
-<button onclick="playMusic()">
-
-Play Music 🎵
-
-</button>
-
-</section>
-<!-- Countdown -->
-
-<section id="countdown" class="section">
-
-<h2>Countdown</h2>
-
-<div id="countdownTimer"></div>
-
-</section>
-
-<!-- Gallery -->
-
-<section id="gallery" class="section">
-
-<h2>Photo Gallery</h2>
-
-<div class="gallery">
-
-    <div class="photo-card">
-        <img src="cover.jpg" alt="Busayo">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo1.jpg" alt="Memory 1">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo2.jpg" alt="Memory 2">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo4.jpeg" alt="Memory 3">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo5.jpg" alt="Memory 4">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo6.jpg" alt="Memory 5">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo7.jpeg" alt="Memory 6">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo8.jpg" alt="Memory 7">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo10.jpg" alt="Memory 8">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo11.HEIC" alt="Memory 9">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo12.jpg" alt="Memory 10">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo13.jpg" alt="Memory 11">
-    </div>
-
-    <div class="photo-card">
-        <img src="photo14.jpg" alt="Memory 12">
-    </div>
-
-    <div class="photo-card">
-        <img src="us.jpg" alt="Us Together">
-    </div>
-
-</div>
-
-</section>
-
-<!-- Memory Book -->
-
-<section id="memory" class="section">
-
-<h2>Memory Book</h2>
-
-<div class="memory-book">
-
-<p>
-Every smile.
-Every conversation.
-Every memory.
-
-Has become another beautiful page in a story I'm grateful to be part of.
-</p>
-
-</div>
-
-</section>
-
-<!-- Timeline -->
-
-<section id="timeline" class="section">
-
-<h2>Growing Up Timeline</h2>
-
-<div class="timeline">
-
-<div class="timeline-card">
-
-<h3>🌸 Childhood</h3>
-
-<p>A little girl full of dreams.</p>
-
-</div>
-
-<div class="timeline-card">
-
-<h3>🎓 University</h3>
-
-<p>Growing stronger, wiser and more beautiful.</p>
-
-</div>
-
-<div class="timeline-card">
-
-<h3>✨ Today</h3>
-
-<p>A woman worth celebrating every single day.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- Letter -->
-
-<section id="letter" class="section">
-
-<h2>A Letter To You</h2>
-
-<div class="letter">
 
 <p>
 
 Happy Birthday Busayo.
 
-Thank you for being such a beautiful soul.
+Today isn't just another birthday.
 
-May this new year bring peace, joy, laughter and countless reasons to smile.
-
-Never stop believing in yourself because you're capable of amazing things.
-
-Today is your day, and you deserve every bit of happiness coming your way.
-
-🤍
+Today is about celebrating you.
 
 </p>
+
+<button class="nextBtn">
+
+Begin Our Journey →
+
+</button>
 
 </div>
 
 </section>
 
-<!-- Reasons -->
+<!-- PAGE 2 -->
 
-<section id="special" class="section">
+<section class="page" id="memorybox-page">
 
-<h2>Why You're Special</h2>
+<div class="chapter">
 
-<ul class="reasons">
-
-<li>❤️ Your smile brightens every room.</li>
-
-<li>🌸 Your kindness inspires people.</li>
-
-<li>✨ You're intelligent and hardworking.</li>
-
-<li>🤍 You're beautiful inside and out.</li>
-
-<li>🌟 You deserve endless happiness.</li>
-
-</ul>
-
-</section>
-
-<!-- Cake -->
-
-<section class="section">
-
-<h2>Make A Wish 🎂</h2>
-
-<button id="cakeButton">
-
-Blow The Candles 🎂
-
-</button>
-
-</section>
-
-<!-- Ending -->
-
-<section class="section ending">
+<h5>CHAPTER THREE</h5>
 
 <h1>
 
-Happy Birthday Busayo once again!
+Our Memories
 
 </h1>
 
 <p>
 
-You are loved,
-
-celebrated,
-
-today and always.
+Some memories are too precious to rush.
 
 </p>
 
-<h2>
+<button class="nextBtn">
 
-Thank you for taking this journey.
+Open The Memory Box →
 
-🤍
+</button>
 
-</h2>
+</div>
 
 </section>
+
+<!-- PAGE 3 -->
+
+<section class="page" id="memorybook-page">
+
+<div class="chapter">
+
+<h5>CHAPTER FOUR</h5>
+
+<h1>
+
+Memory Book
+
+</h1>
+
+<p>
+
+Every page tells another beautiful story.
+
+</p>
+
+<button class="nextBtn">
+
+Turn The Next Page →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PAGE 4 -->
+
+<section class="page" id="if-page">
+
+<div class="chapter">
+
+<h5>CHAPTER FIVE</h5>
+
+<h1>
+
+If Busayo Were...
+
+</h1>
+
+<p>
+
+Let's imagine you through beautiful little metaphors.
+
+</p>
+
+<button class="nextBtn">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PAGE 5 -->
+
+<section class="page" id="letter-page">
+
+<div class="chapter">
+
+<h5>CHAPTER SIX</h5>
+
+<h1>
+
+A Letter To You
+
+</h1>
+
+<p>
+
+Some words are easier written than spoken.
+
+</p>
+
+<button class="nextBtn">
+
+Open The Letter →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PAGE 6 -->
+
+<section class="page" id="reasons-page">
+
+<div class="chapter">
+
+<h5>CHAPTER SEVEN</h5>
+
+<h1>
+
+23 Reasons You're Amazing
+
+</h1>
+
+<p>
+
+One reason at a time.
+
+</p>
+
+<button class="nextBtn">
+
+Reveal The First Reason →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PAGE 7 -->
+
+<section class="page" id="cake-page">
+
+<div class="chapter">
+
+<h5>CHAPTER EIGHT</h5>
+
+<h1>
+
+Make A Wish
+
+</h1>
+
+<p>
+
+One more surprise awaits...
+
+</p>
+
+<button class="nextBtn">
+
+Celebrate →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PAGE 8 -->
+
+<section class="page" id="gift-page">
+
+<div class="chapter">
+
+<h5>CHAPTER NINE</h5>
+
+<h1>
+
+One Last Surprise
+
+</h1>
+
+<p>
+
+Open your gift.
+
+</p>
+
+<button class="nextBtn">
+
+Open Gift →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PAGE 9 -->
+
+<section class="page" id="ending-page">
+
+<div class="chapter">
+
+<h5>FINAL CHAPTER</h5>
+
+<h1>
+
+Until Next Time...
+
+</h1>
+
+<p>
+
+Every beautiful story deserves another read.
+
+</p>
+
+<button id="restart">
+
+Relive Our Memories ❤️
+
+</button>
+
+</div>
+
+</section>
+
+</div>
 
 <script src="script.js"></script>
 
