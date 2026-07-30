@@ -265,8 +265,33 @@ document.getElementById("openChest");
 openButton.addEventListener("click",()=>{
 
     chest.style.transform="scale(1.15)";
-    chest.innerHTML="✨📦✨";
+    openButton.addEventListener("click",()=>{
 
+    chest.style.transform="scale(1.15)";
+
+    setTimeout(()=>{
+
+        chest.classList.add("open");
+
+    },300);
+
+
+    setTimeout(()=>{
+
+        const viewer =
+        document.getElementById("memoryViewer");
+
+        viewer.style.display="flex";
+
+        setTimeout(()=>{
+
+            viewer.classList.add("show");
+
+        },50);
+
+    },1000);
+
+});
     setTimeout(()=>{
 
         chest.classList.add("open");
