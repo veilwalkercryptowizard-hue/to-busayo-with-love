@@ -1,128 +1,134 @@
+/* =====================================
+   TO BUSAYO, WITH LOVE
+   SCRIPT.JS
+===================================== */
+
+// -------------------------------
+// Elements
+// -------------------------------
+
+const loadingScreen = document.getElementById("loading-screen");
+const passwordPage = document.getElementById("password-page");
+const welcomePage = document.getElementById("welcome-page");
+
+const unlockButton = document.getElementById("unlockButton");
+const passwordInput = document.getElementById("password");
+const error = document.getElementById("error");
+
+const beginJourney = document.getElementById("beginJourney");
+
+const music = document.getElementById("bgMusic");
+
+// -------------------------------
 // Loading Screen
+// -------------------------------
+
 window.addEventListener("load", () => {
+
     setTimeout(() => {
-        document.getElementById("loading-screen").style.display = "none";
-    }, 2500);
-});
 
-// Password
-function checkPassword() {
-    const password = document.getElementById("password").value.trim();
-
-    if (
-        password === "July" ||
-        password === "july"
-    ) {
-        document.getElementById("password-screen").style.display = "none";
-        document.getElementById("website").style.display = "block";
-        document.getElementById("bgMusic").play();
-        window.scrollTo(0, 0);
-    } else {
-        document.getElementById("error").innerHTML =
-            "Wrong password ❤️";
-    }
-}
-
-// Music
-function playMusic() {
-    document.getElementById("music").play();
-}
-
-// Countdown
-const birthday = new Date("July 31, 2026 00:00:00").getTime();
-
-setInterval(() => {
-
-    const now = new Date().getTime();
-
-    const distance = birthday - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-    const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24))
-        /
-        (1000 * 60 * 60)
-    );
-
-    const minutes = Math.floor(
-        (distance % (1000 * 60 * 60))
-        /
-        (1000 * 60)
-    );
-
-    const seconds = Math.floor(
-        (distance % (1000 * 60))
-        /
-        1000
-    );
-
-    const timer = document.getElementById("countdownTimer");
-
-    if (timer) {
-
-        timer.innerHTML =
-            days +
-            " Days " +
-            hours +
-            " Hours " +
-            minutes +
-            " Minutes " +
-            seconds +
-            " Seconds";
-
-    }
-
-}, 1000);
-
-// Cake
-const cake = document.getElementById("cakeButton");
-
-if (cake) {
-
-    cake.addEventListener("click", () => {
-
-        cake.innerHTML = "🎉 Happy Birthday Busayo! 🎉";
-
-        confetti();
-
-    });
-
-}
-
-// Simple Confetti
-function confetti() {
-
-    for (let i = 0; i < 150; i++) {
-
-        let piece = document.createElement("div");
-
-        piece.className = "confetti";
-
-        piece.style.left = Math.random() * 100 + "%";
-
-        piece.style.animationDuration =
-            (Math.random() * 3 + 2) + "s";
-
-        document.body.appendChild(piece);
+        loadingScreen.style.opacity = "0";
 
         setTimeout(() => {
 
-            piece.remove();
+            loadingScreen.style.display = "none";
 
-        }, 5000);
+        },1000);
+
+    },2500);
+
+});
+
+// -------------------------------
+// Music Fade In
+// -------------------------------
+
+function startMusic(){
+
+    music.volume = 0;
+
+    music.play().catch(()=>{});
+
+    let volume = 0;
+
+    const fade = setInterval(()=>{
+
+        if(volume < 1){
+
+            volume += 0.05;
+
+            music.volume = volume;
+
+        }else{
+
+            clearInterval(fade);
+
+        }
+
+    },150);
+
+}
+
+// -------------------------------
+// Password
+// -------------------------------
+
+function unlockWebsite(){
+
+    const pass = passwordInput.value.trim().toLowerCase();
+
+    if(
+        pass === "july"
+    ){
+
+        error.innerHTML = "";
+
+        startMusic();
+
+        passwordPage.classList.remove("active");
+
+        setTimeout(()=>{
+
+            welcomePage.classList.add("active");
+
+        },500);
+
+    }
+
+    else{
+
+        error.innerHTML =
+        "🤍 Wrong password. Try again.";
 
     }
 
 }
 
-// Easter Egg
-document.addEventListener("keydown", function(e){
+unlockButton.addEventListener(
+"click",
+unlockWebsite
+);
 
-    if(e.key === "b" || e.key === "B"){
+passwordInput.addEventListener(
+"keypress",
+function(e){
 
-        alert("🤍 You found the hidden surprise! Happy Birthday Busayo!");
+if(e.key==="Enter"){
 
-    }
+unlockWebsite();
+
+}
+
+});
+
+// -------------------------------
+// Begin Journey
+// -------------------------------
+
+beginJourney.addEventListener("click",()=>{
+
+    alert(
+"🚧 Chapter Two (The Keepsake Chest) is coming next!"
+    );
 
 });
