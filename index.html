@@ -3,763 +3,1229 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>To Busayo, With Love 🤍</title>
+<title>To Busayo With Love 🤍</title>
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&family=Caveat:wght@500;700&display=swap"
-          rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Caveat:wght@700&display=swap"
+rel="stylesheet">
 
-    <link rel="stylesheet"
-          href="style.css">
+<link
+rel="stylesheet"
+href="style.css">
 
 </head>
 
 <body>
 
-<!-- ==========================================
-LOADING SCREEN
-========================================== -->
-
-<div id="loading-screen">
-
-    <div class="loading-content">
-
-        <h1>
-            To Busayo,<br>
-            With Love
-        </h1>
-
-        <p>
-            Preparing something beautiful...
-        </p>
-
-    </div>
-
-</div>
-
-<!-- ==========================================
-PASSWORD PAGE
-========================================== -->
-
-<section
-id="password-page"
-class="page active">
-
-    <div class="password-wrapper">
-
-        <!-- LEFT SIDE -->
-
-        <div class="photo-side">
-
-            <img
-            src="images/cover.jpg"
-            alt="Busayo">
-
-        </div>
-
-        <!-- RIGHT SIDE -->
-
-        <div class="login-side">
-
-            <span class="chapter-tag">
-
-                PRIVATE INVITATION
-
-            </span>
-
-            <h1>
-
-                To Busayo,<br>
-
-                With Love 🤍
-
-            </h1>
-
-            <p>
-
-                A little corner of the internet,
-                created especially for you.
-
-                <br><br>
-
-                Enter the password
-                to begin your journey.
-
-            </p>
-
-            <input
-
-            id="password"
-
-            type="password"
-
-            placeholder="Password">
-
-            <small class="hint">
-
-                Hint:
-                What's my birth month?
-
-            </small>
-
-            <button
-            id="unlockButton"
-            class="primary-button">
-
-                Unlock My Surprise
-
-            </button>
-
-            <p id="error"></p>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-WELCOME PAGE
-========================================== -->
-
-<section
-id="welcome-page"
-class="page">
-
-    <div class="story-container">
-
-        <div class="progress">
-
-            <div
-            class="progress-fill"
-            style="width:12%;">
-
-            </div>
-
-        </div>
-
-        <span class="chapter-tag">
-
-            CHAPTER ONE
-
-        </span>
-
-        <h1 id="typingTitle"></h1>
-
-        <p id="typingText"></p>
-
-        <button
-
-        id="beginJourney"
-
-        class="primary-button">
-
-            Begin Our Journey →
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-CHAPTER TRANSITION
-========================================== -->
-
-<div id="chapterTransition">
-
-    <div class="transition-content">
-
-        <h2 id="transitionChapter">
-
-            CHAPTER ONE
-
-        </h2>
-
-        <h1 id="transitionTitle">
-
-            The Story Begins
-
-        </h1>
-
-    </div>
-
-</div>
-
-<!-- ==========================================
-CHAPTER TWO
-THE KEEPSAKE CHEST
-========================================== -->
-
-<section
-id="memoryPage"
-class="page">
-
-    <div class="story-container">
-
-        <div class="progress">
-
-            <div
-            class="progress-fill"
-            style="width:25%;">
-
-            </div>
-
-        </div>
-
-        <span class="chapter-tag">
-
-            CHAPTER TWO
-
-        </span>
-
-        <h1>
-
-            The Keepsake Chest
-
-        </h1>
-
-        <p>
-
-            Every beautiful story deserves
-            a place where its memories live.
-
-            <br><br>
-
-            Inside this little chest are
-            moments worth remembering forever.
-
-        </p>
-
-        <div class="treasure-area">
-
-            <div
-            id="chest"
-            class="treasure-chest">
-
-                <div class="gold-light"></div>
-
-                <div class="chest-lid"></div>
-
-                <div class="chest-body"></div>
-
-                <div class="chest-lock"></div>
-
-            </div>
-
-        </div>
-
-        <button
-
-        id="openChest"
-
-        class="primary-button">
-
-            Open The Chest ✨
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ==========================================
-CHAPTER THREE
-OUR LITTLE MEMORIES
-========================================== -->
-
-<section
-id="galleryPage"
-class="page">
-
-    <div class="story-container">
-
-        <div class="progress">
-
-            <div
-            class="progress-fill"
-            style="width:40%;">
-
-            </div>
-
-        </div>
-
-        <span class="chapter-tag">
-
-            CHAPTER THREE
-
-        </span>
-
-        <h1>
-
-            Our Little Memories
-
-        </h1>
-
-        <p
-        id="memoryCounter">
-
-            Memory 1 of 14
-
-        </p>
-
-        <div
-        id="memoryViewer">
-
-            <div class="polaroid">
-
-                <div class="photo-tape left"></div>
-
-                <div class="photo-tape right"></div>
-
-                <img
-
-                id="memoryImage"
-
-                src="images/photo1.jpg"
-
-                alt="Memory">
-
-                <h3
-                id="memoryTitle">
-
-                    The Beginning
-
-                </h3>
-
-                <p
-                id="memoryCaption">
-
-                    Every beautiful story
-                    begins with one unforgettable smile.
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="navigationButtons">
-
-            <button
-            id="previousMemory">
-
-                ← Previous
-
-            </button>
-
-            <button
-            id="nextMemory">
-
-                Next →
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==========================================
-CHAPTER FOUR
-FILM STRIP
-========================================== -->
-
-<section
-id="filmPage"
-class="page">
-
-    <div class="story-container">
-
-        <div class="progress">
-
-            <div
-            class="progress-fill"
-            style="width:55%;">
-
-            </div>
-
-        </div>
-
-        <span class="chapter-tag">
-
-            CHAPTER FOUR
-
-        </span>
-
-        <h1>
-
-            A Walk Through Our Moments
-
-        </h1>
-
-        <p>
-
-            Some memories deserve
-            more than a single glance.
-
-        </p>
-
-        <div
-        id="filmStrip">
-
-            <!-- JavaScript creates the film -->
-
-        </div>
-
-        <div class="navigationButtons">
-
-            <button
-            id="filmPrevious">
-
-                ← Previous
-
-            </button>
-
-            <button
-            id="filmNext">
-
-                Next →
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-CHAPTER FIVE
-23 REASONS
-========================================== -->
-
-<section
-id="reasonsPage"
-class="page">
-
-    <div class="story-container">
-
-        <div class="progress">
-
-            <div
-            class="progress-fill"
-            style="width:70%;">
-
-            </div>
-
-        </div>
-
-        <span class="chapter-tag">
-
-            CHAPTER FIVE
-
-        </span>
-
-        <h1>
-
-            23 Reasons Why You're Amazing
-
-        </h1>
-
-        <p>
-
-            Every envelope hides
-            one little reminder of
-            how wonderful you are.
-
-            <br><br>
-
-            Open them in any order.
-
-        </p>
-
-        <div
-        id="reasonsGrid"
-        class="reasons-grid">
-
-            <!-- JavaScript generates 23 envelopes -->
-
-        </div>
-
-        <div class="navigationButtons">
-
-            <button
-            id="backToFilm">
-
-                ← Previous
-
-            </button>
-
-            <button
-            id="toLetter">
-
-                Continue →
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==========================================
-REASON POPUP
-========================================== -->
-
-<div
-id="reasonModal"
-class="reason-modal">
-
-    <div class="reason-card">
-
-        <button
-        id="closeReason"
-        class="closeButton">
-
-            ×
-
-        </button>
-
-        <h2>
-
-            For You 🤍
-
-        </h2>
-
-        <p id="reasonText">
-
-        </p>
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================
-CHAPTER SIX
-THE LETTER
-========================================== -->
-
-<section
-id="letterPage"
-class="page">
-
-    <div class="story-container">
-
-        <div class="progress">
-
-            <div
-            class="progress-fill"
-            style="width:85%;">
-
-            </div>
-
-        </div>
-
-        <span class="chapter-tag">
-
-            CHAPTER SIX
-
-        </span>
-
-        <h1>
-
-            One Last Thing...
-
-        </h1>
-
-        <p>
-
-            Before this journey ends,
-
-            there's something
-
-            I want you to read.
-
-        </p>
-
-        <div
-        id="letterEnvelope">
-
-            💌
-
-            <p>
-
-                Open Letter
-
-            </p>
-
-        </div>
-
-        <div
-        id="letterPaper">
-
-            <h2>
-
-                Dear Busayo,
-
-            </h2>
-
-            <div
-            id="letterText">
-
-            </div>
-
-        </div>
-
-        <div class="navigationButtons">
-
-            <button
-            id="backToReasons">
-
-                ← Previous
-
-            </button>
-
-            <button
-            id="toEnding">
-
-                Final Page →
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-CHAPTER SEVEN
-THE END
-========================================== -->
-
-<section
-id="endingPage"
-class="page">
-
-    <div class="story-container ending">
-
-        <div class="progress">
-
-            <div
-            class="progress-fill"
-            style="width:100%;">
-
-            </div>
-
-        </div>
-
-        <div class="ending-photo">
-
-            <img
-            src="images/cover.jpg"
-            alt="Busayo">
-
-        </div>
-
-        <h1>
-
-            Happy Birthday,
-            Busayo 🤍
-
-        </h1>
-
-        <p>
-
-            Thank you for taking this little journey.
-
-            <br><br>
-
-            I hope every smile,
-            every memory,
-            every page,
-            reminded you just how incredible you truly are.
-
-            <br><br>
-
-            May this new year of your life bring peace,
-            laughter,
-            success,
-            love,
-            unforgettable adventures,
-            and countless reasons to smile.
-
-            <br><br>
-
-            Never stop being the beautiful soul that you are.
-
-        </p>
-
-        <div class="heartContainer">
-
-            🤍 ✨ 🤍 ✨ 🤍
-
-        </div>
-
-        <button
-        id="restartJourney"
-        class="primary-button">
-
-            Begin Again
-
-        </button>
-
-        <small class="ending-credit">
-
-            Made with love,
-            especially for Busayo.
-
-        </small>
-
-    </div>
-
-</section>
-
-
-<!-- ==========================================
-BACKGROUND PARTICLES
-========================================== -->
-
-<div id="particles"></div>
-
-
-<!-- ==========================================
-BACKGROUND MUSIC
-========================================== -->
+<!-- ===================================================== -->
+<!-- MUSIC -->
+<!-- ===================================================== -->
 
 <audio
 id="bgMusic"
-loop
-preload="auto">
+loop>
 
-    <source
-    src="music/background.mp3"
-    type="audio/mpeg">
+<source
+src="music/BrunoMars.mp3"
+type="audio/mpeg">
 
 </audio>
 
+<!-- ===================================================== -->
+<!-- LOADING SCREEN -->
+<!-- ===================================================== -->
 
-<!-- ==========================================
-JAVASCRIPT
-========================================== -->
+<section
+id="loadingScreen"
+class="screen active">
+
+<div class="stars"></div>
+
+<div class="loadingContent">
+
+<h1>
+
+To Busayo,<br>
+With Love 🤍
+
+</h1>
+
+<p>
+
+Preparing something beautiful...
+
+</p>
+
+<div class="loadingBar">
+
+<div
+id="loadingFill">
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- COUNTDOWN -->
+<!-- ===================================================== -->
+
+<section
+id="countdownScreen"
+class="screen">
+
+<div
+id="countNumber">
+
+3
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- HAPPY BIRTHDAY -->
+<!-- ===================================================== -->
+
+<section
+id="birthdayScreen"
+class="screen">
+
+<div
+id="balloons">
+
+</div>
+
+<div
+id="confetti">
+
+</div>
+
+<div
+class="birthdayContent">
+
+<h1>
+
+Happy Birthday Beautiful 🤍
+
+</h1>
+
+<p>
+
+Today isn't just your birthday.
+
+</p>
+
+<p>
+
+It's the celebration of someone truly amazing.
+
+</p>
+
+<p>
+
+So I made something only you can experience.
+
+</p>
+
+<button
+id="startSurprise"
+class="primaryButton">
+
+✨ Start The Surprise ✨
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- MOVIE TITLE -->
+<!-- ===================================================== -->
+
+<section
+id="movieTitle"
+class="screen">
+
+<h1>
+
+To Busayo,<br>
+
+With Love 🤍
+
+</h1>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- PASSWORD PAGE -->
+<!-- ===================================================== -->
+
+<section
+id="passwordPage"
+class="screen">
+
+<div
+class="passwordCard">
+
+<div
+class="leftSide">
+
+<img
+
+src="images/cover.jpg"
+
+alt="Busayo"
+
+id="coverPhoto">
+
+</div>
+
+<div
+class="rightSide">
+
+<span
+class="chapterTag">
+
+PRIVATE INVITATION
+
+</span>
+
+<h1>
+
+To Busayo,<br>
+
+With Love 🤍
+
+</h1>
+
+<p>
+
+A little corner of the internet,
+
+made especially for you.
+
+</p>
+
+<p>
+
+Enter the password
+
+to begin your journey.
+
+</p>
+
+<input
+
+id="password"
+
+type="password"
+
+placeholder="Password">
+
+<small>
+
+Hint:
+
+What's my birth month?
+
+</small>
+
+<button
+
+id="unlockButton"
+
+class="primaryButton">
+
+Unlock My Surprise
+
+</button>
+
+<p
+id="error">
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CHAPTER ONE -->
+<!-- ===================================================== -->
+
+<section
+id="chapter1"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div class="progressFill"
+style="width:12%;">
+
+</div>
+
+</div>
+
+<span>
+
+Chapter One
+
+</span>
+
+</div>
+
+<div class="storyContainer">
+
+<h1
+id="typingTitle">
+
+</h1>
+
+<p
+id="typingText">
+
+</p>
+
+<button
+
+id="beginJourney"
+
+class="primaryButton">
+
+Turn The Page →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CHAPTER TWO -->
+<!-- ===================================================== -->
+
+<section
+id="chapter2"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div class="progressFill"
+style="width:25%;">
+
+</div>
+
+</div>
+
+<span>
+
+Chapter Two
+
+</span>
+
+</div>
+
+<div class="storyContainer">
+
+<h1>
+
+The Keepsake Chest
+
+</h1>
+
+<p>
+
+Every beautiful story deserves
+a place where memories never fade.
+
+Open the chest to discover ours.
+
+</p>
+
+<div
+class="treasureArea">
+
+<div
+id="chest"
+class="treasureChest">
+
+<div class="chestLid"></div>
+
+<div class="chestBody"></div>
+
+<div class="chestLock"></div>
+
+<div class="goldLight"></div>
+
+</div>
+
+</div>
+
+<button
+
+id="openChest"
+
+class="primaryButton">
+
+Open The Chest ✨
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CHAPTER THREE -->
+<!-- ===================================================== -->
+
+<section
+id="chapter3"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div class="progressFill"
+style="width:40%;">
+
+</div>
+
+</div>
+
+<span>
+
+Chapter Three
+
+</span>
+
+</div>
+
+<div class="storyContainer">
+
+<h1>
+
+Our Little Memories
+
+</h1>
+
+<p
+id="memoryCounter">
+
+Memory 1 of 11
+
+</p>
+
+<div
+id="memoryViewer">
+
+<div
+class="polaroid">
+
+<div
+class="photoTape left">
+
+</div>
+
+<div
+class="photoTape right">
+
+</div>
+
+<img
+
+id="memoryImage"
+
+src="images/photo1.jpg"
+
+alt="Memory">
+
+<h2
+id="memoryTitle">
+
+The Beginning
+
+</h2>
+
+<p
+id="memoryCaption">
+
+Every beautiful story begins
+with a single smile.
+
+</p>
+
+</div>
+
+</div>
+
+<div
+class="navigationButtons">
+
+<button
+id="previousMemory">
+
+← Previous
+
+</button>
+
+<button
+id="nextMemory">
+
+Next →
+
+</button>
+
+</div>
+
+<button
+
+id="toFilmStrip"
+
+class="primaryButton">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CHAPTER FOUR -->
+<!-- ===================================================== -->
+
+<section
+id="chapter4"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div class="progressFill"
+style="width:55%;">
+
+</div>
+
+</div>
+
+<span>
+
+Chapter Four
+
+</span>
+
+</div>
+
+<div class="storyContainer">
+
+<h1>
+
+A Walk Through
+Our Moments
+
+</h1>
+
+<p>
+
+Like an old movie,
+every frame tells a story.
+
+</p>
+
+<div
+id="filmStrip">
+
+<!-- Filled by JavaScript -->
+
+</div>
+
+<div
+class="navigationButtons">
+
+<button
+id="filmPrevious">
+
+← Previous
+
+</button>
+
+<button
+id="filmNext">
+
+Next →
+
+</button>
+
+</div>
+
+<div
+id="usMoment">
+
+<img
+
+src="images/us.jpg"
+
+alt="Us">
+
+<p>
+
+"My favourite memory
+will always be us."
+
+</p>
+
+</div>
+
+<button
+
+id="toMiniGame"
+
+class="primaryButton">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CHAPTER FIVE - MINI GAME -->
+<!-- ===================================================== -->
+
+<section
+id="chapter5"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div class="progressFill"
+style="width:70%;">
+
+</div>
+
+</div>
+
+<span>
+
+Chapter Five
+
+</span>
+
+</div>
+
+<div class="storyContainer">
+
+<h1>
+
+A Little Birthday Challenge
+
+</h1>
+
+<p>
+
+Choose a little game.
+
+Complete either one to continue.
+
+</p>
+
+<div class="gameSelection">
+
+<div
+class="gameCard"
+id="heartGameCard">
+
+<div class="gameIcon">
+
+❤️
+
+</div>
+
+<h2>
+
+Catch The Hearts
+
+</h2>
+
+<p>
+
+Catch 23 hearts while avoiding
+the broken ones.
+
+</p>
+
+<button
+id="playHeartGame"
+class="primaryButton">
+
+Play ❤️
+
+</button>
+
+</div>
+
+<div
+class="gameCard"
+id="cakeGameCard">
+
+<div class="gameIcon">
+
+🎂
+
+</div>
+
+<h2>
+
+Build A Birthday Cake
+
+</h2>
+
+<p>
+
+Decorate a birthday cake
+just the way you like.
+
+</p>
+
+<button
+id="playCakeGame"
+class="primaryButton">
+
+Play 🎂
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ===================== -->
+<!-- HEART GAME -->
+<!-- ===================== -->
+
+<div
+id="heartGame"
+class="gameContainer">
+
+<p>
+
+Score:
+<span id="heartScore">
+
+0
+
+</span>
+
+/23
+
+</p>
+
+<div
+id="heartGameArea">
+
+</div>
+
+<button
+id="finishHeartGame"
+class="primaryButton">
+
+Continue →
+
+</button>
+
+</div>
+
+<!-- ===================== -->
+<!-- CAKE GAME -->
+<!-- ===================== -->
+
+<div
+id="cakeGame"
+class="gameContainer">
+
+<h2>
+
+Decorate Your Cake
+
+</h2>
+
+<div
+id="cakeBuilder">
+
+<div id="cake">
+
+<div id="cakeTop"></div>
+
+<div id="cakeMiddle"></div>
+
+<div id="cakeBottom"></div>
+
+</div>
+
+</div>
+
+<div class="cakeOptions">
+
+<button id="pinkCake">
+
+Pink
+
+</button>
+
+<button id="blueCake">
+
+Blue
+
+</button>
+
+<button id="goldCake">
+
+Gold
+
+</button>
+
+<button id="lightCandles">
+
+🕯 Light Candles
+
+</button>
+
+</div>
+
+<button
+id="finishCakeGame"
+class="primaryButton">
+
+Continue →
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CHAPTER SIX -->
+<!-- ===================================================== -->
+
+<section
+id="chapter6"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div class="progressFill"
+style="width:82%;">
+
+</div>
+
+</div>
+
+<span>
+
+Chapter Six
+
+</span>
+
+</div>
+
+<div class="storyContainer">
+
+<h1>
+
+23 Reasons
+Why You're Amazing
+
+</h1>
+
+<p>
+
+Each envelope hides
+a little reminder
+of why you're special.
+
+</p>
+
+<div
+id="reasonsGrid">
+
+<!-- JavaScript creates 23 envelopes -->
+
+</div>
+
+<p
+id="reasonProgress">
+
+Opened
+
+0 / 23
+
+</p>
+
+<div class="navigationButtons">
+
+<button
+id="toLetter"
+class="primaryButton">
+
+Continue →
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CHAPTER SEVEN - THE LETTER -->
+<!-- ===================================================== -->
+
+<section
+id="chapter7"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div
+class="progressFill"
+style="width:92%;">
+
+</div>
+
+</div>
+
+<span>
+
+Chapter Seven
+
+</span>
+
+</div>
+
+<div class="storyContainer">
+
+<h1>
+
+One Last Thing...
+
+</h1>
+
+<p>
+
+Before this journey ends,
+there's something I've wanted to tell you.
+
+</p>
+
+<div
+id="mailboxContainer">
+
+<div
+id="mailbox">
+
+📬
+
+</div>
+
+<div
+id="letterEnvelope">
+
+💌
+
+<p>
+
+Click To Open
+
+</p>
+
+</div>
+
+</div>
+
+<div
+id="letterPaper">
+
+<div
+class="letterHeader">
+
+Dear Busayo 🤍,
+
+</div>
+
+<div
+id="letterText">
+
+<!-- Typed by JavaScript -->
+
+</div>
+
+<div
+class="letterSignature">
+
+— Veilwalker
+
+</div>
+
+</div>
+
+<div
+id="letterPhoto">
+
+<img
+
+src="images/us.jpg"
+
+alt="Us Together">
+
+</div>
+
+<div
+class="navigationButtons">
+
+<button
+
+id="toEnding"
+
+class="primaryButton">
+
+Continue →
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- FINAL CHAPTER -->
+<!-- ===================================================== -->
+
+<section
+id="endingPage"
+class="screen chapter">
+
+<div class="chapterProgress">
+
+<div class="progressBar">
+
+<div
+class="progressFill"
+style="width:100%;">
+
+</div>
+
+</div>
+
+<span>
+
+The End
+
+</span>
+
+</div>
+
+<div
+class="storyContainer ending">
+
+<h1>
+
+Happy Birthday,
+
+Busayo 🤍
+
+</h1>
+
+<img
+
+src="images/us.jpg"
+
+class="endingPhoto"
+
+alt="Us">
+
+<p>
+
+Thank you for taking this little journey.
+
+<br><br>
+
+I hope every page reminded you
+how wonderful,
+kind,
+beautiful,
+and special you truly are.
+
+<br><br>
+
+Some gifts are bought.
+
+<br>
+
+This one was made.
+
+</p>
+
+<div
+class="heartContainer">
+
+🤍 🤍 🤍
+
+</div>
+
+<button
+
+id="secretButton"
+
+class="primaryButton">
+
+One Last Surprise 🎁
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- SECRET ENDING -->
+<!-- ===================================================== -->
+
+<section
+id="secretPage"
+class="screen chapter">
+
+<div
+class="storyContainer">
+
+<h1>
+
+Wait...
+
+</h1>
+
+<p>
+
+You didn't think it was over already,
+did you?
+
+</p>
+
+<div
+id="scrapbook">
+
+<div class="scrapbookPage">
+
+<img
+
+src="images/us.jpg"
+
+alt="Us">
+
+<h2>
+
+My Favourite Memory
+
+</h2>
+
+<p>
+
+Every story has hundreds of beautiful moments,
+
+but my favourite will always be the one
+
+that has both of us in it.
+
+</p>
+
+</div>
+
+</div>
+
+<h2>
+
+Made with love,
+
+just for you. 🤍
+
+</h2>
+
+<p>
+
+Happy Birthday once again,
+
+Busayo.
+
+May this new chapter of your life bring you
+peace,
+joy,
+success,
+good health,
+and countless beautiful memories.
+
+Never stop smiling.
+
+Never stop being you.
+
+🤍
+
+</p>
+
+<button
+
+id="restartJourney"
+
+class="primaryButton">
+
+Begin Again ↺
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- JAVASCRIPT -->
+<!-- ===================================================== -->
 
 <script src="memories.js"></script>
 
