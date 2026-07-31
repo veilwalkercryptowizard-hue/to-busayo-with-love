@@ -1,93 +1,94 @@
-/* ======================================================
-   TO BUSAYO WITH LOVE
+/* =====================================================
+   TO BUSAYO, WITH LOVE
    STYLE.CSS
-   Author: OpenAI + Veilwalker
-====================================================== */
+   Version 1.0
+===================================================== */
 
-/* ======================================================
+/* =====================================================
    RESET
-====================================================== */
+===================================================== */
 
 *,
 *::before,
 *::after{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
+
 }
 
 html{
+
     scroll-behavior:smooth;
+
 }
 
 body{
-
-    width:100%;
-    min-height:100vh;
 
     overflow:hidden;
 
     font-family:"Poppins",sans-serif;
 
-    background:#F9F6F1;
+    background:#F9F6EF;
 
     color:#2D2D2D;
 
-    -webkit-font-smoothing:antialiased;
-
 }
 
-/* ======================================================
-   ROOT VARIABLES
-====================================================== */
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 :root{
 
-    --primary:#C9A227;
+    --gold:#D8B25A;
 
-    --primary-dark:#B58B16;
+    --gold-light:#F7E3A3;
 
-    --cream:#F9F6F1;
+    --cream:#FFFDF9;
 
-    --white:#FFFFFF;
+    --paper:#F7F3EB;
 
-    --text:#2D2D2D;
+    --brown:#6F5B48;
 
-    --text-light:#777777;
+    --dark:#202020;
 
     --shadow:
 
-    0 20px 60px rgba(0,0,0,.10);
+    0 20px 60px rgba(0,0,0,.12);
 
-    --radius:24px;
+    --radius:28px;
 
-    --transition:.45s ease;
-
-}
-
-/* ======================================================
-   GLOBAL
-====================================================== */
-
-body{
-
-    position:relative;
+    --transition:.6s ease;
 
 }
 
-img{
+/* =====================================================
+   FONTS
+===================================================== */
 
-    max-width:100%;
+h1,h2,h3{
 
-    display:block;
+    font-family:
+
+    "Playfair Display",
+
+    serif;
 
 }
 
-button{
+p{
 
-    font-family:inherit;
+    line-height:1.8;
+
+    font-size:17px;
 
 }
+
+/* =====================================================
+   SCREEN
+===================================================== */
 
 .screen{
 
@@ -101,11 +102,9 @@ button{
 
     align-items:center;
 
-    overflow:hidden;
-
-    background:var(--cream);
-
     padding:40px;
+
+    overflow:hidden;
 
 }
 
@@ -115,112 +114,161 @@ button{
 
 }
 
-.chapter{
+/* =====================================================
+   BACKGROUND
+===================================================== */
 
-    flex-direction:column;
+#backgroundEffects{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-100;
+
+    overflow:hidden;
+
+    background:
+
+    linear-gradient(
+
+    180deg,
+
+    #FFFDF9,
+
+    #F5EFE4);
 
 }
+
+/* =====================================================
+   STORY CONTAINER
+===================================================== */
 
 .storyContainer{
 
-    width:min(1100px,95%);
-
-    margin:auto;
+    width:min(950px,95%);
 
     text-align:center;
 
-    position:relative;
+    background:
 
-    z-index:5;
+    rgba(255,255,255,.55);
 
-}
+    backdrop-filter:
 
-h1{
+    blur(20px);
 
-    font-family:"Playfair Display",serif;
+    border-radius:
 
-    font-size:clamp(2.5rem,6vw,5rem);
+    var(--radius);
 
-    margin-bottom:20px;
+    padding:60px;
 
-    line-height:1.15;
+    box-shadow:
 
-}
-
-h2{
-
-    font-family:"Playfair Display",serif;
+    var(--shadow);
 
 }
 
-p{
-
-    font-size:1.1rem;
-
-    color:var(--text-light);
-
-    line-height:1.9;
-
-}
-
-/* ======================================================
+/* =====================================================
    BUTTONS
-====================================================== */
+===================================================== */
 
 .primaryButton{
 
     margin-top:35px;
 
-    padding:18px 42px;
+    padding:
+
+    18px 42px;
 
     border:none;
 
-    border-radius:999px;
-
-    background:linear-gradient(
-    135deg,
-    #D7B447,
-    #B58B16);
-
-    color:white;
+    border-radius:100px;
 
     cursor:pointer;
 
-    font-size:1rem;
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--gold),
+
+    var(--gold-light));
+
+    color:white;
+
+    font-size:17px;
 
     font-weight:600;
 
-    transition:var(--transition);
+    transition:
 
-    box-shadow:
+    .35s;
 
-    0 12px 30px rgba(181,139,22,.25);
+    position:relative;
+
+    overflow:hidden;
 
 }
 
 .primaryButton:hover{
 
     transform:
-    translateY(-4px)
-    scale(1.03);
+
+    translateY(-4px);
+
+    box-shadow:
+
+    0 15px 35px rgba(216,178,90,.35);
 
 }
 
-.primaryButton:active{
+.primaryButton::before{
 
-    transform:scale(.96);
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    transparent,
+
+    rgba(255,255,255,.5),
+
+    transparent);
+
+    transition:.8s;
 
 }
 
-/* ======================================================
-   PROGRESS BAR
-====================================================== */
+.primaryButton:hover::before{
+
+    left:120%;
+
+}
+
+/* =====================================================
+   CHAPTER PROGRESS
+===================================================== */
 
 .chapterProgress{
 
-    width:min(900px,90%);
-
-    margin-bottom:35px;
+    margin-bottom:40px;
 
 }
 
@@ -228,11 +276,11 @@ p{
 
     width:100%;
 
-    height:10px;
+    height:8px;
 
-    background:#EAE4D8;
+    background:#E9E2D8;
 
-    border-radius:999px;
+    border-radius:100px;
 
     overflow:hidden;
 
@@ -242,221 +290,161 @@ p{
 
     height:100%;
 
-    border-radius:999px;
-
     background:
 
     linear-gradient(
+
     90deg,
-    #DDBB50,
-    #B58B16);
+
+    var(--gold),
+
+    var(--gold-light));
 
 }
+
+/* =====================================================
+   CHAPTER TAG
+===================================================== */
 
 .chapterProgress span{
 
     display:block;
 
-    margin-top:15px;
+    margin-top:18px;
 
-    letter-spacing:4px;
+    letter-spacing:3px;
 
-    font-size:.8rem;
+    font-size:13px;
 
-    color:var(--primary);
-
-    font-weight:600;
+    color:var(--gold);
 
 }
 
-/* ======================================================
-   PREMIUM ANIMATED BACKGROUND
-====================================================== */
+/* =====================================================
+   HEADINGS
+===================================================== */
 
-body{
+.storyContainer h1{
+
+    font-size:
+
+    clamp(
+
+    38px,
+
+    5vw,
+
+    62px);
+
+    margin-bottom:25px;
+
+}
+
+.storyContainer p{
+
+    max-width:650px;
+
+    margin:auto;
+
+}
+
+/* =====================================================
+   HIDDEN
+===================================================== */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+/* =====================================================
+   AMBIENT BACKGROUND SYSTEM
+===================================================== */
+
+#backgroundEffects{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    z-index:-100;
+
+    transition:2s ease;
+
+}
+
+/* =====================================================
+   CHANGING BACKGROUNDS
+===================================================== */
+
+body.theme-birthday{
 
     background:
-    radial-gradient(circle at top,#FFFDF9,#F9F6F1 55%,#F3EEE4);
+    linear-gradient(
+    180deg,
+    #FFF9F3,
+    #FFEFCF);
 
 }
 
-/* Soft glow */
-
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
+body.theme-story{
 
     background:
-
-    radial-gradient(circle at 20% 20%,
-    rgba(255,255,255,.75),
-    transparent 45%),
-
-    radial-gradient(circle at 80% 10%,
-    rgba(255,240,180,.35),
-    transparent 35%),
-
-    radial-gradient(circle at 50% 90%,
-    rgba(255,255,255,.45),
-    transparent 40%);
-
-    animation:
-    backgroundGlow
-    12s
-    ease-in-out
-    infinite;
-
-    z-index:-3;
+    linear-gradient(
+    180deg,
+    #FFFDF9,
+    #F5EFE4);
 
 }
 
-/* ======================================================
-   FLOATING SPARKLES
-====================================================== */
+body.theme-memory{
 
-.sparkles{
-
-    position:fixed;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-    z-index:-2;
+    background:
+    linear-gradient(
+    180deg,
+    #FAF6EF,
+    #EFE5D6);
 
 }
 
-.sparkles span{
+body.theme-letter{
 
-    position:absolute;
-
-    width:5px;
-
-    height:5px;
-
-    border-radius:50%;
-
-    background:#F6D66A;
-
-    box-shadow:
-
-    0 0 12px #F6D66A;
-
-    animation:
-
-    sparkleFloat
-
-    linear
-
-    infinite;
+    background:
+    linear-gradient(
+    180deg,
+    #F8F3EA,
+    #E8DBC5);
 
 }
 
-/* ======================================================
-   FLOATING HEARTS
-====================================================== */
+body.theme-ending{
 
-.hearts{
+    background:
+    linear-gradient(
+    180deg,
+    #081120,
+    #13233F);
 
-    position:fixed;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-    z-index:-2;
+    color:white;
 
 }
 
-.hearts span{
-
-    position:absolute;
-
-    font-size:18px;
-
-    opacity:.25;
-
-    animation:
-
-    heartFloat
-
-    linear
-
-    infinite;
-
-}
-
-/* ======================================================
-   FIREFLIES
-====================================================== */
-
-.fireflies{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-    z-index:-2;
-
-}
-
-.fireflies span{
-
-    position:absolute;
-
-    width:8px;
-
-    height:8px;
-
-    border-radius:50%;
-
-    background:#FFE680;
-
-    box-shadow:
-
-    0 0 20px gold;
-
-    animation:
-
-    firefly
-
-    ease-in-out
-
-    infinite;
-
-}
-
-/* ======================================================
+/* =====================================================
    STARS
-====================================================== */
+===================================================== */
 
-.stars{
+#stars{
 
     position:absolute;
 
     inset:0;
 
-    overflow:hidden;
-
-    pointer-events:none;
-
 }
 
-.stars span{
+.star{
 
     position:absolute;
 
@@ -468,99 +456,267 @@ body::before{
 
     border-radius:50%;
 
-    opacity:.8;
-
     animation:
 
     twinkle
 
-    3s
-
-    infinite;
+    4s infinite;
 
 }
 
-/* ======================================================
-   GLASS CARDS
-====================================================== */
+/* =====================================================
+   SPARKLES
+===================================================== */
 
-.passwordCard,
-
-.polaroid,
-
-.gameCard,
-
-#letterPaper,
-
-.scrapbookPage{
-
-    background:
-
-    rgba(255,255,255,.72);
-
-    backdrop-filter:
-
-    blur(20px);
-
-    -webkit-backdrop-filter:
-
-    blur(20px);
-
-    border:
-
-    1px solid
-
-    rgba(255,255,255,.45);
-
-    box-shadow:
-
-    0 20px 60px
-
-    rgba(0,0,0,.08);
-
-}
-
-/* ======================================================
-   FLOATING DECORATIONS
-====================================================== */
-
-.floatingDecoration{
+#sparkles{
 
     position:absolute;
 
-    animation:
-
-    floatDecoration
-
-    6s
-
-    ease-in-out
-
-    infinite;
+    inset:0;
 
 }
 
-/* ======================================================
-   BACKGROUND ANIMATIONS
-====================================================== */
+.sparkle{
 
-@keyframes backgroundGlow{
+    position:absolute;
 
-    0%{
+    color:#F8D77A;
 
+    font-size:16px;
+
+    animation:
+
+    sparkleFloat
+
+    linear infinite;
+
+}
+
+/* =====================================================
+   FIREFLIES
+===================================================== */
+
+#fireflies{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+.firefly{
+
+    position:absolute;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#FFE88C;
+
+    filter:blur(1px);
+
+    box-shadow:
+
+    0 0 15px #FFD54D;
+
+    animation:
+
+    fireflyMove
+
+    linear infinite;
+
+}
+
+/* =====================================================
+   HEARTS
+===================================================== */
+
+#floatingHearts{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+.floatingHeart{
+
+    position:absolute;
+
+    font-size:24px;
+
+    opacity:.15;
+
+    animation:
+
+    heartRise
+
+    linear infinite;
+
+}
+
+/* =====================================================
+   BALLOONS
+===================================================== */
+
+#balloons{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+.balloon{
+
+    position:absolute;
+
+    width:45px;
+
+    height:60px;
+
+    border-radius:
+
+    50% 50% 45% 45%;
+
+    animation:
+
+    balloonFloat
+
+    linear infinite;
+
+}
+
+.balloon::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:60px;
+
+    width:2px;
+
+    height:120px;
+
+    background:#DDD;
+
+}
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+#confetti{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+.confetti{
+
+    position:absolute;
+
+    width:8px;
+
+    height:14px;
+
+    animation:
+
+    confettiFall
+
+    linear infinite;
+
+}
+
+/* =====================================================
+   GOLDEN DUST
+===================================================== */
+
+.goldenDust{
+
+    position:absolute;
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:#FFD96D;
+
+    filter:blur(.5px);
+
+    box-shadow:
+
+    0 0 10px #FFD96D;
+
+    animation:
+
+    dustFloat
+
+    linear infinite;
+
+}
+
+/* =====================================================
+   LIGHT RAYS
+===================================================== */
+
+.lightRay{
+
+    position:absolute;
+
+    width:300px;
+
+    height:900px;
+
+    background:
+
+    linear-gradient(
+
+    transparent,
+
+    rgba(255,255,255,.18),
+
+    transparent);
+
+    filter:blur(35px);
+
+    transform:rotate(-20deg);
+
+    animation:
+
+    lightMove
+
+    14s ease-in-out infinite;
+
+}
+
+/* =====================================================
+   AMBIENT ANIMATIONS
+===================================================== */
+
+@keyframes twinkle{
+
+    0%,100%{
+
+        opacity:.2;
         transform:scale(1);
 
     }
 
     50%{
 
-        transform:scale(1.08);
-
-    }
-
-    100%{
-
-        transform:scale(1);
+        opacity:1;
+        transform:scale(1.8);
 
     }
 
@@ -571,42 +727,46 @@ body::before{
     from{
 
         transform:
-
-        translateY(110vh)
-
-        scale(.3);
-
-        opacity:0;
-
-    }
-
-    20%{
-
-        opacity:1;
+        translateY(120vh)
+        rotate(0deg);
 
     }
 
     to{
 
         transform:
-
         translateY(-20vh)
-
-        scale(1);
-
-        opacity:0;
+        rotate(360deg);
 
     }
 
 }
 
-@keyframes heartFloat{
+@keyframes balloonFloat{
 
     from{
 
         transform:
+        translateY(120vh);
 
-        translateY(110vh);
+    }
+
+    to{
+
+        transform:
+        translateY(-140vh);
+
+    }
+
+}
+
+@keyframes heartRise{
+
+    from{
+
+        transform:
+        translateY(110vh)
+        scale(.6);
 
         opacity:0;
 
@@ -614,17 +774,15 @@ body::before{
 
     20%{
 
-        opacity:.35;
+        opacity:.25;
 
     }
 
     to{
 
         transform:
-
-        translateY(-15vh)
-
-        rotate(360deg);
+        translateY(-30vh)
+        scale(1.3);
 
         opacity:0;
 
@@ -632,406 +790,262 @@ body::before{
 
 }
 
-@keyframes firefly{
+@keyframes confettiFall{
+
+    from{
+
+        transform:
+        translateY(-20vh)
+        rotate(0);
+
+    }
+
+    to{
+
+        transform:
+        translateY(120vh)
+        rotate(720deg);
+
+    }
+
+}
+
+@keyframes fireflyMove{
 
     0%{
 
         transform:
+        translate(0,0);
 
-        translateY(0);
+    }
 
-        opacity:.2;
+    25%{
+
+        transform:
+        translate(40px,-70px);
 
     }
 
     50%{
 
         transform:
+        translate(-40px,-130px);
 
-        translateY(-20px);
+    }
+
+    75%{
+
+        transform:
+        translate(50px,-180px);
+
+    }
+
+    100%{
+
+        transform:
+        translate(0,-250px);
+
+    }
+
+}
+
+@keyframes dustFloat{
+
+    from{
+
+        transform:
+        translateY(20px);
+
+        opacity:0;
+
+    }
+
+    50%{
 
         opacity:1;
 
     }
 
-    100%{
+    to{
 
         transform:
+        translateY(-250px);
 
-        translateY(0);
-
-        opacity:.2;
+        opacity:0;
 
     }
 
 }
 
-@keyframes twinkle{
-
-    0%{
-
-        opacity:.2;
-
-    }
-
-    50%{
-
-        opacity:1;
-
-    }
-
-    100%{
-
-        opacity:.2;
-
-    }
-
-}
-
-@keyframes floatDecoration{
+@keyframes lightMove{
 
     0%{
 
         transform:
-
-        translateY(0);
+        translateX(-120px)
+        rotate(-20deg);
 
     }
 
     50%{
 
         transform:
-
-        translateY(-18px);
+        translateX(120px)
+        rotate(-15deg);
 
     }
 
     100%{
 
         transform:
-
-        translateY(0);
+        translateX(-120px)
+        rotate(-20deg);
 
     }
 
 }
 
-/* ======================================================
-   LOADING SCREEN
-====================================================== */
-
-#loadingScreen{
-
-    background:
-    linear-gradient(
-    135deg,
-    #FFFDF9,
-    #F8F4EC,
-    #F5EFE3);
-
-    flex-direction:column;
-
-    z-index:99999;
-
-}
-
-.loadingContent{
-
-    text-align:center;
-
-    max-width:700px;
-
-    animation:fadeUp 1s;
-
-}
-
-.loadingContent h1{
-
-    color:var(--primary);
-
-    margin-bottom:25px;
-
-    font-size:clamp(3rem,6vw,5rem);
-
-}
-
-.loadingContent p{
-
-    font-size:1.15rem;
-
-    margin-bottom:40px;
-
-}
-
-.loadingBar{
-
-    width:320px;
-
-    height:10px;
-
-    background:#E8E2D8;
-
-    border-radius:999px;
-
-    overflow:hidden;
-
-    margin:auto;
-
-}
-
-#loadingFill{
-
-    width:0%;
-
-    height:100%;
-
-    background:
-
-    linear-gradient(
-    90deg,
-    #E5C256,
-    #B58B16);
-
-    border-radius:999px;
-
-}
-
-/* ======================================================
-   COUNTDOWN
-====================================================== */
-
-#countdownScreen{
-
-    background:
-
-    radial-gradient(circle,#FFFDFB,#F6F1E7);
-
-}
-
-#countNumber{
-
-    font-size:9rem;
-
-    font-weight:bold;
-
-    color:var(--primary);
-
-    animation:
-
-    countdownPulse 1s infinite;
-
-}
-
-/* ======================================================
-   HAPPY BIRTHDAY
-====================================================== */
-
-#birthdayScreen{
-
-    overflow:hidden;
-
-}
-
-.birthdayContent{
-
-    text-align:center;
-
-    z-index:10;
-
-    max-width:900px;
-
-}
-
-.birthdayContent h1{
-
-    color:var(--primary);
-
-    margin-bottom:30px;
-
-}
-
-.birthdayContent p{
-
-    margin-bottom:15px;
-
-    font-size:1.2rem;
-
-}
-
-/* ======================================================
-   BALLOONS
-====================================================== */
-
-#balloons{
-
-    position:absolute;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-}
-
-.balloon{
-
-    position:absolute;
-
-    bottom:-200px;
-
-    width:70px;
-
-    height:90px;
-
-    border-radius:50%;
-
-    animation:
-
-    balloonFloat
-
-    linear
-
-    forwards;
-
-}
-
-.balloon::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:2px;
-
-    height:120px;
-
-    background:#999;
-
-    left:50%;
-
-    top:90px;
-
-}
-
-/* ======================================================
-   CONFETTI
-====================================================== */
-
-#confetti{
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-}
-
-.confettiPiece{
-
-    position:absolute;
-
-    width:8px;
-
-    height:18px;
-
-    animation:
-
-    confettiFall
-
-    linear
-
-    forwards;
-
-}
-
-/* ======================================================
-   MOVIE TITLE
-====================================================== */
-
-#movieTitle{
-
-    background:#111;
-
-    color:white;
-
-}
-
-#movieTitle h1{
-
-    color:white;
-
-    text-align:center;
-
-    letter-spacing:2px;
-
-    animation:
-
-    cinemaTitle
-
-    3s ease;
-
-}
-
-/* ======================================================
+/* =====================================================
    PASSWORD PAGE
-====================================================== */
+===================================================== */
 
 #passwordPage{
 
-    background:
+    justify-content:center;
+    align-items:center;
 
-    linear-gradient(
-    135deg,
-    #FFFDF9,
-    #F8F5EF);
+    padding:60px;
 
 }
+
+/* =====================================================
+   PASSWORD CARD
+===================================================== */
 
 .passwordCard{
 
     width:min(1200px,95%);
 
-    min-height:700px;
+    min-height:680px;
 
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
-    border-radius:30px;
-
     overflow:hidden;
+
+    border-radius:36px;
+
+    background:rgba(255,255,255,.72);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+
+    0 40px 100px rgba(0,0,0,.15);
+
+    transition:.7s;
+
+    position:relative;
 
 }
 
+.passwordCard:hover{
+
+    transform:
+
+    translateY(-8px);
+
+}
+
+/* Gold Border */
+
+.passwordCard::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    padding:2px;
+
+    border-radius:36px;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #FFF6D4,
+
+    #D8B25A,
+
+    #FFF6D4);
+
+    -webkit-mask:
+
+    linear-gradient(#fff 0 0) content-box,
+
+    linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+}
+
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
 .leftSide{
 
-    background:#FAF8F3;
+    position:relative;
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:40px;
+    overflow:hidden;
 
 }
 
 .leftSide img{
 
     width:100%;
-
     height:100%;
 
     object-fit:cover;
 
-    border-radius:20px;
+    transition:10s;
 
 }
+
+.passwordCard:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* Dark Overlay */
+
+.leftSide::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+    transparent,
+
+    rgba(0,0,0,.25));
+
+}
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
 
 .rightSide{
 
@@ -1047,186 +1061,319 @@ body::before{
 
 .chapterTag{
 
-    color:var(--primary);
+    display:inline-block;
 
-    letter-spacing:5px;
+    width:max-content;
 
-    font-size:.9rem;
+    padding:
 
-    font-weight:600;
+    10px 20px;
 
-    margin-bottom:20px;
+    border-radius:100px;
+
+    background:#FFF5D5;
+
+    color:#B88A25;
+
+    letter-spacing:3px;
+
+    font-size:12px;
+
+    margin-bottom:25px;
 
 }
 
 .rightSide h1{
 
-    margin-bottom:25px;
+    font-size:56px;
+
+    margin-bottom:20px;
 
 }
 
 .rightSide p{
 
-    margin-bottom:18px;
-
-}
-
-.rightSide input{
-
-    margin-top:20px;
-
-    padding:18px;
-
-    border-radius:14px;
-
-    border:2px solid #E6DFD2;
-
-    font-size:1rem;
-
-    outline:none;
-
-    transition:.3s;
-
-}
-
-.rightSide input:focus{
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 0 20px
-
-    rgba(201,162,39,.2);
-
-}
-
-.rightSide small{
-
-    margin-top:12px;
-
-    color:#999;
-
-}
-
-#error{
-
-    margin-top:20px;
-
-    color:#D64545;
-
-    font-weight:600;
-
-}
-
-/* ======================================================
-   CHAPTER PAGES
-====================================================== */
-
-.chapter{
-
-    justify-content:center;
-    align-items:center;
-
-    animation:chapterFade .8s ease;
-
-}
-
-.storyContainer{
-
-    animation:fadeUp 1s ease;
-
-}
-
-.storyContainer h1{
+    color:#666;
 
     margin-bottom:25px;
 
 }
 
-.storyContainer p{
+/* =====================================================
+   INPUT
+===================================================== */
 
-    max-width:750px;
+#password{
 
-    margin:auto;
+    width:100%;
 
-}
+    padding:20px;
 
-/* ======================================================
-   PAGE TURN TRANSITION
-====================================================== */
+    border:none;
 
-.pageTurn{
+    outline:none;
 
-    position:fixed;
+    border-radius:20px;
 
-    inset:0;
+    background:#FAF8F2;
 
-    background:white;
+    font-size:18px;
 
-    transform-origin:left;
+    transition:.4s;
 
-    transform:scaleX(0);
+    box-shadow:
 
-    z-index:99998;
-
-}
-
-.pageTurn.active{
-
-    animation:pageTurn .9s ease forwards;
+    inset 0 0 0 2px transparent;
 
 }
 
-/* ======================================================
-   TREASURE AREA
-====================================================== */
+#password:focus{
+
+    box-shadow:
+
+    inset 0 0 0 2px var(--gold);
+
+}
+
+small{
+
+    margin-top:12px;
+
+    color:#9A8F82;
+
+}
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+#error{
+
+    color:#D23A3A;
+
+    margin-top:18px;
+
+    min-height:20px;
+
+}
+
+/* =====================================================
+   FLOATING GOLD CIRCLES
+===================================================== */
+
+.passwordCard::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+
+    height:500px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+    rgba(255,220,120,.18),
+
+    transparent);
+
+    top:-180px;
+
+    right:-120px;
+
+    animation:
+
+    goldGlow
+
+    8s ease-in-out infinite;
+
+}
+
+/* =====================================================
+   LIGHT SWEEP
+===================================================== */
+
+.leftSide::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:60%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    transparent,
+
+    rgba(255,255,255,.35),
+
+    transparent);
+
+    transform:skewX(-20deg);
+
+    animation:
+
+    shine
+
+    8s infinite;
+
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes shine{
+
+    0%{
+
+        left:-120%;
+
+    }
+
+    100%{
+
+        left:180%;
+
+    }
+
+}
+
+@keyframes goldGlow{
+
+    0%{
+
+        transform:
+
+        scale(1);
+
+        opacity:.5;
+
+    }
+
+    50%{
+
+        transform:
+
+        scale(1.25);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:
+
+        scale(1);
+
+        opacity:.5;
+
+    }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:900px){
+
+.passwordCard{
+
+grid-template-columns:1fr;
+
+min-height:auto;
+
+}
+
+.leftSide{
+
+height:320px;
+
+}
+
+.rightSide{
+
+padding:45px 30px;
+
+}
+
+.rightSide h1{
+
+font-size:38px;
+
+}
+
+.storyContainer{
+
+padding:35px 25px;
+
+}
+
+}
+
+/* =====================================================
+   CHAPTER TWO
+===================================================== */
 
 .treasureArea{
+
+    margin-top:60px;
 
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
-    margin:60px 0;
+    perspective:1400px;
 
 }
 
-/* ======================================================
-   3D TREASURE CHEST
-====================================================== */
+/* =====================================================
+   TREASURE CHEST
+===================================================== */
 
 .treasureChest{
 
     position:relative;
 
-    width:260px;
-
-    height:180px;
+    width:280px;
+    height:220px;
 
     cursor:pointer;
 
-    perspective:1000px;
+    transform-style:preserve-3d;
 
-    transition:.5s;
+    transition:1s;
 
 }
 
 .treasureChest:hover{
 
     transform:
-
-    translateY(-8px)
-
-    scale(1.03);
+    scale(1.05)
+    rotateY(6deg);
 
 }
 
-/* ======================================================
+/* =====================================================
    CHEST BODY
-====================================================== */
+===================================================== */
 
 .chestBody{
 
@@ -1235,499 +1382,33 @@ body::before{
     bottom:0;
 
     width:100%;
+    height:145px;
 
-    height:120px;
+    border-radius:
+    0 0 24px 24px;
 
     background:
 
     linear-gradient(
     180deg,
-    #8A5A12,
-    #5B3710);
-
-    border-radius:
-
-    0 0 25px 25px;
-
-    border:
-
-    6px solid
-
-    #D8B04B;
-
-}
-
-/* ======================================================
-   CHEST LID
-====================================================== */
-
-.chestLid{
-
-    position:absolute;
-
-    width:100%;
-
-    height:80px;
-
-    background:
-
-    linear-gradient(
-    180deg,
-    #A26B19,
-    #6D4513);
-
-    border-radius:
-
-    25px 25px 8px 8px;
-
-    border:
-
-    6px solid
-
-    #D8B04B;
-
-    transform-origin:bottom;
-
-    transition:
-
-    transform .9s ease;
-
-}
-
-/* ======================================================
-   LOCK
-====================================================== */
-
-.chestLock{
-
-    position:absolute;
-
-    left:50%;
-
-    top:60px;
-
-    transform:translateX(-50%);
-
-    width:35px;
-
-    height:50px;
-
-    border-radius:8px;
-
-    background:#E6C45E;
-
-    z-index:4;
-
-}
-
-/* ======================================================
-   GOLD LIGHT
-====================================================== */
-
-.goldLight{
-
-    position:absolute;
-
-    left:50%;
-
-    top:-30px;
-
-    transform:
-
-    translateX(-50%);
-
-    width:220px;
-
-    height:220px;
-
-    background:
-
-    radial-gradient(
-
-    circle,
-
-    rgba(255,230,120,.95),
-
-    rgba(255,215,0,.35),
-
-    transparent);
-
-    opacity:0;
-
-    filter:blur(18px);
-
-    transition:
-
-    opacity 1s;
-
-}
-
-/* ======================================================
-   OPEN STATE
-====================================================== */
-
-.treasureChest.open
-
-.chestLid{
-
-    transform:
-
-    rotateX(-145deg);
-
-}
-
-.treasureChest.open
-
-.goldLight{
-
-    opacity:1;
-
-}
-
-/* ======================================================
-   MAGIC PARTICLES
-====================================================== */
-
-.magicParticle{
-
-    position:absolute;
-
-    width:8px;
-
-    height:8px;
-
-    border-radius:50%;
-
-    background:#FFD84E;
+    #8B5A2B,
+    #5D3820);
 
     box-shadow:
 
-    0 0 18px gold;
+    inset 0 5px 12px rgba(255,255,255,.12),
 
-    pointer-events:none;
+    inset 0 -8px 18px rgba(0,0,0,.28),
 
-}
-
-/* ======================================================
-   STORY NAVIGATION
-====================================================== */
-
-.navigationButtons{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:20px;
-
-    margin-top:45px;
+    0 25px 45px rgba(0,0,0,.28);
 
 }
 
-.navigationButtons button{
-
-    padding:16px 34px;
-
-    border:none;
-
-    border-radius:999px;
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #D8B04B,
-    #B58B16);
-
-    color:white;
-
-    cursor:pointer;
-
-    font-size:1rem;
-
-    transition:.35s;
-
-}
-
-.navigationButtons button:hover{
-
-    transform:
-
-    translateY(-4px);
-
-}
-
-/* ======================================================
-   ANIMATIONS
-====================================================== */
-
-@keyframes chapterFade{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-        translateY(40px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-        translateY(0);
-
-    }
-
-}
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-        translateY(50px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-        translateY(0);
-
-    }
-
-}
-
-@keyframes pageTurn{
-
-    0%{
-
-        transform:scaleX(0);
-
-    }
-
-    50%{
-
-        transform:scaleX(1);
-
-    }
-
-    100%{
-
-        transform:scaleX(0);
-
-        transform-origin:right;
-
-    }
-
-}
-
-/* ======================================================
-   CHAPTER ATMOSPHERES
-====================================================== */
-
-/* Every chapter gets its own mood */
-
-#chapter1{
-
-    background:
-    linear-gradient(
-    180deg,
-    #FFFDF9,
-    #F8F4EC);
-
-}
-
-#chapter2{
-
-    background:
-    radial-gradient(
-    circle at center,
-    #FFF8E7,
-    #F6F0E2);
-
-}
-
-#chapter3{
-
-    background:
-    linear-gradient(
-    180deg,
-    #FBF8F2,
-    #F4EEE3);
-
-}
-
-#chapter4{
-
-    background:
-    linear-gradient(
-    180deg,
-    #F8F5EF,
-    #EFE7D8);
-
-}
-
-#chapter5{
-
-    background:
-    linear-gradient(
-    180deg,
-    #FFFDF8,
-    #F7F0E3);
-
-}
-
-#chapter6{
-
-    background:
-    linear-gradient(
-    180deg,
-    #FCFAF5,
-    #F5EFE5);
-
-}
-
-#chapter7{
-
-    background:
-    linear-gradient(
-    180deg,
-    #FFFDF9,
-    #F8F2E8);
-
-}
-
-#endingPage{
-
-    background:
-    linear-gradient(
-    180deg,
-    #0B1022,
-    #1B2340);
-
-    color:white;
-
-}
-
-#secretPage{
-
-    background:
-    linear-gradient(
-    180deg,
-    #0A0F1D,
-    #161F35);
-
-    color:white;
-
-}
-
-/* ======================================================
-   CHAPTER ONE
-====================================================== */
-
-#chapter1::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-    radial-gradient(circle,
-    rgba(255,215,0,.10),
-    transparent 70%);
-
-    animation:
-
-    goldenDust
-
-    10s linear infinite;
-
-}
-
-/* ======================================================
-   CHAPTER TWO
-====================================================== */
-
-#chapter2::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:120px;
-
-    width:350px;
-
-    height:350px;
-
-    transform:translateX(-50%);
-
-    background:
-
-    radial-gradient(circle,
-
-    rgba(255,215,0,.25),
-
-    transparent);
-
-    filter:blur(50px);
-
-    animation:
-
-    chestGlow
-
-    3s ease-in-out infinite;
-
-}
-
-/* ======================================================
-   CHAPTER THREE
-====================================================== */
-
-#chapter3::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-
-    radial-gradient(
-
-    rgba(255,255,255,.5) 1px,
-
-    transparent 1px);
-
-    background-size:120px 120px;
-
-    opacity:.25;
-
-}
-
-/* ======================================================
-   CHAPTER FOUR
-====================================================== */
-
-#chapter4::before{
+/* =====================================================
+   METAL STRAPS
+===================================================== */
+
+.chestBody::before{
 
     content:"";
 
@@ -1741,71 +1422,256 @@ body::before{
 
     90deg,
 
-    rgba(0,0,0,.03),
+    transparent 0px,
 
-    rgba(0,0,0,.03) 2px,
+    transparent 48px,
 
-    transparent 2px,
+    #C89C3D 48px,
 
-    transparent 10px);
-
-    opacity:.25;
+    #C89C3D 62px);
 
 }
 
-/* ======================================================
-   CHAPTER FIVE
-====================================================== */
+/* =====================================================
+   LID
+===================================================== */
 
-#chapter5::before{
-
-    content:"🎈 🎂 ❤️ ✨";
+.chestLid{
 
     position:absolute;
 
+    top:0;
+
     width:100%;
+    height:90px;
 
-    text-align:center;
+    border-radius:
 
-    top:30px;
+    24px 24px 0 0;
 
-    font-size:26px;
+    background:
 
-    opacity:.18;
+    linear-gradient(
+
+    180deg,
+
+    #9A6738,
+
+    #6B4323);
+
+    transform-origin:bottom;
+
+    transition:1.2s;
+
+    box-shadow:
+
+    inset 0 5px 10px rgba(255,255,255,.15);
 
 }
 
-/* ======================================================
-   CHAPTER SIX
-====================================================== */
+/* =====================================================
+   LOCK
+===================================================== */
 
-#chapter6::before{
-
-    content:"✉ ✉ ✉ ✉ ✉";
+.chestLock{
 
     position:absolute;
 
-    width:100%;
+    left:50%;
 
-    top:30px;
+    top:70px;
 
-    text-align:center;
+    transform:translateX(-50%);
 
-    font-size:28px;
+    width:34px;
+    height:42px;
 
-    opacity:.15;
+    border-radius:10px;
+
+    background:
+
+    linear-gradient(
+
+    180deg,
+
+    #FFD86B,
+
+    #C59628);
+
+    box-shadow:
+
+    0 0 15px rgba(255,215,120,.5);
+
+    z-index:5;
 
 }
 
-/* ======================================================
-   CHAPTER SEVEN
-====================================================== */
-
-#chapter7::before{
+.chestLock::before{
 
     content:"";
 
     position:absolute;
+
+    left:50%;
+
+    top:-18px;
+
+    transform:translateX(-50%);
+
+    width:20px;
+    height:20px;
+
+    border:4px solid #D4A63D;
+
+    border-bottom:none;
+
+    border-radius:20px 20px 0 0;
+
+}
+
+/* =====================================================
+   GOLD LIGHT
+===================================================== */
+
+.goldLight{
+
+    position:absolute;
+
+    left:50%;
+
+    top:70px;
+
+    transform:translateX(-50%);
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+    rgba(255,225,120,.8),
+
+    rgba(255,210,70,.15),
+
+    transparent);
+
+    opacity:0;
+
+    filter:blur(25px);
+
+    transition:1s;
+
+    pointer-events:none;
+
+}
+
+/* =====================================================
+   OPEN STATE
+===================================================== */
+
+.treasureChest.open .chestLid{
+
+    transform:
+
+    rotateX(-130deg);
+
+}
+
+.treasureChest.open .goldLight{
+
+    opacity:1;
+
+    transform:
+
+    translateX(-50%)
+    scale(1.5);
+
+}
+
+.treasureChest.open{
+
+    transform:scale(1.08);
+
+}
+
+/* =====================================================
+   GOLD PARTICLES
+===================================================== */
+
+.goldParticle{
+
+    position:absolute;
+
+    bottom:90px;
+
+    left:50%;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#FFD966;
+
+    box-shadow:
+
+    0 0 15px #FFD966;
+
+    pointer-events:none;
+
+    animation:
+
+    explodeUp 2.5s linear forwards;
+
+}
+
+@keyframes explodeUp{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+
+        translate(-50%,0)
+        scale(.2);
+
+    }
+
+    10%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+
+        translate(
+
+        calc(-50% + var(--x)),
+
+        calc(-350px + var(--y)))
+
+        scale(1.3);
+
+    }
+
+}
+
+/* =====================================================
+   SCREEN FLASH
+===================================================== */
+
+#memoryFlash{
+
+    position:fixed;
 
     inset:0;
 
@@ -1813,105 +1679,864 @@ body::before{
 
     radial-gradient(
 
-    circle,
+    #FFF4B5,
 
-    rgba(255,230,180,.20),
+    rgba(255,245,180,.6),
 
     transparent);
 
-    animation:
+    opacity:0;
 
-    candleGlow
+    pointer-events:none;
 
-    4s ease-in-out infinite;
+    z-index:9999;
 
 }
 
-/* ======================================================
-   ENDING
-====================================================== */
+#memoryFlash.show{
 
-.endingPhoto{
+    animation:
 
-    width:260px;
+    flashMemory 1.3s ease;
+
+}
+
+@keyframes flashMemory{
+
+    0%{
+
+        opacity:0;
+
+    }
+
+    40%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+    }
+
+}
+
+/* =====================================================
+   CHAPTER THREE - MEMORY DESK
+===================================================== */
+
+#chapter3{
+
+    background:
+    linear-gradient(
+    180deg,
+    #F9F5EC,
+    #EFE5D8);
+
+}
+
+/* =====================================================
+   WOODEN DESK
+===================================================== */
+
+#memoryDesk{
+
+    position:relative;
+
+    width:100%;
+
+    height:720px;
+
+    margin-top:60px;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #9D7147,
+    #7A5334);
+
+    box-shadow:
+
+    inset 0 15px 35px rgba(255,255,255,.08),
+
+    inset 0 -20px 40px rgba(0,0,0,.18),
+
+    0 35px 70px rgba(0,0,0,.18);
+
+}
+
+/* subtle wood grain */
+
+#memoryDesk::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.12;
+
+    background:
+
+    repeating-linear-gradient(
+
+    0deg,
+
+    transparent 0px,
+
+    transparent 8px,
+
+    rgba(255,255,255,.25) 9px,
+
+    transparent 10px);
+
+}
+
+/* =====================================================
+   POLAROID
+===================================================== */
+
+.polaroid{
+
+    position:absolute;
+
+    width:240px;
+
+    background:white;
+
+    padding:14px;
+
+    padding-bottom:55px;
+
+    border-radius:8px;
+
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.28);
+
+    transform-origin:center;
+
+    transition:
+
+    .6s ease;
+
+    opacity:0;
+
+}
+
+.polaroid.show{
+
+    opacity:1;
+
+}
+
+.polaroid:hover{
+
+    transform:
+
+    scale(1.06)
+    rotate(0deg) !important;
+
+    z-index:500;
+
+}
+
+/* tape */
+
+.polaroid::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+
+    height:24px;
+
+    left:50%;
+
+    top:-12px;
+
+    transform:translateX(-50%) rotate(-4deg);
+
+    background:
+
+    rgba(255,245,200,.65);
+
+    backdrop-filter:blur(2px);
+
+}
+
+/* image */
+
+.polaroid img{
+
+    width:100%;
 
     height:260px;
 
     object-fit:cover;
 
-    border-radius:50%;
-
-    border:8px solid white;
-
-    margin:35px auto;
-
-    box-shadow:
-
-    0 0 60px rgba(255,255,255,.35);
+    border-radius:4px;
 
 }
 
-.heartContainer{
+/* title */
 
-    margin-top:40px;
+.polaroid h3{
 
-    font-size:42px;
+    margin-top:18px;
+
+    font-size:24px;
+
+}
+
+/* caption */
+
+.polaroid p{
+
+    margin-top:10px;
+
+    font-family:
+
+    "Caveat",
+    cursive;
+
+    font-size:24px;
+
+    color:#666;
+
+}
+
+/* =====================================================
+   MEMORY DROP
+===================================================== */
+
+.polaroid.drop{
 
     animation:
 
-    heartbeat
+    memoryDrop
 
-    2s infinite;
-
-}
-
-/* ======================================================
-   SECRET PAGE
-====================================================== */
-
-.scrapbookPage{
-
-    width:700px;
-
-    max-width:90%;
-
-    padding:40px;
-
-    border-radius:25px;
-
-    transform:rotate(-2deg);
+    1.4s
+    cubic-bezier(.2,.9,.3,1)
+    forwards;
 
 }
 
-.scrapbookPage img{
+@keyframes memoryDrop{
+
+    0%{
+
+        transform:
+
+        translateY(-500px)
+        rotate(var(--rotation))
+        scale(.3);
+
+        opacity:0;
+
+    }
+
+    65%{
+
+        transform:
+
+        translateY(20px)
+        rotate(var(--rotation))
+        scale(1.05);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:
+
+        translateY(0)
+        rotate(var(--rotation));
+
+        opacity:1;
+
+    }
+
+}
+
+/* =====================================================
+   SUNLIGHT
+===================================================== */
+
+.memoryLight{
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    right:-80px;
+
+    top:-120px;
+
+    background:
+
+    radial-gradient(
+
+    rgba(255,240,180,.30),
+
+    transparent);
+
+    filter:blur(30px);
+
+    pointer-events:none;
+
+}
+
+.memoryNote{
+
+    position:absolute;
+
+    font-family:
+
+    "Caveat",
+    cursive;
+
+    font-size:28px;
+
+    color:#FFF8E6;
+
+    opacity:0;
+
+    animation:
+
+    noteFade
+
+    1s forwards;
+
+}
+
+@keyframes noteFade{
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/* =====================================================
+   CHAPTER FOUR - FILM PROJECTOR
+===================================================== */
+
+#chapter4{
+
+    background:
+    radial-gradient(
+    circle at center,
+    #232323,
+    #0E0E0E);
+
+    color:white;
+
+}
+
+/* =====================================================
+   CINEMA ROOM
+===================================================== */
+
+#filmProjector{
+
+    position:relative;
 
     width:100%;
 
+    height:700px;
+
+    margin-top:50px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #111,
+    #000);
+
+    box-shadow:
+
+    inset 0 0 80px rgba(255,255,255,.05),
+
+    0 30px 80px rgba(0,0,0,.5);
+
+}
+
+/* =====================================================
+   PROJECTOR LIGHT
+===================================================== */
+
+.projectorBeam{
+
+    position:absolute;
+
+    left:0;
+
+    top:50%;
+
+    width:70%;
+
+    height:300px;
+
+    transform:
+
+    translateY(-50%);
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    rgba(255,255,255,.22),
+
+    rgba(255,255,255,.05),
+
+    transparent);
+
+    filter:
+
+    blur(18px);
+
+    opacity:.7;
+
+    animation:
+
+    beamPulse 4s ease-in-out infinite;
+
+}
+
+@keyframes beamPulse{
+
+    0%,100%{
+
+        opacity:.45;
+
+    }
+
+    50%{
+
+        opacity:.85;
+
+    }
+
+}
+
+/* =====================================================
+   FILM STRIP
+===================================================== */
+
+#filmStrip{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+
+    translate(-50%,-50%);
+
+    width:88%;
+
+    height:360px;
+
+    display:flex;
+
+    gap:30px;
+
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+.filmFrame{
+
+    flex:none;
+
+    width:280px;
+
+    background:#151515;
+
+    border-radius:10px;
+
+    padding:14px;
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.45);
+
+}
+
+.filmFrame img{
+
+    width:100%;
+
+    height:250px;
+
+    object-fit:cover;
+
+}
+
+.filmFrame p{
+
+    margin-top:12px;
+
+    color:white;
+
+    font-family:"Caveat",cursive;
+
+    font-size:28px;
+
+}
+
+/* =====================================================
+   CINEMA DUST
+===================================================== */
+
+.dust{
+
+    position:absolute;
+
+    width:4px;
+
+    height:4px;
+
+    background:white;
+
+    border-radius:50%;
+
+    opacity:.25;
+
+    animation:
+
+    dustMove linear infinite;
+
+}
+
+@keyframes dustMove{
+
+    from{
+
+        transform:
+
+        translateY(100vh);
+
+    }
+
+    to{
+
+        transform:
+
+        translateY(-20vh);
+
+    }
+
+}
+
+/* =====================================================
+   FILM GRAIN
+===================================================== */
+
+.filmGrain{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.08;
+
+    background-image:
+
+    radial-gradient(circle,#FFF 1px,transparent 1px);
+
+    background-size:8px 8px;
+
+    animation:
+
+    grainShift .25s infinite;
+
+}
+
+@keyframes grainShift{
+
+    0%{
+
+        transform:translate(0,0);
+
+    }
+
+    25%{
+
+        transform:translate(-3px,2px);
+
+    }
+
+    50%{
+
+        transform:translate(2px,-2px);
+
+    }
+
+    75%{
+
+        transform:translate(-2px,-3px);
+
+    }
+
+    100%{
+
+        transform:translate(0,0);
+
+    }
+
+}
+
+/* =====================================================
+   FINAL FRAME
+===================================================== */
+
+.finalFrame{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    opacity:0;
+
+    transition:1.5s;
+
+}
+
+.finalFrame.show{
+
+    opacity:1;
+
+}
+
+.finalFrame img{
+
+    width:min(500px,90%);
+
     border-radius:18px;
 
-    margin-bottom:25px;
+    box-shadow:
+
+    0 30px 80px rgba(0,0,0,.55);
 
 }
 
-.scrapbookPage h2{
+.finalFrame h2{
 
-    margin-bottom:20px;
+    margin-top:35px;
+
+    font-size:42px;
 
 }
 
-.scrapbookPage p{
+.finalFrame p{
+
+    margin-top:18px;
+
+    max-width:600px;
 
     color:#DDD;
 
+    font-size:20px;
+
+    font-family:"Caveat",cursive;
+
 }
 
-/* ======================================================
-   ATMOSPHERE ANIMATIONS
-====================================================== */
+/* =====================================================
+   CHAPTER FIVE
+===================================================== */
 
-@keyframes goldenDust{
+#chapter5{
+
+    background:
+    linear-gradient(
+    180deg,
+    #FFFDF8,
+    #FFF3D9);
+
+}
+
+/* =====================================================
+   GAME SELECTOR
+===================================================== */
+
+.gameSelection{
+
+    margin-top:50px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.gameSelection button{
+
+    min-width:250px;
+
+}
+
+/* =====================================================
+   GAME AREA
+===================================================== */
+
+.gameArea{
+
+    margin-top:50px;
+
+    width:100%;
+
+    min-height:520px;
+
+    border-radius:28px;
+
+    background:white;
+
+    box-shadow:
+
+    0 25px 70px rgba(0,0,0,.12);
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+/* =====================================================
+   HEART GAME
+===================================================== */
+
+#heartCanvas{
+
+    position:relative;
+
+    width:100%;
+
+    height:500px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #FFF8FB,
+    #FFE8EF);
+
+    overflow:hidden;
+
+}
+
+.gameHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:20px 35px;
+
+    font-size:20px;
+
+    font-weight:600;
+
+}
+
+.catchHeart{
+
+    position:absolute;
+
+    font-size:38px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    animation:
+
+    fallHeart linear forwards;
+
+}
+
+@keyframes fallHeart{
 
     from{
+
+        transform:
+        translateY(-100px);
+
+    }
+
+    to{
+
+        transform:
+        translateY(620px);
+
+    }
+
+}
+
+.comboText{
+
+    position:absolute;
+
+    color:#D8B25A;
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    animation:
+
+    comboUp 1s forwards;
+
+}
+
+@keyframes comboUp{
+
+    from{
+
+        opacity:1;
 
         transform:translateY(0);
 
@@ -1919,81 +2544,1330 @@ body::before{
 
     to{
 
-        transform:translateY(-60px);
+        opacity:0;
+
+        transform:translateY(-80px);
 
     }
 
 }
 
-@keyframes chestGlow{
+/* =====================================================
+   CAKE GAME
+===================================================== */
 
-    0%{
+#cakeWorkspace{
 
-        opacity:.4;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:380px;
+
+    position:relative;
+
+}
+
+#cakeBase{
+
+    width:260px;
+
+    height:180px;
+
+    border-radius:
+
+    20px 20px 40px 40px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #FFF2D7,
+    #EFC18D);
+
+    position:relative;
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,.18);
+
+}
+
+#cakeTools{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    padding:35px;
+
+    flex-wrap:wrap;
+
+}
+
+.cakeItem{
+
+    width:70px;
+
+    height:70px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:18px;
+
+    background:white;
+
+    cursor:grab;
+
+    box-shadow:
+
+    0 12px 30px rgba(0,0,0,.10);
+
+    font-size:36px;
+
+    transition:.35s;
+
+}
+
+.cakeItem:hover{
+
+    transform:
+
+    scale(1.1);
+
+}
+
+/* =====================================================
+   CAKE CELEBRATION
+===================================================== */
+
+#birthdayBanner{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:
+
+    rgba(255,255,255,.92);
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+#birthdayBanner.show{
+
+    opacity:1;
+
+    animation:
+
+    fadeCelebration
+
+    1s;
+
+}
+
+#birthdayBanner h1{
+
+    font-size:60px;
+
+    color:#D8B25A;
+
+}
+
+#birthdayBanner p{
+
+    margin-top:15px;
+
+    font-size:24px;
+
+}
+
+@keyframes fadeCelebration{
+
+    from{
+
+        transform:
+
+        scale(.8);
+
+        opacity:0;
 
     }
 
-    50%{
+    to{
+
+        transform:
+
+        scale(1);
 
         opacity:1;
 
     }
 
-    100%{
+}
 
-        opacity:.4;
+/* =====================================================
+   CHAPTER SIX
+===================================================== */
+
+#chapter6{
+
+    background:
+    linear-gradient(
+    180deg,
+    #FFFDF9,
+    #F7F1E6);
+
+}
+
+/* =====================================================
+   LETTER TABLE
+===================================================== */
+
+#reasonsGrid{
+
+    margin-top:55px;
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(
+    auto-fit,
+    minmax(150px,1fr));
+
+    gap:30px;
+
+    justify-items:center;
+
+}
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+.reasonEnvelope{
+
+    position:relative;
+
+    width:140px;
+
+    height:110px;
+
+    cursor:pointer;
+
+    transition:.45s;
+
+    transform-style:preserve-3d;
+
+}
+
+.reasonEnvelope:hover{
+
+    transform:
+
+    translateY(-10px)
+    rotate(-3deg);
+
+}
+
+/* Body */
+
+.reasonEnvelope .body{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#FFF8EC;
+
+    border-radius:12px;
+
+    box-shadow:
+
+    0 15px 30px rgba(0,0,0,.15);
+
+}
+
+/* Flap */
+
+.reasonEnvelope .flap{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+    height:55px;
+
+    background:#F3E1BF;
+
+    clip-path:
+
+    polygon(
+    0 0,
+    100% 0,
+    50% 100%);
+
+    transform-origin:top;
+
+    transition:.7s;
+
+}
+
+/* Wax Seal */
+
+.reasonEnvelope .seal{
+
+    position:absolute;
+
+    left:50%;
+
+    top:42px;
+
+    transform:translateX(-50%);
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+    #D14545,
+
+    #9E2424);
+
+    box-shadow:
+
+    0 0 15px rgba(209,69,69,.4);
+
+}
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+.reasonLetter{
+
+    position:absolute;
+
+    left:50%;
+
+    top:20px;
+
+    transform:
+
+    translateX(-50%);
+
+    width:125px;
+
+    min-height:120px;
+
+    padding:16px;
+
+    background:white;
+
+    border-radius:8px;
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.18);
+
+    opacity:0;
+
+    transition:.8s;
+
+    font-family:
+
+    "Caveat",
+    cursive;
+
+    font-size:24px;
+
+    text-align:center;
+
+}
+
+/* Open */
+
+.reasonEnvelope.open .flap{
+
+    transform:
+
+    rotateX(180deg);
+
+}
+
+.reasonEnvelope.open .reasonLetter{
+
+    transform:
+
+    translateX(-50%)
+    translateY(-95px);
+
+    opacity:1;
+
+}
+
+/* =====================================================
+   NUMBER BADGE
+===================================================== */
+
+.reasonNumber{
+
+    position:absolute;
+
+    right:-8px;
+
+    top:-8px;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #FFD96B,
+    #D8B25A);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+}
+
+/* =====================================================
+   COMPLETE
+===================================================== */
+
+#reasonsFinished{
+
+    margin-top:45px;
+
+    display:none;
+
+    text-align:center;
+
+}
+
+#reasonsFinished.show{
+
+    display:block;
+
+    animation:
+
+    fadeUp
+
+    .8s;
+
+}
+
+#reasonsFinished h2{
+
+    color:#D8B25A;
+
+    font-size:40px;
+
+}
+
+#reasonsFinished p{
+
+    margin-top:15px;
+
+    font-size:22px;
+
+}
+
+.reasonSpark{
+
+    position:absolute;
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:#FFD86B;
+
+    animation:
+
+    sparklePop
+
+    .9s forwards;
+
+}
+
+@keyframes sparklePop{
+
+    from{
+
+        opacity:1;
+
+        transform:scale(.4);
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:
+
+        translateY(-45px)
+        scale(1.6);
 
     }
 
 }
 
-@keyframes candleGlow{
+/* =====================================================
+   CHAPTER SEVEN
+===================================================== */
 
-    0%{
+#chapter7{
 
-        opacity:.4;
+    background:
+    linear-gradient(
+    180deg,
+    #FFFCF8,
+    #F5EBDD);
+
+}
+
+/* =====================================================
+   MAILBOX AREA
+===================================================== */
+
+#mailboxContainer{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:60px;
+
+    min-height:320px;
+
+}
+
+/* =====================================================
+   MAILBOX
+===================================================== */
+
+#mailbox{
+
+    position:relative;
+
+    width:180px;
+
+    height:190px;
+
+    border-radius:18px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #D74B4B,
+    #9C2424);
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.18);
+
+    cursor:pointer;
+
+    transition:.45s;
+
+}
+
+#mailbox:hover{
+
+    transform:
+
+    translateY(-6px);
+
+}
+
+#mailbox::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+
+    height:16px;
+
+    background:#663300;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    bottom:-16px;
+
+}
+
+#mailbox::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+
+    height:150px;
+
+    background:#7B4B2A;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    bottom:-150px;
+
+}
+
+/* =====================================================
+   FLAG
+===================================================== */
+
+.mailFlag{
+
+    position:absolute;
+
+    right:-18px;
+
+    top:45px;
+
+    width:12px;
+
+    height:70px;
+
+    background:#DDD;
+
+    transform-origin:bottom;
+
+    transition:.8s;
+
+}
+
+.mailFlag::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:35px;
+
+    height:20px;
+
+    background:#D74B4B;
+
+    left:10px;
+
+}
+
+.mailFlag.up{
+
+    transform:
+
+    rotate(-90deg);
+
+}
+
+/* =====================================================
+   BIRD
+===================================================== */
+
+.mailBird{
+
+    position:absolute;
+
+    top:-40px;
+
+    right:-30px;
+
+    font-size:36px;
+
+    animation:
+
+    birdHop
+
+    2.5s infinite;
+
+}
+
+@keyframes birdHop{
+
+    0%,100%{
+
+        transform:translateY(0);
 
     }
 
     50%{
 
+        transform:translateY(-10px);
+
+    }
+
+}
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+#letterEnvelope{
+
+    position:absolute;
+
+    width:170px;
+
+    height:110px;
+
+    background:#FFF8EB;
+
+    border-radius:10px;
+
+    box-shadow:
+
+    0 18px 40px rgba(0,0,0,.18);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    transform:
+
+    translateY(20px);
+
+    transition:1s;
+
+}
+
+#letterEnvelope.show{
+
+    opacity:1;
+
+    transform:
+
+    translateY(-60px);
+
+}
+
+/* =====================================================
+   LETTER PAPER
+===================================================== */
+
+#letterPaper{
+
+    width:min(760px,95%);
+
+    min-height:650px;
+
+    margin:60px auto 0;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #FFFDF8,
+    #F5EFE4);
+
+    border-radius:18px;
+
+    padding:70px;
+
+    box-shadow:
+
+    0 25px 70px rgba(0,0,0,.18);
+
+    display:none;
+
+    position:relative;
+
+}
+
+#letterPaper.show{
+
+    display:block;
+
+    animation:
+
+    unfoldLetter
+
+    1.2s;
+
+}
+
+/* =====================================================
+   HANDWRITING
+===================================================== */
+
+#typedLetter{
+
+    margin-top:40px;
+
+    font-family:
+
+    "Caveat",
+    cursive;
+
+    font-size:34px;
+
+    line-height:1.8;
+
+    color:#5A4634;
+
+    white-space:pre-wrap;
+
+}
+
+#signature{
+
+    margin-top:55px;
+
+    text-align:right;
+
+    font-size:42px;
+
+    font-family:
+
+    "Caveat",
+    cursive;
+
+}
+
+/* =====================================================
+   UNFOLD
+===================================================== */
+
+@keyframes unfoldLetter{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+
+        scaleY(.2);
+
+    }
+
+    60%{
+
+        opacity:1;
+
+        transform:
+
+        scaleY(1.05);
+
+    }
+
+    100%{
+
+        transform:
+
+        scaleY(1);
+
+    }
+
+}
+
+/* =====================================================
+   LETTER GLOW
+===================================================== */
+
+#letterPaper::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+
+    translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+    rgba(255,228,160,.30),
+
+    transparent);
+
+    filter:blur(50px);
+
+    pointer-events:none;
+
+}
+
+/* =====================================================
+   FINAL CHAPTER
+===================================================== */
+
+#endingPage{
+
+    background:
+    radial-gradient(
+    circle at top,
+    #182C4F,
+    #08111F);
+
+    color:white;
+
+    overflow:hidden;
+
+}
+
+/* =====================================================
+   ENDING CONTAINER
+===================================================== */
+
+.endingContainer{
+
+    position:relative;
+
+    width:min(950px,95%);
+
+    margin:auto;
+
+    text-align:center;
+
+    z-index:5;
+
+}
+
+.endingContainer h1{
+
+    font-size:72px;
+
+    margin-bottom:25px;
+
+    color:white;
+
+}
+
+.endingContainer p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:#EEEEEE;
+
+    font-size:21px;
+
+    line-height:1.9;
+
+}
+
+/* =====================================================
+   MEMORY SKY
+===================================================== */
+
+#memorySky{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+}
+
+/* =====================================================
+   STARS
+===================================================== */
+
+.memoryStar{
+
+    position:absolute;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+    box-shadow:
+
+    0 0 15px white;
+
+}
+
+.memoryStar:hover{
+
+    transform:
+
+    scale(2);
+
+    box-shadow:
+
+    0 0 30px white;
+
+}
+
+/* =====================================================
+   STAR MEMORY
+===================================================== */
+
+.starMemory{
+
+    position:absolute;
+
+    min-width:280px;
+
+    max-width:350px;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    background:
+
+    rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+
+    color:white;
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.3);
+
+    animation:
+
+    popupMemory
+
+    .5s;
+
+}
+
+@keyframes popupMemory{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        scale(1);
+
+    }
+
+}
+
+/* =====================================================
+   SHOOTING STAR
+===================================================== */
+
+.shootingStar{
+
+    position:absolute;
+
+    width:180px;
+
+    height:2px;
+
+    background:
+
+    linear-gradient(
+
+    white,
+
+    transparent);
+
+    transform:
+
+    rotate(-30deg);
+
+    animation:
+
+    shooting
+
+    2s linear;
+
+}
+
+@keyframes shooting{
+
+    from{
+
+        transform:
+
+        translate(-200px,-100px)
+
+        rotate(-30deg);
+
         opacity:1;
 
     }
 
-    100%{
+    to{
 
-        opacity:.4;
+        transform:
 
-    }
+        translate(1200px,800px)
 
-}
+        rotate(-30deg);
 
-@keyframes heartbeat{
-
-    0%{
-
-        transform:scale(1);
-
-    }
-
-    20%{
-
-        transform:scale(1.15);
-
-    }
-
-    40%{
-
-        transform:scale(1);
-
-    }
-
-    100%{
-
-        transform:scale(1);
+        opacity:0;
 
     }
 
 }
 
+/* =====================================================
+   FINAL HEARTS
+===================================================== */
+
+.finalHeart{
+
+    position:absolute;
+
+    font-size:26px;
+
+    opacity:.18;
+
+    animation:
+
+    finalFloat
+
+    12s linear infinite;
+
+}
+
+@keyframes finalFloat{
+
+    from{
+
+        transform:
+
+        translateY(120vh);
+
+    }
+
+    to{
+
+        transform:
+
+        translateY(-120px);
+
+    }
+
+}
+
+/* =====================================================
+   MOON
+===================================================== */
+
+#moon{
+
+    position:absolute;
+
+    top:70px;
+
+    right:90px;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:#FFF8DB;
+
+    box-shadow:
+
+    0 0 80px rgba(255,245,200,.6);
+
+}
+
+/* =====================================================
+   CLOUDS
+===================================================== */
+
+.cloud{
+
+    position:absolute;
+
+    width:220px;
+
+    height:70px;
+
+    background:
+
+    rgba(255,255,255,.08);
+
+    border-radius:100px;
+
+    filter:blur(12px);
+
+    animation:
+
+    cloudMove
+
+    60s linear infinite;
+
+}
+
+@keyframes cloudMove{
+
+    from{
+
+        transform:
+
+        translateX(-300px);
+
+    }
+
+    to{
+
+        transform:
+
+        translateX(1500px);
+
+    }
+
+}
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+.musicCredit{
+
+    position:absolute;
+
+    bottom:25px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:#CFCFCF;
+
+    font-size:15px;
+
+    opacity:.8;
+
+}
+
+/* =====================================================
+   FINAL MESSAGE
+===================================================== */
+
+#finalWords{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+
+    translate(-50%,-50%);
+
+    text-align:center;
+
+    opacity:0;
+
+    transition:2s;
+
+}
+
+#finalWords.show{
+
+    opacity:1;
+
+}
+
+#finalWords h2{
+
+    font-size:56px;
+
+}
+
+#finalWords p{
+
+    margin-top:25px;
+
+    font-size:24px;
+
+}
