@@ -1036,3 +1036,746 @@ startProjector();
 
 }
 
+/*====================================================
+VINTAGE PROJECTOR ENGINE
+====================================================*/
+
+const filmStrip =
+document.getElementById("filmStrip");
+
+const projector =
+document.getElementById("filmProjector");
+
+const finalFrame =
+document.getElementById("finalFrame");
+
+let projectorStarted=false;
+
+/*====================================================
+START PROJECTOR
+====================================================*/
+
+async function startProjector(){
+
+if(projectorStarted) return;
+
+projectorStarted=true;
+
+createDust();
+
+createFilmGrain();
+
+await sleep(1500);
+
+playFilm();
+
+}
+
+/*====================================================
+PLAY FILM
+====================================================*/
+
+async function playFilm(){
+
+filmStrip.innerHTML="";
+
+for(let i=0;i<memories.length;i++){
+
+addFilmFrame(memories[i]);
+
+await sleep(2200);
+
+}
+
+await sleep(1200);
+
+showFavouriteMemory();
+
+}
+
+/*====================================================
+ADD FILM FRAME
+====================================================*/
+
+function addFilmFrame(memory){
+
+const frame=
+
+document.createElement("div");
+
+frame.className="filmFrame";
+
+frame.innerHTML=`
+
+<img src="${memory.image}">
+
+<p>${memory.caption}</p>
+
+`;
+
+filmStrip.appendChild(frame);
+
+frame.animate(
+
+[
+
+{
+
+opacity:0,
+
+transform:"translateX(100px)"
+
+},
+
+{
+
+opacity:1,
+
+transform:"translateX(0)"
+
+}
+
+],
+
+{
+
+duration:800,
+
+fill:"forwards"
+
+}
+
+);
+
+filmStrip.scrollTo({
+
+left:filmStrip.scrollWidth,
+
+behavior:"smooth"
+
+});
+
+}
+
+/*====================================================
+PROJECTOR DUST
+====================================================*/
+
+function createDust(){
+
+for(let i=0;i<80;i++){
+
+const dust=
+
+document.createElement("div");
+
+dust.className="dust";
+
+dust.style.left=
+
+Math.random()*100+"%";
+
+dust.style.animationDuration=
+
+4+
+
+Math.random()*8+
+
+"s";
+
+dust.style.animationDelay=
+
+Math.random()*6+"s";
+
+projector.appendChild(dust);
+
+}
+
+}
+
+/*====================================================
+FILM GRAIN
+====================================================*/
+
+function createFilmGrain(){
+
+const grain=
+
+document.createElement("div");
+
+grain.className="filmGrain";
+
+projector.appendChild(grain);
+
+}
+
+/*====================================================
+FINAL MEMORY
+====================================================*/
+
+async function showFavouriteMemory(){
+
+filmStrip.style.opacity=0;
+
+await sleep(1000);
+
+finalFrame.classList.add("show");
+
+finalFrame.innerHTML=`
+
+<img src="images/us.jpg">
+
+<h2>My Favourite Memory 🤍</h2>
+
+<p>
+
+Out of every photograph...
+
+every laugh...
+
+every moment...
+
+this one will always mean a little more to me.
+
+</p>
+
+<button
+
+class="primaryButton"
+
+id="continueGames">
+
+Continue
+
+</button>
+
+`;
+
+document
+
+.getElementById(
+
+"continueGames"
+
+)
+
+.addEventListener(
+
+"click",
+
+goToGames
+
+);
+
+}
+
+/*====================================================
+NEXT
+====================================================*/
+
+async function goToGames(){
+
+pageTurn();
+
+await sleep(900);
+
+currentChapter=5;
+
+saveProgress();
+
+showScreen("chapter5");
+
+startHeartGame();
+
+}
+
+/*====================================================
+CATCH THE HEARTS
+====================================================*/
+
+const heartCanvas =
+document.getElementById("heartCanvas");
+
+const scoreDisplay =
+document.getElementById("heartScore");
+
+const timerDisplay =
+document.getElementById("heartTimer");
+
+let gameRunning=false;
+
+let score=0;
+
+let combo=0;
+
+let timer=60;
+
+let spawnInterval;
+
+let timerInterval;
+
+/*====================================================
+START GAME
+====================================================*/
+
+function startHeartGame(){
+
+if(gameRunning) return;
+
+gameRunning=true;
+
+score=0;
+
+combo=0;
+
+timer=60;
+
+scoreDisplay.textContent=0;
+
+timerDisplay.textContent=60;
+
+spawnInterval=
+
+setInterval(
+
+spawnHeart,
+
+650
+
+);
+
+timerInterval=
+
+setInterval(
+
+updateTimer,
+
+1000
+
+);
+
+}
+
+/*====================================================
+TIMER
+====================================================*/
+
+function updateTimer(){
+
+timer--;
+
+timerDisplay.textContent=timer;
+
+if(timer<=0){
+
+finishHeartGame();
+
+}
+
+}
+
+/*====================================================
+HEART TYPES
+====================================================*/
+
+const heartTypes=[
+
+{
+
+emoji:"🤍",
+
+points:1,
+
+weight:45
+
+},
+
+{
+
+emoji:"❤️",
+
+points:2,
+
+weight:30
+
+},
+
+{
+
+emoji:"💛",
+
+points:5,
+
+weight:15
+
+},
+
+{
+
+emoji:"💔",
+
+points:-3,
+
+weight:10
+
+}
+
+];
+
+/*====================================================
+RANDOM
+====================================================*/
+
+function randomHeart(){
+
+const roll=Math.random()*100;
+
+let total=0;
+
+for(const type of heartTypes){
+
+total+=type.weight;
+
+if(roll<=total){
+
+return type;
+
+}
+
+}
+
+return heartTypes[0];
+
+}
+
+/*====================================================
+CREATE HEART
+====================================================*/
+
+function spawnHeart(){
+
+const type=
+
+randomHeart();
+
+const heart=
+
+document.createElement("div");
+
+heart.className=
+
+"catchHeart";
+
+heart.textContent=
+
+type.emoji;
+
+heart.dataset.points=
+
+type.points;
+
+heart.style.left=
+
+Math.random()*92+"%";
+
+heart.style.animationDuration=
+
+3+
+
+Math.random()*2+
+
+"s";
+
+heartCanvas.appendChild(
+
+heart
+
+);
+
+heart.onclick=()=>{
+
+collectHeart(
+
+heart,
+
+type.points
+
+);
+
+};
+
+setTimeout(()=>{
+
+heart.remove();
+
+combo=0;
+
+},5000);
+
+}
+
+/*====================================================
+COLLECT
+====================================================*/
+
+function collectHeart(
+
+heart,
+
+points
+
+){
+
+score+=points;
+
+combo++;
+
+if(score<0){
+
+score=0;
+
+}
+
+scoreDisplay.textContent=
+
+score;
+
+showFloatingScore(
+
+heart,
+
+points
+
+);
+
+heart.remove();
+
+if(combo>=10){
+
+showCombo();
+
+combo=0;
+
+}
+
+}
+
+/*====================================================
+FLOATING SCORE
+====================================================*/
+
+function showFloatingScore(
+
+heart,
+
+points
+
+){
+
+const text=
+
+document.createElement("div");
+
+text.className=
+
+"comboText";
+
+text.textContent=
+
+(points>0?"+":"")+points;
+
+text.style.left=
+
+heart.style.left;
+
+text.style.top=
+
+heart.offsetTop+"px";
+
+heartCanvas.appendChild(
+
+text
+
+);
+
+setTimeout(()=>{
+
+text.remove();
+
+},1000);
+
+}
+
+/*====================================================
+COMBO
+====================================================*/
+
+function showCombo(){
+
+const comboText=
+
+document.createElement("div");
+
+comboText.className=
+
+"comboText";
+
+comboText.textContent=
+
+"PERFECT ×10 ✨";
+
+comboText.style.left="50%";
+
+comboText.style.top="120px";
+
+comboText.style.transform=
+
+"translateX(-50%)";
+
+heartCanvas.appendChild(
+
+comboText
+
+);
+
+createConfetti();
+
+setTimeout(()=>{
+
+comboText.remove();
+
+},1500);
+
+}
+
+/*====================================================
+CONFETTI
+====================================================*/
+
+function createConfetti(){
+
+for(let i=0;i<80;i++){
+
+const piece=
+
+document.createElement("div");
+
+piece.className=
+
+"confetti";
+
+piece.style.left=
+
+Math.random()*100+"%";
+
+piece.style.background=
+
+`hsl(${Math.random()*360},90%,65%)`;
+
+piece.style.animationDuration=
+
+2+
+
+Math.random()*2+
+
+"s";
+
+document.body.appendChild(
+
+piece
+
+);
+
+setTimeout(()=>{
+
+piece.remove();
+
+},4000);
+
+}
+
+}
+
+/*====================================================
+FINISH
+====================================================*/
+
+function finishHeartGame(){
+
+clearInterval(
+
+spawnInterval
+
+);
+
+clearInterval(
+
+timerInterval
+
+);
+
+gameRunning=false;
+
+if(score>=80){
+
+showHeartVictory();
+
+}else{
+
+showHeartRetry();
+
+}
+
+}
+
+/*====================================================
+WIN
+====================================================*/
+
+function showHeartVictory(){
+
+createConfetti();
+
+setTimeout(()=>{
+
+goToCakeGame();
+
+},2500);
+
+}
+
+/*====================================================
+RETRY
+====================================================*/
+
+function showHeartRetry(){
+
+if(confirm(
+
+"You scored "+score+
+
+". Try again? ❤️"
+
+)){
+
+heartCanvas.innerHTML="";
+
+startHeartGame();
+
+}
+
+}
+
+/*====================================================
+NEXT
+====================================================*/
+
+async function goToCakeGame(){
+
+pageTurn();
+
+await sleep(900);
+
+showCakeGame();
+
+}
