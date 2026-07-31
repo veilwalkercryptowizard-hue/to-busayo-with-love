@@ -1,115 +1,298 @@
-/* ==========================================
-TO BUSAYO, WITH LOVE
-SCRIPT.JS V2
-========================================== */
+/*====================================================
+TO BUSAYO WITH LOVE
+SCRIPT.JS
+Version 1.0
+====================================================*/
 
+"use strict";
 
-/* ==========================================
+/*====================================================
+GLOBAL VARIABLES
+====================================================*/
+
+let currentChapter = 0;
+
+let currentMemory = 0;
+
+let openedReasons = 0;
+
+let heartScore = 0;
+
+let cakeFinished = false;
+
+let musicStarted = false;
+
+let typingFinished = false;
+
+let saveKey = "busayoBirthdayJourney";
+
+/*====================================================
 ELEMENTS
-========================================== */
+====================================================*/
 
-const pages = {
-
-    password : document.getElementById("password-page"),
-
-    welcome : document.getElementById("welcome-page"),
-
-    memory : document.getElementById("memoryPage"),
-
-    gallery : document.getElementById("galleryPage"),
-
-    film : document.getElementById("filmPage"),
-
-    reasons : document.getElementById("reasonsPage"),
-
-    letter : document.getElementById("letterPage"),
-
-    ending : document.getElementById("endingPage")
-
-};
+const audio = document.getElementById("backgroundMusic");
 
 const loadingScreen =
-document.getElementById("loading-screen");
+document.getElementById("loadingScreen");
 
-const unlockButton =
-document.getElementById("unlockButton");
+const countdownScreen =
+document.getElementById("countdownScreen");
+
+const birthdayScreen =
+document.getElementById("birthdayScreen");
+
+const introScreen =
+document.getElementById("introScreen");
+
+const passwordPage =
+document.getElementById("passwordPage");
 
 const passwordInput =
 document.getElementById("password");
 
+const unlockButton =
+document.getElementById("unlockButton");
+
 const error =
 document.getElementById("error");
 
-const music =
-document.getElementById("bgMusic");
+const screens =
+document.querySelectorAll(".screen");
 
-const beginJourney =
-document.getElementById("beginJourney");
+/*====================================================
+HELPERS
+====================================================*/
 
-const transition =
-document.getElementById("chapterTransition");
+function hideAllScreens(){
 
-const transitionChapter =
-document.getElementById("transitionChapter");
+    screens.forEach(screen=>{
 
-const transitionTitle =
-document.getElementById("transitionTitle");
+        screen.classList.remove("active");
 
-/* ==========================================
-LOADING
-========================================== */
+    });
 
-window.addEventListener("load",()=>{
+}
 
-    setTimeout(()=>{
+function showScreen(id){
 
-        loadingScreen.style.opacity="0";
+    hideAllScreens();
 
-        setTimeout(()=>{
+    document
+    .getElementById(id)
+    .classList
+    .add("active");
 
-            loadingScreen.style.display="none";
+}
 
-        },500);
+function sleep(ms){
 
-    },500);
+    return new Promise(resolve=>{
 
-});
+        setTimeout(resolve,ms);
 
-/* ==========================================
+    });
+
+}
+
+/*====================================================
 MUSIC
-========================================== */
+====================================================*/
 
 function startMusic(){
 
-    music.volume=0;
+    if(musicStarted) return;
 
-    music.play().catch(()=>{});
+    musicStarted=true;
+
+    audio.volume=0;
+
+    audio.play();
 
     let volume=0;
 
     const fade=setInterval(()=>{
 
-        volume+=0.05;
+        volume+=0.02;
 
-        music.volume=volume;
+        audio.volume=Math.min(volume,0.45);
 
-        if(volume>=1){
+        if(volume>=0.45){
 
             clearInterval(fade);
 
         }
 
-    },150);
+    },200);
 
 }
 
-/* ==========================================
-PASSWORD
-========================================== */
+/*====================================================
+SAVE
+====================================================*/
 
-function unlockWebsite(){
+function saveProgress(){
 
-    const pass=
+    const data={
+
+        chapter:currentChapter,
+
+        reasons:openedReasons,
+
+        memory:currentMemory
+
+    };
+
+    localStorage.setItem(
+
+        saveKey,
+
+        JSON.stringify(data)
+
+    );
+
+}
+
+function loadProgress(){
+
+    const data=
+
+    localStorage.getItem(saveKey);
+
+    if(!data) return;
+
+    const progress=
+
+    JSON.parse(data);
+
+    currentChapter=
+
+    progress.chapter;
+
+    currentMemory=
+
+    progress.memory;
+
+    openedReasons=
+
+    progress.reasons;
+
+}
+
+/*====================================================
+RESTART
+====================================================*/
+
+function restartJourney(){
+
+    localStorage.removeItem(saveKey);
+
+    location.reload();
+
+}
+
+/*====================================================
+INTRO SEQUENCE
+====================================================*/
+
+async function startExperience(){
+
+    showScreen("loadingScreen");
+
+    await sleep(3000);
+
+    showScreen("countdownScreen");
+
+    await countdown();
+
+    showScreen("birthdayScreen");
+
+    launchBirthday();
+
+    await sleep(5000);
+
+    showScreen("introScreen");
+
+    await sleep(3000);
+
+    showScreen("passwordPage");
+
+}
+
+window.onload=()=>{
+
+    loadProgress();
+
+    startExperience();
+
+};
+
+/*====================================================
+COUNTDOWN
+====================================================*/
+
+async function countdown(){
+
+    const number=
+
+    document.getElementById("countdownNumber");
+
+    for(let i=3;i>=1;i--){
+
+        number.textContent=i;
+
+        await sleep(1000);
+
+    }
+
+    number.textContent="🎉";
+
+}
+
+/*====================================================
+BALLOONS
+====================================================*/
+
+function launchBirthday(){
+
+    const container=
+
+    document.getElementById("balloons");
+
+    if(!container) return;
+
+    for(let i=0;i<30;i++){
+
+        const balloon=
+
+        document.createElement("div");
+
+        balloon.className="balloon";
+
+        balloon.style.left=
+
+        Math.random()*100+"%";
+
+        balloon.style.animationDuration=
+
+        8+Math.random()*8+"s";
+
+        balloon.style.background=
+
+        `hsl(${Math.random()*360},80%,75%)`;
+
+        container.appendChild(balloon);
+
+    }
+
+}
+
+/*====================================================
+PASSWORD SYSTEM
+====================================================*/
+
+function validatePassword(){
+
+    const entered =
 
     passwordInput.value
 
@@ -117,460 +300,156 @@ function unlockWebsite(){
 
     .toLowerCase();
 
-    if(pass==="july"){
+    if(entered===PASSWORD){
 
-        error.textContent="";
+        unlockSuccess();
 
-        startMusic();
+    }else{
 
-        showPage("welcome");
-
-        startTyping();
-
-    }
-
-    else{
-
-        error.textContent=
-
-        "🤍 Wrong password.";
+        unlockFailure();
 
     }
 
 }
 
-unlockButton.onclick=
+/*====================================================
+BUTTON
+====================================================*/
 
-unlockWebsite;
+unlockButton.addEventListener(
+
+"click",
+
+validatePassword
+
+);
 
 passwordInput.addEventListener(
 
-"keypress",
+"keydown",
 
-e=>{
+function(event){
 
-if(e.key==="Enter"){
+    if(event.key==="Enter"){
 
-unlockWebsite();
+        validatePassword();
 
-}
+    }
 
 });
 
-/* ==========================================
-PAGE ENGINE
-========================================== */
+/*====================================================
+WRONG PASSWORD
+====================================================*/
 
-function showPage(page){
+function unlockFailure(){
 
-    Object.values(pages).forEach(p=>{
+    error.textContent=
 
-        p.classList.remove("active");
+    "That's not the secret word 🤍";
 
-    });
+    const card=
 
-    pages[page].classList.add("active");
+    document.querySelector(".passwordCard");
 
-}
-
-/* ==========================================
-TRANSITIONS
-========================================== */
-
-function chapterTransition(
-
-chapter,
-
-title,
-
-nextPage
-
-){
-
-    transitionChapter.textContent=
-
-    chapter;
-
-    transitionTitle.textContent=
-
-    title;
-
-    transition.classList.add("show");
+    card.classList.add("shake");
 
     setTimeout(()=>{
 
-        showPage(nextPage);
+        card.classList.remove("shake");
 
-    },700);
+    },600);
+
+}
+
+/*====================================================
+CORRECT PASSWORD
+====================================================*/
+
+async function unlockSuccess(){
+
+    error.textContent="";
+
+    startMusic();
+
+    unlockButton.disabled=true;
+
+    unlockButton.textContent=
+
+    "Unlocking...";
+
+    const card=
+
+    document.querySelector(".passwordCard");
+
+    card.classList.add("success");
+
+    await sleep(1800);
+
+    transitionToChapterOne();
+
+}
+
+/*====================================================
+TRANSITION
+====================================================*/
+
+async function transitionToChapterOne(){
+
+    pageTurn();
+
+    await sleep(1200);
+
+    currentChapter=1;
+
+    saveProgress();
+
+    showScreen("chapter1");
+
+}
+
+/*====================================================
+PAGE TURN
+====================================================*/
+
+function pageTurn(){
+
+    const page=
+
+    document.getElementById("pageTurn");
+
+    page.classList.add("turn");
 
     setTimeout(()=>{
 
-        transition.classList.remove("show");
+        page.classList.remove("turn");
 
-    },1500);
-
-}
-
-/* ==========================================
-BEGIN JOURNEY
-========================================== */
-
-beginJourney.onclick=()=>{
-
-    chapterTransition(
-
-        "CHAPTER TWO",
-
-        "The Keepsake Chest",
-
-        "memory"
-
-    );
-
-};
-
-/* ==========================================
-RESTART
-========================================== */
-
-document
-
-.getElementById("restartJourney")
-
-.onclick=()=>{
-
-location.reload();
-
-};
-
-/* ==========================================
-TREASURE CHEST
-========================================== */
-
-const chest =
-document.getElementById("chest");
-
-const openChest =
-document.getElementById("openChest");
-
-let chestOpened = false;
-
-openChest.onclick = () => {
-
-    if(chestOpened) return;
-
-    chestOpened = true;
-
-    chest.classList.add("open");
-
-    openChest.disabled = true;
-
-    openChest.textContent = "Opening...";
-
-    setTimeout(()=>{
-
-        chapterTransition(
-
-            "CHAPTER THREE",
-
-            "Our Little Memories",
-
-            "gallery"
-
-        );
-
-        loadMemory();
-
-    },2200);
-
-};
-
-/* ==========================================
-MEMORY GALLERY
-========================================== */
-
-let currentMemory = 0;
-
-const memoryImage =
-document.getElementById("memoryImage");
-
-const memoryTitle =
-document.getElementById("memoryTitle");
-
-const memoryCaption =
-document.getElementById("memoryCaption");
-
-const memoryCounter =
-document.getElementById("memoryCounter");
-
-function loadMemory(){
-
-    const memory = memories[currentMemory];
-
-    memoryImage.src = memory.image;
-
-    memoryTitle.textContent = memory.title;
-
-    memoryCaption.textContent = memory.caption;
-
-    memoryCounter.textContent =
-
-    `Memory ${currentMemory + 1} of ${memories.length}`;
+    },1200);
 
 }
 
-document
-.getElementById("nextMemory")
-.onclick = ()=>{
+/*====================================================
+AUTO FOCUS
+====================================================*/
 
-    currentMemory++;
+const observer=
 
-    if(currentMemory >= memories.length){
+new MutationObserver(()=>{
 
-        chapterTransition(
+    if(passwordPage.classList.contains("active")){
 
-            "CHAPTER FOUR",
-
-            "A Walk Through Our Moments",
-
-            "film"
-
-        );
-
-        buildFilmStrip();
-
-        return;
+        passwordInput.focus();
 
     }
 
-    loadMemory();
+});
 
-};
+observer.observe(
 
-document
-.getElementById("previousMemory")
-.onclick = ()=>{
+passwordPage,
 
-    if(currentMemory > 0){
+{
 
-        currentMemory--;
+attributes:true
 
-        loadMemory();
-
-    }
-
-};
-
-/* ==========================================
-FILM STRIP
-========================================== */
-
-const filmStrip =
-document.getElementById("filmStrip");
-
-function buildFilmStrip(){
-
-    filmStrip.innerHTML = "";
-
-    memories.forEach(memory=>{
-
-        const frame =
-        document.createElement("div");
-
-        frame.className = "film-frame";
-
-        frame.innerHTML = `
-
-            <img src="${memory.image}">
-
-        `;
-
-        filmStrip.appendChild(frame);
-
-    });
-
-}
-
-document
-.getElementById("filmNext")
-.onclick = ()=>{
-
-    chapterTransition(
-
-        "CHAPTER FIVE",
-
-        "23 Reasons",
-
-        "reasons"
-
-    );
-
-    createReasons();
-
-};
-
-document
-.getElementById("filmPrevious")
-.onclick = ()=>{
-
-    chapterTransition(
-
-        "CHAPTER THREE",
-
-        "Our Little Memories",
-
-        "gallery"
-
-    );
-
-};
-
-/* ==========================================
-23 REASONS
-========================================== */
-
-const reasonsGrid =
-document.getElementById("reasonsGrid");
-
-const reasonModal =
-document.getElementById("reasonModal");
-
-const reasonText =
-document.getElementById("reasonText");
-
-const closeReason =
-document.getElementById("closeReason");
-
-let openedReasons = 0;
-
-function createReasons(){
-
-    reasonsGrid.innerHTML="";
-
-    reasons.forEach((reason,index)=>{
-
-        const envelope =
-        document.createElement("div");
-
-        envelope.className="envelope";
-
-        envelope.innerHTML="💌";
-
-        envelope.onclick=()=>{
-
-            openReason(
-
-                reason,
-
-                envelope
-
-            );
-
-        };
-
-        reasonsGrid.appendChild(envelope);
-
-    });
-
-}
-
-function openReason(reason,envelope){
-
-    reasonModal.style.display="flex";
-
-    reasonText.textContent=reason;
-
-    if(!envelope.classList.contains("opened")){
-
-        envelope.classList.add("opened");
-
-        envelope.innerHTML="🤍";
-
-        openedReasons++;
-
-        updateReasonProgress();
-
-    }
-
-}
-
-closeReason.onclick=()=>{
-
-    reasonModal.style.display="none";
-
-};
-
-window.onclick=(event)=>{
-
-    if(event.target===reasonModal){
-
-        reasonModal.style.display="none";
-
-    }
-
-};
-
-function updateReasonProgress(){
-
-    const title=
-
-    document.querySelector(
-
-    "#reasonsPage h1"
-
-    );
-
-    title.innerHTML=
-
-    `Twenty-Three Reasons
-
-    <br>
-
-    <small>
-
-    ${openedReasons} of
-
-    ${reasons.length}
-
-    opened
-
-    </small>`;
-
-}
-
-document
-
-.getElementById("toLetter")
-
-.onclick=()=>{
-
-    chapterTransition(
-
-        "CHAPTER SIX",
-
-        "One Last Thing...",
-
-        "letter"
-
-    );
-
-};
-
-document
-
-.getElementById("backToFilm")
-
-.onclick=()=>{
-
-    chapterTransition(
-
-        "CHAPTER FOUR",
-
-        "A Walk Through Our Moments",
-
-        "film"
-
-    );
-
-};
-
+});
