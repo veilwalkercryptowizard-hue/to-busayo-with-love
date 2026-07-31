@@ -3933,3 +3933,17 @@ SUCCESS
     rgba(216,178,90,.6);
 
 }
+
+.polaroid.zoomed{
+
+transform:
+
+scale(1.35)
+
+rotate(0deg)!important;
+
+z-index:9999;
+
+transition:.45s;
+
+}
