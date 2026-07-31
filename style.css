@@ -3871,3 +3871,65 @@ padding:35px 25px;
     font-size:24px;
 
 }
+
+/* =====================================================
+PASSWORD SHAKE
+===================================================== */
+
+.passwordCard.shake{
+
+    animation:
+
+    passwordShake
+
+    .6s;
+
+}
+
+@keyframes passwordShake{
+
+    0%,100%{
+
+        transform:translateX(0);
+
+    }
+
+    20%{
+
+        transform:translateX(-10px);
+
+    }
+
+    40%{
+
+        transform:translateX(10px);
+
+    }
+
+    60%{
+
+        transform:translateX(-8px);
+
+    }
+
+    80%{
+
+        transform:translateX(8px);
+
+    }
+
+}
+
+/* =====================================================
+SUCCESS
+===================================================== */
+
+.passwordCard.success{
+
+    box-shadow:
+
+    0 0 80px
+
+    rgba(216,178,90,.6);
+
+}
