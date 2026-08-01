@@ -1,88 +1,30 @@
-/*====================================================
+/*==================================================
 TO BUSAYO WITH LOVE
 SCRIPT.JS
-Version 1.0
-====================================================*/
+==================================================*/
 
-"use strict";
-
-/*====================================================
+/*==========================================
 GLOBAL VARIABLES
-====================================================*/
+==========================================*/
 
-let currentChapter = 0;
+const screens = document.querySelectorAll(".screen");
 
-let currentMemory = 0;
+const music =
+document.getElementById("birthdayMusic");
 
-let openedReasons = 0;
+const pageTurn =
+document.getElementById("pageTurn");
 
-let heartScore = 0;
+const memoryFlash =
+document.getElementById("memoryFlash");
 
-let cakeFinished = false;
+let currentScreen = 0;
 
 let musicStarted = false;
 
-let typingFinished = false;
-
-let saveKey = "busayoBirthdayJourney";
-
-/*====================================================
-ELEMENTS
-====================================================*/
-
-const audio = document.getElementById("birthdayMusic");
-
-const loadingScreen =
-document.getElementById("loadingScreen");
-
-const number =
-document.getElementById("countnumber");
-
-const birthdayScreen =
-document.getElementById("birthdayScreen");
-
-const introScreen =
-document.getElementById("introScreen");
-
-const passwordPage =
-document.getElementById("passwordPage");
-
-const passwordInput =
-document.getElementById("password");
-
-const unlockButton =
-document.getElementById("unlockButton");
-
-const error =
-document.getElementById("error");
-
-const screens =
-document.querySelectorAll(".screen");
-
-/*====================================================
-HELPERS
-====================================================*/
-
-function hideAllScreens(){
-
-    screens.forEach(screen=>{
-
-        screen.classList.remove("active");
-
-    });
-
-}
-
-function showScreen(id){
-
-    hideAllScreens();
-
-    document
-    .getElementById(id)
-    .classList
-    .add("active");
-
-}
+/*==========================================
+HELPER FUNCTIONS
+==========================================*/
 
 function sleep(ms){
 
@@ -94,173 +36,182 @@ function sleep(ms){
 
 }
 
-/*====================================================
+function showScreen(id){
+
+    screens.forEach(screen=>{
+
+        screen.classList.remove("active");
+
+    });
+
+    document
+    .getElementById(id)
+    .classList
+    .add("active");
+
+}
+
+function fadeFlash(){
+
+    memoryFlash.classList.add("show");
+
+    setTimeout(()=>{
+
+        memoryFlash.classList.remove("show");
+
+    },700);
+
+}
+
+function pageFlip(callback){
+
+    pageTurn.classList.add("turn");
+
+    setTimeout(()=>{
+
+        if(callback){
+
+            callback();
+
+        }
+
+    },550);
+
+    setTimeout(()=>{
+
+        pageTurn.classList.remove("turn");
+
+    },1100);
+
+}
+
+/*==========================================
 MUSIC
-====================================================*/
+==========================================*/
 
 function startMusic(){
 
     if(musicStarted) return;
 
-    musicStarted=true;
+    music.volume = .45;
 
-    audio.volume=0;
+    music.play();
 
-    audio.play();
-
-    let volume=0;
-
-    const fade=setInterval(()=>{
-
-        volume+=0.02;
-
-        audio.volume=Math.min(volume,0.45);
-
-        if(volume>=0.45){
-
-            clearInterval(fade);
-
-        }
-
-    },200);
+    musicStarted = true;
 
 }
 
-/*====================================================
-SAVE
-====================================================*/
+/*==========================================
+LOADING
+==========================================*/
 
-function saveProgress(){
+window.addEventListener("load",()=>{
 
-    const data={
+    startLoading();
 
-        chapter:currentChapter,
+});
 
-        reasons:openedReasons,
-
-        memory:currentMemory
-
-    };
-
-    localStorage.setItem(
-
-        saveKey,
-
-        JSON.stringify(data)
-
-    );
-
-}
-
-function loadProgress(){
-
-    const data=
-
-    localStorage.getItem(saveKey);
-
-    if(!data) return;
-
-    const progress=
-
-    JSON.parse(data);
-
-    currentChapter=
-
-    progress.chapter;
-
-    currentMemory=
-
-    progress.memory;
-
-    openedReasons=
-
-    progress.reasons;
-
-}
-
-/*====================================================
-RESTART
-====================================================*/
-
-function restartJourney(){
-
-    localStorage.removeItem(saveKey);
-
-    location.reload();
-
-}
-
-/*====================================================
-INTRO SEQUENCE
-====================================================*/
-
-async function startExperience(){
+async function startLoading(){
 
     showScreen("loadingScreen");
 
     await sleep(3000);
 
-    showScreen("countdownScreen");
-
-    await countdown();
-
-    showScreen("birthdayScreen");
-
-    launchBirthday();
-
-    await sleep(5000);
-
-    showScreen("introScreen");
-
-    await sleep(3000);
-
-    showScreen("passwordPage");
+    startCountdown();
 
 }
 
-window.onload=()=>{
-
-    loadProgress();
-
-    startExperience();
-
-};
-
-/*====================================================
+/*==========================================
 COUNTDOWN
-====================================================*/
+==========================================*/
 
-async function countdown(){
+async function startCountdown(){
 
-    const number=
+    showScreen("countdownScreen");
 
-    document.getElementById("countdownNumber");
+    const number =
+
+    document.getElementById("countNumber");
 
     for(let i=3;i>=1;i--){
 
         number.textContent=i;
 
+        number.animate([
+
+        {
+
+        transform:"scale(.5)",
+
+        opacity:0
+
+        },
+
+        {
+
+        transform:"scale(1)",
+
+        opacity:1
+
+        }
+
+        ],{
+
+        duration:700
+
+        });
+
         await sleep(1000);
 
     }
 
-    number.textContent="🎉";
+    number.textContent="❤️";
+
+    await sleep(900);
+
+    birthdayScreen();
 
 }
 
-/*====================================================
+/*==========================================
+BIRTHDAY
+==========================================*/
+
+async function birthdayScreen(){
+
+    showScreen("birthdayScreen");
+
+    createBalloons();
+
+}
+
+/*==========================================
 BALLOONS
-====================================================*/
+==========================================*/
 
-function launchBirthday(){
+function createBalloons(){
 
-    const container=
+    const area =
 
     document.getElementById("balloons");
 
-    if(!container) return;
+    const colors=[
 
-    for(let i=0;i<30;i++){
+    "#FF6B6B",
+
+    "#FFD93D",
+
+    "#6BCB77",
+
+    "#4D96FF",
+
+    "#FF74B1",
+
+    "#A66CFF"
+
+    ];
+
+    setInterval(()=>{
 
         const balloon=
 
@@ -272,350 +223,260 @@ function launchBirthday(){
 
         Math.random()*100+"%";
 
-        balloon.style.animationDuration=
-
-        8+Math.random()*8+"s";
-
         balloon.style.background=
 
-        `hsl(${Math.random()*360},80%,75%)`;
+        colors[
 
-        container.appendChild(balloon);
+        Math.floor(
 
-    }
+        Math.random()*colors.length
 
-}
+        )
 
-/*====================================================
-PASSWORD SYSTEM
-====================================================*/
+        ];
 
-function validatePassword(){
+        balloon.style.animationDuration=
 
-    const entered =
+        8+
 
-    passwordInput.value
+        Math.random()*6+
 
-    .trim()
+        "s";
 
-    .toLowerCase();
+        area.appendChild(balloon);
 
-    if(entered===PASSWORD){
+        setTimeout(()=>{
 
-        unlockSuccess();
+            balloon.remove();
 
-    }else{
+        },15000);
 
-        unlockFailure();
-
-    }
+    },450);
 
 }
 
-/*====================================================
-BUTTON
-====================================================*/
+/*==========================================
+START BUTTON
+==========================================*/
 
-unlockButton.addEventListener(
+document
 
-"click",
+.getElementById("beginSurprise")
 
-validatePassword
-
-);
-
-passwordInput.addEventListener(
-
-"keydown",
-
-function(event){
-
-    if(event.key==="Enter"){
-
-        validatePassword();
-
-    }
-
-});
-
-/*====================================================
-WRONG PASSWORD
-====================================================*/
-
-function unlockFailure(){
-
-    error.textContent=
-
-    "That's not the secret word 🤍";
-
-    const card=
-
-    document.querySelector(".passwordCard");
-
-    card.classList.add("shake");
-
-    setTimeout(()=>{
-
-        card.classList.remove("shake");
-
-    },600);
-
-}
-
-/*====================================================
-CORRECT PASSWORD
-====================================================*/
-
-async function unlockSuccess(){
-
-    error.textContent="";
+.addEventListener("click",()=>{
 
     startMusic();
 
-    unlockButton.disabled=true;
+    pageFlip(()=>{
 
-    unlockButton.textContent=
+        showIntro();
 
-    "Unlocking...";
-
-    const card=
-
-    document.querySelector(".passwordCard");
-
-    card.classList.add("success");
-
-    await sleep(1800);
-
-    transitionToChapterOne();
-
-}
-
-/*====================================================
-TRANSITION
-====================================================*/
-
-async function transitionToChapterOne(){
-
-    pageTurn();
-
-    await sleep(1200);
-
-    currentChapter=1;
-
-    saveProgress();
-
-    showScreen("chapter1");
-
-}
-
-/*====================================================
-PAGE TURN
-====================================================*/
-
-function pageTurn(){
-
-    const page=
-
-    document.getElementById("pageTurn");
-
-    page.classList.add("turn");
-
-    setTimeout(()=>{
-
-        page.classList.remove("turn");
-
-    },1200);
-
-}
-
-/*====================================================
-AUTO FOCUS
-====================================================*/
-
-const observer=
-
-new MutationObserver(()=>{
-
-    if(passwordPage.classList.contains("active")){
-
-        passwordInput.focus();
-
-    }
+    });
 
 });
 
-observer.observe(
+/*==========================================
+INTRO
+==========================================*/
 
-passwordPage,
+async function showIntro(){
 
-{
+    showScreen("introScreen");
 
-attributes:true
+    await sleep(4500);
 
-});
+    pageFlip(()=>{
 
-/*====================================================
-TREASURE CHEST
-====================================================*/
+        showPassword();
 
-const chest =
-document.getElementById("treasurechest");
+    });
 
-const openChestButton =
-document.getElementById("openChest");
+}
 
-const flash =
-document.getElementById("memoryFlash");
+/*==========================================
+PASSWORD
+==========================================*/
 
-let chestOpened = false;
+const unlock=
 
-if(openChestButton){
+document.getElementById(
 
-openChestButton.addEventListener(
-
-"click",
-
-openTreasureChest
+"unlockButton"
 
 );
 
+unlock.onclick=checkPassword;
+
+function checkPassword(){
+
+const input=
+
+document.getElementById(
+
+"password"
+
+);
+
+const card=
+
+document.querySelector(
+
+".passwordCard"
+
+);
+
+const error=
+
+document.getElementById(
+
+"error"
+
+);
+
+/*
+CHANGE THIS PASSWORD
+TO WHATEVER YOU WANT
+*/
+
+const correctPassword=
+
+"busayo";
+
+if(
+
+input.value
+
+.trim()
+
+.toLowerCase()
+
+===
+
+correctPassword
+
+){
+
+card.classList.add(
+
+"success"
+
+);
+
+error.textContent="";
+
+setTimeout(()=>{
+
+pageFlip(()=>{
+
+showTreasure();
+
+});
+
+},800);
+
 }
 
-/*====================================================
-OPEN CHEST
-====================================================*/
+else{
 
-async function openTreasureChest(){
+card.classList.add(
+
+"shake"
+
+);
+
+error.textContent=
+
+"Wrong password ❤️";
+
+setTimeout(()=>{
+
+card.classList.remove(
+
+"shake"
+
+);
+
+},600);
+
+}
+
+}
+
+/*==========================================
+TREASURE
+==========================================*/
+
+function showTreasure(){
+
+    showScreen("chapter2");
+
+}
+
+/*==========================================
+TREASURE CHEST ENGINE
+==========================================*/
+
+const chest =
+document.getElementById("treasureChest");
+
+const openChest =
+document.getElementById("openChest");
+
+let chestOpened=false;
+
+openChest.addEventListener("click",openTreasure);
+
+async function openTreasure(){
 
 if(chestOpened) return;
 
 chestOpened=true;
 
-openChestButton.disabled=true;
-
-/* Lock wiggle */
-
-await wiggleLock();
-
-/* Lid opens */
+openChest.disabled=true;
 
 chest.classList.add("open");
 
-/* Gold particles */
+createGoldExplosion();
 
-createGoldParticles();
-
-/* Wait */
+createGoldenDust();
 
 await sleep(1800);
 
-/* Flash */
+fadeFlash();
 
-flash.classList.add("show");
+await sleep(900);
 
-await sleep(1100);
+pageFlip(()=>{
 
-flash.classList.remove("show");
-
-/* Save */
-
-currentChapter=2;
-
-saveProgress();
-
-/* Continue */
-
-showScreen("chapter3");
-
-startMemoryDesk();
-
-}
-
-/*====================================================
-LOCK WIGGLE
-====================================================*/
-
-function wiggleLock(){
-
-return new Promise(resolve=>{
-
-const lock=
-
-document.querySelector(".chestLock");
-
-lock.animate([
-
-{
-
-transform:"translateX(-50%) rotate(0deg)"
-
-},
-
-{
-
-transform:"translateX(-50%) rotate(-10deg)"
-
-},
-
-{
-
-transform:"translateX(-50%) rotate(10deg)"
-
-},
-
-{
-
-transform:"translateX(-50%) rotate(-8deg)"
-
-},
-
-{
-
-transform:"translateX(-50%) rotate(0deg)"
-
-}
-
-],
-
-{
-
-duration:900
-
-}
-
-);
-
-setTimeout(resolve,900);
+showMemoryDesk();
 
 });
 
 }
 
-/*====================================================
-GOLD PARTICLES
-====================================================*/
+/*==========================================
+GOLD EXPLOSION
+==========================================*/
 
-function createGoldParticles(){
+function createGoldExplosion(){
 
-for(let i=0;i<60;i++){
+for(let i=0;i<120;i++){
 
 const particle=
 
 document.createElement("div");
 
-particle.className=
+particle.className="goldParticle";
 
-"goldParticle";
+particle.style.left="50%";
 
-particle.style.left=
-
-"50%";
+particle.style.top="52%";
 
 particle.style.setProperty(
 
 "--x",
 
-(Math.random()*500-250)+"px"
+(Math.random()-0.5)*900+"px"
 
 );
 
@@ -623,216 +484,269 @@ particle.style.setProperty(
 
 "--y",
 
-(Math.random()*120)+"px"
+Math.random()*800+"px"
 
 );
 
 particle.style.animationDuration=
 
-1.5+
+1+
 
-Math.random()*1.5+
+Math.random()+"s";
 
-"s";
-
-document.body.appendChild(
-
-particle
-
-);
+document.body.appendChild(particle);
 
 setTimeout(()=>{
 
 particle.remove();
 
-},3000);
+},2200);
 
 }
 
 }
 
-/*====================================================
-CHEST SPARKLES
-====================================================*/
+/*==========================================
+GOLD DUST
+==========================================*/
 
-function createChestSparkles(){
+function createGoldenDust(){
 
-for(let i=0;i<30;i++){
+for(let i=0;i<60;i++){
 
-const sparkle=
+const dust=
 
 document.createElement("div");
 
-sparkle.className=
+dust.className="goldenDust";
 
-"goldenDust";
+dust.style.left=
 
-sparkle.style.left=
+Math.random()*100+"vw";
 
-Math.random()*100+"%";
+dust.style.top=
 
-sparkle.style.top=
+Math.random()*100+"vh";
 
-Math.random()*100+"%";
+dust.style.animationDuration=
 
-sparkle.style.animationDuration=
+5+
 
-3+
-
-Math.random()*4+
+Math.random()*6+
 
 "s";
 
-document.body.appendChild(
-
-sparkle
-
-);
+document.body.appendChild(dust);
 
 setTimeout(()=>{
 
-sparkle.remove();
+dust.remove();
 
-},5000);
-
-}
+},12000);
 
 }
 
-createGoldParticles();
-
-createChestSparkles();
-
-/*====================================================
-FLASH
-====================================================*/
-
-function screenFlash(){
-
-flash.classList.add("show");
-
-setTimeout(()=>{
-
-flash.classList.remove("show");
-
-},1000);
-
 }
 
-/*====================================================
-MEMORY DESK ENGINE
-====================================================*/
+/*==========================================
+MEMORY DESK
+==========================================*/
 
-const memoryDesk =
-document.getElementById("memoryDesk");
+const memories=[
 
-let currentPhoto = 0;
+{
 
-let deskFinished = false;
+image:"images/photo1.jpg",
 
-const photoRotations = [
+title:"A Beautiful Beginning",
 
--12,
-8,
--6,
-13,
--9,
-4,
--15,
-7,
--5,
-11,
--10
+text:"Every story has a first page."
+
+},
+
+{
+
+image:"images/photo2.jpg",
+
+title:"Your Smile",
+
+text:"It lights up everything."
+
+},
+
+{
+
+image:"images/photo4.jpg",
+
+title:"Special Moments",
+
+text:"The little moments matter."
+
+},
+
+{
+
+image:"images/photo5.jpg",
+
+title:"Joy",
+
+text:"Happiness looks good on you."
+
+},
+
+{
+
+image:"images/photo6.jpg",
+
+title:"Laughter",
+
+text:"One of my favourite sounds."
+
+},
+
+{
+
+image:"images/photo7.jpg",
+
+title:"Unforgettable",
+
+text:"Some memories never fade."
+
+},
+
+{
+
+image:"images/photo8.jpg",
+
+title:"Beautiful Soul",
+
+text:"That's who you are."
+
+},
+
+{
+
+image:"images/photo10.jpg",
+
+title:"Adventure",
+
+text:"More memories await."
+
+},
+
+{
+
+image:"images/photo12.jpg",
+
+title:"Grateful",
+
+text:"Thank you for existing."
+
+},
+
+{
+
+image:"images/photo13.jpg",
+
+title:"Cherished",
+
+text:"Always."
+
+},
+
+{
+
+image:"images/photo14.jpg",
+
+title:"Forever",
+
+text:"One photo, countless emotions."
+
+}
 
 ];
 
-/*====================================================
-START MEMORY DESK
-====================================================*/
+/*==========================================
+SHOW MEMORY DESK
+==========================================*/
 
-async function startMemoryDesk(){
+async function showMemoryDesk(){
 
-memoryDesk.innerHTML="";
+showScreen("chapter3");
 
-currentPhoto=0;
+const desk=
+
+document.getElementById("memoryDesk");
+
+desk.innerHTML="";
 
 for(let i=0;i<memories.length;i++){
 
-await createPolaroid(memories[i],i);
+await sleep(450);
 
-await sleep(1000);
+dropPhoto(
+
+desk,
+
+memories[i],
+
+i
+
+);
 
 }
 
-showFinalMemoryCard();
+await sleep(1800);
+
+showDeskNote();
 
 }
 
-/*====================================================
-CREATE PHOTO
-====================================================*/
+/*==========================================
+DROP PHOTO
+==========================================*/
 
-async function createPolaroid(memory,index){
+function dropPhoto(
+
+desk,
+
+memory,
+
+index
+
+){
 
 const card=
 
 document.createElement("div");
 
-card.className="polaroid";
+card.className=
+
+"polaroid";
+
+card.style.left=
+
+80+
+
+(index%4)*250+
+
+"px";
+
+card.style.top=
+
+60+
+
+Math.floor(index/4)*220+
+
+"px";
 
 card.style.setProperty(
 
 "--rotation",
 
-photoRotations[index]+"deg"
+(Math.random()*18-9)+"deg"
 
 );
-
-const positions=[
-
-[8,8],
-
-[34,10],
-
-[60,8],
-
-[12,34],
-
-[42,30],
-
-[68,28],
-
-[18,56],
-
-[48,54],
-
-[74,52],
-
-[30,70],
-
-[58,72]
-
-];
-
-card.style.left=
-
-positions[index][0]+"%";
-
-card.style.top=
-
-positions[index][1]+"%";
-
-card.style.top=
-
-20+
-
-Math.random()*45+
-
-"%";
-
-card.style.transform=
-
-`rotate(${photoRotations[index]}deg)`;
 
 card.innerHTML=`
 
@@ -840,11 +754,11 @@ card.innerHTML=`
 
 <h3>${memory.title}</h3>
 
-<p>${memory.caption}</p>
+<p>${memory.text}</p>
 
 `;
 
-memoryDesk.appendChild(card);
+desk.appendChild(card);
 
 requestAnimationFrame(()=>{
 
@@ -858,16 +772,6 @@ card.classList.add(
 
 });
 
-enablePhotoInteraction(card);
-
-}
-
-/*====================================================
-PHOTO INTERACTION
-====================================================*/
-
-function enablePhotoInteraction(card){
-
 card.addEventListener(
 
 "click",
@@ -876,85 +780,59 @@ card.addEventListener(
 
 zoomPhoto(card);
 
-});
+}
 
-makeDraggable(card);
+);
 
 }
 
-/*====================================================
-ZOOM
-====================================================*/
+/*==========================================
+ZOOM PHOTO
+==========================================*/
 
 function zoomPhoto(card){
 
-card.classList.toggle("zoomed");
+document
+
+.querySelectorAll(
+
+".polaroid"
+
+)
+
+.forEach(photo=>{
+
+photo.classList.remove(
+
+"zoomed"
+
+);
+
+});
+
+card.classList.add(
+
+"zoomed"
+
+);
+
+setTimeout(()=>{
+
+card.classList.remove(
+
+"zoomed"
+
+);
+
+},2200);
 
 }
 
-/*====================================================
-DRAG
-====================================================*/
+/*==========================================
+NOTE
+==========================================*/
 
-function makeDraggable(element){
-
-let active=false;
-
-let x=0;
-
-let y=0;
-
-element.addEventListener(
-
-"pointerdown",
-
-e=>{
-
-active=true;
-
-x=e.clientX-element.offsetLeft;
-
-y=e.clientY-element.offsetTop;
-
-element.style.zIndex=999;
-
-});
-
-window.addEventListener(
-
-"pointermove",
-
-e=>{
-
-if(!active) return;
-
-element.style.left=
-
-e.clientX-x+"px";
-
-element.style.top=
-
-e.clientY-y+"px";
-
-});
-
-window.addEventListener(
-
-"pointerup",
-
-()=>{
-
-active=false;
-
-});
-
-}
-
-/*====================================================
-FINAL CARD
-====================================================*/
-
-function showFinalMemoryCard(){
+function showDeskNote(){
 
 const note=
 
@@ -968,13 +846,13 @@ note.innerHTML=`
 
 <p>
 
-One photograph...
+Every photograph tells a story...
 
-was simply too special
+but my favourite one
 
-to leave lying
+will always be the one
 
-on the table.
+that has you in it.
 
 </p>
 
@@ -982,268 +860,9 @@ on the table.
 
 class="primaryButton"
 
-id="showFavourite">
+id="continueProjector"
 
-See My Favourite One
-
-</button>
-
-`;
-
-memoryDesk.appendChild(note);
-
-requestAnimationFrame(()=>{
-
-note.style.opacity=1;
-
-});
-
-document
-
-.getElementById(
-
-"showFavourite"
-
-)
-
-.addEventListener(
-
-"click",
-
-goToProjector
-
-);
-
-}
-
-/*====================================================
-PROJECTOR
-====================================================*/
-
-async function goToProjector(){
-
-pageTurn();
-
-await sleep(1000);
-
-currentChapter=4;
-
-saveProgress();
-
-showScreen("chapter4");
-
-startProjector();
-
-}
-
-/*====================================================
-VINTAGE PROJECTOR ENGINE
-====================================================*/
-
-const filmStrip =
-document.getElementById("filmStrip");
-
-const projector =
-document.getElementById("filmProjector");
-
-const finalFrame =
-document.getElementById("finalFrame");
-
-let projectorStarted=false;
-
-/*====================================================
-START PROJECTOR
-====================================================*/
-
-async function startProjector(){
-
-if(projectorStarted) return;
-
-projectorStarted=true;
-
-createDust();
-
-createFilmGrain();
-
-await sleep(1500);
-
-playFilm();
-
-}
-
-/*====================================================
-PLAY FILM
-====================================================*/
-
-async function playFilm(){
-
-filmStrip.innerHTML="";
-
-for(let i=0;i<memories.length;i++){
-
-addFilmFrame(memories[i]);
-
-await sleep(2200);
-
-}
-
-await sleep(1200);
-
-showFavouriteMemory();
-
-}
-
-/*====================================================
-ADD FILM FRAME
-====================================================*/
-
-function addFilmFrame(memory){
-
-const frame=
-
-document.createElement("div");
-
-frame.className="filmFrame";
-
-frame.innerHTML=`
-
-<img src="${memory.image}">
-
-<p>${memory.caption}</p>
-
-`;
-
-filmStrip.appendChild(frame);
-
-frame.animate(
-
-[
-
-{
-
-opacity:0,
-
-transform:"translateX(100px)"
-
-},
-
-{
-
-opacity:1,
-
-transform:"translateX(0)"
-
-}
-
-],
-
-{
-
-duration:800,
-
-fill:"forwards"
-
-}
-
-);
-
-filmStrip.scrollTo({
-
-left:filmStrip.scrollWidth,
-
-behavior:"smooth"
-
-});
-
-}
-
-/*====================================================
-PROJECTOR DUST
-====================================================*/
-
-function createDust(){
-
-for(let i=0;i<80;i++){
-
-const dust=
-
-document.createElement("div");
-
-dust.className="dust";
-
-dust.style.left=
-
-Math.random()*100+"%";
-
-dust.style.animationDuration=
-
-4+
-
-Math.random()*8+
-
-"s";
-
-dust.style.animationDelay=
-
-Math.random()*6+"s";
-
-projector.appendChild(dust);
-
-}
-
-}
-
-/*====================================================
-FILM GRAIN
-====================================================*/
-
-function createFilmGrain(){
-
-const grain=
-
-document.createElement("div");
-
-grain.className="filmGrain";
-
-projector.appendChild(grain);
-
-}
-
-/*====================================================
-FINAL MEMORY
-====================================================*/
-
-async function showFavouriteMemory(){
-
-filmStrip.style.opacity=0;
-
-await sleep(1000);
-
-finalFrame.classList.add("show");
-
-finalFrame.innerHTML=`
-
-<img src="images/us.jpg">
-
-<h2>My Favourite Memory 🤍</h2>
-
-<p>
-
-Out of every photograph...
-
-every laugh...
-
-every moment...
-
-this one will always mean a little more to me.
-
-</p>
-
-<button
-
-class="primaryButton"
-
-id="continueGames">
+>
 
 Continue
 
@@ -1255,1857 +874,1131 @@ document
 
 .getElementById(
 
-"continueGames"
+"memoryDesk"
 
 )
 
-.addEventListener(
+.appendChild(note);
 
-"click",
+requestAnimationFrame(()=>{
 
-goToGames
+note.style.opacity=1;
 
-);
+});
 
-}
+document
 
-/*====================================================
-NEXT
-====================================================*/
+.getElementById(
 
-async function goToGames(){
+"continueProjector"
 
-pageTurn();
+)
 
-await sleep(900);
+.onclick=()=>{
 
-currentChapter=5;
+pageFlip(()=>{
 
-saveProgress();
+showProjector();
 
-showScreen("chapter5");
+});
 
-startHeartGame();
+};
 
 }
 
-/*====================================================
-CATCH THE HEARTS
-====================================================*/
+/*==========================================
+PROJECTOR
+==========================================*/
 
-const heartCanvas =
-document.getElementById("heartCanvas");
+function showProjector(){
 
-const scoreDisplay =
-document.getElementById("heartScore");
+    showScreen("chapter4");
 
-const timerDisplay =
-document.getElementById("heartTimer");
+    const strip =
+    document.getElementById("filmStrip");
 
-let gameRunning=false;
+    const final =
+    document.getElementById("finalFrame");
 
-let score=0;
+    strip.innerHTML = "";
 
-let combo=0;
+    final.innerHTML = "";
 
-let timer=60;
+    createDust();
 
-let spawnInterval;
+    buildFilmStrip(strip);
 
+}
+
+/*==========================================
+FILM STRIP
+==========================================*/
+
+function buildFilmStrip(strip){
+
+    memories.forEach((memory,index)=>{
+
+        const frame = document.createElement("div");
+
+        frame.className="filmFrame";
+
+        frame.innerHTML=`
+
+        <img src="${memory.image}">
+
+        <p>${memory.text}</p>
+
+        `;
+
+        strip.appendChild(frame);
+
+    });
+
+    autoScrollFilm(strip);
+
+}
+
+/*==========================================
+AUTO SCROLL
+==========================================*/
+
+async function autoScrollFilm(strip){
+
+    let position = 0;
+
+    const distance = strip.scrollWidth;
+
+    while(position < distance){
+
+        strip.scrollLeft = position;
+
+        position += 3;
+
+        await sleep(16);
+
+    }
+
+    await sleep(1200);
+
+    revealUsPhoto();
+
+}
+
+/*==========================================
+PROJECTOR DUST
+==========================================*/
+
+function createDust(){
+
+    for(let i=0;i<120;i++){
+
+        const dust = document.createElement("div");
+
+        dust.className="dust";
+
+        dust.style.left=Math.random()*100+"%";
+
+        dust.style.top=Math.random()*100+"%";
+
+        dust.style.animationDuration=
+        5+Math.random()*8+"s";
+
+        document
+        .getElementById("filmProjector")
+        .appendChild(dust);
+
+    }
+
+}
+
+/*==========================================
+US PHOTO
+==========================================*/
+
+function revealUsPhoto(){
+
+    const final =
+    document.getElementById("finalFrame");
+
+    final.innerHTML=`
+
+    <img src="images/us.jpg">
+
+    <h2>
+
+        My Favourite Memory ❤️
+
+    </h2>
+
+    <p>
+
+        Out of every picture...
+
+        every smile...
+
+        every beautiful moment...
+
+        this one will always mean
+
+        the most to me.
+
+    </p>
+
+    <button
+
+    id="continueGames"
+
+    class="primaryButton"
+
+    >
+
+    Continue
+
+    </button>
+
+    `;
+
+    final.classList.add("show");
+
+    document
+
+    .getElementById("continueGames")
+
+    .onclick=()=>{
+
+        pageFlip(()=>{
+
+            startHeartGame();
+
+        });
+
+    };
+
+}
+
+/*==========================================
+FILM GRAIN
+==========================================*/
+
+const grain=document.createElement("div");
+
+grain.className="filmGrain";
+
+document
+
+.getElementById("filmProjector")
+
+.appendChild(grain);
+
+/*==========================================
+HEART GAME
+==========================================*/
+
+let heartScore = 0;
+let gameTime = 60;
+let gameRunning = false;
+let heartInterval;
 let timerInterval;
-
-/*====================================================
-START GAME
-====================================================*/
 
 function startHeartGame(){
 
-if(gameRunning) return;
+    showScreen("chapter5");
 
-gameRunning=true;
+    heartScore = 0;
+    gameTime = 60;
+    gameRunning = true;
 
-score=0;
+    document.getElementById("heartScore").textContent = heartScore;
+    document.getElementById("heartTimer").textContent = gameTime;
 
-combo=0;
+    const canvas = document.getElementById("heartCanvas");
+    canvas.innerHTML = "";
 
-timer=60;
+    spawnHeart();
 
-scoreDisplay.textContent=0;
+    heartInterval = setInterval(spawnHeart, 600);
 
-timerDisplay.textContent=60;
+    timerInterval = setInterval(()=>{
 
-spawnInterval=
+        gameTime--;
 
-setInterval(
+        document.getElementById("heartTimer").textContent = gameTime;
 
-spawnHeart,
+        if(gameTime<=0){
 
-650
+            endHeartGame();
 
-);
+        }
 
-timerInterval=
-
-setInterval(
-
-updateTimer,
-
-1000
-
-);
+    },1000);
 
 }
 
-/*====================================================
-TIMER
-====================================================*/
-
-function updateTimer(){
-
-timer--;
-
-timerDisplay.textContent=timer;
-
-if(timer<=0){
-
-finishHeartGame();
-
-}
-
-}
-
-/*====================================================
-HEART TYPES
-====================================================*/
-
-const heartTypes=[
-
-{
-
-emoji:"🤍",
-
-points:1,
-
-weight:45
-
-},
-
-{
-
-emoji:"❤️",
-
-points:2,
-
-weight:30
-
-},
-
-{
-
-emoji:"💛",
-
-points:5,
-
-weight:15
-
-},
-
-{
-
-emoji:"💔",
-
-points:-3,
-
-weight:10
-
-}
-
-];
-
-/*====================================================
-RANDOM
-====================================================*/
-
-function randomHeart(){
-
-const roll=Math.random()*100;
-
-let total=0;
-
-for(const type of heartTypes){
-
-total+=type.weight;
-
-if(roll<=total){
-
-return type;
-
-}
-
-}
-
-return heartTypes[0];
-
-}
-
-/*====================================================
-CREATE HEART
-====================================================*/
+/*==========================================
+SPAWN HEART
+==========================================*/
 
 function spawnHeart(){
 
-const type=
+    if(!gameRunning) return;
 
-randomHeart();
+    const canvas = document.getElementById("heartCanvas");
 
-const heart=
+    const heart = document.createElement("div");
 
-document.createElement("div");
+    heart.className = "catchHeart";
 
-heart.className=
+    heart.innerHTML = "❤️";
 
-"catchHeart";
+    heart.style.left = Math.random()*90 + "%";
 
-heart.textContent=
+    heart.style.animationDuration =
+    3 + Math.random()*3 + "s";
 
-type.emoji;
+    canvas.appendChild(heart);
 
-heart.dataset.points=
+    heart.onclick = ()=>{
 
-type.points;
+        heart.remove();
 
-heart.style.left=
+        heartScore++;
 
-Math.random()*92+"%";
+        document.getElementById("heartScore").textContent = heartScore;
 
-heart.style.animationDuration=
+        showCombo(heart);
 
-3+
+    };
 
-Math.random()*2+
+    setTimeout(()=>{
 
-"s";
+        heart.remove();
 
-heartCanvas.appendChild(
-
-heart
-
-);
-
-heart.onclick=()=>{
-
-collectHeart(
-
-heart,
-
-type.points
-
-);
-
-};
-
-setTimeout(()=>{
-
-heart.remove();
-
-combo=0;
-
-},5000);
+    },7000);
 
 }
 
-/*====================================================
-COLLECT
-====================================================*/
+/*==========================================
+COMBO TEXT
+==========================================*/
 
-function collectHeart(
+function showCombo(target){
 
-heart,
+    const combo = document.createElement("div");
 
-points
+    combo.className="comboText";
 
-){
+    combo.innerHTML="+1 ❤️";
 
-score+=points;
+    combo.style.left = target.style.left;
 
-combo++;
+    combo.style.top = target.offsetTop+"px";
 
-if(score<0){
+    document
+    .getElementById("heartCanvas")
+    .appendChild(combo);
 
-score=0;
+    setTimeout(()=>{
 
-}
+        combo.remove();
 
-scoreDisplay.textContent=
-
-score;
-
-showFloatingScore(
-
-heart,
-
-points
-
-);
-
-heart.remove();
-
-if(combo>=10){
-
-showCombo();
-
-combo=0;
+    },1000);
 
 }
 
-}
+/*==========================================
+END HEART GAME
+==========================================*/
 
-/*====================================================
-FLOATING SCORE
-====================================================*/
+function endHeartGame(){
 
-function showFloatingScore(
+    clearInterval(timerInterval);
 
-heart,
+    clearInterval(heartInterval);
 
-points
+    gameRunning=false;
 
-){
+    createConfetti();
 
-const text=
+    setTimeout(()=>{
 
-document.createElement("div");
+        pageFlip(()=>{
 
-text.className=
+            startCakeGame();
 
-"comboText";
+        });
 
-text.textContent=
-
-(points>0?"+":"")+points;
-
-text.style.left=
-
-heart.style.left;
-
-text.style.top=
-
-heart.offsetTop+"px";
-
-heartCanvas.appendChild(
-
-text
-
-);
-
-setTimeout(()=>{
-
-text.remove();
-
-},1000);
+    },2500);
 
 }
 
-/*====================================================
-COMBO
-====================================================*/
-
-function showCombo(){
-
-const comboText=
-
-document.createElement("div");
-
-comboText.className=
-
-"comboText";
-
-comboText.textContent=
-
-"PERFECT ×10 ✨";
-
-comboText.style.left="50%";
-
-comboText.style.top="120px";
-
-comboText.style.transform=
-
-"translateX(-50%)";
-
-heartCanvas.appendChild(
-
-comboText
-
-);
-
-createConfetti();
-
-setTimeout(()=>{
-
-comboText.remove();
-
-},1500);
-
-}
-
-/*====================================================
+/*==========================================
 CONFETTI
-====================================================*/
+==========================================*/
 
 function createConfetti(){
 
-for(let i=0;i<80;i++){
+    for(let i=0;i<180;i++){
 
-const piece=
+        const piece = document.createElement("div");
 
-document.createElement("div");
+        piece.className="confetti";
 
-piece.className=
+        piece.style.left=Math.random()*100+"vw";
 
-"confetti";
+        piece.style.background=
 
-piece.style.left=
+        `hsl(${Math.random()*360},90%,60%)`;
 
-Math.random()*100+"%";
+        piece.style.animationDuration=
 
-piece.style.background=
+        3+Math.random()*3+"s";
 
-`hsl(${Math.random()*360},90%,65%)`;
+        document.body.appendChild(piece);
 
-piece.style.animationDuration=
+        setTimeout(()=>{
 
-2+
+            piece.remove();
 
-Math.random()*2+
+        },6000);
 
-"s";
-
-document.body.appendChild(
-
-piece
-
-);
-
-setTimeout(()=>{
-
-piece.remove();
-
-},4000);
+    }
 
 }
 
-}
+/*==========================================
+CAKE GAME
+==========================================*/
 
-/*====================================================
-FINISH
-====================================================*/
+const cakeDecorations=[
 
-function finishHeartGame(){
+"🍓",
 
-clearInterval(
+"🍒",
 
-spawnInterval
+"🕯",
 
-);
+"🎀",
 
-clearInterval(
+"🌸",
 
-timerInterval
+"🍫",
 
-);
+"🍬",
 
-gameRunning=false;
-
-if(score>=80){
-
-showHeartVictory();
-
-}else{
-
-showHeartRetry();
-
-}
-
-}
-
-/*====================================================
-WIN
-====================================================*/
-
-function showHeartVictory(){
-
-createConfetti();
-
-setTimeout(()=>{
-
-goToCakeGame();
-
-},2500);
-
-}
-
-/*====================================================
-RETRY
-====================================================*/
-
-function showHeartRetry(){
-
-if(confirm(
-
-"You scored "+score+
-
-". Try again? ❤️"
-
-)){
-
-heartCanvas.innerHTML="";
-
-startHeartGame();
-
-}
-
-}
-
-/*====================================================
-NEXT
-====================================================*/
-
-async function goToCakeGame(){
-
-pageTurn();
-
-await sleep(900);
-
-showCakeGame();
-
-}
-
-/*====================================================
-BUILD THE BIRTHDAY CAKE
-====================================================*/
-
-const cakeBase =
-document.getElementById("cakeBase");
-
-const cakeTools =
-document.getElementById("cakeTools");
-
-const birthdayBanner =
-document.getElementById("birthdayBanner");
-
-let cakePiecesPlaced = 0;
-
-const requiredPieces = 7;
-
-/*====================================================
-CAKE ITEMS
-====================================================*/
-
-const cakeItems = [
-
-{
-emoji:"🍰",
-name:"Frosting"
-},
-
-{
-emoji:"🍫",
-name:"Chocolate"
-},
-
-{
-emoji:"🍓",
-name:"Strawberries"
-},
-
-{
-emoji:"🌹",
-name:"Roses"
-},
-
-{
-emoji:"✨",
-name:"Gold Stars"
-},
-
-{
-emoji:"🫐",
-name:"Blueberries"
-},
-
-{
-emoji:"🕯",
-name:"Candles"
-}
+"❤️"
 
 ];
 
-/*====================================================
-START CAKE GAME
-====================================================*/
+let placedDecorations=0;
 
-function showCakeGame(){
+function startCakeGame(){
 
-cakeTools.innerHTML="";
+    showScreen("chapter6");
 
-cakeBase.innerHTML="";
+    placedDecorations=0;
 
-cakePiecesPlaced=0;
+    const tools=
 
-cakeItems.forEach(createCakeItem);
+    document.getElementById("cakeTools");
 
-}
+    const cake=
 
-/*====================================================
-CREATE ITEM
-====================================================*/
+    document.getElementById("cakeBase");
 
-function createCakeItem(item){
+    const banner=
 
-const tool=document.createElement("div");
+    document.getElementById("birthdayBanner");
 
-tool.className="cakeItem";
+    tools.innerHTML="";
 
-tool.textContent=item.emoji;
+    cake.innerHTML="";
 
-tool.draggable=true;
+    banner.classList.remove("show");
 
-tool.dataset.name=item.name;
+    cakeDecorations.forEach(icon=>{
 
-cakeTools.appendChild(tool);
+        const item=
 
-tool.addEventListener(
+        document.createElement("div");
 
-"dragstart",
+        item.className="cakeItem";
 
-dragStart
+        item.innerHTML=icon;
 
-);
+        item.onclick=()=>{
 
-}
+            placeDecoration(icon);
 
-/*====================================================
-DRAG
-====================================================*/
+        };
 
-let draggedItem=null;
+        tools.appendChild(item);
 
-function dragStart(event){
-
-draggedItem=
-
-event.target;
+    });
 
 }
 
-/*====================================================
-DROP
-====================================================*/
+/*==========================================
+PLACE DECORATION
+==========================================*/
 
-cakeBase.addEventListener(
+function placeDecoration(icon){
 
-"dragover",
+    const cake=
 
-event=>{
+    document.getElementById("cakeBase");
 
-event.preventDefault();
+    const deco=
 
-});
+    document.createElement("div");
 
-cakeBase.addEventListener(
+    deco.innerHTML=icon;
 
-"drop",
+    deco.style.position="absolute";
 
-dropItem
+    deco.style.left=
 
-);
+    Math.random()*75+10+"%";
 
-function dropItem(event){
+    deco.style.top=
 
-event.preventDefault();
+    Math.random()*75+10+"%";
 
-if(!draggedItem) return;
+    deco.style.fontSize="34px";
 
-placeDecoration(
+    cake.appendChild(deco);
 
-draggedItem.textContent,
+    placedDecorations++;
 
-event.offsetX,
+    if(icon==="🕯"){
 
-event.offsetY
+        const flame=
 
-);
+        document.createElement("div");
 
-draggedItem.remove();
+        flame.className="candleFlame";
 
-cakePiecesPlaced++;
+        flame.style.left=deco.style.left;
 
-checkCake();
+        flame.style.top=
 
-}
+        `calc(${deco.style.top} - 18px)`;
 
-/*====================================================
-PLACE
-====================================================*/
+        cake.appendChild(flame);
 
-function placeDecoration(
+    }
 
-emoji,
+    if(placedDecorations>=8){
 
-x,
+        finishCake();
 
-y
-
-){
-
-const piece=
-
-document.createElement("div");
-
-piece.textContent=emoji;
-
-piece.style.position="absolute";
-
-piece.style.left=x-15+"px";
-
-piece.style.top=y-15+"px";
-
-piece.style.fontSize="36px";
-
-piece.style.pointerEvents="none";
-
-piece.animate(
-
-[
-
-{
-
-transform:"scale(.2)",
-
-opacity:0
-
-},
-
-{
-
-transform:"scale(1.2)",
-
-opacity:1
-
-},
-
-{
-
-transform:"scale(1)"
+    }
 
 }
 
-],
+/*==========================================
+FINISH CAKE
+==========================================*/
 
-{
+function finishCake(){
 
-duration:500,
+    document
 
-fill:"forwards"
+    .getElementById("cakeBase")
 
-}
+    .classList.add("finished");
 
-);
+    const banner=
 
-cakeBase.appendChild(piece);
+    document.getElementById("birthdayBanner");
 
-}
+    banner.innerHTML=`
 
-/*====================================================
-CHECK
-====================================================*/
+    <h1>Happy Birthday ❤️</h1>
 
-function checkCake(){
+    <h2>Your cake is ready!</h2>
 
-if(
+    <p>
 
-cakePiecesPlaced
+    Beautiful... just like the person
 
->=requiredPieces
+    this surprise was made for.
 
-){
+    </p>
 
-finishCake();
+    <button
 
-}
+    id="continueReasons"
 
-}
+    class="primaryButton">
 
-/*====================================================
-FINISH
-====================================================*/
+    Continue
 
-async function finishCake(){
+    </button>
 
-lightCandles();
+    `;
 
-createConfetti();
+    banner.classList.add("show");
 
-await sleep(1200);
+    document
 
-birthdayBanner.classList.add("show");
+    .getElementById("continueReasons")
 
-await sleep(4000);
+    .onclick=()=>{
 
-goToReasons();
+        pageFlip(()=>{
 
-}
+            showReasons();
 
-/*====================================================
-LIGHT CANDLES
-====================================================*/
+        });
 
-function lightCandles(){
-
-const flames=
-
-document.createElement("div");
-
-flames.innerHTML="🕯✨";
-
-flames.style.position="absolute";
-
-flames.style.left="50%";
-
-flames.style.top="-30px";
-
-flames.style.transform=
-
-"translateX(-50%)";
-
-flames.style.fontSize="50px";
-
-cakeBase.appendChild(
-
-flames
-
-);
+    };
 
 }
 
-birthdayBanner.innerHTML = `
-
-<h1>🎉 Happy Birthday 🎉</h1>
-
-<h2>Busayo 🤍</h2>
-
-<p>
-
-May your new year be filled
-
-with laughter,
-
-peace,
-
-beautiful surprises,
-
-and unforgettable memories.
-
-</p>
-
-`;
-
-/*====================================================
-NEXT
-====================================================*/
-
-async function goToReasons(){
-
-pageTurn();
-
-await sleep(1000);
-
-currentChapter=6;
-
-saveProgress();
-
-showScreen("chapter6");
-
-buildReasons();
-
-}
-
-/*====================================================
+/*==========================================
 23 REASONS
-====================================================*/
+==========================================*/
 
-const reasonsGrid =
-document.getElementById("reasonsGrid");
+const reasons = [
 
-const reasonsFinished =
-document.getElementById("reasonsFinished");
+"Your smile brightens every room.",
+"Your kindness inspires people.",
+"You make ordinary moments special.",
+"You are beautifully unique.",
+"Your laugh is contagious.",
+"You care deeply about others.",
+"You have a beautiful heart.",
+"You make life more colorful.",
+"You are stronger than you know.",
+"You always try your best.",
+"You deserve endless happiness.",
+"You are incredibly thoughtful.",
+"You make memories unforgettable.",
+"You bring peace wherever you go.",
+"You make people feel appreciated.",
+"You have amazing dreams.",
+"You are full of potential.",
+"You are wonderfully genuine.",
+"You make me smile too.",
+"You deserve to be celebrated.",
+"You are loved more than you realize.",
+"You are God's beautiful masterpiece.",
+"And simply... because you're Busayo. ❤️"
 
-let openedLetters = 0;
+];
 
-/*====================================================
-BUILD ENVELOPES
-====================================================*/
+function showReasons(){
 
-function buildReasons(){
+    showScreen("chapter7");
 
-reasonsGrid.innerHTML="";
+    const grid =
+    document.getElementById("reasonsGrid");
 
-openedLetters=0;
+    grid.innerHTML = "";
 
-reasons.forEach((reason,index)=>{
+    reasons.forEach((reason,index)=>{
 
-createEnvelope(reason,index);
+        const envelope =
+        document.createElement("div");
 
-});
+        envelope.className="reasonEnvelope";
 
-}
+        if(index===22){
 
-/*====================================================
-CREATE ENVELOPE
-====================================================*/
+            envelope.classList.add("gold");
 
-function createEnvelope(reason,index){
+        }
 
-const envelope=
+        envelope.innerHTML=`
 
-document.createElement("div");
+        <div class="body"></div>
 
-envelope.className=
+        <div class="flap"></div>
 
-"reasonEnvelope";
+        <div class="seal"></div>
 
-envelope.innerHTML=`
+        <div class="reasonLetter">
 
-<div class="body"></div>
+        ${reason}
 
-<div class="flap"></div>
+        </div>
 
-<div class="seal"></div>
+        <div class="reasonNumber">
 
-<div class="reasonLetter">
+        ${index+1}
 
-${reason}
+        </div>
 
-</div>
+        `;
 
-<div class="reasonNumber">
+        envelope.onclick=()=>{
 
-${index+1}
+            openReason(envelope);
 
-</div>
+        };
 
-`;
+        grid.appendChild(envelope);
 
-if(index===22){
-
-envelope.classList.add("gold");
-
-setInterval(()=>{
-
-envelope.classList.toggle(
-
-"pulse"
-
-);
-
-},1400);
-
-}
-
-envelope.onclick=()=>{
-
-openEnvelope(envelope);
-
-};
-
-reasonsGrid.appendChild(envelope);
+    });
 
 }
 
-/*====================================================
-OPEN
-====================================================*/
+/*==========================================
+OPEN ENVELOPE
+==========================================*/
 
-function openEnvelope(envelope){
+let openedReasons = 0;
 
-if(
+function openReason(card){
 
-envelope.classList.contains("open")
+    if(card.classList.contains("open")) return;
 
-)
+    card.classList.add("open");
 
-return;
+    openedReasons++;
 
-envelope.classList.add("open");
+    createReasonSpark();
 
-openedLetters++;
+    if(openedReasons===23){
 
-saveProgress();
+        setTimeout(()=>{
 
-createEnvelopeSparkles(envelope);
+            pageFlip(()=>{
 
-checkReasons();
+                showMailbox();
+
+            });
+
+        },2500);
+
+    }
 
 }
 
-/*====================================================
+/*==========================================
 SPARKLES
-====================================================*/
+==========================================*/
 
-function createEnvelopeSparkles(envelope){
+function createReasonSpark(){
 
-const rect=
+    for(let i=0;i<20;i++){
 
-envelope.getBoundingClientRect();
+        const spark =
+        document.createElement("div");
 
-for(let i=0;i<15;i++){
+        spark.className="reasonSpark";
 
-const spark=
+        spark.style.left=
+        Math.random()*100+"vw";
 
-document.createElement("div");
+        spark.style.top=
+        Math.random()*100+"vh";
 
-spark.className="reasonSpark";
+        document.body.appendChild(spark);
 
-spark.style.left=
+        setTimeout(()=>{
 
-rect.left+
+            spark.remove();
 
-rect.width/2+
+        },900);
 
-(Math.random()*40-20)+"px";
-
-spark.style.top=
-
-rect.top+
-
-40+"px";
-
-document.body.appendChild(spark);
-
-setTimeout(()=>{
-
-spark.remove();
-
-},900);
+    }
 
 }
 
-}
-
-/*====================================================
-CHECK
-====================================================*/
-
-function checkReasons(){
-
-if(openedLetters===23){
-
-finishReasons();
-
-}
-
-}
-
-/*====================================================
-FINISH
-====================================================*/
-
-async function finishReasons(){
-
-const envelopes=
-
-document.querySelectorAll(
-
-".reasonEnvelope"
-
-);
-
-envelopes.forEach((env,index)=>{
-
-setTimeout(()=>{
-
-env.style.transition="1.8s";
-
-env.style.transform=
-
-"translateY(-250px) rotate("+
-
-(Math.random()*40-20)
-
-+"deg)";
-
-env.style.opacity=0;
-
-},index*80);
-
-});
-
-await sleep(2800);
-
-showMailbox();
-
-}
-
-/*====================================================
+/*==========================================
 MAILBOX
-====================================================*/
+==========================================*/
 
 function showMailbox(){
 
-reasonsFinished.classList.add(
+    showScreen("chapter8");
 
-"show"
+    const mailbox =
+    document.getElementById("mailbox");
 
-);
-
-reasonsFinished.innerHTML=`
-
-<h2>
-
-💌
-
-</h2>
-
-<p>
-
-You've discovered every little reason.
-
-One final message
-
-is waiting for you.
-
-</p>
-
-<button
-
-class="primaryButton"
-
-id="openMailbox"
-
->
-
-Open My Letter
-
-</button>
-
-`;
-
-document
-
-.getElementById(
-
-"openMailbox"
-
-)
-
-.addEventListener(
-
-"click",
-
-goToLetter
-
-);
+    mailbox.onclick=openMailbox;
 
 }
 
-/*====================================================
-NEXT
-====================================================*/
-
-async function goToLetter(){
-
-pageTurn();
-
-await sleep(900);
-
-currentChapter=7;
-
-saveProgress();
-
-showScreen("chapter7");
-
-startMailbox();
-
-}
-
-/*====================================================
-MAILBOX ENGINE
-====================================================*/
-
-const mailbox =
-document.getElementById("mailbox");
-
-const mailboxFlag =
-document.querySelector(".mailFlag");
-
-const mailboxBird =
-document.querySelector(".mailBird");
-
-const envelope =
-document.getElementById("letterEnvelope");
-
-const letter =
-document.getElementById("letterPaper");
-
-const typedLetter =
-document.getElementById("typedLetter");
-
-const signature =
-document.getElementById("signature");
-
-const continueJourney =
-document.getElementById("continueJourney");
-
-let mailboxOpened=false;
-
-/*====================================================
-START
-====================================================*/
-
-async function startMailbox(){
-
-mailbox.classList.remove("open");
-
-mailboxFlag.classList.remove("up");
-
-envelope.classList.remove("show");
-
-letter.classList.remove("show");
-
-typedLetter.textContent="";
-
-signature.style.opacity=0;
-
-continueJourney.style.display="none";
-
-mailbox.onclick=openMailbox;
-
-}
-
-/*====================================================
-OPEN
-====================================================*/
+/*==========================================
+OPEN MAILBOX
+==========================================*/
 
 async function openMailbox(){
 
-if(mailboxOpened) return;
+    document
+    .querySelector(".mailFlag")
+    .classList
+    .add("up");
 
-mailboxOpened=true;
+    document
+    .getElementById("letterEnvelope")
+    .classList
+    .add("show");
 
-mailbox.onclick=null;
+    await sleep(1800);
 
-/* Bird */
+    document
+    .getElementById("letterPaper")
+    .classList
+    .add("show");
 
-birdFlyAway();
-
-/* Flag */
-
-await sleep(500);
-
-mailboxFlag.classList.add("up");
-
-/* Door */
-
-await sleep(700);
-
-mailbox.classList.add("open");
-
-/* Envelope */
-
-await sleep(900);
-
-envelope.classList.add("show");
-
-/* Paper */
-
-await sleep(1800);
-
-showLetter();
+    typeLetter();
 
 }
 
-/*====================================================
-BIRD
-====================================================*/
-
-function birdFlyAway(){
-
-mailboxBird.animate(
-
-[
-
-{
-
-transform:"translate(0,0)"
-
-},
-
-{
-
-transform:"translate(120px,-180px)"
-
-},
-
-{
-
-transform:"translate(300px,-350px)"
-
-}
-
-],
-
-{
-
-duration:1800,
-
-fill:"forwards"
-
-}
-
-);
-
-}
-
-/*====================================================
+/*==========================================
 LETTER
-====================================================*/
+==========================================*/
 
-async function showLetter(){
+const finalLetter = `
 
-letter.classList.add("show");
+Happy Birthday Busayo ❤️
 
-await sleep(1000);
+I honestly don't know if words will ever
+be enough to explain how special you are.
 
-typeLetter();
+This little website isn't just code.
 
-}
+It's time...
+effort...
+thought...
+and appreciation wrapped into something
+I hope you'll remember.
 
-/*====================================================
-TYPEWRITER
-====================================================*/
+Every page you've gone through
+was made with one purpose:
+
+To make you smile.
+
+Life will keep moving.
+
+People will change.
+
+Moments will pass.
+
+But I hope today reminds you
+that you are appreciated,
+valued,
+and celebrated.
+
+Never stop being the wonderful person
+you already are.
+
+May this new year bring peace,
+joy,
+growth,
+answered prayers,
+beautiful surprises,
+and countless reasons to smile.
+
+Happy Birthday once again.
+
+❤️
+`;
 
 async function typeLetter(){
 
-typedLetter.textContent="";
+    const output =
+    document.getElementById("typedLetter");
 
-const text=LETTER;
+    output.innerHTML="";
 
-for(let i=0;i<text.length;i++){
+    for(let i=0;i<finalLetter.length;i++){
 
-typedLetter.textContent+=text[i];
+        output.innerHTML+=finalLetter.charAt(i);
 
-window.scrollTo({
+        await sleep(32);
 
-top:document.body.scrollHeight,
+    }
 
-behavior:"smooth"
+    output.classList.add("finished");
 
-});
-
-/* punctuation pauses */
-
-if(text[i]==="."){
-
-await sleep(220);
+    document
+    .getElementById("signature")
+    .style.opacity=1;
 
 }
 
-else if(text[i]===","){
-
-await sleep(120);
-
-}
-
-else if(text[i]==="\n"){
-
-await sleep(400);
-
-}
-
-else{
-
-await sleep(
-
-18+
-
-Math.random()*35
-
-);
-
-}
-
-}
-
-finishLetter();
-
-typedLetter.classList.add(
-
-"finished"
-
-);
-
-}
-
-/*====================================================
-FINISH
-====================================================*/
-
-async function finishLetter(){
-
-await sleep(1000);
-
-signature.style.opacity=1;
-
-signature.style.transition="1.5s";
-
-await sleep(1500);
-
-showPostScript();
-
-}
-
-/*====================================================
-POSTSCRIPT
-====================================================*/
-
-async function showPostScript(){
-
-const ps=
-
-document.createElement("p");
-
-ps.className="postScript";
-
-ps.innerHTML=
-
-"<strong>P.S.</strong><br>Thank you for existing 🤍";
-
-letter.appendChild(ps);
-
-await sleep(1500);
-
-continueJourney.style.display="inline-flex";
-
-continueJourney.style.opacity=1;
-
-}
-
-/*====================================================
-NEXT
-====================================================*/
-
-continueJourney.onclick=async()=>{
-
-pageTurn();
-
-await sleep(900);
-
-currentChapter=8;
-
-saveProgress();
-
-showScreen("endingPage");
-
-startEnding();
-
-};
-
-/*====================================================
-MEMORY SKY ENGINE
-====================================================*/
-
-const memorySky =
-document.getElementById("memorySky");
-
-const finalWords =
-document.getElementById("finalWords");
-
-const moon =
-document.getElementById("moon");
-
-let endingStarted=false;
-
-/*====================================================
-START
-====================================================*/
-
-async function startEnding(){
-
-if(endingStarted) return;
-
-endingStarted=true;
-
-createStars();
-
-createClouds();
-
-createFloatingHearts();
-
-shootingStars();
-
-await sleep(30000);
-
-showFinalWords();
-
-}
-
-/*====================================================
-STARS
-====================================================*/
-
-const starMessages=[
-
-"Your smile is unforgettable 🤍",
-
-"I hope today made you smile.",
-
-"You deserve every beautiful thing.",
-
-"Thank you for every memory.",
-
-"I'll always treasure our moments.",
-
-"You make ordinary days special.",
-
-"You deserve happiness.",
-
-"Never stop being you.",
-
-"Keep shining.",
-
-"I'm grateful for you."
-
-];
-
-function createStars(){
-
-for(let i=0;i<80;i++){
-
-const star=document.createElement("div");
-
-star.className="memoryStar";
-
-star.style.left=Math.random()*100+"%";
-
-star.style.top=Math.random()*100+"%";
-
-star.onclick=()=>{
-
-showStarMemory(star);
-
-};
-
-memorySky.appendChild(star);
-
-}
-
-}
-
-/*====================================================
-POPUP
-====================================================*/
-
-function showStarMemory(star){
-
-const popup=
-
-document.createElement("div");
-
-popup.className="starMemory";
-
-popup.innerHTML=
-
-starMessages[
-
-Math.floor(
-
-Math.random()*starMessages.length
-
-)
-
-];
-
-popup.style.left=
-
-star.style.left;
-
-popup.style.top=
-
-star.style.top;
-
-memorySky.appendChild(popup);
-
-setTimeout(()=>{
-
-popup.remove();
-
-},3500);
-
-}
-
-/*====================================================
-SHOOTING STARS
-====================================================*/
-
-function shootingStars(){
-
-setInterval(()=>{
-
-const shooting=
-
-document.createElement("div");
-
-shooting.className=
-
-"shootingStar";
-
-shooting.style.left=
-
-"-200px";
-
-shooting.style.top=
-
-Math.random()*300+"px";
-
-memorySky.appendChild(shooting);
-
-setTimeout(()=>{
-
-shooting.remove();
-
-},2500);
-
-},9000);
-
-}
-
-/*====================================================
-HEARTS
-====================================================*/
-
-function createFloatingHearts(){
-
-for(let i=0;i<18;i++){
-
-const heart=
-
-document.createElement("div");
-
-heart.className=
-
-"finalHeart";
-
-heart.textContent="🤍";
-
-heart.style.left=
-
-Math.random()*100+"%";
-
-heart.style.animationDelay=
-
-Math.random()*10+"s";
-
-memorySky.appendChild(
-
-heart
-
-);
-
-}
-
-}
-
-/*====================================================
-CLOUDS
-====================================================*/
-
-function createClouds(){
-
-for(let i=0;i<5;i++){
-
-const cloud=
-
-document.createElement("div");
-
-cloud.className="cloud";
-
-cloud.style.top=
-
-80+i*110+"px";
-
-cloud.style.animationDelay=
-
-i*8+"s";
-
-memorySky.appendChild(
-
-cloud
-
-);
-
-}
-
-}
-
-/*====================================================
-WORDS
-====================================================*/
-
-async function showFinalWords(){
-
-finalWords.classList.add("show");
-
-await sleep(8000);
-
-finalStar();
-
-}
-
-/*====================================================
-LAST STAR
-====================================================*/
-
-async function finalStar(){
-
-const stars=
-
-document.querySelectorAll(
-
-".memoryStar"
-
-);
-
-stars.forEach(star=>{
-
-star.style.opacity=.1;
-
-});
-
-const last=
-
-stars[
-
-Math.floor(
-
-Math.random()*stars.length
-
-)
-
-];
-
-last.style.opacity=1;
-
-last.animate(
-
-[
-
-{
-
-transform:"scale(1)"
-
-},
-
-{
-
-transform:"scale(80)"
-
-}
-
-],
-
-{
-
-duration:4500,
-
-fill:"forwards",
-
-easing:"ease-in"
-
-}
-
-);
-
-await sleep(4200);
-
-whiteEnding();
-
-}
-
-/*====================================================
-WHITE
-====================================================*/
-
-function whiteEnding(){
-
-const white=
-
-document.createElement("div");
-
-white.id="whiteEnding";
-
-white.innerHTML=`
-
-<h1>
-
-Every beautiful story
-
-deserves another beginning.
-
-</h1>
-
-<button id="restartStory">
-
-Begin Again 🤍
-
-</button>
-
-`;
-
-document.body.appendChild(
-
-white
-
-);
+/*==========================================
+CONTINUE
+==========================================*/
 
 document
 
-.getElementById(
+.getElementById("continueJourney")
 
-"restartStory"
+.onclick=()=>{
 
-)
+pageFlip(()=>{
 
-.onclick=restartJourney;
+showEnding();
 
-}
-
-/*====================================================
-SECRET
-====================================================*/
-
-const secret=document.createElement("div");
-
-secret.className="memoryStar";
-
-secret.style.right="80px";
-
-secret.style.bottom="120px";
-
-secret.style.left="";
-
-secret.style.top="";
-
-secret.style.background="#FFD54F";
-
-secret.onclick=()=>{
-
-alert(
-
-"If you ever feel alone,\n\nremember that somewhere in the world there is someone who built an entire little universe just to make you smile on your birthday. 🤍"
-
-);
+});
 
 };
 
-memorySky.appendChild(secret);
+/*==========================================
+CHAPTER 9
+MEMORY SKY
+==========================================*/
 
+const skyMemories = [
+
+"You deserve every beautiful thing life has to offer. ✨",
+
+"May your smile never fade. ❤️",
+
+"Thank you for being you.",
+
+"Today is all about celebrating you.",
+
+"Keep shining brighter every year. 🌙",
+
+"I hope all your dreams come true.",
+
+"You are deeply appreciated.",
+
+"You are unforgettable.",
+
+"You make the world a little brighter."
+
+];
+
+function showEnding(){
+
+    showScreen("endingPage");
+
+    createStars();
+
+    createMoonHearts();
+
+    shootingStarLoop();
+
+    showFinalWords();
+
+}
+
+/*==========================================
+STARS
+==========================================*/
+
+function createStars(){
+
+    const sky=document.getElementById("memorySky");
+
+    sky.innerHTML="";
+
+    for(let i=0;i<120;i++){
+
+        const star=document.createElement("div");
+
+        star.className="memoryStar";
+
+        star.style.left=Math.random()*100+"%";
+
+        star.style.top=Math.random()*100+"%";
+
+        star.style.animationDelay=
+        Math.random()*4+"s";
+
+        star.onclick=()=>{
+
+            showMemoryPopup(
+
+            star,
+
+            skyMemories[
+
+            Math.floor(
+
+            Math.random()*skyMemories.length
+
+            )]
+
+            );
+
+        };
+
+        sky.appendChild(star);
+
+    }
+
+}
+
+/*==========================================
+STAR POPUP
+==========================================*/
+
+function showMemoryPopup(star,text){
+
+    const popup=document.createElement("div");
+
+    popup.className="starMemory";
+
+    popup.innerHTML=text;
+
+    popup.style.left=star.style.left;
+
+    popup.style.top=star.style.top;
+
+    document
+
+    .getElementById("memorySky")
+
+    .appendChild(popup);
+
+    setTimeout(()=>{
+
+        popup.remove();
+
+    },3500);
+
+}
+
+/*==========================================
+SHOOTING STAR
+==========================================*/
+
+function shootingStarLoop(){
+
+    setInterval(()=>{
+
+        const star=
+
+        document.createElement("div");
+
+        star.className="shootingStar";
+
+        star.style.left="-250px";
+
+        star.style.top=
+
+        Math.random()*300+"px";
+
+        document
+
+        .getElementById("memorySky")
+
+        .appendChild(star);
+
+        setTimeout(()=>{
+
+            star.remove();
+
+        },2500);
+
+    },5000);
+
+}
+
+/*==========================================
+FLOATING HEARTS
+==========================================*/
+
+function createMoonHearts(){
+
+    setInterval(()=>{
+
+        const heart=
+
+        document.createElement("div");
+
+        heart.className="finalHeart";
+
+        heart.innerHTML="❤️";
+
+        heart.style.left=
+
+        Math.random()*100+"vw";
+
+        heart.style.animationDuration=
+
+        12+
+
+        Math.random()*8+
+
+        "s";
+
+        document
+
+        .getElementById("memorySky")
+
+        .appendChild(heart);
+
+        setTimeout(()=>{
+
+            heart.remove();
+
+        },20000);
+
+    },900);
+
+}
+
+/*==========================================
+FINAL WORDS
+==========================================*/
+
+async function showFinalWords(){
+
+    await sleep(3500);
+
+    const words=
+
+    document.getElementById("finalWords");
+
+    words.classList.add("show");
+
+    words.innerHTML=`
+
+    <h1>
+
+    Happy Birthday
+
+    Busayo ❤️
+
+    </h1>
+
+    <button
+
+    class="primaryButton"
+
+    id="restartJourney"
+
+    >
+
+    Begin Again
+
+    </button>
+
+    `;
+
+    document
+
+    .getElementById("restartJourney")
+
+    .onclick=restartJourney;
+
+}
+
+/*==========================================
+RESTART
+==========================================*/
+
+function restartJourney(){
+
+    location.reload();
+
+}
+
+/*==========================================
+END OF SCRIPT
+==========================================*/
+
+console.log(
+
+"❤️ Happy Birthday Busayo ❤️"
+
+);
