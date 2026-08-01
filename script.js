@@ -273,23 +273,35 @@ duration:500
    TREASURE CHEST
 ========================================== */
 
-const chest=document.getElementById("treasureChest");
+const chest = document.getElementById("treasureChest");
+const treasureMessage = document.getElementById("treasureMessage");
 
-if(chest){
+if (chest) {
 
-chest.addEventListener("click",()=>{
+    chest.addEventListener("click", () => {
 
-chest.classList.add("treasureOpen");
+        chest.classList.add("treasureOpen");
 
-document.body.classList.add("treasureOpen");
+        document.body.classList.add("treasureOpen");
 
-setTimeout(()=>{
+        if (treasureMessage) {
 
-showPage(6);
+            treasureMessage.innerHTML = `
+                <h3>✨ Every treasure tells a story...</h3>
+                <p>Some treasures are made of gold, but mine smiles, laughs, and answers to the name <strong>Busayo</strong>. ❤️</p>
+            `;
 
-},2500);
+            treasureMessage.classList.add("show");
 
-});
+        }
+
+        setTimeout(() => {
+
+            showPage(6);
+
+        }, 2500);
+
+    });
 
 }
 
