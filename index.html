@@ -46,10 +46,10 @@
 <!-- Cover Page -->
 <div id="cover-page" class="screen">
   <div class="cover-content">
-    <div class="white-frame">
+    <div class="cover-left">
       <img src="images/cover.jpg" alt="Cover" class="cover-image"/>
     </div>
-    <div class="cover-text">
+    <div class="cover-right">
       <h2>To Busayo,</h2>
       <p class="love-text">With Love 🤍</p>
       <p class="intro-text">I made something for you...<br/>I hope it makes you smile.</p>
@@ -58,15 +58,20 @@
   </div>
 </div>
 
-<!-- Password Screen -->
+<!-- Password Screen (with image beside input) -->
 <div id="password-screen" class="screen">
   <div class="password-section">
-    <div class="password-card">
-      <div class="lock-icon">🔐</div>
-      <p class="password-instruction">Every beautiful surprise deserves a little secret.</p>
-      <input type="password" id="password-input" placeholder="Enter Password" />
-      <div class="password-buttons">
-        <button id="unlock-btn" class="btn">Unlock</button>
+    <div class="password-left">
+      <img src="images/cover.jpg" alt="Cover" class="password-image"/>
+    </div>
+    <div class="password-right">
+      <div class="password-card">
+        <div class="lock-icon">🔐</div>
+        <p class="password-instruction">What's my birth month?</p>
+        <input type="text" id="password-input" placeholder="Enter Month" />
+        <div class="password-buttons">
+          <button id="unlock-btn" class="btn">Unlock</button>
+        </div>
       </div>
     </div>
   </div>
@@ -133,7 +138,7 @@
       <button class="decor-btn" data-decoration="🎀">🎀</button>
       <button class="decor-btn" data-decoration="🕯️">🕯️</button>
     </div>
-    <button class="btn" id="finish-cake">Happy Birthday Busayo ❤️</button>
+    <button class="btn" id="finish-cake">Finish Cake & Celebrate 🎉</button>
   </div>
 </div>
 
@@ -142,7 +147,10 @@
   <div class="reasons-section">
     <h2>23 Reasons Why You Are Awesome ❤️</h2>
     <div class="envelopes"></div>
-    <button class="btn" id="to-mailbox">Next</button>
+    <div class="reasons-navigation">
+      <button class="btn" id="reasons-prev">Previous</button>
+      <button class="btn" id="reasons-next">Next</button>
+    </div>
   </div>
 </div>
 
