@@ -1,223 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Happy Birthday Busayo🤍</title>
+<title>To Busayo, With Love 🤍</title>
+
+<meta name="theme-color" content="#d4af37">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
 
+<!-- ========================= -->
+<!-- BACKGROUND MUSIC -->
+<!-- ========================= -->
 
-<audio id="birthdayMusic" src="music/BrunoMars.mp3"></audio>
+<audio id="bgMusic" loop preload="auto">
+    <source src="./BrunoMars.mp3" type="audio/mpeg">
+</audio>
 
+<!-- Floating Hearts -->
 
-<!-- GLOBAL PAGE CONTAINER -->
+<div id="floatingHearts"></div>
 
-<main id="website">
+<!-- Gold Particles -->
 
+<div id="goldParticles"></div>
 
-<!-- LOADING PAGE -->
+<!-- Navigation -->
 
-<section class="page active" id="loadingPage">
+<div id="navigation">
 
-    <div class="loading-content">
+<button id="prevBtn">
 
-        <div class="gold-heart">
-            ♡
-        </div>
+◀ Previous
 
+</button>
 
-        <h2>
-            Preparing something special...
-        </h2>
+<button id="nextBtn">
 
+Next ▶
 
-        <div class="loading-bar">
-
-            <div class="loading-progress"></div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-
-
-<!-- COUNTDOWN PAGE -->
-
-<section class="page" id="countdownPage">
-
-
-    <div class="countdown-container">
-
-
-        <h1 id="countNumber">
-            3
-        </h1>
-
-
-    </div>
-
-
-</section>
-
-
-
-
-
-<!-- HAPPY BIRTHDAY REVEAL -->
-
-<section class="page" id="birthdayPage">
-
-
-<div class="birthday-animation">
-
-
-    <div class="balloons">
-        🎈 🎈 🎈
-    </div>
-
-
-    <div class="confetti">
-
-    </div>
-
-
-
-    <h1>
-
-        HAPPY BIRTHDAY
-
-        <br>
-
-        BUSAYO
-
-    </h1>
-
-
-
-    <div class="sparkles">
-
-        ✨ ✨ ✨
-
-    </div>
-
-
+</button>
 
 </div>
 
+<!-- ====================================== -->
+<!-- PAGE 1 -->
+<!-- OPENING -->
+<!-- ====================================== -->
+
+<section class="page active" id="page1">
+
+<div class="opening-container">
+
+<div id="goldPen">
+
+✒️
+
+</div>
+
+<h1 id="openingTitle">
+
+To Busayo, With Love 🤍
+
+</h1>
+
+<p id="openingSubtitle">
+
+A little journey made just for you...
+
+</p>
+
+<div class="loadingContainer">
+
+<div class="loadingBar">
+
+<div class="loadingFill"></div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
+<!-- ====================================== -->
+<!-- PAGE 2 -->
+<!-- COUNTDOWN -->
+<!-- ====================================== -->
 
+<section class="page" id="page2">
 
+<div class="countdownContainer">
 
+<h2 class="countNumber" id="countNumber">
 
-
-
-<!-- COVER PAGE -->
-
-<section class="page" id="coverPage">
-
-
-<div class="luxury-cover">
-
-
-<img src="images/cover.jpg"
-alt="Busayo Cover">
-
-
-<div class="gold-frame">
-
-
-<h2>
-
-To Busayo,
-
-<br>
-
-With Love 🤍
+3
 
 </h2>
 
+<p>
 
+Get ready...
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PAGE 3 -->
+<!-- HAPPY BIRTHDAY -->
+<!-- ====================================== -->
+
+<section class="page birthdayReveal" id="page3">
+
+<div id="balloonContainer"></div>
+
+<div id="confettiContainer"></div>
+
+<div id="sparkleContainer"></div>
+
+<div class="birthdayContent">
+
+<h1 class="birthdayTitle">
+
+HAPPY BIRTHDAY
+
+</h1>
+
+<h2 class="birthdayName">
+
+BUSAYO ❤️
+
+</h2>
+
+<p class="birthdayText">
+
+Today is all about you.
+
+May every dream in your heart
+find its way into reality.
+
+</p>
+
+<button id="beginJourney">
+
+Begin The Journey ❤️
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PAGE 4 -->
+<!-- COVER PAGE -->
+<!-- ====================================== -->
+
+<section class="page" id="page4">
+
+<div class="coverWrapper">
+
+<div class="coverImage">
+
+<img src="./cover.jpg" alt="Cover">
+
+</div>
+
+<div class="coverText">
+
+<h2>
+
+To Busayo, With Love 🤍
+
+</h2>
 
 <p>
 
 I made something for you...
 
-<br>
+</p>
+
+<p>
 
 I hope it makes you smile.
 
 </p>
 
+<button class="continueBtn">
+
+Continue ❤️
+
+</button>
 
 </div>
 
-
 </div>
-
 
 </section>
 
-
-
-
-
-
-
-
+<!-- ====================================== -->
+<!-- PAGE 5 -->
 <!-- PASSWORD PAGE -->
+<!-- ====================================== -->
 
-<section class="page" id="passwordPage">
+<section class="page" id="page5">
 
+<div class="passwordWrapper">
 
-<div class="password-wrapper">
+<div class="passwordImage">
 
-
-
-<!-- COVER IMAGE BESIDE CARD -->
-
-<div class="password-image">
-
-
-<img src="images/cover.jpg"
-alt="Busayo">
-
+<img src="./cover.jpg" alt="Cover Photo">
 
 </div>
 
+<div class="passwordCard">
 
-
-
-
-
-<!-- PASSWORD CARD -->
-
-
-<div class="password-card">
-
-
-<div class="lock-icon">
+<div class="lockIcon">
 
 🔐
 
 </div>
-
-
 
 <h2>
 
@@ -225,587 +242,588 @@ Every beautiful surprise deserves a little secret.
 
 </h2>
 
-
-
 <p class="hint">
 
-Hint:
-
-<br>
-
-"what's my birth month"
+Hint: What's my birth month?
 
 </p>
 
-
-
 <input
-
 type="password"
-
 id="passwordInput"
+placeholder="Enter Password">
 
-placeholder="Enter password"
+<p id="passwordError"></p>
 
->
+<button id="unlockBtn">
 
-
-
-<button onclick="checkPassword()">
-
-Unlock
+Unlock ❤️
 
 </button>
 
-
-
-<p id="passwordMessage">
-
-</p>
-
-
-
 </div>
 
-
 </div>
-
 
 </section>
 
+<!-- ====================================== -->
+<!-- PAGE 6 -->
+<!-- TREASURE CHEST -->
+<!-- ====================================== -->
 
+<section class="page" id="page6">
 
+<div class="treasureContainer">
 
+<h2>
 
-<!-- TREASURE CHEST PAGE -->
-
-
-<section class="page" id="treasurePage">
-
-
-<div class="treasure-container">
-
-
-<div id="treasureChest"
-onclick="openChest()">
-
-
-<div class="chest">
-
-🧰
-
-</div>
-
-
-<div class="gold-lock">
-
-🔒
-
-</div>
-
-
-</div>
-
-
-
-<h2 id="treasureMessage">
-
-Every treasure tells a story...
+A Little Treasure Awaits...
 
 </h2>
 
+<div id="treasureChest">
+
+<div id="treasureChest"></div>
+alt="Treasure Chest">
 
 </div>
 
+<div id="goldLight"></div>
 
-</section>
+<p id="treasureMessage">
 
+Every treasure tells a story...
 
-
-
-
-<!-- MEMORY BOOK PAGE -->
-
-<section class="page" id="memoryPage">
-
-
-<div class="memory-book">
-
-
-<h1>
-Our Memories ❤️
-</h1>
-
-
-
-<div class="book-cover">
-
-
-<div class="book-page">
-
-
-<img id="memoryImage"
-
-src="images/photo1.jpg"
-
-alt="Memory Photo"
-
->
-
-
-<p id="memoryCaption">
-
-A beautiful moment preserved forever.
+and ours is just beginning.
 
 </p>
 
+<button class="continueBtn">
 
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="memory-controls">
-
-
-<button onclick="previousMemory()">
-
-← Previous Memory
+Continue ❤️
 
 </button>
 
-
-
-<button onclick="nextMemory()">
-
-Next Memory →
-
-</button>
-
-
 </div>
-
-
-
-</div>
-
 
 </section>
 
+<!-- ====================================== -->
+<!-- PAGE 7 -->
+<!-- MEMORY BOOK -->
+<!-- ====================================== -->
 
+<section class="page" id="page7">
 
+<div class="bookContainer">
 
+<div class="bookCover">
 
+<h2>
 
+Our Memories ❤️
 
-<!-- CATCH MY HEART GAME -->
-
-
-<section class="page" id="heartGamePage">
-
-
-<div class="game-container">
-
-
-<h1>
-
-Catch My Heart ❤️
-
-</h1>
-
+</h2>
 
 <p>
 
-Catch falling hearts before time runs out.
+Tap to Open
 
 </p>
 
+</div>
 
+<div class="memoryBook">
 
-<div class="game-score">
+<div class="memoryPage">
 
+<img src="./photo1.jpg">
 
-<span>
+<div class="caption">
 
-Score:
-
-<b id="score">
-0
-</b>
-
-
-</span>
-
-
-
-<span>
-
-Time:
-
-<b id="timer">
-
-60
-
-</b>
-
-s
-
-
-</span>
-
-
+Our story began with beautiful little moments.
 
 </div>
 
+</div>
 
+<div class="memoryPage">
 
+<img src="./photo2.jpg">
 
-<div id="heartArea">
+<div class="caption">
+
+Some smiles deserve to be remembered forever.
 
 </div>
 
+</div>
 
+<div class="memoryPage">
 
+<img src="./photo4.jpeg">
 
-<button onclick="startHeartGame()">
+<div class="caption">
+
+Every picture reminds me how lucky I am.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo5.jpg">
+
+<div class="caption">
+
+Some memories never fade.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo6.jpg">
+
+<div class="caption">
+
+Every laugh became another reason to smile.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo7.jpeg">
+
+<div class="caption">
+
+Life feels brighter with you in it.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo8.jpg">
+
+<div class="caption">
+
+Moments like these deserve forever.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo10.jpg">
+
+<div class="caption">
+
+Another beautiful chapter of us.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo12.jpg">
+
+<div class="caption">
+
+Every picture tells a little love story.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo13.jpg">
+
+<div class="caption">
+
+One smile can change an entire day.
+
+</div>
+
+</div>
+
+<div class="memoryPage">
+
+<img src="./photo14.jpg">
+
+<div class="caption">
+
+The memories only get more beautiful.
+
+</div>
+
+</div>
+
+</div>
+
+<button id="nextMemory">
+
+Turn The Page →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PAGE 8 -->
+<!-- SPECIAL MEMORY -->
+<!-- ====================================== -->
+
+<section class="page" id="page8">
+
+<div class="specialMemory">
+
+<div class="specialIntro">
+
+<p>
+
+There was one memory...
+
+I could never place beside the others.
+
+</p>
+
+</div>
+
+<div class="specialImage">
+
+<img src="./us.jpg" alt="Us">
+
+</div>
+
+<h2>
+
+No matter how many memories we make...
+
+</h2>
+
+<h3>
+
+this will always be my favourite one.
+
+</h3>
+
+<button class="continueBtn">
+
+Continue Our Story ❤️
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PAGE 9 -->
+<!-- CATCH MY HEART -->
+<!-- ====================================== -->
+
+<section class="page" id="page9">
+
+<div class="gameContainer">
+
+<h2>
+
+Catch My Heart ❤️
+
+</h2>
+
+<p>
+
+Catch as many hearts as you can before time runs out!
+
+</p>
+
+<div class="gameInfo">
+
+<div>Score: <span id="score">0</span></div>
+
+<div>Time: <span id="timer">60</span>s</div>
+
+</div>
+
+<div id="heartGameArea">
+
+<div id="basket">🧺</div>
+
+</div>
+
+<button id="startGame">
 
 Start Game ❤️
 
 </button>
 
-
-
 </div>
-
-
 
 </section>
 
+<!-- ====================================== -->
+<!-- PAGE 10 -->
+<!-- BAKE A CAKE -->
+<!-- ====================================== -->
 
+<section class="page" id="page10">
 
-
-
-
-
-
-
-<!-- BIRTHDAY CAKE BUILDER -->
-
-
-<section class="page" id="cakePage">
-
-
-<div class="cake-container">
-
-
-<h1>
-
-Build My Birthday Cake 🎂
-
-</h1>
-
-
-
-<div class="cake-display">
-
-
-<div class="cake-top">
-
-</div>
-
-
-<div class="cake-body">
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="cake-options">
-
-
-<button onclick="addDecoration('🍓')">
-🍓
-</button>
-
-
-<button onclick="addDecoration('🍒')">
-🍒
-</button>
-
-
-<button onclick="addDecoration('🍫')">
-🍫
-</button>
-
-
-<button onclick="addDecoration('🌸')">
-🌸
-</button>
-
-
-<button onclick="addDecoration('🎀')">
-🎀
-</button>
-
-
-<button onclick="addDecoration('🕯️')">
-🕯️
-</button>
-
-
-
-</div>
-
-
-
-
-<div id="cakeDecorations">
-
-</div>
-
-
-
-
-<h2 id="cakeBanner">
-
-</h2>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- 23 REASONS PAGE -->
-
-
-<section class="page" id="reasonsPage">
-
-
-<div class="reasons-container">
-
-
-<h1>
-
-23 Reasons Why You Are Awesome ❤️
-
-</h1>
-
-
-
-
-<div id="envelopeContainer">
-
-
-</div>
-
-
-
-
-
-<div id="reasonDisplay">
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- MAILBOX PAGE -->
-
-
-<section class="page" id="mailboxPage">
-
-
-<div class="mailbox-container">
-
-
-<div class="mailbox"
-
-onclick="openMailbox()">
-
-
-📮
-
-
-
-<div class="mailbox-flag">
-
-⭐
-
-</div>
-
-
-</div>
-
-
-
+<div class="cakeSection">
 
 <h2>
 
-You have a special letter waiting...
+Let's Bake Your Birthday Cake 🎂
 
 </h2>
 
+<div class="cakeLayout">
+
+<div class="toolBox">
+
+<h3>
+
+Ingredients & Tools
+
+</h3>
+
+<button class="tool" data-action="bowl">🥣 Mixing Bowl</button>
+
+<button class="tool" data-action="flour">🌾 Flour</button>
+
+<button class="tool" data-action="eggs">🥚 Eggs</button>
+
+<button class="tool" data-action="milk">🥛 Milk</button>
+
+<button class="tool" data-action="mix">🥄 Mix Batter</button>
+
+<button class="tool" data-action="bake">🔥 Bake</button>
+
+<button class="tool" data-action="layer">🍰 Add Layer</button>
+
+<button class="tool" data-action="cream">🤍 Frosting</button>
+
+<button class="tool" data-action="strawberry">🍓</button>
+
+<button class="tool" data-action="cherry">🍒</button>
+
+<button class="tool" data-action="chocolate">🍫</button>
+
+<button class="tool" data-action="flower">🌸</button>
+
+<button class="tool" data-action="ribbon">🎀</button>
+
+<button class="tool" data-action="candle">🕯️</button>
 
 </div>
 
+<div class="cakeDisplay">
+
+<div id="cake">
+
+<div id="cakeLayers"></div>
+
+</div>
+
+<h3 id="cakeMessage"></h3>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
+<!-- ====================================== -->
+<!-- PAGE 11 -->
+<!-- 23 REASONS -->
+<!-- ====================================== -->
 
+<section class="page" id="page11">
 
+<div class="reasonsSection">
 
+<h2>
 
+23 Reasons Why You Are Awesome ❤️
 
+</h2>
 
+<div id="reasonCards">
 
-<!-- LOVE LETTER PAGE -->
+<!-- Generated by JavaScript -->
 
+</div>
 
-<section class="page" id="letterPage">
+</div>
 
+</section>
 
-<div class="letter-container">
+<!-- ====================================== -->
+<!-- PAGE 12 -->
+<!-- MAILBOX -->
+<!-- ====================================== -->
 
+<section class="page" id="page12">
 
+<div class="mailSection">
 
-<div class="letter-envelope"
+<h2>
 
-onclick="openLetter()">
+There's One More Surprise...
+
+</h2>
+
+<div id="mailbox">
+
+📬
+
+</div>
+
+<p>
+
+Tap the mailbox to receive your letter.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PAGE 13 -->
+<!-- LOVE LETTER -->
+<!-- ====================================== -->
+
+<section class="page" id="page13">
+
+<div class="letterContainer">
+
+<div id="envelope">
 
 💌
 
 </div>
 
+<button id="openLetter">
 
+Click Here ❤️
 
+</button>
 
-
-<div class="letter-paper">
-
-
-<p id="letterText">
-
-</p>
-
-
-
-<h3>
-
-— Veilwalker 🤍
-
-</h3>
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-<!-- MOON ENDING PAGE -->
-
-<section class="page" id="moonPage">
-
-
-<div class="moon-background">
-
-
-<div class="moon">
-
-</div>
-
-
-
-<div class="stars">
-
-✨ &nbsp; ✨ &nbsp; ✨ &nbsp; ✨ &nbsp; ✨
-
-</div>
-
-
-
-<div class="night-hearts">
-
-🤍 ❤️ 🤍 ❤️ 🤍
-
-</div>
-
-
-
+<div id="letter">
 
 <h2>
 
-A beautiful night...
-
-for a beautiful soul.
+To Busayo,
 
 </h2>
 
+<p id="typedLetter"></p>
 
+<p class="signature">
+
+— Veilwalker 🤍
+
+</p>
 
 </div>
 
+</div>
 
 </section>
 
+<!-- ====================================== -->
+<!-- PAGE 14 -->
+<!-- UNDER THE SAME MOON -->
+<!-- ====================================== -->
 
+<section class="page" id="page14">
 
+<div class="moonScene">
 
+<div id="stars"></div>
 
+<div id="fireflies"></div>
 
+<div id="moon"></div>
 
+<h2>
 
+To Busayo, With Love 🤍
 
-<!-- FINAL MESSAGE PAGE -->
+</h2>
 
+<h3>
 
-<section class="page" id="finalPage">
+Under The Same Moon
 
+</h3>
 
-<div class="final-container">
+<div id="poem">
 
+<p>
+Tonight, even the moon borrowed your light.
+</p>
 
+<p>
+The stars shine brighter because today is your day.
+</p>
+
+<p>
+May your heart always know peace,
+your smile never fade,
+and your dreams always find their way home.
+</p>
+
+<p>
+Every memory we've shared has become
+a little piece of forever.
+</p>
+
+<p>
+If life ever feels uncertain,
+look up at the moon...
+</p>
+
+<p>
+Somewhere beneath that same sky,
+someone is wishing you nothing but happiness.
+</p>
+
+<p>
+
+Happy Birthday, Busayo. 🤍
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PAGE 15 -->
+<!-- FINAL MESSAGE -->
+<!-- ====================================== -->
+
+<section class="page" id="page15">
+
+<div class="finalMessage">
 
 <h1>
 
@@ -813,45 +831,18 @@ Happy Birthday Busayo ❤️
 
 </h1>
 
-
-
-
-
 <p>
 
+I hope this little journey made you smile,
+because every page was made with love,
+just for you.
 
-Today is a celebration of someone truly special.
-
-
-<br><br>
-
-
-Thank you for every smile, every memory,
-every little moment, and every happiness
-you bring into my life.
-
-
-<br><br>
-
-
-I hope this new chapter brings you endless joy,
-success, peace, love, and everything your heart desires.
-
-
-<br><br>
-
-
-You deserve beautiful moments,
+You deserve happiness,
 beautiful memories,
-and a beautiful life.
-
-
+endless laughter,
+and all the wonderful things life has to offer.
 
 </p>
-
-
-
-
 
 <h2>
 
@@ -859,99 +850,34 @@ One Last Thing...
 
 </h2>
 
-
-
-
-
-<button onclick="revealLove()">
+<button id="revealLove">
 
 Reveal ❤️
 
 </button>
 
+<div id="loveMessage">
 
+<p>
 
+I love you more than words could ever explain.
 
-<h3 id="loveReveal">
-
-</h3>
-
-
-
-
-
-<button class="restart-button"
-
-onclick="restartWebsite()">
-
-Begin Again ❤️
-
-</button>
-
-
-
+</p>
 
 </div>
 
+<button id="restart">
+
+⬆️ Replay Our Story ❤️
+
+</button>
+
+</div>
 
 </section>
 
-
-
-
-
-
-
-
-
-<!-- GLOBAL PAGE NAVIGATION -->
-
-
-<div class="navigation hidden" id="navigation">
-
-
-<button
-
-id="previousButton"
-
-onclick="previousPage()">
-
-← Previous
-
-</button>
-
-
-
-
-
-<button
-
-id="nextButton"
-
-onclick="nextPage()">
-
-Next →
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-</main>
-
-
-
-
 <script src="script.js"></script>
 
-
 </body>
-
 
 </html>
