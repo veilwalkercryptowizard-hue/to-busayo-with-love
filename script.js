@@ -30,7 +30,7 @@ let saveKey = "busayoBirthdayJourney";
 ELEMENTS
 ====================================================*/
 
-const audio = document.getElementById("backgroundMusic");
+const audio = document.getElementById("birthdayMusic");
 
 const loadingScreen =
 document.getElementById("loadingScreen");
@@ -459,7 +459,7 @@ TREASURE CHEST
 ====================================================*/
 
 const chest =
-document.getElementById("chest");
+document.getElementById("treasurechest");
 
 const openChestButton =
 document.getElementById("openChest");
