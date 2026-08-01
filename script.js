@@ -2710,3 +2710,402 @@ startEnding();
 
 };
 
+/*====================================================
+MEMORY SKY ENGINE
+====================================================*/
+
+const memorySky =
+document.getElementById("memorySky");
+
+const finalWords =
+document.getElementById("finalWords");
+
+const moon =
+document.getElementById("moon");
+
+let endingStarted=false;
+
+/*====================================================
+START
+====================================================*/
+
+async function startEnding(){
+
+if(endingStarted) return;
+
+endingStarted=true;
+
+createStars();
+
+createClouds();
+
+createFloatingHearts();
+
+shootingStars();
+
+await sleep(30000);
+
+showFinalWords();
+
+}
+
+/*====================================================
+STARS
+====================================================*/
+
+const starMessages=[
+
+"Your smile is unforgettable 🤍",
+
+"I hope today made you smile.",
+
+"You deserve every beautiful thing.",
+
+"Thank you for every memory.",
+
+"I'll always treasure our moments.",
+
+"You make ordinary days special.",
+
+"You deserve happiness.",
+
+"Never stop being you.",
+
+"Keep shining.",
+
+"I'm grateful for you."
+
+];
+
+function createStars(){
+
+for(let i=0;i<80;i++){
+
+const star=document.createElement("div");
+
+star.className="memoryStar";
+
+star.style.left=Math.random()*100+"%";
+
+star.style.top=Math.random()*100+"%";
+
+star.onclick=()=>{
+
+showStarMemory(star);
+
+};
+
+memorySky.appendChild(star);
+
+}
+
+}
+
+/*====================================================
+POPUP
+====================================================*/
+
+function showStarMemory(star){
+
+const popup=
+
+document.createElement("div");
+
+popup.className="starMemory";
+
+popup.innerHTML=
+
+starMessages[
+
+Math.floor(
+
+Math.random()*starMessages.length
+
+)
+
+];
+
+popup.style.left=
+
+star.style.left;
+
+popup.style.top=
+
+star.style.top;
+
+memorySky.appendChild(popup);
+
+setTimeout(()=>{
+
+popup.remove();
+
+},3500);
+
+}
+
+/*====================================================
+SHOOTING STARS
+====================================================*/
+
+function shootingStars(){
+
+setInterval(()=>{
+
+const shooting=
+
+document.createElement("div");
+
+shooting.className=
+
+"shootingStar";
+
+shooting.style.left=
+
+"-200px";
+
+shooting.style.top=
+
+Math.random()*300+"px";
+
+memorySky.appendChild(shooting);
+
+setTimeout(()=>{
+
+shooting.remove();
+
+},2500);
+
+},9000);
+
+}
+
+/*====================================================
+HEARTS
+====================================================*/
+
+function createFloatingHearts(){
+
+for(let i=0;i<18;i++){
+
+const heart=
+
+document.createElement("div");
+
+heart.className=
+
+"finalHeart";
+
+heart.textContent="🤍";
+
+heart.style.left=
+
+Math.random()*100+"%";
+
+heart.style.animationDelay=
+
+Math.random()*10+"s";
+
+memorySky.appendChild(
+
+heart
+
+);
+
+}
+
+}
+
+/*====================================================
+CLOUDS
+====================================================*/
+
+function createClouds(){
+
+for(let i=0;i<5;i++){
+
+const cloud=
+
+document.createElement("div");
+
+cloud.className="cloud";
+
+cloud.style.top=
+
+80+i*110+"px";
+
+cloud.style.animationDelay=
+
+i*8+"s";
+
+memorySky.appendChild(
+
+cloud
+
+);
+
+}
+
+}
+
+/*====================================================
+WORDS
+====================================================*/
+
+async function showFinalWords(){
+
+finalWords.classList.add("show");
+
+await sleep(8000);
+
+finalStar();
+
+}
+
+/*====================================================
+LAST STAR
+====================================================*/
+
+async function finalStar(){
+
+const stars=
+
+document.querySelectorAll(
+
+".memoryStar"
+
+);
+
+stars.forEach(star=>{
+
+star.style.opacity=.1;
+
+});
+
+const last=
+
+stars[
+
+Math.floor(
+
+Math.random()*stars.length
+
+)
+
+];
+
+last.style.opacity=1;
+
+last.animate(
+
+[
+
+{
+
+transform:"scale(1)"
+
+},
+
+{
+
+transform:"scale(80)"
+
+}
+
+],
+
+{
+
+duration:4500,
+
+fill:"forwards",
+
+easing:"ease-in"
+
+}
+
+);
+
+await sleep(4200);
+
+whiteEnding();
+
+}
+
+/*====================================================
+WHITE
+====================================================*/
+
+function whiteEnding(){
+
+const white=
+
+document.createElement("div");
+
+white.id="whiteEnding";
+
+white.innerHTML=`
+
+<h1>
+
+Every beautiful story
+
+deserves another beginning.
+
+</h1>
+
+<button id="restartStory">
+
+Begin Again 🤍
+
+</button>
+
+`;
+
+document.body.appendChild(
+
+white
+
+);
+
+document
+
+.getElementById(
+
+"restartStory"
+
+)
+
+.onclick=restartJourney;
+
+}
+
+/*====================================================
+SECRET
+====================================================*/
+
+const secret=document.createElement("div");
+
+secret.className="memoryStar";
+
+secret.style.right="80px";
+
+secret.style.bottom="120px";
+
+secret.style.left="";
+
+secret.style.top="";
+
+secret.style.background="#FFD54F";
+
+secret.onclick=()=>{
+
+alert(
+
+"If you ever feel alone,\n\nremember that somewhere in the world there is someone who built an entire little universe just to make you smile on your birthday. 🤍"
+
+);
+
+};
+
+memorySky.appendChild(secret);
+
