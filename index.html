@@ -3,231 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A luxury interactive birthday experience for Busayo">
+    <meta name="theme-color" content="#d4af37">
     <title>Happy Birthday Busayo ❤️</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-    <!-- ============================================
-         1. LOADING SCREEN
-         ============================================ -->
-    <div id="loadingScreen" class="screen active">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="screen active" role="status" aria-label="Loading screen">
         <div class="loading-container">
-            <div class="loading-heart">
+            <div class="loading-heart" aria-hidden="true">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <path d="M50,95 C20,75 5,60 5,45 C5,30 15,20 25,20 C35,20 45,30 50,40 C55,30 65,20 75,20 C85,20 95,30 95,45 C95,60 80,75 50,95 Z"/>
                 </svg>
             </div>
             <p class="loading-text">Preparing something special...</p>
-            <div class="loading-bar">
+            <div class="loading-bar" aria-hidden="true">
                 <div class="loading-bar-fill"></div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================
-         2. COUNTDOWN SCREEN
-         ============================================ -->
-    <div id="countdownScreen" class="screen">
+    <!-- Countdown Screen -->
+    <div id="countdownScreen" class="screen" role="status" aria-label="Countdown">
         <div class="countdown-container">
-            <div class="countdown-number" id="countdownNumber">3</div>
-            <div class="countdown-arrow">↓</div>
+            <div class="countdown-number" id="countdownNumber" aria-live="polite">3</div>
+            <div class="countdown-arrow" aria-hidden="true">↓</div>
         </div>
     </div>
 
-    <!-- ============================================
-         3. HAPPY BIRTHDAY REVEAL
-         ============================================ -->
-    <div id="birthdayScreen" class="screen">
+    <!-- Birthday Reveal Screen -->
+    <div id="birthdayScreen" class="screen" role="main" aria-label="Birthday reveal">
         <div class="birthday-content">
             <h1 class="birthday-text">HAPPY BIRTHDAY BUSAYO</h1>
-            <button class="birthday-button" onclick="goToNextScreen()">Begin The Journey ❤️</button>
+            <button class="btn-primary" onclick="app.goToNextScreen()" aria-label="Begin the birthday journey">
+                Begin The Journey ❤️
+            </button>
         </div>
-        <div id="confettiContainer" class="confetti-container"></div>
+        <div id="confettiContainer" class="confetti-container" aria-hidden="true"></div>
     </div>
 
-    <!-- ============================================
-         4. COVER PAGE
-         ============================================ -->
-    <div id="coverPage" class="screen">
+    <!-- Cover Page -->
+    <div id="coverPage" class="screen" role="main" aria-label="Cover page">
         <div class="cover-container">
             <div class="cover-image-wrapper">
-                <img src="images/cover.jpg" alt="Cover" class="cover-image">
+                <img src="images/cover.jpg" alt="Cover photo" class="cover-image">
             </div>
             <div class="cover-text-wrapper">
                 <h2 class="cover-title">To Busayo,</h2>
                 <p class="cover-subtitle">With Love 🤍</p>
                 <p class="cover-message">I made something for you...</p>
                 <p class="cover-message">I hope it makes you smile.</p>
-                <button class="continue-button" onclick="goToNextScreen()">Continue</button>
+                <button class="btn-secondary" onclick="app.goToNextScreen()" aria-label="Continue to next page">
+                    Continue
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- ============================================
-         5. PASSWORD SCREEN
-         ============================================ -->
-    <div id="passwordScreen" class="screen">
+    <!-- Password Screen -->
+    <div id="passwordScreen" class="screen" role="main" aria-label="Password protected screen">
         <div class="password-container">
             <div class="password-image">
-                <img src="images/cover.jpg" alt="Cover">
+                <img src="images/cover.jpg" alt="Cover photo">
             </div>
             <div class="password-card">
-                <div class="password-icon">🔐</div>
+                <div class="password-icon" aria-hidden="true">🔐</div>
                 <h2>Every beautiful surprise deserves a little secret.</h2>
                 <p>Enter the password to unlock the treasure.</p>
-                <input type="password" id="passwordInput" class="password-input" placeholder="Enter password">
-                <button class="unlock-button" onclick="checkPassword()">Unlock</button>
+                <input 
+                    type="password" 
+                    id="passwordInput" 
+                    class="password-input" 
+                    placeholder="Enter password"
+                    aria-label="Password input"
+                    autocomplete="off"
+                >
+                <button 
+                    class="unlock-button" 
+                    onclick="app.checkPassword()" 
+                    aria-label="Unlock with password"
+                >
+                    Unlock
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- ============================================
-         6. TREASURE CHEST
-         ============================================ -->
-    <div id="treasureScreen" class="screen">
+    <!-- Treasure Chest Screen -->
+    <div id="treasureScreen" class="screen" role="main" aria-label="Treasure chest">
         <div class="treasure-container">
-            <div class="treasure-chest" id="treasureChest" onclick="openTreasure()">
+            <div 
+                class="treasure-chest" 
+                id="treasureChest" 
+                onclick="app.openTreasure()" 
+                role="button" 
+                tabindex="0"
+                aria-label="Click to open treasure chest"
+                aria-pressed="false"
+            >
                 <div class="treasure-chest-lid"></div>
-                <div class="treasure-lock">🔓</div>
+                <div class="treasure-lock" aria-hidden="true">🔓</div>
                 <div class="treasure-glow"></div>
             </div>
             <p class="treasure-message" id="treasureMessage" style="display: none;">Every treasure tells a story...</p>
-            <button class="continue-button" id="treasureButton" style="display: none;" onclick="goToNextScreen()">Continue</button>
+            <button 
+                class="btn-secondary" 
+                id="treasureButton" 
+                style="display: none;" 
+                onclick="app.goToNextScreen()"
+                aria-label="Continue to next page"
+            >
+                Continue
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         7. MEMORY BOOK
-         ============================================ -->
-    <div id="memoryBook" class="screen">
+    <!-- Memory Book Screen -->
+    <div id="memoryBook" class="screen" role="main" aria-label="Memory book">
         <div class="book-container">
-            <div class="book">
-                <div class="book-spine">📖</div>
-                <div class="book-pages" id="bookPages">
-                    <!-- Pages will be generated by JavaScript -->
-                </div>
+            <div class="book" role="region" aria-label="Photo memory book">
+                <div class="book-spine" aria-hidden="true">📖</div>
+                <div class="book-pages" id="bookPages"></div>
                 <div class="book-controls">
-                    <button class="page-button" id="prevPageBtn" onclick="previousPage()">← Previous</button>
-                    <button class="page-button" id="nextPageBtn" onclick="nextPage()">Next →</button>
+                    <button 
+                        class="page-button" 
+                        id="prevPageBtn" 
+                        onclick="app.previousPage()"
+                        aria-label="Previous page"
+                    >
+                        ← Previous
+                    </button>
+                    <button 
+                        class="page-button" 
+                        id="nextPageBtn" 
+                        onclick="app.nextPage()"
+                        aria-label="Next page"
+                    >
+                        Next →
+                    </button>
                 </div>
-                <div class="page-counter" id="pageCounter">Page 1 of 12</div>
+                <div class="page-counter" id="pageCounter" aria-live="polite">Page 1 of 12</div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================
-         8. CATCH MY HEART GAME
-         ============================================ -->
-    <div id="gameScreen" class="screen">
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen" role="main" aria-label="Catch my heart game">
         <div class="game-container">
             <h2 class="game-title">Catch My Heart</h2>
             <div class="game-stats">
                 <div class="game-stat">
                     <div class="game-stat-label">Score</div>
-                    <div class="game-stat-value" id="gameScore">0</div>
+                    <div class="game-stat-value" id="gameScore" aria-live="polite">0</div>
                 </div>
                 <div class="game-stat">
                     <div class="game-stat-label">Time</div>
-                    <div class="game-stat-value" id="gameTimer">60</div>
+                    <div class="game-stat-value" id="gameTimer" aria-live="polite">60</div>
                 </div>
             </div>
-            <div class="game-canvas" id="gameCanvas"></div>
-            <button class="game-button" id="gameButton" onclick="startGame()">Start Game</button>
-            <button class="game-button" style="display: none;" id="nextAfterGame" onclick="goToNextScreen()">Next</button>
+            <div class="game-canvas" id="gameCanvas" role="region" aria-label="Game canvas with falling hearts"></div>
+            <button 
+                class="btn-secondary" 
+                id="gameButton" 
+                onclick="app.startGame()"
+                aria-label="Start the game"
+            >
+                Start Game
+            </button>
+            <button 
+                class="btn-secondary" 
+                style="display: none;" 
+                id="nextAfterGame" 
+                onclick="app.goToNextScreen()"
+                aria-label="Continue to next page"
+            >
+                Next
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         9. CAKE BUILDER
-         ============================================ -->
-    <div id="cakeScreen" class="screen">
+    <!-- Cake Builder Screen -->
+    <div id="cakeScreen" class="screen" role="main" aria-label="Cake builder">
         <div class="cake-container">
             <h2 class="cake-title">Build My Birthday Cake</h2>
-            <div class="cake-canvas" id="cakeCanvas">
+            <div class="cake-canvas" id="cakeCanvas" role="region" aria-label="Cake canvas">
                 <div class="cake-base">
                     <div class="cake-frosting"></div>
                 </div>
             </div>
-            <div class="decoration-palette">
-                <button class="decoration-btn" onclick="addDecoration('🍓')">🍓</button>
-                <button class="decoration-btn" onclick="addDecoration('🍒')">🍒</button>
-                <button class="decoration-btn" onclick="addDecoration('🍫')">🍫</button>
-                <button class="decoration-btn" onclick="addDecoration('🌸')">🌸</button>
-                <button class="decoration-btn" onclick="addDecoration('🎀')">🎀</button>
-                <button class="decoration-btn" onclick="addDecoration('🕯️')">🕯️</button>
+            <div class="decoration-palette" role="group" aria-label="Decoration options">
+                <button class="decoration-btn" onclick="app.addDecoration('🍓')" aria-label="Add strawberry decoration">🍓</button>
+                <button class="decoration-btn" onclick="app.addDecoration('🍒')" aria-label="Add cherry decoration">🍒</button>
+                <button class="decoration-btn" onclick="app.addDecoration('🍫')" aria-label="Add chocolate decoration">🍫</button>
+                <button class="decoration-btn" onclick="app.addDecoration('🌸')" aria-label="Add flower decoration">🌸</button>
+                <button class="decoration-btn" onclick="app.addDecoration('🎀')" aria-label="Add bow decoration">🎀</button>
+                <button class="decoration-btn" onclick="app.addDecoration('🕯️')" aria-label="Add candle decoration">🕯️</button>
             </div>
             <div id="cakeBanner" class="cake-banner" style="display: none;">Happy Birthday Busayo ❤️</div>
-            <button class="game-button" id="cakeNextBtn" style="display: none;" onclick="goToNextScreen()">Next</button>
+            <button 
+                class="btn-secondary" 
+                id="cakeNextBtn" 
+                style="display: none;" 
+                onclick="app.goToNextScreen()"
+                aria-label="Continue to next page"
+            >
+                Next
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         10. 23 REASONS
-         ============================================ -->
-    <div id="reasonsScreen" class="screen">
+    <!-- 23 Reasons Screen -->
+    <div id="reasonsScreen" class="screen" role="main" aria-label="23 reasons why you are awesome">
         <div class="reasons-container">
             <h2 class="reasons-title">23 Reasons Why You Are Awesome ❤️</h2>
-            <div class="envelopes-grid" id="envelopesGrid">
-                <!-- Envelopes will be generated by JavaScript -->
-            </div>
-            <button class="continue-button" onclick="goToNextScreen()" style="align-self: center; margin-top: 2rem;">Continue</button>
+            <div class="envelopes-grid" id="envelopesGrid" role="region" aria-label="Interactive reason envelopes"></div>
+            <button 
+                class="btn-secondary" 
+                onclick="app.goToNextScreen()" 
+                style="align-self: center; margin-top: 2rem;"
+                aria-label="Continue to next page"
+            >
+                Continue
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         11. MAILBOX
-         ============================================ -->
-    <div id="mailboxScreen" class="screen">
+    <!-- Mailbox Screen -->
+    <div id="mailboxScreen" class="screen" role="main" aria-label="Mailbox">
         <div class="mailbox-container">
             <h2 style="color: #d4af37; letter-spacing: 2px;">Open The Mailbox</h2>
-            <div class="mailbox" id="mailbox" onclick="openMailbox()">
+            <div 
+                class="mailbox" 
+                id="mailbox" 
+                onclick="app.openMailbox()" 
+                role="button" 
+                tabindex="0"
+                aria-label="Click to open mailbox"
+                aria-pressed="false"
+            >
                 <div class="mailbox-door"></div>
                 <div class="mailbox-flag"></div>
                 <div class="mailbox-letter"></div>
             </div>
             <p class="mailbox-text">Click to open</p>
-            <button class="continue-button" id="mailboxNextBtn" style="display: none;" onclick="goToNextScreen()">Continue</button>
+            <button 
+                class="btn-secondary" 
+                id="mailboxNextBtn" 
+                style="display: none;" 
+                onclick="app.goToNextScreen()"
+                aria-label="Continue to next page"
+            >
+                Continue
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         12. LOVE LETTER
-         ============================================ -->
-    <div id="letterScreen" class="screen">
+    <!-- Love Letter Screen -->
+    <div id="letterScreen" class="screen" role="main" aria-label="Love letter">
         <div class="letter-container">
             <h2 style="color: #d4af37; letter-spacing: 2px; margin-bottom: 1rem;">A Letter For You</h2>
-            <div class="letter-envelope" id="letterEnvelope" onclick="openLetter()">
-                <div class="letter-flap">💌</div>
+            <div 
+                class="letter-envelope" 
+                id="letterEnvelope" 
+                onclick="app.openLetter()" 
+                role="button" 
+                tabindex="0"
+                aria-label="Click to open love letter"
+                aria-pressed="false"
+            >
+                <div class="letter-flap" aria-hidden="true">💌</div>
                 <div class="letter-paper">
-                    <div class="letter-content" id="letterContent">
-                        <!-- Letter content will be generated by JavaScript -->
-                    </div>
+                    <div class="letter-content" id="letterContent"></div>
                 </div>
             </div>
-            <button class="continue-button" id="letterNextBtn" style="display: none;" onclick="goToNextScreen()">Continue</button>
+            <button 
+                class="btn-secondary" 
+                id="letterNextBtn" 
+                style="display: none;" 
+                onclick="app.goToNextScreen()"
+                aria-label="Continue to next page"
+            >
+                Continue
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         13. MOON ENDING
-         ============================================ -->
-    <div id="moonScreen" class="screen">
+    <!-- Moon Ending Screen -->
+    <div id="moonScreen" class="screen" role="main" aria-label="Moon ending">
         <div class="moon-container">
-            <div class="moon">
+            <div class="moon" aria-hidden="true">
                 <div class="moon-craters"></div>
             </div>
             <p class="moon-text">In the quiet of the night...</p>
             <p class="moon-text">My heart is always with you</p>
-            <div id="moonHearts"></div>
-            <div id="moonStars"></div>
-            <button class="continue-button" onclick="goToNextScreen()" style="margin-top: 2rem;">Continue</button>
+            <div id="moonHearts" aria-hidden="true"></div>
+            <div id="moonStars" aria-hidden="true"></div>
+            <button 
+                class="btn-secondary" 
+                onclick="app.goToNextScreen()"
+                style="margin-top: 2rem;"
+                aria-label="Continue to next page"
+            >
+                Continue
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         14. FINAL MESSAGE
-         ============================================ -->
-    <div id="finalScreen" class="screen">
+    <!-- Final Message Screen -->
+    <div id="finalScreen" class="screen" role="main" aria-label="Final birthday message">
         <div class="final-container">
             <h1 class="final-title">Happy Birthday Busayo ❤️</h1>
             <div class="final-message">
@@ -236,14 +322,30 @@
                 <p>I hope this little journey through our memories reminds you of how special you are to me. Not just today, but every single day.</p>
                 <p style="margin-top: 2rem; font-weight: 600;">One Last Thing...</p>
             </div>
-            <button class="final-reveal-btn" onclick="revealFinal()">Click Here</button>
-            <div class="final-reveal" id="finalReveal">I love you more than words could ever explain. 🤍</div>
-            <button class="restart-button" id="restartBtn" style="display: none;" onclick="restartJourney()">Begin Again ❤️</button>
+            <button 
+                class="btn-primary" 
+                onclick="app.revealFinal()"
+                aria-label="Reveal final message"
+            >
+                Click Here
+            </button>
+            <div class="final-reveal" id="finalReveal" aria-live="polite">I love you more than words could ever explain. 🤍</div>
+            <button 
+                class="btn-primary" 
+                id="restartBtn" 
+                style="display: none;" 
+                onclick="app.restartJourney()"
+                aria-label="Restart the birthday journey"
+            >
+                Begin Again ❤️
+            </button>
         </div>
     </div>
 
-    <audio id="bgMusic" src="music/BrunoMars.mp3"></audio>
+    <!-- Audio Element -->
+    <audio id="bgMusic" src="music/BrunoMars.mp3" preload="none"></audio>
 
-    <script src="script.js"></script>
+    <!-- Main Script -->
+    <script src="script.js" defer></script>
 </body>
 </html>
