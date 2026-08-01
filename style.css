@@ -8,7 +8,7 @@ body, html {
   color: #333;
 }
 
-/* General screen styles */
+/* Screens overlay with fade effect */
 .screen {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -27,13 +27,12 @@ body, html {
   z-index: 20;
 }
 
-/* Loading Screen */
+/* Loading Screen Styles */
 #loading-screen {
   flex-direction: column;
   font-family: 'Helvetica Neue', sans-serif;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
 }
 .loading-wrapper {
   display: flex;
@@ -117,10 +116,12 @@ body, html {
   justify-content: center;
   padding: 40px;
   background: #fff;
+  position: relative;
 }
 .birthday-content {
   position: relative;
   text-align: center;
+  max-width: 600px;
 }
 .big-text {
   font-family: 'Georgia', serif;
@@ -193,4 +194,500 @@ body, html {
 }
 .btn:hover {
   transform: scale(1.05);
+}
+
+/* Cover Page */
+#cover-page {
+  flex-direction: row;
+  max-width: 800px;
+  padding: 20px;
+}
+.cover-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.cover-left {
+  flex: 1;
+}
+.cover-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cover-image {
+  width: 100%;
+  border-radius: 10px;
+  border: 3px solid #ffd700;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.love-text {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #bfa14d;
+}
+.intro-text {
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+@media(max-width: 768px){
+  #cover-page {
+    flex-direction: column;
+  }
+  .cover-content {
+    flex-direction: column;
+  }
+}
+
+/* Password Screen with Image beside input */
+#password-screen {
+  flex-direction: row;
+  max-width: 900px;
+  padding: 20px;
+}
+.password-section {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 20px;
+}
+.password-left {
+  flex: 1;
+}
+.password-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.password-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  border: 3px solid #ffd700;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.password-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
+.lock-icon {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+.password-instruction {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+#password-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.password-buttons {
+  display: flex;
+  justify-content: center;
+}
+@media(max-width: 768px){
+  #password-screen {
+    flex-direction: column;
+  }
+}
+
+/* Treasure Chest */
+#treasure-screen {
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+.chest {
+  width: 150px;
+  height: 100px;
+  background-color: #8b5a2b;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: inset 0 0 10px #654321;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.chest.open {
+  transform: rotateY(180deg);
+}
+.treasure-message {
+  margin-top: 20px;
+  font-size: 1.4em;
+  font-family: 'Georgia', serif;
+  color: #555;
+}
+#open-chest {
+  margin-top: 30px;
+}
+
+/* Memory Book (Luxury) */
+#memory-book {
+  max-width: 800px;
+  padding: 20px;
+}
+.book-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.book {
+  width: 100%;
+  height: 600px;
+  background: #f5f5dc;
+  border: 5px solid #ffd700;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  perspective: 1500px;
+}
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+  position: absolute;
+  top: 0; left: 0;
+}
+.page-img {
+  max-width: 80%;
+  max-height: 70%;
+  border-radius: 10px;
+}
+.caption {
+  font-size: 1.2em;
+  margin-top: 10px;
+  font-family: 'Georgia', serif;
+  color: #444;
+}
+.book-controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+.reasons-navigation {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+/* Final Photo */
+#final-photo {
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+.final-photo {
+  max-width: 80%;
+  border-radius: 10px;
+  border: 4px solid #ffd700;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+.final-caption {
+  margin-top: 15px;
+  font-size: 1.4em;
+  font-family: 'Georgia', serif;
+  color: #555;
+}
+#to-final {
+  margin-top: 20px;
+}
+
+/* Catch My Heart Game */
+#game-screen {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.score-timer {
+  display: flex;
+  gap: 50px;
+  font-size: 1.4em;
+  margin-bottom: 20px;
+}
+#heart-canvas {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  background: linear-gradient(to bottom, #222, #444);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Build Cake */
+#cake-screen {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cake {
+  width: 200px;
+  height: 300px;
+  position: relative;
+  margin-bottom: 20px;
+}
+.layers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.layer {
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  background-color: #fff8dc;
+  border: 3px solid #b8860b;
+  border-radius: 10px;
+  bottom: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#layer1 { bottom: 0; }
+#layer2 { bottom: 80px; }
+#layer3 { bottom: 160px; }
+.decorations {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.decor-btn {
+  padding: 10px 15px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #ffd700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.decor-btn:hover {
+  background: #e6c200;
+}
+#finish-cake {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ffd700, #fff8dc);
+  font-size: 1.4em;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  margin-top: 20px;
+}
+#finish-cake:hover {
+  transform: scale(1.05);
+}
+
+/* Reasons - Envelopes with navigation buttons */
+#reasons-screen {
+  max-width: 800px;
+  padding: 20px;
+  text-align: center;
+}
+.envelopes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.envelope {
+  width: 60px;
+  height: 40px;
+  background-color: #fff;
+  border: 2px solid #bfa14d;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s;
+}
+.envelope.open {
+  transform: rotateY(180deg);
+}
+.envelope::after {
+  content: attr(data-reason);
+  position: absolute;
+  top: -100px;
+  width: 200px;
+  left: -70px;
+  background: #fff8dc;
+  border: 2px solid #b8860b;
+  border-radius: 8px;
+  padding: 10px;
+  display: none;
+}
+.envelope.open::after {
+  display: block;
+}
+.reasons-navigation {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Mailbox */
+#mailbox {
+  width: 200px;
+  height: 250px;
+  background-color: #fff;
+  border: 4px solid #ffd700;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+#flag {
+  position: absolute;
+  top: 10px;
+  right: -20px;
+  width: 40px;
+  height: 40px;
+  background-color: gold;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  cursor: pointer;
+}
+#envelope {
+  width: 80px;
+  height: 50px;
+  background-color: #fff;
+  border: 2px solid #bfa14d;
+  margin: 80px auto 0 auto;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.3s;
+}
+#envelope.open {
+  transform: rotateY(180deg);
+}
+#open-envelope {
+  margin-top: 20px;
+}
+
+/* Love Letter */
+#letter {
+  max-width: 600px;
+  background: #fff8dc;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #b8860b;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  font-family: 'Georgia', serif;
+  font-size: 1.4em;
+}
+#to-moon {
+  margin-top: 20px;
+}
+
+/* Moon scene */
+#moon-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #000, #222);
+  overflow: hidden;
+}
+.moon {
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, #fff, #ccc);
+  border-radius: 50%;
+  box-shadow: 0 0 50px rgba(255,255,255,0.7);
+}
+.stars {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+.stars::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center;
+  animation: twinkle 2s infinite;
+}
+@keyframes twinkle {
+  0%, 100% { background-position: center; }
+  50% { background-position: calc(20px + 2px) calc(20px + 2px); }
+}
+
+/* Final message and love message */
+#final-message, #love-message {
+  flex-direction: column;
+  text-align: center;
+  padding: 40px;
+}
+h1 {
+  font-family: 'Georgia', serif;
+  font-size: 3em;
+  color: #bfa14d;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+#reveal-love {
+  margin-top: 20px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ffd700, #fff8dc);
+  font-size: 1.4em;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+#reveal-love:hover {
+  transform: scale(1.05);
+}
+
+/* balloons & confetti animations on start button */
+@keyframes balloonsRise {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-600px); opacity: 0; }
+}
+@keyframes confettiFall {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+.balloons {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.confetti {
+  position: absolute;
+  width: 100%; height: 100%;
+  background: transparent;
+  pointer-events: none;
+  animation: confettiFall 3s forwards;
+}
+.floating-hearts {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
 }
