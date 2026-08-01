@@ -1,708 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>
-        To Busayo, With Love ❤️
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="style.css">
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap"
-        rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Busayo ❤️</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-    <!-- =======================================
-    BACKGROUND MUSIC
-    ======================================== -->
-
-    <audio
-        id="birthdayMusic"
-        loop>
-
-        <source
-            src="music/BrunoMars.mp3"
-            type="audio/mpeg">
-
-    </audio>
-
-    <!-- =======================================
-    PAGE EFFECTS
-    ======================================== -->
-
-    <div id="pageTurn"></div>
-
-    <div id="memoryFlash"></div>
-
-    <div id="particleContainer"></div>
-
-    <div id="confettiContainer"></div>
-
-    <!-- =======================================
-    LOADING SCREEN
-    ======================================== -->
-
-    <section
-        id="loadingScreen"
-        class="screen active">
-
-        <div class="loadingContent">
-
-            <div id="loadingHeart">
-
-                ❤️
-
+    <!-- ============================================
+         1. LOADING SCREEN
+         ============================================ -->
+    <div id="loadingScreen" class="screen active">
+        <div class="loading-container">
+            <div class="loading-heart">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50,95 C20,75 5,60 5,45 C5,30 15,20 25,20 C35,20 45,30 50,40 C55,30 65,20 75,20 C85,20 95,30 95,45 C95,60 80,75 50,95 Z"/>
+                </svg>
             </div>
-
-            <h1>
-
-                Preparing something special...
-
-            </h1>
-
-            <div id="loadingBar">
-
-                <div id="loadingFill"></div>
-
+            <p class="loading-text">Preparing something special...</p>
+            <div class="loading-bar">
+                <div class="loading-bar-fill"></div>
             </div>
-
         </div>
-
-    </section>
-
-    <!-- =======================================
-    COUNTDOWN
-    ======================================== -->
-
-    <section
-        id="countdownScreen"
-        class="screen">
-
-        <div class="countdownContent">
-
-            <h1 id="countNumber">
-
-                3
-
-            </h1>
-
-            <p>
-
-                Are you ready?
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    WELCOME SCREEN
-    ======================================== -->
-
-    <section
-        id="welcomeScreen"
-        class="screen">
-
-        <div class="welcomeContent">
-
-            <h1>
-
-                This surprise was made
-
-                especially for
-
-                <strong>
-
-                    Busayo ❤️
-
-                </strong>
-
-            </h1>
-
-            <p>
-
-                Every little detail here
-
-                was created with love.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    HAPPY BIRTHDAY
-    ======================================== -->
-
-    <section
-        id="birthdayScreen"
-        class="screen">
-
-        <div id="balloons"></div>
-
-        <div id="confettiLayer"></div>
-
-        <div class="birthdayContent">
-
-            <h1>
-
-                Happy Birthday
-
-                Busayo ❤️
-
-            </h1>
-
-            <p>
-
-                Today isn't just another day.
-
-                It's a celebration of someone
-
-                truly amazing.
-
-            </p>
-
-            <button
-
-                id="beginJourney"
-
-                class="primaryButton">
-
-                Start The Journey ❤️
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    INTRO
-    ======================================== -->
-
-    <section
-        id="introScreen"
-        class="screen">
-
-        <div class="introContent">
-
-            <img
-
-                id="coverImage"
-
-                src="images/cover.jpg"
-
-                alt="Cover">
-
-            <h1>
-
-                To Busayo,
-
-                With Love 🤍
-
-            </h1>
-
-            <p>
-
-                Some gifts are bought.
-
-                Some are handmade.
-
-                This one was written
-
-                one line at a time.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    PASSWORD
-    ======================================== -->
-
-    <section
-        id="passwordScreen"
-        class="screen">
-
-        <div class="passwordCard">
-
-            <h2>
-
-                🔐
-
-            </h2>
-
-            <p>
-
-                Every beautiful surprise
-
-                deserves a little secret.
-
-            </p>
-
-            <input
-
-                id="password"
-
-                type="password"
-
-                placeholder="Enter Password">
-
-            <small id="error"></small>
-
-            <button
-
-                id="unlockButton"
-
-                class="primaryButton">
-
-                Unlock ❤️
-
-            </button>
-
-        </div>
-
-    </section>
-        <!-- =======================================
-    TREASURE SCREEN
-    ======================================== -->
-
-    <section
-        id="treasureScreen"
-        class="screen">
-
-        <div class="screenContent">
-
-            <h1>
-
-                One More Surprise 🎁
-
-            </h1>
-
-            <p>
-
-                Some treasures aren't made of gold.
-
-                Some are made of memories.
-
-            </p>
-
-            <div id="treasureChest">
-
-                <div class="chestShadow"></div>
-
-                <div class="chestBase"></div>
-
-                <div class="chestLid"></div>
-
-                <div class="chestLock"></div>
-
-            </div>
-
-            <button
-
-                id="openChest"
-
-                class="primaryButton">
-
-                Open Treasure ❤️
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    MEMORY GALLERY
-    ======================================== -->
-
-    <section
-        id="galleryScreen"
-        class="screen">
-
-        <div class="screenContent">
-
-            <h1>
-
-                Our Beautiful Memories 📸
-
-            </h1>
-
-            <p>
-
-                Every picture tells a beautiful story.
-
-            </p>
-
-            <div id="memoryDesk">
-
-                <!-- JavaScript inserts all photos here -->
-
-            </div>
-
-            <button
-
-                id="continueProjector"
-
-                class="primaryButton">
-
-                Continue ❤️
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    PROJECTOR
-    ======================================== -->
-
-    <section
-        id="projectorScreen"
-        class="screen">
-
-        <div class="screenContent">
-
-            <h1>
-
-                Movie Night 🎞️
-
-            </h1>
-
-            <p>
-
-                Let's replay some beautiful memories.
-
-            </p>
-
-            <div id="filmProjector">
-
-                <div id="projectorLight"></div>
-
-                <div id="filmStrip">
-
-                    <!-- Frames inserted by JavaScript -->
-
-                </div>
-
-                <div id="finalFrame">
-
-                    <!-- Final image appears here -->
-
-                </div>
-
-            </div>
-
-            <button
-
-                id="continueGames"
-
-                class="primaryButton">
-
-                Continue ❤️
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    HEART GAME
-    ======================================== -->
-
-    <section
-        id="heartGameScreen"
-        class="screen">
-
-        <div class="screenContent">
-
-            <h1>
-
-                Catch My Heart ❤️
-
-            </h1>
-
-            <p>
-
-                Catch as many hearts as you can before time runs out.
-
-            </p>
-
-            <div id="gameHUD">
-
-                <span>
-
-                    Score:
-                    <strong id="heartScore">0</strong>
-
-                </span>
-
-                <span>
-
-                    Time:
-                    <strong id="heartTimer">60</strong>
-
-                </span>
-
-            </div>
-
-            <div id="heartCanvas">
-
-                <!-- Hearts generated by JavaScript -->
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    CAKE GAME
-    ======================================== -->
-
-    <section
-        id="cakeScreen"
-        class="screen">
-
-        <div class="screenContent">
-
-            <h1>
-
-                Build My Birthday Cake 🎂
-
-            </h1>
-
-            <p>
-
-                Decorate the cake with love.
-
-            </p>
-
-            <div id="cakeArea">
-
-                <div id="cakeBase">
-
-                    <!-- Cake -->
-
-                </div>
-
-                <div id="cakeTools">
-
-                    <!-- Decorations -->
-
-                </div>
-
-            </div>
-
-            <div id="birthdayBanner"></div>
-
-        </div>
-
-    </section>
-        <!-- =======================================
-    23 REASONS
-    ======================================== -->
-
-    <section
-        id="reasonsScreen"
-        class="screen">
-
-        <div class="screenContent">
-
-            <h1>
-
-                23 Reasons Why You're Amazing ❤️
-
-            </h1>
-
-            <p>
-
-                Open every envelope to discover
-                something special.
-
-            </p>
-
-            <div id="reasonsGrid">
-
-                <!-- JavaScript creates 23 envelopes -->
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    MAILBOX
-    ======================================== -->
-
-    <section
-        id="mailboxScreen"
-        class="screen">
-
-        <div class="screenContent">
-
-            <h1>
-
-                One Last Surprise 💌
-
-            </h1>
-
-            <p>
-
-                There's still something
-                I want to tell you.
-
-            </p>
-
-            <div id="mailbox">
-
-                <div class="mailFlag"></div>
-
-                <div class="mailBody"></div>
-
-                <div class="mailSlot"></div>
-
-            </div>
-
-            <div id="letterEnvelope"></div>
-
-            <div id="letterPaper">
-
-                <div id="typedLetter"></div>
-
-                <div id="signature">
-
-                    — Veilwalker 🤍
-
-                </div>
-
-            </div>
-
-            <button
-
-                id="continueJourney"
-
-                class="primaryButton">
-
-                Continue ❤️
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    MEMORY SKY
-    ======================================== -->
-
-    <section
-        id="endingScreen"
-        class="screen">
-
-        <div id="memorySky">
-
-            <div id="moon"></div>
-
-            <div id="stars"></div>
-
-            <div id="floatingHearts"></div>
-
-        </div>
-
-        <div id="finalWords">
-
-            <h1>
-
-                Happy Birthday
-
-                <br>
-
-                Busayo ❤️
-
-            </h1>
-
-            <p>
-
-                Thank you for taking this little journey.
-
-                I hope today reminds you how deeply loved,
-
-                appreciated and cherished you are.
-
-                May your smile never fade,
-
-                your dreams come true,
-
-                and your heart always find peace.
-
-            </p>
-
-            <button
-
-                id="restartJourney"
-
-                class="primaryButton">
-
-                Begin Again ❤️
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- =======================================
-    PHOTO MODAL
-    ======================================== -->
-
-    <div id="photoModal">
-
-        <span id="closePhoto">
-
-            &times;
-
-        </span>
-
-        <img
-
-            id="modalImage"
-
-            src=""
-
-            alt="Memory">
-
-        <div id="modalCaption"></div>
-
     </div>
 
-    <!-- =======================================
-    JAVASCRIPT
-    ======================================== -->
+    <!-- ============================================
+         2. COUNTDOWN SCREEN
+         ============================================ -->
+    <div id="countdownScreen" class="screen">
+        <div class="countdown-container">
+            <div class="countdown-number" id="countdownNumber">3</div>
+            <div class="countdown-arrow">↓</div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         3. HAPPY BIRTHDAY REVEAL
+         ============================================ -->
+    <div id="birthdayScreen" class="screen">
+        <div class="birthday-content">
+            <h1 class="birthday-text">HAPPY BIRTHDAY BUSAYO</h1>
+            <button class="birthday-button" onclick="goToNextScreen()">Begin The Journey ❤️</button>
+        </div>
+        <div id="confettiContainer" class="confetti-container"></div>
+    </div>
+
+    <!-- ============================================
+         4. COVER PAGE
+         ============================================ -->
+    <div id="coverPage" class="screen">
+        <div class="cover-container">
+            <div class="cover-image-wrapper">
+                <img src="images/cover.jpg" alt="Cover" class="cover-image">
+            </div>
+            <div class="cover-text-wrapper">
+                <h2 class="cover-title">To Busayo,</h2>
+                <p class="cover-subtitle">With Love 🤍</p>
+                <p class="cover-message">I made something for you...</p>
+                <p class="cover-message">I hope it makes you smile.</p>
+                <button class="continue-button" onclick="goToNextScreen()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         5. PASSWORD SCREEN
+         ============================================ -->
+    <div id="passwordScreen" class="screen">
+        <div class="password-container">
+            <div class="password-image">
+                <img src="images/cover.jpg" alt="Cover">
+            </div>
+            <div class="password-card">
+                <div class="password-icon">🔐</div>
+                <h2>Every beautiful surprise deserves a little secret.</h2>
+                <p>Enter the password to unlock the treasure.</p>
+                <input type="password" id="passwordInput" class="password-input" placeholder="Enter password">
+                <button class="unlock-button" onclick="checkPassword()">Unlock</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         6. TREASURE CHEST
+         ============================================ -->
+    <div id="treasureScreen" class="screen">
+        <div class="treasure-container">
+            <div class="treasure-chest" id="treasureChest" onclick="openTreasure()">
+                <div class="treasure-chest-lid"></div>
+                <div class="treasure-lock">🔓</div>
+                <div class="treasure-glow"></div>
+            </div>
+            <p class="treasure-message" id="treasureMessage" style="display: none;">Every treasure tells a story...</p>
+            <button class="continue-button" id="treasureButton" style="display: none;" onclick="goToNextScreen()">Continue</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         7. MEMORY BOOK
+         ============================================ -->
+    <div id="memoryBook" class="screen">
+        <div class="book-container">
+            <div class="book">
+                <div class="book-spine">📖</div>
+                <div class="book-pages" id="bookPages">
+                    <!-- Pages will be generated by JavaScript -->
+                </div>
+                <div class="book-controls">
+                    <button class="page-button" id="prevPageBtn" onclick="previousPage()">← Previous</button>
+                    <button class="page-button" id="nextPageBtn" onclick="nextPage()">Next →</button>
+                </div>
+                <div class="page-counter" id="pageCounter">Page 1 of 12</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         8. CATCH MY HEART GAME
+         ============================================ -->
+    <div id="gameScreen" class="screen">
+        <div class="game-container">
+            <h2 class="game-title">Catch My Heart</h2>
+            <div class="game-stats">
+                <div class="game-stat">
+                    <div class="game-stat-label">Score</div>
+                    <div class="game-stat-value" id="gameScore">0</div>
+                </div>
+                <div class="game-stat">
+                    <div class="game-stat-label">Time</div>
+                    <div class="game-stat-value" id="gameTimer">60</div>
+                </div>
+            </div>
+            <div class="game-canvas" id="gameCanvas"></div>
+            <button class="game-button" id="gameButton" onclick="startGame()">Start Game</button>
+            <button class="game-button" style="display: none;" id="nextAfterGame" onclick="goToNextScreen()">Next</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         9. CAKE BUILDER
+         ============================================ -->
+    <div id="cakeScreen" class="screen">
+        <div class="cake-container">
+            <h2 class="cake-title">Build My Birthday Cake</h2>
+            <div class="cake-canvas" id="cakeCanvas">
+                <div class="cake-base">
+                    <div class="cake-frosting"></div>
+                </div>
+            </div>
+            <div class="decoration-palette">
+                <button class="decoration-btn" onclick="addDecoration('🍓')">🍓</button>
+                <button class="decoration-btn" onclick="addDecoration('🍒')">🍒</button>
+                <button class="decoration-btn" onclick="addDecoration('🍫')">🍫</button>
+                <button class="decoration-btn" onclick="addDecoration('🌸')">🌸</button>
+                <button class="decoration-btn" onclick="addDecoration('🎀')">🎀</button>
+                <button class="decoration-btn" onclick="addDecoration('🕯️')">🕯️</button>
+            </div>
+            <div id="cakeBanner" class="cake-banner" style="display: none;">Happy Birthday Busayo ❤️</div>
+            <button class="game-button" id="cakeNextBtn" style="display: none;" onclick="goToNextScreen()">Next</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         10. 23 REASONS
+         ============================================ -->
+    <div id="reasonsScreen" class="screen">
+        <div class="reasons-container">
+            <h2 class="reasons-title">23 Reasons Why You Are Awesome ❤️</h2>
+            <div class="envelopes-grid" id="envelopesGrid">
+                <!-- Envelopes will be generated by JavaScript -->
+            </div>
+            <button class="continue-button" onclick="goToNextScreen()" style="align-self: center; margin-top: 2rem;">Continue</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         11. MAILBOX
+         ============================================ -->
+    <div id="mailboxScreen" class="screen">
+        <div class="mailbox-container">
+            <h2 style="color: #d4af37; letter-spacing: 2px;">Open The Mailbox</h2>
+            <div class="mailbox" id="mailbox" onclick="openMailbox()">
+                <div class="mailbox-door"></div>
+                <div class="mailbox-flag"></div>
+                <div class="mailbox-letter"></div>
+            </div>
+            <p class="mailbox-text">Click to open</p>
+            <button class="continue-button" id="mailboxNextBtn" style="display: none;" onclick="goToNextScreen()">Continue</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         12. LOVE LETTER
+         ============================================ -->
+    <div id="letterScreen" class="screen">
+        <div class="letter-container">
+            <h2 style="color: #d4af37; letter-spacing: 2px; margin-bottom: 1rem;">A Letter For You</h2>
+            <div class="letter-envelope" id="letterEnvelope" onclick="openLetter()">
+                <div class="letter-flap">💌</div>
+                <div class="letter-paper">
+                    <div class="letter-content" id="letterContent">
+                        <!-- Letter content will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            <button class="continue-button" id="letterNextBtn" style="display: none;" onclick="goToNextScreen()">Continue</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         13. MOON ENDING
+         ============================================ -->
+    <div id="moonScreen" class="screen">
+        <div class="moon-container">
+            <div class="moon">
+                <div class="moon-craters"></div>
+            </div>
+            <p class="moon-text">In the quiet of the night...</p>
+            <p class="moon-text">My heart is always with you</p>
+            <div id="moonHearts"></div>
+            <div id="moonStars"></div>
+            <button class="continue-button" onclick="goToNextScreen()" style="margin-top: 2rem;">Continue</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         14. FINAL MESSAGE
+         ============================================ -->
+    <div id="finalScreen" class="screen">
+        <div class="final-container">
+            <h1 class="final-title">Happy Birthday Busayo ❤️</h1>
+            <div class="final-message">
+                <p>Today is your day to shine, to celebrate everything you are, and to know how deeply loved you are. Every moment with you is a gift, and every memory we share is treasured in my heart.</p>
+                <p>You bring light, joy, and love into my life in ways words could never fully capture. Your smile, your kindness, your strength—these are the things that make my world brighter.</p>
+                <p>I hope this little journey through our memories reminds you of how special you are to me. Not just today, but every single day.</p>
+                <p style="margin-top: 2rem; font-weight: 600;">One Last Thing...</p>
+            </div>
+            <button class="final-reveal-btn" onclick="revealFinal()">Click Here</button>
+            <div class="final-reveal" id="finalReveal">I love you more than words could ever explain. 🤍</div>
+            <button class="restart-button" id="restartBtn" style="display: none;" onclick="restartJourney()">Begin Again ❤️</button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" src="music/BrunoMars.mp3"></audio>
 
     <script src="script.js"></script>
-
 </body>
-
 </html>
