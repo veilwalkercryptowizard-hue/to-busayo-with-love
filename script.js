@@ -1780,3 +1780,927 @@ showCakeGame();
 
 }
 
+/*====================================================
+BUILD THE BIRTHDAY CAKE
+====================================================*/
+
+const cakeBase =
+document.getElementById("cakeBase");
+
+const cakeTools =
+document.getElementById("cakeTools");
+
+const birthdayBanner =
+document.getElementById("birthdayBanner");
+
+let cakePiecesPlaced = 0;
+
+const requiredPieces = 7;
+
+/*====================================================
+CAKE ITEMS
+====================================================*/
+
+const cakeItems = [
+
+{
+emoji:"🍰",
+name:"Frosting"
+},
+
+{
+emoji:"🍫",
+name:"Chocolate"
+},
+
+{
+emoji:"🍓",
+name:"Strawberries"
+},
+
+{
+emoji:"🌹",
+name:"Roses"
+},
+
+{
+emoji:"✨",
+name:"Gold Stars"
+},
+
+{
+emoji:"🫐",
+name:"Blueberries"
+},
+
+{
+emoji:"🕯",
+name:"Candles"
+}
+
+];
+
+/*====================================================
+START CAKE GAME
+====================================================*/
+
+function showCakeGame(){
+
+cakeTools.innerHTML="";
+
+cakeBase.innerHTML="";
+
+cakePiecesPlaced=0;
+
+cakeItems.forEach(createCakeItem);
+
+}
+
+/*====================================================
+CREATE ITEM
+====================================================*/
+
+function createCakeItem(item){
+
+const tool=document.createElement("div");
+
+tool.className="cakeItem";
+
+tool.textContent=item.emoji;
+
+tool.draggable=true;
+
+tool.dataset.name=item.name;
+
+cakeTools.appendChild(tool);
+
+tool.addEventListener(
+
+"dragstart",
+
+dragStart
+
+);
+
+}
+
+/*====================================================
+DRAG
+====================================================*/
+
+let draggedItem=null;
+
+function dragStart(event){
+
+draggedItem=
+
+event.target;
+
+}
+
+/*====================================================
+DROP
+====================================================*/
+
+cakeBase.addEventListener(
+
+"dragover",
+
+event=>{
+
+event.preventDefault();
+
+});
+
+cakeBase.addEventListener(
+
+"drop",
+
+dropItem
+
+);
+
+function dropItem(event){
+
+event.preventDefault();
+
+if(!draggedItem) return;
+
+placeDecoration(
+
+draggedItem.textContent,
+
+event.offsetX,
+
+event.offsetY
+
+);
+
+draggedItem.remove();
+
+cakePiecesPlaced++;
+
+checkCake();
+
+}
+
+/*====================================================
+PLACE
+====================================================*/
+
+function placeDecoration(
+
+emoji,
+
+x,
+
+y
+
+){
+
+const piece=
+
+document.createElement("div");
+
+piece.textContent=emoji;
+
+piece.style.position="absolute";
+
+piece.style.left=x-15+"px";
+
+piece.style.top=y-15+"px";
+
+piece.style.fontSize="36px";
+
+piece.style.pointerEvents="none";
+
+piece.animate(
+
+[
+
+{
+
+transform:"scale(.2)",
+
+opacity:0
+
+},
+
+{
+
+transform:"scale(1.2)",
+
+opacity:1
+
+},
+
+{
+
+transform:"scale(1)"
+
+}
+
+],
+
+{
+
+duration:500,
+
+fill:"forwards"
+
+}
+
+);
+
+cakeBase.appendChild(piece);
+
+}
+
+/*====================================================
+CHECK
+====================================================*/
+
+function checkCake(){
+
+if(
+
+cakePiecesPlaced
+
+>=requiredPieces
+
+){
+
+finishCake();
+
+}
+
+}
+
+/*====================================================
+FINISH
+====================================================*/
+
+async function finishCake(){
+
+lightCandles();
+
+createConfetti();
+
+await sleep(1200);
+
+birthdayBanner.classList.add("show");
+
+await sleep(4000);
+
+goToReasons();
+
+}
+
+/*====================================================
+LIGHT CANDLES
+====================================================*/
+
+function lightCandles(){
+
+const flames=
+
+document.createElement("div");
+
+flames.innerHTML="🕯✨";
+
+flames.style.position="absolute";
+
+flames.style.left="50%";
+
+flames.style.top="-30px";
+
+flames.style.transform=
+
+"translateX(-50%)";
+
+flames.style.fontSize="50px";
+
+cakeBase.appendChild(
+
+flames
+
+);
+
+}
+
+birthdayBanner.innerHTML = `
+
+<h1>🎉 Happy Birthday 🎉</h1>
+
+<h2>Busayo 🤍</h2>
+
+<p>
+
+May your new year be filled
+
+with laughter,
+
+peace,
+
+beautiful surprises,
+
+and unforgettable memories.
+
+</p>
+
+`;
+
+/*====================================================
+NEXT
+====================================================*/
+
+async function goToReasons(){
+
+pageTurn();
+
+await sleep(1000);
+
+currentChapter=6;
+
+saveProgress();
+
+showScreen("chapter6");
+
+buildReasons();
+
+}
+
+/*====================================================
+23 REASONS
+====================================================*/
+
+const reasonsGrid =
+document.getElementById("reasonsGrid");
+
+const reasonsFinished =
+document.getElementById("reasonsFinished");
+
+let openedLetters = 0;
+
+/*====================================================
+BUILD ENVELOPES
+====================================================*/
+
+function buildReasons(){
+
+reasonsGrid.innerHTML="";
+
+openedLetters=0;
+
+reasons.forEach((reason,index)=>{
+
+createEnvelope(reason,index);
+
+});
+
+}
+
+/*====================================================
+CREATE ENVELOPE
+====================================================*/
+
+function createEnvelope(reason,index){
+
+const envelope=
+
+document.createElement("div");
+
+envelope.className=
+
+"reasonEnvelope";
+
+envelope.innerHTML=`
+
+<div class="body"></div>
+
+<div class="flap"></div>
+
+<div class="seal"></div>
+
+<div class="reasonLetter">
+
+${reason}
+
+</div>
+
+<div class="reasonNumber">
+
+${index+1}
+
+</div>
+
+`;
+
+if(index===22){
+
+envelope.classList.add("gold");
+
+setInterval(()=>{
+
+envelope.classList.toggle(
+
+"pulse"
+
+);
+
+},1400);
+
+}
+
+envelope.onclick=()=>{
+
+openEnvelope(envelope);
+
+};
+
+reasonsGrid.appendChild(envelope);
+
+}
+
+/*====================================================
+OPEN
+====================================================*/
+
+function openEnvelope(envelope){
+
+if(
+
+envelope.classList.contains("open")
+
+)
+
+return;
+
+envelope.classList.add("open");
+
+openedLetters++;
+
+saveProgress();
+
+createEnvelopeSparkles(envelope);
+
+checkReasons();
+
+}
+
+/*====================================================
+SPARKLES
+====================================================*/
+
+function createEnvelopeSparkles(envelope){
+
+const rect=
+
+envelope.getBoundingClientRect();
+
+for(let i=0;i<15;i++){
+
+const spark=
+
+document.createElement("div");
+
+spark.className="reasonSpark";
+
+spark.style.left=
+
+rect.left+
+
+rect.width/2+
+
+(Math.random()*40-20)+"px";
+
+spark.style.top=
+
+rect.top+
+
+40+"px";
+
+document.body.appendChild(spark);
+
+setTimeout(()=>{
+
+spark.remove();
+
+},900);
+
+}
+
+}
+
+/*====================================================
+CHECK
+====================================================*/
+
+function checkReasons(){
+
+if(openedLetters===23){
+
+finishReasons();
+
+}
+
+}
+
+/*====================================================
+FINISH
+====================================================*/
+
+async function finishReasons(){
+
+const envelopes=
+
+document.querySelectorAll(
+
+".reasonEnvelope"
+
+);
+
+envelopes.forEach((env,index)=>{
+
+setTimeout(()=>{
+
+env.style.transition="1.8s";
+
+env.style.transform=
+
+"translateY(-250px) rotate("+
+
+(Math.random()*40-20)
+
++"deg)";
+
+env.style.opacity=0;
+
+},index*80);
+
+});
+
+await sleep(2800);
+
+showMailbox();
+
+}
+
+/*====================================================
+MAILBOX
+====================================================*/
+
+function showMailbox(){
+
+reasonsFinished.classList.add(
+
+"show"
+
+);
+
+reasonsFinished.innerHTML=`
+
+<h2>
+
+💌
+
+</h2>
+
+<p>
+
+You've discovered every little reason.
+
+One final message
+
+is waiting for you.
+
+</p>
+
+<button
+
+class="primaryButton"
+
+id="openMailbox"
+
+>
+
+Open My Letter
+
+</button>
+
+`;
+
+document
+
+.getElementById(
+
+"openMailbox"
+
+)
+
+.addEventListener(
+
+"click",
+
+goToLetter
+
+);
+
+}
+
+/*====================================================
+NEXT
+====================================================*/
+
+async function goToLetter(){
+
+pageTurn();
+
+await sleep(900);
+
+currentChapter=7;
+
+saveProgress();
+
+showScreen("chapter7");
+
+startMailbox();
+
+}
+
+/*====================================================
+MAILBOX ENGINE
+====================================================*/
+
+const mailbox =
+document.getElementById("mailbox");
+
+const mailboxFlag =
+document.querySelector(".mailFlag");
+
+const mailboxBird =
+document.querySelector(".mailBird");
+
+const envelope =
+document.getElementById("letterEnvelope");
+
+const letter =
+document.getElementById("letterPaper");
+
+const typedLetter =
+document.getElementById("typedLetter");
+
+const signature =
+document.getElementById("signature");
+
+const continueJourney =
+document.getElementById("continueJourney");
+
+let mailboxOpened=false;
+
+/*====================================================
+START
+====================================================*/
+
+async function startMailbox(){
+
+mailbox.classList.remove("open");
+
+mailboxFlag.classList.remove("up");
+
+envelope.classList.remove("show");
+
+letter.classList.remove("show");
+
+typedLetter.textContent="";
+
+signature.style.opacity=0;
+
+continueJourney.style.display="none";
+
+mailbox.onclick=openMailbox;
+
+}
+
+/*====================================================
+OPEN
+====================================================*/
+
+async function openMailbox(){
+
+if(mailboxOpened) return;
+
+mailboxOpened=true;
+
+mailbox.onclick=null;
+
+/* Bird */
+
+birdFlyAway();
+
+/* Flag */
+
+await sleep(500);
+
+mailboxFlag.classList.add("up");
+
+/* Door */
+
+await sleep(700);
+
+mailbox.classList.add("open");
+
+/* Envelope */
+
+await sleep(900);
+
+envelope.classList.add("show");
+
+/* Paper */
+
+await sleep(1800);
+
+showLetter();
+
+}
+
+/*====================================================
+BIRD
+====================================================*/
+
+function birdFlyAway(){
+
+mailboxBird.animate(
+
+[
+
+{
+
+transform:"translate(0,0)"
+
+},
+
+{
+
+transform:"translate(120px,-180px)"
+
+},
+
+{
+
+transform:"translate(300px,-350px)"
+
+}
+
+],
+
+{
+
+duration:1800,
+
+fill:"forwards"
+
+}
+
+);
+
+}
+
+/*====================================================
+LETTER
+====================================================*/
+
+async function showLetter(){
+
+letter.classList.add("show");
+
+await sleep(1000);
+
+typeLetter();
+
+}
+
+/*====================================================
+TYPEWRITER
+====================================================*/
+
+async function typeLetter(){
+
+typedLetter.textContent="";
+
+const text=LETTER;
+
+for(let i=0;i<text.length;i++){
+
+typedLetter.textContent+=text[i];
+
+window.scrollTo({
+
+top:document.body.scrollHeight,
+
+behavior:"smooth"
+
+});
+
+/* punctuation pauses */
+
+if(text[i]==="."){
+
+await sleep(220);
+
+}
+
+else if(text[i]===","){
+
+await sleep(120);
+
+}
+
+else if(text[i]==="\n"){
+
+await sleep(400);
+
+}
+
+else{
+
+await sleep(
+
+18+
+
+Math.random()*35
+
+);
+
+}
+
+}
+
+finishLetter();
+
+}
+
+/*====================================================
+FINISH
+====================================================*/
+
+async function finishLetter(){
+
+await sleep(1000);
+
+signature.style.opacity=1;
+
+signature.style.transition="1.5s";
+
+await sleep(1500);
+
+showPostScript();
+
+}
+
+/*====================================================
+POSTSCRIPT
+====================================================*/
+
+async function showPostScript(){
+
+const ps=
+
+document.createElement("p");
+
+ps.className="postScript";
+
+ps.innerHTML=
+
+"<strong>P.S.</strong><br>Thank you for existing 🤍";
+
+letter.appendChild(ps);
+
+await sleep(1500);
+
+continueJourney.style.display="inline-flex";
+
+continueJourney.style.opacity=1;
+
+}
+
+/*====================================================
+NEXT
+====================================================*/
+
+continueJourney.onclick=async()=>{
+
+pageTurn();
+
+await sleep(900);
+
+currentChapter=8;
+
+saveProgress();
+
+showScreen("endingPage");
+
+startEnding();
+
+};
+
