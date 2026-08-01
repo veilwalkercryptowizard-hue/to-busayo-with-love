@@ -1,773 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Busayo, With Love ❤️</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 
-    <title>To Busayo, With Love 🤍</title>
-
-    <!-- Google Fonts -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@400;700&display=swap"
-          rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="style.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- ==========================================================
-BACKGROUND EFFECTS
-=========================================================== -->
+<!-- MUSIC -->
+<audio id="birthdayMusic" preload="auto" loop>
+    <source src="BrunoMars.mp3" type="audio/mpeg">
+</audio>
 
-<div id="backgroundEffects">
+<!-- LOADING -->
+<section id="loadingScreen" class="screen active">
+    <div class="loader"></div>
+    <h1>Preparing Something Special...</h1>
+</section>
 
-    <div id="stars"></div>
+<!-- COUNTDOWN -->
+<section id="countdownScreen" class="screen">
+    <div class="countdownBox">
+        <h1 id="countNumber">3</h1>
+    </div>
+</section>
 
-    <div id="sparkles"></div>
-
-    <div id="fireflies"></div>
-
-    <div id="floatingHearts"></div>
-
-    <div id="confetti"></div>
+<!-- HAPPY BIRTHDAY -->
+<section id="birthdayScreen" class="screen">
 
     <div id="balloons"></div>
 
-</div>
+    <h1 class="birthdayTitle">
+        🎉 Happy Birthday Beautiful 🎉
+    </h1>
 
-<!-- ==========================================================
-MUSIC
-=========================================================== -->
+    <p class="birthdayText">
 
-<audio
-id="birthdayMusic"
-loop>
+        Today isn't just another day.
 
-    <source
-        src="music/BrunoMars.mp3"
-        type="audio/mpeg">
+        It's a celebration of someone incredibly special.
 
-</audio>
+        I made something just for you.
 
-<!-- ==========================================================
-LOADING SCREEN
-=========================================================== -->
+        I hope it makes you smile.
 
-<section
-id="loadingScreen"
-class="screen active">
+    </p>
 
-    <div class="loadingContent">
-
-        <h1>
-
-            To Busayo,
-            With Love
-
-        </h1>
-
-        <p>
-
-            Preparing something beautiful...
-
-        </p>
-
-        <div class="loadingBar">
-
-            <div id="loadingFill"></div>
-
-        </div>
-
-    </div>
+    <button id="beginSurprise" class="primaryButton">
+        Start The Surprise ❤️
+    </button>
 
 </section>
 
-<!-- ==========================================================
-COUNTDOWN
-=========================================================== -->
+<!-- INTRO -->
+<section id="introScreen" class="screen">
 
-<section
-id="countdownScreen"
-class="screen">
+    <img src="images/cover.jpg" class="coverImage">
 
-    <h1 id="countNumber">
+    <h1 class="loveTitle">
 
-        3
+        To Busayo,
+
+        <br>
+
+        With Love 🤍
 
     </h1>
 
 </section>
 
-<!-- ==========================================================
-HAPPY BIRTHDAY
-=========================================================== -->
-
-<section
-id="birthdayScreen"
-class="screen">
-
-    <div class="birthdayContent">
-
-        <h1>
-
-            Happy Birthday Beautiful 🤍
-
-        </h1>
-
-        <p>
-
-            Some gifts are wrapped in paper...
-
-        </p>
-
-        <p>
-
-            This one is wrapped in memories.
-
-        </p>
-
-        <button
-        id="beginSurprise"
-        class="primaryButton">
-
-            Begin Your Surprise
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================================================
-MOVIE TITLE
-=========================================================== -->
-
-<section
-id="movieTitle"
-class="screen">
-
-    <div class="movieTitleContent">
-
-        <p>
-
-            A Digital Story
-
-        </p>
-
-        <h1>
-
-            TO BUSAYO,
-
-            <br>
-
-            WITH LOVE
-
-        </h1>
-
-    </div>
-
-</section>
-
-<!-- ==========================================================
-PASSWORD PAGE
-=========================================================== -->
-
-<section
-id="passwordPage"
-class="screen">
+<!-- PASSWORD -->
+<section id="passwordPage" class="screen">
 
     <div class="passwordCard">
 
-        <div class="leftSide">
+        <h2>🔐</h2>
 
-            <img
-            src="images/cover.jpg"
-            alt="Cover">
+        <p>
 
-        </div>
+            Every special gift deserves a secret.
 
-        <div class="rightSide">
+        </p>
 
-            <span class="chapterTag">
-
-                PRIVATE INVITATION
-
-            </span>
-
-            <h1>
-
-                Welcome,
-                Beautiful 🤍
-
-            </h1>
-
-            <p>
-
-                This little corner of the internet
-
-                was made only for you.
-
-            </p>
-
-            <input
+        <input
 
             id="password"
 
             type="password"
 
-            placeholder="Enter Password">
+            placeholder="Enter Password"
 
-            <small>
+        >
 
-                Hint:
-
-                My birth month.
-
-            </small>
-
-            <button
+        <button
 
             id="unlockButton"
 
-            class="primaryButton">
+            class="primaryButton"
 
-                Unlock My Surprise
+        >
 
-            </button>
+            Unlock
 
-            <p id="error"></p>
+        </button>
 
-        </div>
+        <small id="error"></small>
 
     </div>
 
 </section>
 
-  <!-- ==========================================================
-CHAPTER ONE
-=========================================================== -->
+<!-- CHAPTERS -->
 
-<section id="chapter1" class="screen chapter">
+<section id="chapter1" class="screen">
 
-    <div class="storyContainer">
+    <h1>Welcome ❤️</h1>
 
-        <div class="chapterProgress">
+</section>
 
-            <div class="progressBar">
-                <div class="progressFill" style="width:14%"></div>
-            </div>
+<section id="chapter2" class="screen">
 
-            <span>CHAPTER ONE</span>
+    <div id="treasureChest">
 
-        </div>
+        <div class="lid"></div>
 
-        <h1>Once Upon A Birthday</h1>
+        <div class="box"></div>
 
-        <p id="chapterOneText"></p>
+        <div class="lock"></div>
 
-        <button
-            id="toChapter2"
-            class="primaryButton">
+    </div>
 
-            Turn The Page →
+    <button
 
-        </button>
+        id="openChest"
+
+        class="primaryButton"
+
+    >
+
+        Open Treasure Chest
+
+    </button>
+
+</section>
+
+<section id="chapter3" class="screen">
+
+    <div id="memoryDesk"></div>
+
+</section>
+
+<section id="chapter4" class="screen">
+
+    <div id="filmProjector">
+
+        <div id="filmStrip"></div>
+
+        <div id="finalFrame"></div>
 
     </div>
 
 </section>
 
-<!-- ==========================================================
-CHAPTER TWO
-=========================================================== -->
+<section id="chapter5" class="screen">
 
-<section id="chapter2" class="screen chapter">
+    <h2>❤️ Catch The Hearts ❤️</h2>
 
-    <div class="storyContainer">
+    <div id="gameHUD">
 
-        <div class="chapterProgress">
+        <span>
 
-            <div class="progressBar">
-                <div class="progressFill" style="width:28%"></div>
-            </div>
+            Score :
 
-            <span>CHAPTER TWO</span>
+            <strong id="heartScore">0</strong>
 
-        </div>
+        </span>
 
-        <h1>The Keepsake Chest</h1>
+        <span>
 
-        <p>
+            Time :
 
-            Every beautiful memory deserves
-            a place to live forever.
+            <strong id="heartTimer">60</strong>
 
-        </p>
-
-        <div class="treasureArea">
-
-            <div
-                id="treasureChest"
-                class="treasureChest">
-
-                <div class="goldLight"></div>
-
-                <div class="chestLid"></div>
-
-                <div class="chestBody"></div>
-
-                <div class="chestLock"></div>
-
-            </div>
-
-        </div>
-
-        <button
-            id="openChest"
-            class="primaryButton">
-
-            Open The Chest ✨
-
-        </button>
+        </span>
 
     </div>
 
+    <div id="heartCanvas"></div>
+
 </section>
 
-<!-- ==========================================================
-CHAPTER THREE
-=========================================================== -->
+<section id="chapter6" class="screen">
 
-<section id="chapter3" class="screen chapter">
+    <h2>Build My Birthday Cake 🎂</h2>
 
-    <div class="storyContainer">
+    <div id="cakeArea">
 
-        <div class="chapterProgress">
+        <div id="cakeBase"></div>
 
-            <div class="progressBar">
-                <div class="progressFill" style="width:42%"></div>
-            </div>
-
-            <span>CHAPTER THREE</span>
-
-        </div>
-
-        <h1>Little Pieces Of Us</h1>
-
-        <p>
-
-            Some moments never fade.
-            They simply wait to be remembered.
-
-        </p>
-
-        <div id="memoryDesk">
-
-            <!-- JavaScript places Polaroids here -->
-
-        </div>
-
-        <button
-            id="replayMemories"
-            class="primaryButton">
-
-            Let's Watch Them Again
-
-        </button>
-
-        <button
-            id="toChapter4"
-            class="primaryButton">
-
-            Continue →
-
-        </button>
+        <div id="cakeTools"></div>
 
     </div>
 
+    <div id="birthdayBanner"></div>
+
 </section>
 
-<!-- ==========================================================
-CHAPTER FOUR
-=========================================================== -->
+<section id="chapter7" class="screen">
 
-<section id="chapter4" class="screen chapter">
+    <h2>
 
-    <div class="storyContainer">
+        23 Reasons You're Amazing ❤️
 
-        <div class="chapterProgress">
+    </h2>
 
-            <div class="progressBar">
-                <div class="progressFill" style="width:56%"></div>
-            </div>
+    <div id="reasonsGrid"></div>
 
-            <span>CHAPTER FOUR</span>
+    <div id="reasonsFinished"></div>
 
-        </div>
+</section>
 
-        <h1>Through Our Eyes</h1>
+<section id="chapter8" class="screen">
 
-        <p>
+    <div id="mailbox">
 
-            Every story has a favourite frame.
+        <div class="mailFlag"></div>
 
-        </p>
-
-        <div id="filmProjector">
-
-            <div id="filmStrip"></div>
-
-        </div>
-
-        <blockquote>
-
-            “Out of every moment...
-            this one became my favourite.”
-
-        </blockquote>
-
-        <button
-            id="toGames"
-            class="primaryButton">
-
-            Continue →
-
-        </button>
+        <div class="mailBird">🐦</div>
 
     </div>
 
-</section>
+    <div id="letterEnvelope"></div>
 
-<!-- ==========================================================
-CHAPTER FIVE - BIRTHDAY CHALLENGE
-=========================================================== -->
+    <div id="letterPaper">
 
-<section id="chapter5" class="screen chapter">
+        <div id="typedLetter"></div>
 
-    <div class="storyContainer">
+        <div id="signature">
 
-        <div class="chapterProgress">
-
-            <div class="progressBar">
-                <div class="progressFill" style="width:70%"></div>
-            </div>
-
-            <span>CHAPTER FIVE</span>
+            — Veilwalker 🤍
 
         </div>
-
-        <h1>A Birthday Challenge</h1>
-
-        <p>
-
-            Before we continue...
-
-            Let's have a little fun together.
-
-        </p>
-
-        <div class="gameSelection">
-
-            <button
-                id="playHearts"
-                class="primaryButton">
-
-                ❤️ Catch The Hearts
-
-            </button>
-
-            <button
-                id="playCake"
-                class="primaryButton">
-
-                🎂 Build The Cake
-
-            </button>
-
-        </div>
-
-        <!-- Hearts Game -->
-
-        <div
-            id="heartGame"
-            class="gameArea hidden">
-
-            <div class="gameHeader">
-
-                <span>
-
-                    Score:
-                    <strong id="heartScore">0</strong>
-
-                </span>
-
-                <span>
-
-                    Time:
-                    <strong id="heartTimer">30</strong>
-
-                </span>
-
-            </div>
-
-            <div id="heartCanvas"></div>
-
-        </div>
-
-        <!-- Cake Game -->
-
-        <div
-            id="cakeGame"
-            class="gameArea hidden">
-
-            <h2>
-
-                Decorate Your Cake
-
-            </h2>
-
-            <div id="cakeWorkspace">
-
-                <div id="cakeBase"></div>
-
-            </div>
-
-            <div id="cakeTools">
-
-                <!-- JavaScript creates decorations -->
-
-            </div>
-
-        </div>
-
-        <button
-            id="toReasons"
-            class="primaryButton">
-
-            Continue →
-
-        </button>
 
     </div>
 
+    <button
+
+        id="continueJourney"
+
+        class="primaryButton"
+
+    >
+
+        Continue
+
+    </button>
+
 </section>
 
-<!-- ==========================================================
-CHAPTER SIX - 23 REASONS
-=========================================================== -->
+<section id="endingPage" class="screen">
 
-<section id="chapter6" class="screen chapter">
+    <div id="memorySky">
 
-    <div class="storyContainer">
+        <div id="moon"></div>
 
-        <div class="chapterProgress">
+    </div>
 
-            <div class="progressBar">
-                <div class="progressFill" style="width:82%"></div>
-            </div>
-
-            <span>CHAPTER SIX</span>
-
-        </div>
+    <div id="finalWords">
 
         <h1>
 
-            Twenty-Three Little Truths
+            Every beautiful story
+
+            deserves another beginning.
 
         </h1>
 
-        <p>
-
-            Every envelope holds
-            something I've always wanted
-            you to know.
-
-        </p>
-
-        <div id="reasonsGrid">
-
-            <!-- JavaScript creates 23 envelopes -->
-
-        </div>
-
         <button
-            id="toLetter"
-            class="primaryButton">
 
-            Continue →
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================================================
-CHAPTER SEVEN - LETTER
-=========================================================== -->
-
-<section id="chapter7" class="screen chapter">
-
-    <div class="storyContainer">
-
-        <div class="chapterProgress">
-
-            <div class="progressBar">
-                <div class="progressFill" style="width:94%"></div>
-            </div>
-
-            <span>CHAPTER SEVEN</span>
-
-        </div>
-
-        <h1>
-
-            Words I Couldn't Leave Unsaid
-
-        </h1>
-
-        <p>
-
-            There's one last thing
-            I'd like you to read.
-
-        </p>
-
-        <div id="mailboxContainer">
-
-            <div id="mailbox">
-
-                📬
-
-            </div>
-
-            <div id="letterEnvelope">
-
-                💌
-
-            </div>
-
-        </div>
-
-        <div id="letterPaper">
-
-            <h2>
-
-                Dear Busayo,
-
-            </h2>
-
-            <div id="typedLetter"></div>
-
-            <div id="signature">
-
-                — Veilwalker 🤍
-
-            </div>
-
-        </div>
-
-        <button
-            id="toEnding"
-            class="primaryButton">
-
-            Continue →
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================================================
-FINAL CHAPTER
-=========================================================== -->
-
-<section id="endingPage" class="screen chapter">
-
-    <div class="storyContainer">
-
-        <h1>
-
-            Happy Birthday,
-            Busayo 🤍
-
-        </h1>
-
-        <img
-            src="images/us.jpg"
-            class="endingPhoto"
-            alt="Us">
-
-        <p>
-
-            Thank you for taking this journey.
-
-            <br><br>
-
-            This wasn't just a website.
-
-            <br><br>
-
-            It was a little piece of my heart.
-
-        </p>
-
-        <button
-            id="toMemorySky"
-            class="primaryButton">
-
-            One Last Surprise ✨
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================================================
-SECRET MEMORY SKY
-=========================================================== -->
-
-<section id="secretPage" class="screen chapter">
-
-    <div class="storyContainer">
-
-        <h1>
-
-            The Memory Sky
-
-        </h1>
-
-        <p>
-
-            Every star holds
-            a little memory.
-
-        </p>
-
-        <div id="memorySky">
-
-            <!-- JavaScript creates stars -->
-
-        </div>
-
-        <button
             id="restartStory"
-            class="primaryButton">
+
+            class="primaryButton"
+
+        >
 
             Begin Again 🤍
 
@@ -777,15 +296,9 @@ SECRET MEMORY SKY
 
 </section>
 
-<!-- ==========================================================
-PAGE TURN ANIMATION
-=========================================================== -->
+<div id="memoryFlash"></div>
 
-<div id="pageTurn" class="pageTurn"></div>
-
-<!-- ==========================================================
-JAVASCRIPT
-=========================================================== -->
+<div id="pageTurn"></div>
 
 <script src="memories.js"></script>
 <script src="script.js"></script>
