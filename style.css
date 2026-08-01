@@ -997,6 +997,8 @@ font-weight:600;
 .treasureContainer{
 
 text-align:center;
+position:relative;
+padding:30px;
 
 }
 
@@ -1011,6 +1013,13 @@ margin:40px auto;
 position:relative;
 
 cursor:pointer;
+
+transition:transform .4s ease;
+
+}
+
+#treasureChest:hover{
+transform:scale(1.05);
 
 }
 
@@ -1033,6 +1042,16 @@ top:0;
 left:0;
 
 border:5px solid #c9a227;
+
+transform-origin:bottom;
+
+transition:transform .8s ease;
+
+}
+
+.treasureOpen #treasureChest: :before{
+
+transform:rotateX(-160deg);
 
 }
 
@@ -1078,6 +1097,8 @@ opacity:0;
 
 pointer-events:none;
 
+z-index:-1;
+
 }
 
 .treasureOpen #goldLight{
@@ -1096,14 +1117,37 @@ transform:translate(-50%,-50%) scale(.2);
 
 }
 
-100%{
+50%{
 
 opacity:1;
 
-transform:translate(-50%,-50%) scale(2);
+transform:translate(-50%,-50%) scale(2.2);
 
 }
 
+}
+
+#treasureMessage{
+    margin-top:30px;
+    opacity:0;
+    transform:translateY(20px);
+    transition:all .8s ease;
+    min-height:80px;
+}
+
+#treasureMessage.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+#treasureMessage h2{
+    color:#c9a227;
+    margin-bottom:10px;
+}
+
+#treasureMessage p{
+    color:#555;
+    line-height:1.8;
 }
 
 /* ==========================================
