@@ -1,215 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Happy Birthday Busayo</title>
-<link rel="stylesheet" href="style.css" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>To Busayo With Love🤍</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
 
-<!-- Loading Screen -->
-<div id="loading-screen" class="screen active">
-  <div class="loading-wrapper">
-    <div class="glowing-heart"></div>
-    <div class="loading-text">Preparing something special...</div>
-    <div class="loading-bar-background">
-      <div class="loading-progress"></div>
-    </div>
-  </div>
-</div>
 
-<!-- Countdown Screen -->
-<div id="countdown-screen" class="screen">
-  <div class="countdown-wrapper">
-    <div class="countdown-number" id="countdown-number">3</div>
-    <div class="countdown-arrow">↓</div>
-  </div>
-</div>
+<audio id="birthdayMusic" src="music/BrunoMars.mp3"></audio>
 
-<!-- Birthday Reveal -->
-<div id="birthday-reveal" class="screen">
-  <div class="birthday-content">
-    <h1 class="big-text">HAPPY BIRTHDAY BUSAYO</h1>
-    <div class="balloon-container">
-      <div class="balloon white"></div>
-      <div class="balloon white"></div>
-      <div class="balloon gold"></div>
-    </div>
-    <div class="confetti"></div>
-    <div class="floating-hearts"></div>
-    <div class="sparkles"></div>
-    <button id="start-journey" class="btn">Begin The Journey ❤️</button>
-  </div>
-</div>
 
-<!-- Cover Page -->
-<div id="cover-page" class="screen">
-  <div class="cover-content">
-    <div class="cover-left">
-      <img src="images/cover.jpg" alt="Cover" class="cover-image"/>
-    </div>
-    <div class="cover-right">
-      <h2>To Busayo,</h2>
-      <p class="love-text">With Love 🤍</p>
-      <p class="intro-text">I made something for you...<br/>I hope it makes you smile.</p>
-      <button class="btn" id="to-cover-next">Continue</button>
-    </div>
-  </div>
-</div>
+<!-- GLOBAL PAGE CONTAINER -->
 
-<!-- Password Screen (with image beside input) -->
-<div id="password-screen" class="screen">
-  <div class="password-section">
-    <div class="password-left">
-      <img src="images/cover.jpg" alt="Cover" class="password-image"/>
-    </div>
-    <div class="password-right">
-      <div class="password-card">
-        <div class="lock-icon">🔐</div>
-        <p class="password-instruction">What's my birth month?</p>
-        <input type="text" id="password-input" placeholder="july" />
-        <div class="password-buttons">
-          <button id="unlock-btn" class="btn">Unlock</button>
+<main id="website">
+
+
+<!-- LOADING PAGE -->
+
+<section class="page active" id="loadingPage">
+
+    <div class="loading-content">
+
+        <div class="gold-heart">
+            ♡
         </div>
-      </div>
+
+
+        <h2>
+            Preparing something special...
+        </h2>
+
+
+        <div class="loading-bar">
+
+            <div class="loading-progress"></div>
+
+        </div>
+
+
     </div>
-  </div>
-</div>
 
-<!-- Treasure Chest -->
-<div id="treasure-screen" class="screen">
-  <div class="treasure-section">
-    <div class="chest" id="chest"></div>
-    <div class="treasure-message">"Every treasure tells a story..."</div>
-    <button class="btn" id="open-chest">Continue</button>
-  </div>
-</div>
+</section>
 
-<!-- Memory Book -->
-<div id="memory-book" class="screen">
-  <div class="book-section">
-    <div class="book" id="book"></div>
-    <div class="book-controls">
-      <button id="prev-page" class="btn">Previous</button>
-      <button id="next-page" class="btn">Next</button>
+
+
+
+
+<!-- COUNTDOWN PAGE -->
+
+<section class="page" id="countdownPage">
+
+
+    <div class="countdown-container">
+
+
+        <h1 id="countNumber">
+            3
+        </h1>
+
+
     </div>
-  </div>
-</div>
 
-<!-- Final Photo -->
-<div id="final-photo" class="screen">
-  <div class="final-photo-section">
-    <img src="images/us.jpg" alt="Us" class="final-photo"/>
-    <div class="final-caption">
-      <p>No matter how many memories we make...<br/>this will always be my favourite one.</p>
+
+</section>
+
+
+
+
+
+<!-- HAPPY BIRTHDAY REVEAL -->
+
+<section class="page" id="birthdayPage">
+
+
+<div class="birthday-animation">
+
+
+    <div class="balloons">
+        🎈 🎈 🎈
     </div>
-    <button class="btn" id="to-final">Continue</button>
-  </div>
-</div>
 
-<!-- Catch My Heart Game -->
-<div id="game-screen" class="screen">
-  <div class="game-section">
-    <div class="score-timer">
-      <div>Score: <span id="score">0</span></div>
-      <div>Time: <span id="timer">60</span>s</div>
+
+    <div class="confetti">
+
     </div>
-    <canvas id="heart-canvas"></canvas>
-    <button class="btn" id="end-game">End Game</button>
-  </div>
-</div>
 
-<!-- Build Birthday Cake -->
-<div id="cake-screen" class="screen">
-  <div class="cake-section">
-    <div class="cake">
-      <div class="layers">
-        <div class="layer" id="layer1"></div>
-        <div class="layer" id="layer2"></div>
-        <div class="layer" id="layer3"></div>
-      </div>
+
+
+    <h1>
+
+        HAPPY BIRTHDAY
+
+        <br>
+
+        BUSAYO
+
+    </h1>
+
+
+
+    <div class="sparkles">
+
+        ✨ ✨ ✨
+
     </div>
-    <div class="decorations">
-      <button class="decor-btn" data-decoration="🍓">🍓</button>
-      <button class="decor-btn" data-decoration="🍒">🍒</button>
-      <button class="decor-btn" data-decoration="🍫">🍫</button>
-      <button class="decor-btn" data-decoration="🌸">🌸</button>
-      <button class="decor-btn" data-decoration="🎀">🎀</button>
-      <button class="decor-btn" data-decoration="🕯️">🕯️</button>
-    </div>
-    <button class="btn" id="finish-cake">Finish Cake & Celebrate 🎉</button>
-  </div>
+
+
+
 </div>
 
-<!-- 23 Reasons -->
-<div id="reasons-screen" class="screen">
-  <div class="reasons-section">
-    <h2>23 Reasons Why You Are Awesome ❤️</h2>
-    <div class="envelopes"></div>
-    <div class="reasons-navigation">
-      <button class="btn" id="reasons-prev">Previous</button>
-      <button class="btn" id="reasons-next">Next</button>
-    </div>
-  </div>
+
+</section>
+
+
+
+
+
+
+
+<!-- COVER PAGE -->
+
+<section class="page" id="coverPage">
+
+
+<div class="luxury-cover">
+
+
+<img src="images/cover.jpg"
+alt="Busayo Cover">
+
+
+<div class="gold-frame">
+
+
+<h2>
+
+To Busayo,
+
+<br>
+
+With Love 🤍
+
+</h2>
+
+
+
+<p>
+
+I made something for you...
+
+<br>
+
+I hope it makes you smile.
+
+</p>
+
+
 </div>
 
-<!-- Mailbox -->
-<div id="mailbox-screen" class="screen">
-  <div class="mailbox-section">
-    <div class="mailbox" id="mailbox">
-      <div class="flag" id="flag"></div>
-      <div class="mailbox-body">
-        <div class="envelope" id="envelope"></div>
-        <button class="btn" id="open-envelope">Open Envelope</button>
-      </div>
-    </div>
-  </div>
+
 </div>
 
-<!-- Love Letter -->
-<div id="letter-screen" class="screen">
-  <div class="letter-section">
-    <div class="letter" id="letter">
-      <p>Dear Busayo,</p>
-      <p>You're amazing and loved more than words can say.</p>
-      <p>— Veilwalker 🤍</p>
-    </div>
-    <button class="btn" id="to-moon">Next</button>
-  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- PASSWORD PAGE -->
+
+<section class="page" id="passwordPage">
+
+
+<div class="password-wrapper">
+
+
+
+<!-- COVER IMAGE BESIDE CARD -->
+
+<div class="password-image">
+
+
+<img src="images/cover.jpg"
+alt="Busayo">
+
+
 </div>
 
-<!-- Moon Scene -->
-<div id="moon-screen" class="screen">
-  <div class="moon-section">
-    <div class="moon"></div>
-    <div class="stars"></div>
-    <div class="floating-hearts"></div>
-  </div>
-  <button class="btn" id="to-final-message">Next</button>
+
+
+
+
+
+<!-- PASSWORD CARD -->
+
+
+<div class="password-card">
+
+
+<div class="lock-icon">
+
+🔐
+
 </div>
 
-<!-- Final Birthday Message -->
-<div id="final-message" class="screen">
-  <div class="final-message-section">
-    <h1>Happy Birthday Busayo ❤️</h1>
-    <p>Wishing you all the love and happiness in the world.</p>
-    <p>One Last Thing...</p>
-    <button class="btn" id="reveal-love">Reveal</button>
-  </div>
+
+
+<h2>
+
+Every beautiful surprise deserves a little secret.
+
+</h2>
+
+
+
+<p class="hint">
+
+Hint:
+
+<br>
+
+"what's my birth month"
+
+</p>
+
+
+
+<input
+
+type="password"
+
+id="passwordInput"
+
+placeholder="Enter password"
+
+>
+
+
+
+<button onclick="checkPassword()">
+
+Unlock
+
+</button>
+
+
+
+<p id="passwordMessage">
+
+</p>
+
+
+
 </div>
 
-<!-- Love Final -->
-<div id="love-message" class="screen">
-  <div class="love-final">
-    <h2>I love you more than words could ever explain.</h2>
-    <button class="btn" id="restart">Begin Again ❤️</button>
-  </div>
+
 </div>
 
-<!-- Audio -->
-<audio id="bg-music" src="music/BrunoMars.mp3" preload="auto"></audio>
 
-<script src="script.js"></script>
-</body>
-</html>
+</section>
+
+
+
+
+
+<!-- TREASURE CHEST PAGE -->
+
+
+<section class="page" id="treasurePage">
+
+
+<div class="treasure-container">
+
+
+<div id="treasureChest"
+onclick="openChest()">
+
+
+<div class="chest">
+
+🧰
+
+</div>
+
+
+<div class="gold-lock">
+
+🔒
+
+</div>
+
+
+</div>
+
+
+
+<h2 id="treasureMessage">
+
+Every treasure tells a story...
+
+</h2>
+
+
+</div>
+
+
+</section>
