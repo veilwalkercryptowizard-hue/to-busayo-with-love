@@ -1,265 +1,980 @@
-// Core page navigation setup
-const pages = [
-  'loading-screen', 'countdown-screen', 'birthday-reveal', 'cover-page',
-  'password-screen', 'treasure-screen', 'memory-book', 'final-photo',
-  'game-screen', 'cake-screen', 'reasons-screen', 'mailbox-screen',
-  'letter-screen', 'moon-screen', 'final-message', 'love-message'
-];
+/* =====================================
+   BUSAYO LUXURY BIRTHDAY EXPERIENCE
+   JAVASCRIPT
+===================================== */
 
-let currentPageIndex = 0;
-const showPage = (id) => {
-  pages.forEach(p => {
-    document.getElementById(p).classList.remove('active');
-  });
-  document.getElementById(id).classList.add('active');
-};
-const gotoPage = (index) => {
-  if (index >= 0 && index < pages.length) {
-    currentPageIndex = index;
-    showPage(pages[currentPageIndex]);
-  }
-};
 
-// 1. Loading Screen
-const loadingScreen = document.getElementById('loading-screen');
-const progressBar = document.querySelector('.loading-progress');
+const pages = document.querySelectorAll(".page");
 
-setTimeout(() => {
-  progressBar.style.animationPlayState = 'running';
-  setTimeout(() => {
-    loadingScreen.classList.remove('active');
-    gotoPage(1); // countdown
-    startCountdown();
-  }, 3500);
-}, 500);
+let currentPage = 0;
 
-// 2. Countdown
-const countdownNumbers = ['3', '2', '1'];
-const countdownNumberEl = document.getElementById('countdown-number');
-let countdownIdx = 0;
 
-const startCountdown = () => {
-  if (countdownIdx < countdownNumbers.length) {
-    countdownNumberEl.textContent = countdownNumbers[countdownIdx];
-    countdownNumberEl.classList.remove('animate');
-    setTimeout(() => {
-      countdownNumberEl.classList.add('animate');
-    }, 10);
-    countdownIdx++;
-    setTimeout(() => {
-      startCountdown();
-    }, 1500);
-  } else {
-    gotoPage(2);
-    startBirthdayAnimation();
-  }
-};
 
-// 3. Birthday reveal
-const birthdayScreen = document.getElementById('birthday-reveal');
-const startButton = document.getElementById('start-journey');
+function showPage(index){
 
-const startBirthdayAnimation = () => {
-  birthdayScreen.classList.add('active');
+    if(index < 0) index = 0;
 
-  // Animate balloons
-  document.querySelectorAll('.balloon').forEach((b, i) => {
-    b.style.left = `${10 + i * 30}%`;
-    b.animate([
-      { transform: 'translateY(0)', opacity: 1 },
-      { transform: 'translateY(-400px)', opacity: 0 }
-    ], { duration: 4000, delay: i * 200 }).onfinish = () => {
-      b.remove();
-    };
-  });
+    if(index >= pages.length)
+        index = pages.length - 1;
 
-  // Animate confetti
-  // (confetti animation handled via CSS animation)
 
-  // Animate hearts
-  // (hearts floating animation)
-};
+    pages.forEach(page=>{
 
-// Start journey button
-startButton.addEventListener('click', () => {
-  // Play music
-  document.getElementById('bg-music').play();
-  // Balloon and confetti animation trigger
-  startBirthdayAnimation();
-  // Proceed after a moment
-  setTimeout(() => {
-    gotoPage(3);
-  }, 1500);
-});
+        page.classList.remove("active");
 
-// 4. Cover Page
-document.getElementById('to-cover-next').addEventListener('click', () => {
-  gotoPage(4);
-});
+    });
 
-// 5. Password Screen
-const passwordInput = document.getElementById('password-input');
-const unlockBtn = document.getElementById('unlock-btn');
 
-unlockBtn.addEventListener('click', () => {
-  const val = passwordInput.value.trim().toLowerCase();
-  if (val === 'july') {
-    gotoPage(5);
-  } else {
-    // Shake effect
-    passwordInput.animate([
-      { transform: 'translateX(0)' },
-      { transform: 'translateX(-10px)' },
-      { transform: 'translateX(10px)' },
-      { transform: 'translateX(0)' }
-    ], { duration: 500 });
-  }
-});
+    pages[index].classList.add("active");
 
-// 6. Treasure Chest
-document.getElementById('open-chest').addEventListener('click', () => {
-  document.getElementById('chest').classList.add('open');
-  setTimeout(() => {
-    gotoPage(6);
-    initMemoryBook();
-  }, 1000);
-});
 
-// 7. Memory Book - generate pages
-const reasons = [
-  "Your kindness shines brightly.",
-  "You make everyone smile.",
-  "Your smile is contagious.",
-  "You are truly special.",
-  "Your laughter warms hearts.",
-  "You are beautiful inside and out.",
-  "Your kindness is a gift.",
-  "You inspire others.",
-  "Your presence is a blessing.",
-  "You light up the room.",
-  "Your smile is my favorite.",
-  "You are loved beyond words.",
-  "Your heart is gold.",
-  "You are unique.",
-  "You bring joy everywhere.",
-  "You are a star.",
-  "Your kindness makes a difference.",
-  "You are my sunshine.",
-  "You are the best.",
-  "Your smile is magic.",
-  "You are cherished.",
-  "You make life brighter.",
-  "You are loved always."
-];
+    currentPage = index;
 
-let currentReasonPage = 0;
 
-function initMemoryBook() {
-  const bookDiv = document.getElementById('book');
-  bookDiv.innerHTML = '';
-  for (let i = 0; i < reasons.length; i++) {
-    const pageDiv = document.createElement('div');
-    pageDiv.className = 'page';
-    pageDiv.innerHTML = `
-      <div class="reason">${reasons[i]}</div>
-    `;
-    if (i !== 0) pageDiv.style.display = 'none';
-    bookDiv.appendChild(pageDiv);
-  }
-  showMemoryPage(0);
+
+    updateNavigation();
+
+
 }
 
-function showMemoryPage(index) {
-  const pages = document.querySelectorAll('.page');
-  pages.forEach((p, i) => {
-    p.style.display = i === index ? 'flex' : 'none';
-  });
+
+
+
+
+function nextPage(){
+
+    if(currentPage < pages.length - 1){
+
+        showPage(currentPage + 1);
+
+    }
+
 }
 
-document.getElementById('next-page').addEventListener('click', () => {
-  if (currentReasonPage < reasons.length -1) {
-    currentReasonPage++;
-    showMemoryPage(currentReasonPage);
-  }
-});
-document.getElementById('prev-page').addEventListener('click', () => {
-  if (currentReasonPage > 0) {
-    currentReasonPage--;
-    showMemoryPage(currentReasonPage);
-  }
+
+
+function previousPage(){
+
+    if(currentPage > 0){
+
+        showPage(currentPage - 1);
+
+    }
+
+}
+
+
+
+
+function updateNavigation(){
+
+    const prev =
+    document.getElementById("previousButton");
+
+
+    const next =
+    document.getElementById("nextButton");
+
+
+
+    if(currentPage === 0){
+
+        prev.style.display="none";
+
+    }
+
+    else{
+
+        prev.style.display="block";
+
+    }
+
+
+
+    if(currentPage === pages.length - 1){
+
+        next.style.display="none";
+
+    }
+
+    else{
+
+        next.style.display="block";
+
+    }
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   LOADING + COUNTDOWN
+===================================== */
+
+
+window.onload=function(){
+
+
+    updateNavigation();
+
+
+    setTimeout(()=>{
+
+
+        showPage(1);
+
+
+        startCountdown();
+
+
+    },4000);
+
+
+};
+
+
+
+
+
+function startCountdown(){
+
+
+let number = 3;
+
+
+let counter =
+document.getElementById("countNumber");
+
+
+
+let countdown =
+setInterval(()=>{
+
+
+    number--;
+
+
+    if(number > 0){
+
+
+        counter.innerHTML = number;
+
+
+        counter.style.animation="none";
+
+
+        setTimeout(()=>{
+
+            counter.style.animation=
+            "countAnimation 1s";
+
+        },20);
+
+
+    }
+
+
+
+    else{
+
+
+        clearInterval(countdown);
+
+
+        showBirthday();
+
+
+    }
+
+
+
+},1000);
+
+
+
+}
+
+
+
+
+
+function showBirthday(){
+
+
+showPage(2);
+
+
+
+const music =
+document.getElementById("birthdayMusic");
+
+
+music.play();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+ PASSWORD
+===================================== */
+
+
+function checkPassword(){
+
+
+const input =
+document.getElementById("passwordInput");
+
+
+
+const message =
+document.getElementById("passwordMessage");
+
+
+
+let password =
+input.value.toLowerCase();
+
+
+
+if(password === "july"){
+
+
+message.innerHTML=
+"Unlocked ❤️";
+
+
+setTimeout(()=>{
+
+nextPage();
+
+},800);
+
+
+}
+
+
+
+else{
+
+
+message.innerHTML=
+"Wrong password";
+
+
+input.classList.add("shake");
+
+
+setTimeout(()=>{
+
+
+input.classList.remove("shake");
+
+
+},500);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+ TREASURE CHEST
+===================================== */
+
+
+function openChest(){
+
+
+const chest =
+document.getElementById("treasureChest");
+
+
+chest.classList.add("open");
+
+
+
+document.getElementById("treasureMessage")
+.innerHTML=
+"Every treasure tells a story... ❤️";
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+ MEMORY BOOK
+===================================== */
+
+
+const memories=[
+
+
+{
+img:"photo1.jpg",
+text:"A beautiful beginning."
+},
+
+
+{
+img:"photo2.jpg",
+text:"A moment worth remembering."
+},
+
+
+{
+img:"photo4.jpg",
+text:"A smile captured forever."
+},
+
+
+{
+img:"photo5.jpg",
+text:"Another beautiful chapter."
+},
+
+
+{
+img:"photo6.jpg",
+text:"Memories that shine."
+},
+
+
+{
+img:"photo7.jpg",
+text:"A special moment."
+},
+
+
+{
+img:"photo8.jpg",
+text:"Forever treasured."
+},
+
+
+{
+img:"photo10.jpg",
+text:"A memory close to my heart."
+},
+
+
+{
+img:"photo12.jpg",
+text:"Another page of happiness."
+},
+
+
+{
+img:"photo13.jpg",
+text:"A story worth keeping."
+},
+
+
+{
+img:"photo14.jpg",
+text:"The final memory."
+}
+
+
+];
+
+
+
+let memoryIndex=0;
+
+
+
+function nextMemory(){
+
+
+memoryIndex++;
+
+
+if(memoryIndex >= memories.length)
+
+memoryIndex=0;
+
+
+
+changeMemory();
+
+
+}
+
+
+
+
+function previousMemory(){
+
+
+memoryIndex--;
+
+
+if(memoryIndex < 0)
+
+memoryIndex=memories.length-1;
+
+
+
+changeMemory();
+
+
+}
+
+
+
+function changeMemory(){
+
+
+const image =
+document.getElementById("memoryImage");
+
+
+const caption =
+document.getElementById("memoryCaption");
+
+
+
+image.src=
+"images/"+memories[memoryIndex].img;
+
+
+
+caption.innerHTML=
+memories[memoryIndex].text;
+
+
+
+image.style.animation="none";
+
+
+setTimeout(()=>{
+
+
+image.style.animation=
+"photoReveal 1s";
+
+
+},20);
+
+
+
+}
+
+
+/* =====================================
+   CATCH MY HEART GAME
+===================================== */
+
+
+let score = 0;
+
+let timeLeft = 60;
+
+let gameTimer;
+
+let heartInterval;
+
+
+
+function startHeartGame(){
+
+
+score = 0;
+
+timeLeft = 60;
+
+
+
+document.getElementById("score")
+.innerHTML = score;
+
+
+
+document.getElementById("timer")
+.innerHTML = timeLeft;
+
+
+
+
+clearInterval(gameTimer);
+
+clearInterval(heartInterval);
+
+
+
+
+gameTimer=setInterval(()=>{
+
+
+timeLeft--;
+
+
+document.getElementById("timer")
+.innerHTML=timeLeft;
+
+
+
+if(timeLeft <=0){
+
+
+clearInterval(gameTimer);
+
+clearInterval(heartInterval);
+
+
+
+alert(
+"Game Over ❤️ Your score is "+score
+);
+
+
+}
+
+
+
+},1000);
+
+
+
+
+
+heartInterval=setInterval(createHeart,600);
+
+
+
+}
+
+
+
+
+
+function createHeart(){
+
+
+
+const area =
+document.getElementById("heartArea");
+
+
+
+const heart =
+document.createElement("div");
+
+
+
+heart.className="falling-heart";
+
+
+heart.innerHTML="❤️";
+
+
+
+heart.style.left =
+Math.random()*450+"px";
+
+
+
+heart.onclick=function(){
+
+
+score++;
+
+
+document.getElementById("score")
+.innerHTML=score;
+
+
+heart.remove();
+
+
+
+};
+
+
+
+
+area.appendChild(heart);
+
+
+
+setTimeout(()=>{
+
+
+heart.remove();
+
+
+},4000);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   CAKE BUILDER
+===================================== */
+
+
+
+function addDecoration(item){
+
+
+const area =
+document.getElementById("cakeDecorations");
+
+
+
+area.innerHTML += item;
+
+
+
+if(area.innerHTML.length > 0){
+
+
+document.getElementById("cakeBanner")
+.innerHTML=
+"Happy Birthday Busayo ❤️";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   23 REASONS
+===================================== */
+
+
+
+const reasons=[
+
+
+"You bring happiness into my world ❤️",
+
+"Your smile makes everything brighter",
+
+"You are beautifully unique",
+
+"You inspire me",
+
+"You have a wonderful heart",
+
+"You make ordinary moments special",
+
+"Your kindness is unforgettable",
+
+"You are someone worth celebrating",
+
+"You create beautiful memories",
+
+"You bring peace and joy",
+
+"Your laughter is precious",
+
+"You are stronger than you know",
+
+"You deserve the best things in life",
+
+"You make people feel special",
+
+"You are truly one of a kind",
+
+"Your presence is a gift",
+
+"You make every day better",
+
+"You are full of beautiful energy",
+
+"You have an amazing soul",
+
+"You make life sweeter",
+
+"You are a beautiful story",
+
+"You are deeply appreciated",
+
+"You are simply awesome ❤️"
+
+
+];
+
+
+
+
+
+
+function createReasons(){
+
+
+const container =
+document.getElementById("envelopeContainer");
+
+
+
+reasons.forEach((reason,index)=>{
+
+
+const envelope =
+document.createElement("div");
+
+
+
+envelope.className=
+"reason-envelope";
+
+
+
+envelope.innerHTML=
+"💌";
+
+
+
+envelope.onclick=function(){
+
+
+document.getElementById("reasonDisplay")
+.innerHTML=
+reason;
+
+
+envelope.classList.add("open");
+
+
+};
+
+
+
+container.appendChild(envelope);
+
+
+
 });
 
-// After reasons, go to mailbox
-document.getElementById('to-mailbox').addEventListener('click', () => {
-  gotoPage(12);
-});
 
-// Mailbox interactions
-document.getElementById('open-envelope').addEventListener('click', () => {
-  document.getElementById('envelope').classList.toggle('open');
-});
-document.getElementById('to-moon').addEventListener('click', () => {
-  gotoPage(13);
-});
-document.getElementById('to-final-message').addEventListener('click', () => {
-  gotoPage(14);
-});
-document.getElementById('reveal-love').addEventListener('click', () => {
-  gotoPage(15);
-});
-document.getElementById('restart').addEventListener('click', () => {
-  window.location.reload();
-});
 
-// 8. Moon scene
-document.getElementById('to-final-message').addEventListener('click', () => {
-  gotoPage(14);
-});
+}
 
-// 9. Final message
-document.getElementById('reveal-love').addEventListener('click', () => {
-  gotoPage(15);
-});
 
-// 10. Restart
-document.getElementById('restart').addEventListener('click', () => {
-  window.location.reload();
-});
 
-// --- Additional animations on "Begin The Journey ❤️" ---
-startButton.addEventListener('click', () => {
-  // Create balloons and confetti animations
-  createBalloonsAndConfetti();
-  // Play music
-  document.getElementById('bg-music').play();
-});
+createReasons();
 
-// Function to create balloons and confetti
-function createBalloonsAndConfetti() {
-  const container = document.createElement('div');
-  container.className = 'balloons';
 
-  // Generate balloons
-  for (let i=0; i<20; i++) {
-    const balloon = document.createElement('div');
-    balloon.className = 'balloon';
-    balloon.style.left = Math.random() * 100 + '%';
-    balloon.style.backgroundColor = Math.random() > 0.5 ? '#ffd700' : '#fff';
-    balloon.animate([
-      { transform: 'translateY(0)', opacity: 1 },
-      { transform: 'translateY(-600px)', opacity: 0 }
-    ], { duration: 4000 + Math.random() * 2000, delay: Math.random() * 1000 });
-    container.appendChild(balloon);
-  }
 
-  // Generate confetti
-  const confettiContainer = document.createElement('div');
-  confettiContainer.className = 'confetti';
-  // No need to add elements if using CSS animation only
-  document.body.appendChild(container);
-  document.body.appendChild(confettiContainer);
-  setTimeout(() => {
-    container.remove();
-    confettiContainer.remove();
-  }, 4000);
+
+
+
+
+
+
+/* =====================================
+   MAILBOX
+===================================== */
+
+
+function openMailbox(){
+
+
+alert(
+"A special letter is waiting for you 💌"
+);
+
+
+
+nextPage();
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   LOVE LETTER
+===================================== */
+
+
+const letterMessage = `
+
+Dear Busayo,
+
+
+
+Happy Birthday ❤️
+
+
+
+I hope today reminds you how special,
+valuable, and loved you are.
+
+
+
+Every smile, every memory,
+and every moment shared is something
+I will always treasure.
+
+
+
+Thank you for being you.
+
+
+
+May this new year bring you endless happiness,
+success, and beautiful surprises.
+
+
+
+With all my heart,
+
+`;
+
+
+
+let letterStarted=false;
+
+
+
+function openLetter(){
+
+
+if(letterStarted) return;
+
+
+letterStarted=true;
+
+
+let index=0;
+
+
+const output =
+document.getElementById("letterText");
+
+
+
+let typing=setInterval(()=>{
+
+
+output.innerHTML +=
+letterMessage[index];
+
+
+
+index++;
+
+
+
+if(index >= letterMessage.length){
+
+
+clearInterval(typing);
+
+
+}
+
+
+
+},50);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   FINAL MESSAGE
+===================================== */
+
+
+
+function revealLove(){
+
+
+
+document.getElementById("loveReveal")
+.innerHTML=
+
+"I love you more than words could ever explain ❤️";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   RESTART EXPERIENCE
+===================================== */
+
+
+function restartWebsite(){
+
+
+location.reload();
+
+
 }
