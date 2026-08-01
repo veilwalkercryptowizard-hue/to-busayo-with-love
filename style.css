@@ -3947,3 +3947,21 @@ z-index:9999;
 transition:.45s;
 
 }
+
+#typedLetter::after{
+
+content:"|";
+
+animation:blink .8s infinite;
+
+}
+
+@keyframes blink{
+
+50%{
+
+opacity:0;
+
+}
+
+}
