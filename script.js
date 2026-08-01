@@ -164,33 +164,41 @@ const app = {
   // Attach event listeners
   attachEventListeners() {
     // Password input Enter key
-    this.elements.passwordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') this.checkPassword();
-    });
+    if (this.elements.passwordInput) {
+      this.elements.passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') this.checkPassword();
+      });
+    }
 
     // Treasure chest keyboard support
-    this.elements.treasureChest.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        this.openTreasure();
-      }
-    });
+    if (this.elements.treasureChest) {
+      this.elements.treasureChest.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openTreasure();
+        }
+      });
+    }
 
     // Mailbox keyboard support
-    this.elements.mailbox.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        this.openMailbox();
-      }
-    });
+    if (this.elements.mailbox) {
+      this.elements.mailbox.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openMailbox();
+        }
+      });
+    }
 
     // Letter envelope keyboard support
-    this.elements.letterEnvelope.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        this.openLetter();
-      }
-    });
+    if (this.elements.letterEnvelope) {
+      this.elements.letterEnvelope.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openLetter();
+        }
+      });
+    }
 
     // Global keyboard shortcuts
     document.addEventListener('keydown', (e) => {
@@ -298,10 +306,13 @@ const app = {
       state.musicStarted = true;
     }
 
-    this.createConfetti();
-    this.createBalloons();
-    this.createFloatingHearts();
-    this.createSparkles();
+    // Use requestAnimationFrame to prevent blocking
+    requestAnimationFrame(() => {
+      this.createConfetti();
+      this.createBalloons();
+      this.createFloatingHearts();
+      this.createSparkles();
+    });
   },
 
   playMusic() {
@@ -311,7 +322,8 @@ const app = {
 
   createConfetti() {
     const container = this.elements.confettiContainer;
-    const confettiCount = 50;
+    const confettiCount = 30; // Reduced from 50
+    const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < confettiCount; i++) {
       const confetti = document.createElement('div');
@@ -320,15 +332,21 @@ const app = {
       confetti.style.top = '-10px';
       confetti.style.animationDuration = (2 + Math.random() * 1) + 's';
       confetti.style.animationDelay = Math.random() * 0.5 + 's';
-      container.appendChild(confetti);
-
-      setTimeout(() => confetti.remove(), 3500);
+      fragment.appendChild(confetti);
     }
+    
+    container.appendChild(fragment);
+    
+    // Clean up after animation
+    setTimeout(() => {
+      Array.from(container.querySelectorAll('.confetti')).forEach(el => el.remove());
+    }, 3500);
   },
 
   createBalloons() {
     const screen = this.elements.screens[2];
-    const balloonCount = 8;
+    const balloonCount = 6; // Reduced from 8
+    const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < balloonCount; i++) {
       const balloon = document.createElement('div');
@@ -336,15 +354,21 @@ const app = {
       balloon.style.left = Math.random() * 100 + '%';
       balloon.style.top = Math.random() * 100 + '%';
       balloon.style.animationDelay = Math.random() * 0.5 + 's';
-      screen.appendChild(balloon);
-
-      setTimeout(() => balloon.remove(), 4500);
+      fragment.appendChild(balloon);
     }
+    
+    screen.appendChild(fragment);
+    
+    // Clean up after animation
+    setTimeout(() => {
+      Array.from(screen.querySelectorAll('.balloon')).forEach(el => el.remove());
+    }, 4500);
   },
 
   createFloatingHearts() {
     const screen = this.elements.screens[2];
-    const heartCount = 15;
+    const heartCount = 10; // Reduced from 15
+    const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < heartCount; i++) {
       const heart = document.createElement('div');
@@ -354,15 +378,21 @@ const app = {
       heart.style.top = Math.random() * 100 + '%';
       heart.style.animationDuration = (2 + Math.random() * 1) + 's';
       heart.style.animationDelay = Math.random() * 0.3 + 's';
-      screen.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 3500);
+      fragment.appendChild(heart);
     }
+    
+    screen.appendChild(fragment);
+    
+    // Clean up after animation
+    setTimeout(() => {
+      Array.from(screen.querySelectorAll('.floating-heart')).forEach(el => el.remove());
+    }, 3500);
   },
 
   createSparkles() {
     const screen = this.elements.screens[2];
-    const sparkleCount = 20;
+    const sparkleCount = 12; // Reduced from 20
+    const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < sparkleCount; i++) {
       const sparkle = document.createElement('div');
@@ -371,10 +401,15 @@ const app = {
       sparkle.style.left = Math.random() * 100 + '%';
       sparkle.style.top = Math.random() * 100 + '%';
       sparkle.style.animationDelay = Math.random() * 1 + 's';
-      screen.appendChild(sparkle);
-
-      setTimeout(() => sparkle.remove(), 4500);
+      fragment.appendChild(sparkle);
     }
+    
+    screen.appendChild(fragment);
+    
+    // Clean up after animation
+    setTimeout(() => {
+      Array.from(screen.querySelectorAll('.sparkle')).forEach(el => el.remove());
+    }, 4500);
   },
 
   // ============================================
