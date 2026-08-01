@@ -1,14 +1,14 @@
 /* ============================================
-   LUXURY BIRTHDAY WEBSITE - SCRIPT.JS
-   Complete interactive logic for all 15 sections
+   LUXURY BIRTHDAY WEBSITE - OPTIMIZED SCRIPT.JS
+   Production-Ready with Clean Architecture
    ============================================ */
 
 // ============================================
-// STATE MANAGEMENT
+// APPLICATION STATE & CONFIGURATION
 // ============================================
 
-let currentScreen = 0;
-const screens = [
+const config = {
+  screens: [
     'loadingScreen',
     'countdownScreen',
     'birthdayScreen',
@@ -23,17 +23,27 @@ const screens = [
     'letterScreen',
     'moonScreen',
     'finalScreen'
-];
-
-let musicStarted = false;
-let currentPage = 0;
-const photos = [
+  ],
+  password: 'busayo',
+  photos: [
     'photo1.jpg', 'photo2.jpg', 'photo4.jpg', 'photo5.jpg',
     'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo10.jpg',
     'photo12.jpg', 'photo13.jpg', 'photo14.jpg'
-];
-
-const reasons = [
+  ],
+  captions: [
+    "Every moment with you is a memory I cherish",
+    "Your smile brightens my darkest days",
+    "Together, we create magic",
+    "In your eyes, I found my home",
+    "You are my favorite adventure",
+    "Every laugh with you is a treasure",
+    "You make ordinary moments extraordinary",
+    "My heart belongs to you",
+    "Forever grateful for you",
+    "You are my greatest blessing",
+    "Every day with you is a gift"
+  ],
+  reasons: [
     "You light up every room you walk into",
     "Your laugh is contagious and pure",
     "You have the biggest heart",
@@ -57,9 +67,8 @@ const reasons = [
     "Your love changes everything",
     "You're my favorite person",
     "You make every day special"
-];
-
-const letterText = [
+  ],
+  letterText: [
     "My Dearest Busayo,",
     "",
     "As I sit down to write this, my heart is overflowing with so much love and gratitude for you.",
@@ -80,598 +89,712 @@ const letterText = [
     "",
     "Forever yours,",
     "— Veilwalker 🤍"
-];
+  ]
+};
 
 // ============================================
-// INITIALIZATION
+// APPLICATION STATE
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    initializeLoadingScreen();
-    initializeMemoryBook();
-    initializeReasons();
-    initializeMoonStars();
-});
+const state = {
+  currentScreen: 0,
+  musicStarted: false,
+  currentPage: 0,
+  gameActive: false,
+  gameScore: 0,
+  gameTime: 60,
+  gameInterval: null,
+  decorationCount: 0,
+  treasureOpen: false,
+  mailboxOpen: false,
+  letterOpen: false,
+  finalRevealed: false,
+  countdownTimer: null,
+  gameHearts: []
+};
 
 // ============================================
-// SCREEN NAVIGATION
+// MAIN APPLICATION OBJECT
 // ============================================
 
-function showScreen(screenIndex) {
-    // Hide all screens
-    screens.forEach(screenId => {
-        document.getElementById(screenId).classList.remove('active');
+const app = {
+  // Initialize application
+  init() {
+    this.cacheElements();
+    this.attachEventListeners();
+    this.startLoadingScreen();
+  },
+
+  // Cache DOM elements for better performance
+  cacheElements() {
+    this.elements = {
+      screens: config.screens.map(id => document.getElementById(id)),
+      countdownNumber: document.getElementById('countdownNumber'),
+      passwordInput: document.getElementById('passwordInput'),
+      treasureChest: document.getElementById('treasureChest'),
+      treasureMessage: document.getElementById('treasureMessage'),
+      treasureButton: document.getElementById('treasureButton'),
+      bookPages: document.getElementById('bookPages'),
+      prevPageBtn: document.getElementById('prevPageBtn'),
+      nextPageBtn: document.getElementById('nextPageBtn'),
+      pageCounter: document.getElementById('pageCounter'),
+      gameCanvas: document.getElementById('gameCanvas'),
+      gameScore: document.getElementById('gameScore'),
+      gameTimer: document.getElementById('gameTimer'),
+      gameButton: document.getElementById('gameButton'),
+      nextAfterGame: document.getElementById('nextAfterGame'),
+      cakeCanvas: document.getElementById('cakeCanvas'),
+      cakeBanner: document.getElementById('cakeBanner'),
+      cakeNextBtn: document.getElementById('cakeNextBtn'),
+      envelopesGrid: document.getElementById('envelopesGrid'),
+      mailbox: document.getElementById('mailbox'),
+      mailboxNextBtn: document.getElementById('mailboxNextBtn'),
+      letterEnvelope: document.getElementById('letterEnvelope'),
+      letterContent: document.getElementById('letterContent'),
+      letterNextBtn: document.getElementById('letterNextBtn'),
+      moonHearts: document.getElementById('moonHearts'),
+      moonStars: document.getElementById('moonStars'),
+      finalReveal: document.getElementById('finalReveal'),
+      restartBtn: document.getElementById('restartBtn'),
+      bgMusic: document.getElementById('bgMusic'),
+      confettiContainer: document.getElementById('confettiContainer')
+    };
+  },
+
+  // Attach event listeners
+  attachEventListeners() {
+    // Password input Enter key
+    this.elements.passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') this.checkPassword();
     });
-    
+
+    // Treasure chest keyboard support
+    this.elements.treasureChest.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.openTreasure();
+      }
+    });
+
+    // Mailbox keyboard support
+    this.elements.mailbox.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.openMailbox();
+      }
+    });
+
+    // Letter envelope keyboard support
+    this.elements.letterEnvelope.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.openLetter();
+      }
+    });
+
+    // Global keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && state.currentScreen !== 7) {
+        e.preventDefault();
+        this.goToNextScreen();
+      }
+    });
+  },
+
+  // ============================================
+  // SCREEN NAVIGATION
+  // ============================================
+
+  showScreen(screenIndex) {
+    // Validate screen index
+    if (screenIndex < 0 || screenIndex >= config.screens.length) return;
+
+    // Hide all screens
+    this.elements.screens.forEach(screen => {
+      if (screen) screen.classList.remove('active');
+    });
+
     // Show target screen
-    document.getElementById(screens[screenIndex]).classList.add('active');
-    currentScreen = screenIndex;
-    
+    const targetScreen = this.elements.screens[screenIndex];
+    if (targetScreen) {
+      targetScreen.classList.add('active');
+      state.currentScreen = screenIndex;
+    }
+
     // Trigger screen-specific logic
-    if (screenIndex === 1) {
-        startCountdown();
-    } else if (screenIndex === 2) {
-        triggerBirthdayAnimation();
-    } else if (screenIndex === 6) {
-        initializeMemoryBook();
-    } else if (screenIndex === 7) {
-        // Game screen
-    } else if (screenIndex === 12) {
-        createMoonStars();
+    this.triggerScreenLogic(screenIndex);
+  },
+
+  triggerScreenLogic(screenIndex) {
+    switch (screenIndex) {
+      case 1: // Countdown
+        this.startCountdown();
+        break;
+      case 2: // Birthday
+        this.triggerBirthdayAnimation();
+        break;
+      case 6: // Memory book
+        this.initializeMemoryBook();
+        break;
+      case 12: // Moon screen
+        this.createMoonStars();
+        break;
     }
-}
+  },
 
-function goToNextScreen() {
-    if (currentScreen < screens.length - 1) {
-        showScreen(currentScreen + 1);
+  goToNextScreen() {
+    if (state.currentScreen < config.screens.length - 1) {
+      this.showScreen(state.currentScreen + 1);
     }
-}
+  },
 
-// ============================================
-// 1. LOADING SCREEN
-// ============================================
+  // ============================================
+  // 1. LOADING SCREEN
+  // ============================================
 
-function initializeLoadingScreen() {
+  startLoadingScreen() {
     setTimeout(() => {
-        showScreen(1);
+      this.showScreen(1);
     }, 3500);
-}
+  },
 
-// ============================================
-// 2. COUNTDOWN SCREEN
-// ============================================
+  // ============================================
+  // 2. COUNTDOWN SCREEN
+  // ============================================
 
-function startCountdown() {
+  startCountdown() {
     let count = 3;
-    const countdownElement = document.getElementById('countdownNumber');
-    const arrowElement = document.querySelector('.countdown-arrow');
     
-    const countdownInterval = setInterval(() => {
-        count--;
-        
-        if (count >= 0) {
-            countdownElement.textContent = count;
-            countdownElement.style.animation = 'none';
-            setTimeout(() => {
-                countdownElement.style.animation = 'countdownPulse 1s ease-out forwards';
-            }, 10);
-        }
-        
-        if (count < 0) {
-            clearInterval(countdownInterval);
-            setTimeout(() => {
-                showScreen(2);
-            }, 500);
-        }
+    if (state.countdownTimer) clearInterval(state.countdownTimer);
+
+    state.countdownTimer = setInterval(() => {
+      count--;
+
+      if (count >= 0) {
+        this.elements.countdownNumber.textContent = count;
+        // Trigger animation
+        this.elements.countdownNumber.style.animation = 'none';
+        setTimeout(() => {
+          this.elements.countdownNumber.style.animation = 'countdownPulse 1s ease-out forwards';
+        }, 10);
+      }
+
+      if (count < 0) {
+        clearInterval(state.countdownTimer);
+        setTimeout(() => {
+          this.showScreen(2);
+        }, 500);
+      }
     }, 1000);
-}
+  },
 
-// ============================================
-// 3. HAPPY BIRTHDAY REVEAL
-// ============================================
+  // ============================================
+  // 3. BIRTHDAY REVEAL
+  // ============================================
 
-function triggerBirthdayAnimation() {
-    if (!musicStarted) {
-        const audio = document.getElementById('bgMusic');
-        audio.play().catch(err => console.log('Audio play failed:', err));
-        musicStarted = true;
+  triggerBirthdayAnimation() {
+    if (!state.musicStarted) {
+      this.playMusic();
+      state.musicStarted = true;
     }
-    
-    createConfetti();
-    createBalloons();
-    createFloatingHearts();
-    createSparkles();
-}
 
-function createConfetti() {
-    const container = document.getElementById('confettiContainer');
+    this.createConfetti();
+    this.createBalloons();
+    this.createFloatingHearts();
+    this.createSparkles();
+  },
+
+  playMusic() {
+    const audio = this.elements.bgMusic;
+    audio.play().catch(err => console.log('Audio play failed:', err));
+  },
+
+  createConfetti() {
+    const container = this.elements.confettiContainer;
     const confettiCount = 50;
-    
+
     for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti ' + (Math.random() > 0.5 ? 'gold' : 'white');
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
-        confetti.style.animationDuration = (2 + Math.random() * 1) + 's';
-        confetti.style.animationDelay = Math.random() * 0.5 + 's';
-        container.appendChild(confetti);
-        
-        setTimeout(() => confetti.remove(), 3500);
-    }
-}
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti ' + (Math.random() > 0.5 ? 'gold' : 'white');
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.top = '-10px';
+      confetti.style.animationDuration = (2 + Math.random() * 1) + 's';
+      confetti.style.animationDelay = Math.random() * 0.5 + 's';
+      container.appendChild(confetti);
 
-function createBalloons() {
-    const screen = document.getElementById('birthdayScreen');
+      setTimeout(() => confetti.remove(), 3500);
+    }
+  },
+
+  createBalloons() {
+    const screen = this.elements.screens[2];
     const balloonCount = 8;
-    
+
     for (let i = 0; i < balloonCount; i++) {
-        const balloon = document.createElement('div');
-        balloon.className = 'balloon white';
-        balloon.style.left = Math.random() * 100 + '%';
-        balloon.style.top = Math.random() * 100 + '%';
-        balloon.style.animationDelay = Math.random() * 0.5 + 's';
-        screen.appendChild(balloon);
-        
-        setTimeout(() => balloon.remove(), 4500);
-    }
-}
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon white';
+      balloon.style.left = Math.random() * 100 + '%';
+      balloon.style.top = Math.random() * 100 + '%';
+      balloon.style.animationDelay = Math.random() * 0.5 + 's';
+      screen.appendChild(balloon);
 
-function createFloatingHearts() {
-    const screen = document.getElementById('birthdayScreen');
+      setTimeout(() => balloon.remove(), 4500);
+    }
+  },
+
+  createFloatingHearts() {
+    const screen = this.elements.screens[2];
     const heartCount = 15;
-    
+
     for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.textContent = '❤️';
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.top = Math.random() * 100 + '%';
-        heart.style.animationDuration = (2 + Math.random() * 1) + 's';
-        heart.style.animationDelay = Math.random() * 0.3 + 's';
-        screen.appendChild(heart);
-        
-        setTimeout(() => heart.remove(), 3500);
-    }
-}
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.top = Math.random() * 100 + '%';
+      heart.style.animationDuration = (2 + Math.random() * 1) + 's';
+      heart.style.animationDelay = Math.random() * 0.3 + 's';
+      screen.appendChild(heart);
 
-function createSparkles() {
-    const screen = document.getElementById('birthdayScreen');
+      setTimeout(() => heart.remove(), 3500);
+    }
+  },
+
+  createSparkles() {
+    const screen = this.elements.screens[2];
     const sparkleCount = 20;
-    
+
     for (let i = 0; i < sparkleCount; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.textContent = '✨';
-        sparkle.style.left = Math.random() * 100 + '%';
-        sparkle.style.top = Math.random() * 100 + '%';
-        sparkle.style.animationDelay = Math.random() * 1 + 's';
-        screen.appendChild(sparkle);
-        
-        setTimeout(() => sparkle.remove(), 4500);
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.textContent = '✨';
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.top = Math.random() * 100 + '%';
+      sparkle.style.animationDelay = Math.random() * 1 + 's';
+      screen.appendChild(sparkle);
+
+      setTimeout(() => sparkle.remove(), 4500);
     }
-}
+  },
 
-// ============================================
-// 5. PASSWORD SCREEN
-// ============================================
+  // ============================================
+  // 5. PASSWORD SCREEN
+  // ============================================
 
-function checkPassword() {
-    const input = document.getElementById('passwordInput');
-    const correctPassword = 'busayo';
-    
-    if (input.value.toLowerCase() === correctPassword) {
-        goToNextScreen();
+  checkPassword() {
+    const input = this.elements.passwordInput;
+    if (input.value.toLowerCase() === config.password) {
+      this.goToNextScreen();
     } else {
-        input.classList.add('shake');
-        setTimeout(() => {
-            input.classList.remove('shake');
-        }, 400);
-        input.value = '';
+      input.classList.add('shake');
+      setTimeout(() => {
+        input.classList.remove('shake');
+      }, 400);
+      input.value = '';
     }
-}
+  },
 
-// Allow Enter key to submit password
-document.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter' && currentScreen === 4) {
-        checkPassword();
+  // ============================================
+  // 6. TREASURE CHEST
+  // ============================================
+
+  openTreasure() {
+    if (!state.treasureOpen) {
+      state.treasureOpen = true;
+      this.elements.treasureChest.classList.add('open');
+      this.elements.treasureChest.setAttribute('aria-pressed', 'true');
+      this.elements.treasureMessage.style.display = 'block';
+      setTimeout(() => {
+        this.elements.treasureButton.style.display = 'block';
+      }, 1000);
     }
-});
+  },
 
-// ============================================
-// 6. TREASURE CHEST
-// ============================================
+  // ============================================
+  // 7. MEMORY BOOK
+  // ============================================
 
-function openTreasure() {
-    const chest = document.getElementById('treasureChest');
-    if (!chest.classList.contains('open')) {
-        chest.classList.add('open');
-        document.getElementById('treasureMessage').style.display = 'block';
-        setTimeout(() => {
-            document.getElementById('treasureButton').style.display = 'block';
-        }, 1000);
-    }
-}
-
-// ============================================
-// 7. MEMORY BOOK
-// ============================================
-
-function initializeMemoryBook() {
-    const bookPages = document.getElementById('bookPages');
+  initializeMemoryBook() {
+    const bookPages = this.elements.bookPages;
     bookPages.innerHTML = '';
-    
+    state.currentPage = 0;
+
     // Cover page
     const coverPage = document.createElement('div');
     coverPage.className = 'book-page active';
     coverPage.innerHTML = `
-        <div class="book-cover">
-            <h2 class="book-cover-title">Our Memories ❤️</h2>
-            <p style="color: #d4af37; font-style: italic;">A collection of moments we treasure</p>
-        </div>
+      <div class="book-cover">
+        <h2 class="book-cover-title">Our Memories ❤️</h2>
+        <p style="color: #d4af37; font-style: italic;">A collection of moments we treasure</p>
+      </div>
     `;
     bookPages.appendChild(coverPage);
-    
-    // Photo pages with captions
-    const captions = [
-        "Every moment with you is a memory I cherish",
-        "Your smile brightens my darkest days",
-        "Together, we create magic",
-        "In your eyes, I found my home",
-        "You are my favorite adventure",
-        "Every laugh with you is a treasure",
-        "You make ordinary moments extraordinary",
-        "My heart belongs to you",
-        "Forever grateful for you",
-        "You are my greatest blessing",
-        "Every day with you is a gift"
-    ];
-    
-    photos.forEach((photo, index) => {
-        const page = document.createElement('div');
-        page.className = 'book-page';
-        page.innerHTML = `
-            <img src="images/${photo}" alt="Memory ${index + 1}" class="page-image">
-            <p class="page-caption">${captions[index]}</p>
-        `;
-        bookPages.appendChild(page);
+
+    // Photo pages
+    config.photos.forEach((photo, index) => {
+      const page = document.createElement('div');
+      page.className = 'book-page';
+      page.innerHTML = `
+        <img src="images/${photo}" alt="Memory ${index + 1}" class="page-image">
+        <p class="page-caption">${config.captions[index]}</p>
+      `;
+      bookPages.appendChild(page);
     });
-    
+
     // Final page with us.jpg
     const finalPage = document.createElement('div');
     finalPage.className = 'book-page';
     finalPage.innerHTML = `
-        <img src="images/us.jpg" alt="Us" class="page-image" style="height: 70%;">
-        <p class="page-caption">No matter how many memories we make... this will always be my favourite one.</p>
+      <img src="images/us.jpg" alt="Us together" class="page-image" style="height: 70%;">
+      <p class="page-caption">No matter how many memories we make... this will always be my favourite one.</p>
     `;
     bookPages.appendChild(finalPage);
-    
-    currentPage = 0;
-    updateBookButtons();
-    updatePageCounter();
-}
 
-function nextPage() {
-    const pages = document.querySelectorAll('.book-page');
-    if (currentPage < pages.length - 1) {
-        pages[currentPage].classList.remove('active');
-        pages[currentPage].classList.add('prev');
-        currentPage++;
-        pages[currentPage].classList.remove('prev');
-        pages[currentPage].classList.add('active');
-        updateBookButtons();
-        updatePageCounter();
-        
-        // Go to next screen after final page
-        if (currentPage === pages.length - 1) {
-            setTimeout(() => {
-                goToNextScreen();
-            }, 2000);
-        }
+    this.updateBookButtons();
+    this.updatePageCounter();
+  },
+
+  nextPage() {
+    const pages = this.elements.bookPages.querySelectorAll('.book-page');
+    if (state.currentPage < pages.length - 1) {
+      pages[state.currentPage].classList.remove('active');
+      pages[state.currentPage].classList.add('prev');
+      state.currentPage++;
+      pages[state.currentPage].classList.remove('prev');
+      pages[state.currentPage].classList.add('active');
+      this.updateBookButtons();
+      this.updatePageCounter();
+
+      // Auto-advance after final page
+      if (state.currentPage === pages.length - 1) {
+        setTimeout(() => {
+          this.goToNextScreen();
+        }, 2000);
+      }
     }
-}
+  },
 
-function previousPage() {
-    const pages = document.querySelectorAll('.book-page');
-    if (currentPage > 0) {
-        pages[currentPage].classList.remove('active');
-        currentPage--;
-        pages[currentPage].classList.remove('prev');
-        pages[currentPage].classList.add('active');
-        updateBookButtons();
-        updatePageCounter();
+  previousPage() {
+    const pages = this.elements.bookPages.querySelectorAll('.book-page');
+    if (state.currentPage > 0) {
+      pages[state.currentPage].classList.remove('active');
+      state.currentPage--;
+      pages[state.currentPage].classList.remove('prev');
+      pages[state.currentPage].classList.add('active');
+      this.updateBookButtons();
+      this.updatePageCounter();
     }
-}
+  },
 
-function updateBookButtons() {
-    const pages = document.querySelectorAll('.book-page');
-    document.getElementById('prevPageBtn').disabled = currentPage === 0;
-    document.getElementById('nextPageBtn').disabled = currentPage === pages.length - 1;
-}
+  updateBookButtons() {
+    const pages = this.elements.bookPages.querySelectorAll('.book-page');
+    this.elements.prevPageBtn.disabled = state.currentPage === 0;
+    this.elements.nextPageBtn.disabled = state.currentPage === pages.length - 1;
+  },
 
-function updatePageCounter() {
-    const pages = document.querySelectorAll('.book-page');
-    document.getElementById('pageCounter').textContent = `Page ${currentPage + 1} of ${pages.length}`;
-}
+  updatePageCounter() {
+    const pages = this.elements.bookPages.querySelectorAll('.book-page');
+    this.elements.pageCounter.textContent = `Page ${state.currentPage + 1} of ${pages.length}`;
+  },
 
-// ============================================
-// 8. CATCH MY HEART GAME
-// ============================================
+  // ============================================
+  // 8. CATCH MY HEART GAME
+  // ============================================
 
-let gameActive = false;
-let gameScore = 0;
-let gameTime = 60;
-let gameInterval = null;
+  startGame() {
+    state.gameActive = true;
+    state.gameScore = 0;
+    state.gameTime = 60;
+    this.elements.gameScore.textContent = '0';
+    this.elements.gameTimer.textContent = '60';
+    this.elements.gameButton.style.display = 'none';
+    this.elements.gameCanvas.innerHTML = '';
 
-function startGame() {
-    gameActive = true;
-    gameScore = 0;
-    gameTime = 60;
-    document.getElementById('gameScore').textContent = '0';
-    document.getElementById('gameTimer').textContent = '60';
-    document.getElementById('gameButton').style.display = 'none';
-    document.getElementById('gameCanvas').innerHTML = '';
-    
-    // Create falling hearts
+    // Spawn hearts
     const spawnInterval = setInterval(() => {
-        if (!gameActive) {
-            clearInterval(spawnInterval);
-            return;
-        }
-        createFallingHeart();
+      if (!state.gameActive) {
+        clearInterval(spawnInterval);
+        return;
+      }
+      this.createFallingHeart();
     }, 400);
-    
-    // Timer countdown
-    gameInterval = setInterval(() => {
-        gameTime--;
-        document.getElementById('gameTimer').textContent = gameTime;
-        
-        if (gameTime <= 0) {
-            endGame();
-            clearInterval(gameInterval);
-            clearInterval(spawnInterval);
-        }
-    }, 1000);
-}
 
-function createFallingHeart() {
-    if (!gameActive) return;
-    
-    const canvas = document.getElementById('gameCanvas');
+    // Timer
+    if (state.gameInterval) clearInterval(state.gameInterval);
+    state.gameInterval = setInterval(() => {
+      state.gameTime--;
+      this.elements.gameTimer.textContent = state.gameTime;
+
+      if (state.gameTime <= 0) {
+        this.endGame();
+        clearInterval(state.gameInterval);
+        clearInterval(spawnInterval);
+      }
+    }, 1000);
+  },
+
+  createFallingHeart() {
+    if (!state.gameActive) return;
+
+    const canvas = this.elements.gameCanvas;
     const heart = document.createElement('div');
     heart.className = 'falling-heart-game';
     heart.textContent = '❤️';
     heart.style.left = Math.random() * (canvas.offsetWidth - 30) + 'px';
     heart.style.animationDuration = (3 + Math.random() * 2) + 's';
-    
+
     heart.onclick = (e) => {
-        e.stopPropagation();
-        gameScore++;
-        document.getElementById('gameScore').textContent = gameScore;
-        heart.remove();
+      e.stopPropagation();
+      state.gameScore++;
+      this.elements.gameScore.textContent = state.gameScore;
+      heart.remove();
     };
-    
+
     canvas.appendChild(heart);
-    
+    state.gameHearts.push(heart);
+
     setTimeout(() => {
-        if (heart.parentNode) heart.remove();
+      if (heart.parentNode) heart.remove();
     }, 5000);
-}
+  },
 
-function endGame() {
-    gameActive = false;
-    document.getElementById('gameButton').style.display = 'block';
-    document.getElementById('gameButton').textContent = 'Play Again';
-    document.getElementById('nextAfterGame').style.display = 'block';
-}
+  endGame() {
+    state.gameActive = false;
+    this.elements.gameButton.style.display = 'block';
+    this.elements.gameButton.textContent = 'Play Again';
+    this.elements.nextAfterGame.style.display = 'block';
+  },
 
-// ============================================
-// 9. CAKE BUILDER
-// ============================================
+  // ============================================
+  // 9. CAKE BUILDER
+  // ============================================
 
-let decorationCount = 0;
-
-function addDecoration(emoji) {
-    const canvas = document.getElementById('cakeCanvas');
+  addDecoration(emoji) {
+    const canvas = this.elements.cakeCanvas;
     const decoration = document.createElement('div');
     decoration.className = 'decoration';
     decoration.textContent = emoji;
     decoration.style.left = Math.random() * (canvas.offsetWidth - 40) + 'px';
     decoration.style.top = Math.random() * (canvas.offsetHeight - 40) + 'px';
-    
+
     canvas.appendChild(decoration);
-    decorationCount++;
-    
-    if (decorationCount >= 6) {
-        showCakeBanner();
+    state.decorationCount++;
+
+    if (state.decorationCount >= 6) {
+      this.showCakeBanner();
     }
-}
+  },
 
-function showCakeBanner() {
-    const banner = document.getElementById('cakeBanner');
-    banner.style.display = 'block';
-    document.getElementById('cakeNextBtn').style.display = 'block';
-}
+  showCakeBanner() {
+    this.elements.cakeBanner.style.display = 'block';
+    this.elements.cakeNextBtn.style.display = 'block';
+  },
 
-// ============================================
-// 10. 23 REASONS
-// ============================================
+  // ============================================
+  // 10. 23 REASONS
+  // ============================================
 
-function initializeReasons() {
-    const grid = document.getElementById('envelopesGrid');
+  initializeReasons() {
+    const grid = this.elements.envelopesGrid;
     grid.innerHTML = '';
-    
-    reasons.forEach((reason, index) => {
-        const envelope = document.createElement('div');
-        envelope.className = 'envelope';
-        envelope.innerHTML = `
-            <div class="envelope-flap"></div>
-            <div class="envelope-number">${index + 1}</div>
-            <div class="envelope-content">
-                <p class="envelope-text">${reason}</p>
-            </div>
-        `;
-        
-        envelope.onclick = () => {
-            envelope.classList.toggle('open');
-        };
-        
-        grid.appendChild(envelope);
+
+    config.reasons.forEach((reason, index) => {
+      const envelope = document.createElement('div');
+      envelope.className = 'envelope';
+      envelope.setAttribute('role', 'button');
+      envelope.setAttribute('tabindex', '0');
+      envelope.setAttribute('aria-label', `Reason ${index + 1}: ${reason}`);
+      envelope.innerHTML = `
+        <div class="envelope-flap"></div>
+        <div class="envelope-number">${index + 1}</div>
+        <div class="envelope-content">
+          <p class="envelope-text">${reason}</p>
+        </div>
+      `;
+
+      envelope.onclick = () => {
+        envelope.classList.toggle('open');
+      };
+
+      envelope.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          envelope.classList.toggle('open');
+        }
+      });
+
+      grid.appendChild(envelope);
     });
-}
+  },
 
-// ============================================
-// 11. MAILBOX
-// ============================================
+  // ============================================
+  // 11. MAILBOX
+  // ============================================
 
-function openMailbox() {
-    const mailbox = document.getElementById('mailbox');
-    if (!mailbox.classList.contains('open')) {
-        mailbox.classList.add('open');
-        setTimeout(() => {
-            document.getElementById('mailboxNextBtn').style.display = 'block';
-        }, 600);
+  openMailbox() {
+    if (!state.mailboxOpen) {
+      state.mailboxOpen = true;
+      this.elements.mailbox.classList.add('open');
+      this.elements.mailbox.setAttribute('aria-pressed', 'true');
+      setTimeout(() => {
+        this.elements.mailboxNextBtn.style.display = 'block';
+      }, 600);
     }
-}
+  },
 
-// ============================================
-// 12. LOVE LETTER
-// ============================================
+  // ============================================
+  // 12. LOVE LETTER
+  // ============================================
 
-function openLetter() {
-    const envelope = document.getElementById('letterEnvelope');
-    if (!envelope.classList.contains('open')) {
-        envelope.classList.add('open');
-        typeLetterContent();
-        setTimeout(() => {
-            document.getElementById('letterNextBtn').style.display = 'block';
-        }, 2000);
+  openLetter() {
+    if (!state.letterOpen) {
+      state.letterOpen = true;
+      this.elements.letterEnvelope.classList.add('open');
+      this.elements.letterEnvelope.setAttribute('aria-pressed', 'true');
+      this.typeLetterContent();
+      setTimeout(() => {
+        this.elements.letterNextBtn.style.display = 'block';
+      }, 2000);
     }
-}
+  },
 
-function typeLetterContent() {
-    const contentDiv = document.getElementById('letterContent');
+  typeLetterContent() {
+    const contentDiv = this.elements.letterContent;
     contentDiv.innerHTML = '';
-    
-    letterText.forEach((line, index) => {
-        const lineElement = document.createElement('div');
-        lineElement.className = 'letter-line';
-        lineElement.textContent = line;
-        lineElement.style.animationDelay = (index * 0.1) + 's';
-        contentDiv.appendChild(lineElement);
+
+    config.letterText.forEach((line) => {
+      const lineElement = document.createElement('div');
+      lineElement.className = 'letter-line';
+      lineElement.textContent = line;
+      contentDiv.appendChild(lineElement);
     });
-}
+  },
 
-// ============================================
-// 13. MOON ENDING
-// ============================================
+  // ============================================
+  // 13. MOON ENDING
+  // ============================================
 
-function createMoonStars() {
-    const container = document.getElementById('moonStars');
+  createMoonStars() {
+    const container = this.elements.moonStars;
     if (!container) return;
-    
+
     container.innerHTML = '';
-    
+
     for (let i = 0; i < 15; i++) {
-        const star = document.createElement('div');
-        star.className = 'moon-stars';
-        star.textContent = '✨';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 2 + 's';
-        container.appendChild(star);
+      const star = document.createElement('div');
+      star.className = 'moon-stars';
+      star.textContent = '✨';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 2 + 's';
+      container.appendChild(star);
     }
-}
 
-function initializeMoonStars() {
-    const container = document.getElementById('moonHearts');
+    this.createMoonHearts();
+  },
+
+  createMoonHearts() {
+    const container = this.elements.moonHearts;
     if (!container) return;
-    
+
+    container.innerHTML = '';
+
     for (let i = 0; i < 8; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'moon-hearts';
-        heart.textContent = '❤️';
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.top = Math.random() * 100 + '%';
-        heart.style.animationDelay = Math.random() * 3 + 's';
-        container.appendChild(heart);
+      const heart = document.createElement('div');
+      heart.className = 'moon-hearts';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.top = Math.random() * 100 + '%';
+      heart.style.animationDelay = Math.random() * 3 + 's';
+      container.appendChild(heart);
     }
-}
+  },
 
-// ============================================
-// 14. FINAL MESSAGE
-// ============================================
+  // ============================================
+  // 14. FINAL MESSAGE
+  // ============================================
 
-function revealFinal() {
-    const reveal = document.getElementById('finalReveal');
-    reveal.classList.add('show');
+  revealFinal() {
+    state.finalRevealed = true;
+    this.elements.finalReveal.classList.add('show');
     setTimeout(() => {
-        document.getElementById('restartBtn').style.display = 'block';
+      this.elements.restartBtn.style.display = 'block';
     }, 800);
-}
+  },
 
-// ============================================
-// 15. RESTART
-// ============================================
+  // ============================================
+  // 15. RESTART
+  // ============================================
 
-function restartJourney() {
-    // Reset all state
-    currentScreen = 0;
-    currentPage = 0;
-    gameScore = 0;
-    gameTime = 60;
-    gameActive = false;
-    decorationCount = 0;
-    musicStarted = false;
-    
-    // Clear game canvas
-    document.getElementById('gameCanvas').innerHTML = '';
-    document.getElementById('gameButton').style.display = 'block';
-    document.getElementById('gameButton').textContent = 'Start Game';
-    document.getElementById('nextAfterGame').style.display = 'none';
-    
-    // Clear cake decorations
-    document.getElementById('cakeCanvas').innerHTML = '<div class="cake-base"><div class="cake-frosting"></div></div>';
-    document.getElementById('cakeBanner').style.display = 'none';
-    document.getElementById('cakeNextBtn').style.display = 'none';
-    
-    // Reset password
-    document.getElementById('passwordInput').value = '';
-    
-    // Reset treasure
-    document.getElementById('treasureChest').classList.remove('open');
-    document.getElementById('treasureMessage').style.display = 'none';
-    document.getElementById('treasureButton').style.display = 'none';
-    
-    // Reset mailbox
-    document.getElementById('mailbox').classList.remove('open');
-    document.getElementById('mailboxNextBtn').style.display = 'none';
-    
-    // Reset letter
-    document.getElementById('letterEnvelope').classList.remove('open');
-    document.getElementById('letterNextBtn').style.display = 'none';
-    
-    // Reset final reveal
-    document.getElementById('finalReveal').classList.remove('show');
-    document.getElementById('restartBtn').style.display = 'none';
-    
+  restartJourney() {
+    // Reset state
+    state.currentScreen = 0;
+    state.musicStarted = false;
+    state.currentPage = 0;
+    state.gameActive = false;
+    state.gameScore = 0;
+    state.gameTime = 60;
+    state.decorationCount = 0;
+    state.treasureOpen = false;
+    state.mailboxOpen = false;
+    state.letterOpen = false;
+    state.finalRevealed = false;
+
+    // Clear timers
+    if (state.countdownTimer) clearInterval(state.countdownTimer);
+    if (state.gameInterval) clearInterval(state.gameInterval);
+
+    // Reset UI elements
+    this.elements.gameCanvas.innerHTML = '';
+    this.elements.gameButton.style.display = 'block';
+    this.elements.gameButton.textContent = 'Start Game';
+    this.elements.nextAfterGame.style.display = 'none';
+
+    this.elements.cakeCanvas.innerHTML = '<div class="cake-base"><div class="cake-frosting"></div></div>';
+    this.elements.cakeBanner.style.display = 'none';
+    this.elements.cakeNextBtn.style.display = 'none';
+
+    this.elements.passwordInput.value = '';
+
+    this.elements.treasureChest.classList.remove('open');
+    this.elements.treasureChest.setAttribute('aria-pressed', 'false');
+    this.elements.treasureMessage.style.display = 'none';
+    this.elements.treasureButton.style.display = 'none';
+
+    this.elements.mailbox.classList.remove('open');
+    this.elements.mailbox.setAttribute('aria-pressed', 'false');
+    this.elements.mailboxNextBtn.style.display = 'none';
+
+    this.elements.letterEnvelope.classList.remove('open');
+    this.elements.letterEnvelope.setAttribute('aria-pressed', 'false');
+    this.elements.letterNextBtn.style.display = 'none';
+
+    this.elements.finalReveal.classList.remove('show');
+    this.elements.restartBtn.style.display = 'none';
+
     // Stop music
-    const audio = document.getElementById('bgMusic');
+    const audio = this.elements.bgMusic;
     audio.pause();
     audio.currentTime = 0;
-    
-    // Show loading screen
-    showScreen(0);
-    initializeLoadingScreen();
-}
+
+    // Restart
+    this.showScreen(0);
+    this.startLoadingScreen();
+  }
+};
 
 // ============================================
-// KEYBOARD SHORTCUTS
+// INITIALIZATION
 // ============================================
 
-document.addEventListener('keydown', function(event) {
-    // Skip to next screen with spacebar (except during games/interactions)
-    if (event.code === 'Space' && currentScreen !== 7) {
-        event.preventDefault();
-        goToNextScreen();
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  app.init();
+  // Initialize reasons screen early for better performance
+  app.initializeReasons();
+});
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+  if (state.countdownTimer) clearInterval(state.countdownTimer);
+  if (state.gameInterval) clearInterval(state.gameInterval);
 });
