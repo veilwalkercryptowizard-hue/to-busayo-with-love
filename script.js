@@ -163,6 +163,13 @@ const app = {
 
   // Attach event listeners
   attachEventListeners() {
+    // Birthday button click
+    if (this.elements.birthdayBtn) {
+      this.elements.birthdayBtn.addEventListener('click', () => {
+        this.goToNextScreen();
+      });
+    }
+
     // Password input Enter key
     if (this.elements.passwordInput) {
       this.elements.passwordInput.addEventListener('keypress', (e) => {
