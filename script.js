@@ -35,8 +35,8 @@ const audio = document.getElementById("backgroundMusic");
 const loadingScreen =
 document.getElementById("loadingScreen");
 
-const countdownScreen =
-document.getElementById("countdownScreen");
+const number =
+document.getElementById("countnumber");
 
 const birthdayScreen =
 document.getElementById("birthdayScreen");
