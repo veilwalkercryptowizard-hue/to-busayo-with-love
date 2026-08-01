@@ -2638,6 +2638,12 @@ Math.random()*35
 
 finishLetter();
 
+typedLetter.classList.add(
+
+"finished"
+
+);
+
 }
 
 /*====================================================
