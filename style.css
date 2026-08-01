@@ -3965,3 +3965,9 @@ opacity:0;
 }
 
 }
+
+.finished::after{
+
+display:none;
+
+}
