@@ -1,174 +1,708 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>To Busayo, With Love ❤️</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        To Busayo, With Love ❤️
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
 
-<audio id="bgMusic" src="music/BrunoMars.mp3" loop preload="none"></audio>
+    <!-- =======================================
+    BACKGROUND MUSIC
+    ======================================== -->
 
-<!-- SCENE 1: LOADING -->
-<section id="scene-loading" class="scene active">
-  <div class="loading-wrap">
-    <div class="loading-heart">❤️</div>
-    <p class="loading-text">Preparing something special...</p>
-    <div class="loading-bar-track"><div class="loading-bar-fill" id="loadingFill">
-    </div></div>
-  </div>
-</section>
+    <audio
+        id="birthdayMusic"
+        loop>
 
-<!-- SCENE 2: COUNTDOWN -->
-<section id="scene-countdown" class="scene">
-  <div class="countdown-number" id="countdownNumber">3</div>
-</section>
+        <source
+            src="music/BrunoMars.mp3"
+            type="audio/mpeg">
 
-<!-- SCENE 3: BIRTHDAY -->
-<section id="scene-birthday" class="scene">
-  <div class="balloons" id="balloonField"></div>
-  <div class="confetti-field" id="confettiField3"></div>
-  <h1 class="title-script birthday-title">Happy Birthday Busayo</h1>
-  <button class="btn-gold" id="startJourneyBtn">Start The Journey ❤️</button>
-</section>
+    </audio>
 
-<!-- SCENE 4: INTRO -->
-<section id="scene-intro" class="scene">
-  <div class="intro-cover">
-    <img src="images/cover.jpg" alt="Cover" class="cover-img" onerror="this.classList.add('img-fallback')">
-  </div>
-  <div class="intro-message">
-    <p class="title-script">To Busayo,</p>
-    <p class="title-script">With Love.</p>
-  </div>
-</section>
+    <!-- =======================================
+    PAGE EFFECTS
+    ======================================== -->
 
-<!-- SCENE 5: PASSWORD -->
-<section id="scene-password" class="scene">
-  <div class="lock-card" id="lockCard">
-    <div class="lock-icon">🔒</div>
-    <h2 class="title-script">A Little Secret</h2>
-    <p class="lock-hint">Enter the password to continue...</p>
-    <input type="text" id="passwordInput" class="password-input" placeholder="Password" autocomplete="off">
-    <button class="btn-gold" id="passwordSubmit">Unlock</button>
-    <p class="lock-error" id="lockError">Wrong password, try again 💔</p>
-  </div>
-</section>
+    <div id="pageTurn"></div>
 
-<!-- SCENE 6: TREASURE CHEST -->
-<section id="scene-chest" class="scene">
-  <div class="chest-wrap" id="chestWrap">
-    <div class="chest" id="chestEl">
-      <div class="chest-lid"></div>
-      <div class="chest-base"></div>
+    <div id="memoryFlash"></div>
+
+    <div id="particleContainer"></div>
+
+    <div id="confettiContainer"></div>
+
+    <!-- =======================================
+    LOADING SCREEN
+    ======================================== -->
+
+    <section
+        id="loadingScreen"
+        class="screen active">
+
+        <div class="loadingContent">
+
+            <div id="loadingHeart">
+
+                ❤️
+
+            </div>
+
+            <h1>
+
+                Preparing something special...
+
+            </h1>
+
+            <div id="loadingBar">
+
+                <div id="loadingFill"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    COUNTDOWN
+    ======================================== -->
+
+    <section
+        id="countdownScreen"
+        class="screen">
+
+        <div class="countdownContent">
+
+            <h1 id="countNumber">
+
+                3
+
+            </h1>
+
+            <p>
+
+                Are you ready?
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    WELCOME SCREEN
+    ======================================== -->
+
+    <section
+        id="welcomeScreen"
+        class="screen">
+
+        <div class="welcomeContent">
+
+            <h1>
+
+                This surprise was made
+
+                especially for
+
+                <strong>
+
+                    Busayo ❤️
+
+                </strong>
+
+            </h1>
+
+            <p>
+
+                Every little detail here
+
+                was created with love.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    HAPPY BIRTHDAY
+    ======================================== -->
+
+    <section
+        id="birthdayScreen"
+        class="screen">
+
+        <div id="balloons"></div>
+
+        <div id="confettiLayer"></div>
+
+        <div class="birthdayContent">
+
+            <h1>
+
+                Happy Birthday
+
+                Busayo ❤️
+
+            </h1>
+
+            <p>
+
+                Today isn't just another day.
+
+                It's a celebration of someone
+
+                truly amazing.
+
+            </p>
+
+            <button
+
+                id="beginJourney"
+
+                class="primaryButton">
+
+                Start The Journey ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    INTRO
+    ======================================== -->
+
+    <section
+        id="introScreen"
+        class="screen">
+
+        <div class="introContent">
+
+            <img
+
+                id="coverImage"
+
+                src="images/cover.jpg"
+
+                alt="Cover">
+
+            <h1>
+
+                To Busayo,
+
+                With Love 🤍
+
+            </h1>
+
+            <p>
+
+                Some gifts are bought.
+
+                Some are handmade.
+
+                This one was written
+
+                one line at a time.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    PASSWORD
+    ======================================== -->
+
+    <section
+        id="passwordScreen"
+        class="screen">
+
+        <div class="passwordCard">
+
+            <h2>
+
+                🔐
+
+            </h2>
+
+            <p>
+
+                Every beautiful surprise
+
+                deserves a little secret.
+
+            </p>
+
+            <input
+
+                id="password"
+
+                type="password"
+
+                placeholder="Enter Password">
+
+            <small id="error"></small>
+
+            <button
+
+                id="unlockButton"
+
+                class="primaryButton">
+
+                Unlock ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+        <!-- =======================================
+    TREASURE SCREEN
+    ======================================== -->
+
+    <section
+        id="treasureScreen"
+        class="screen">
+
+        <div class="screenContent">
+
+            <h1>
+
+                One More Surprise 🎁
+
+            </h1>
+
+            <p>
+
+                Some treasures aren't made of gold.
+
+                Some are made of memories.
+
+            </p>
+
+            <div id="treasureChest">
+
+                <div class="chestShadow"></div>
+
+                <div class="chestBase"></div>
+
+                <div class="chestLid"></div>
+
+                <div class="chestLock"></div>
+
+            </div>
+
+            <button
+
+                id="openChest"
+
+                class="primaryButton">
+
+                Open Treasure ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    MEMORY GALLERY
+    ======================================== -->
+
+    <section
+        id="galleryScreen"
+        class="screen">
+
+        <div class="screenContent">
+
+            <h1>
+
+                Our Beautiful Memories 📸
+
+            </h1>
+
+            <p>
+
+                Every picture tells a beautiful story.
+
+            </p>
+
+            <div id="memoryDesk">
+
+                <!-- JavaScript inserts all photos here -->
+
+            </div>
+
+            <button
+
+                id="continueProjector"
+
+                class="primaryButton">
+
+                Continue ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    PROJECTOR
+    ======================================== -->
+
+    <section
+        id="projectorScreen"
+        class="screen">
+
+        <div class="screenContent">
+
+            <h1>
+
+                Movie Night 🎞️
+
+            </h1>
+
+            <p>
+
+                Let's replay some beautiful memories.
+
+            </p>
+
+            <div id="filmProjector">
+
+                <div id="projectorLight"></div>
+
+                <div id="filmStrip">
+
+                    <!-- Frames inserted by JavaScript -->
+
+                </div>
+
+                <div id="finalFrame">
+
+                    <!-- Final image appears here -->
+
+                </div>
+
+            </div>
+
+            <button
+
+                id="continueGames"
+
+                class="primaryButton">
+
+                Continue ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    HEART GAME
+    ======================================== -->
+
+    <section
+        id="heartGameScreen"
+        class="screen">
+
+        <div class="screenContent">
+
+            <h1>
+
+                Catch My Heart ❤️
+
+            </h1>
+
+            <p>
+
+                Catch as many hearts as you can before time runs out.
+
+            </p>
+
+            <div id="gameHUD">
+
+                <span>
+
+                    Score:
+                    <strong id="heartScore">0</strong>
+
+                </span>
+
+                <span>
+
+                    Time:
+                    <strong id="heartTimer">60</strong>
+
+                </span>
+
+            </div>
+
+            <div id="heartCanvas">
+
+                <!-- Hearts generated by JavaScript -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    CAKE GAME
+    ======================================== -->
+
+    <section
+        id="cakeScreen"
+        class="screen">
+
+        <div class="screenContent">
+
+            <h1>
+
+                Build My Birthday Cake 🎂
+
+            </h1>
+
+            <p>
+
+                Decorate the cake with love.
+
+            </p>
+
+            <div id="cakeArea">
+
+                <div id="cakeBase">
+
+                    <!-- Cake -->
+
+                </div>
+
+                <div id="cakeTools">
+
+                    <!-- Decorations -->
+
+                </div>
+
+            </div>
+
+            <div id="birthdayBanner"></div>
+
+        </div>
+
+    </section>
+        <!-- =======================================
+    23 REASONS
+    ======================================== -->
+
+    <section
+        id="reasonsScreen"
+        class="screen">
+
+        <div class="screenContent">
+
+            <h1>
+
+                23 Reasons Why You're Amazing ❤️
+
+            </h1>
+
+            <p>
+
+                Open every envelope to discover
+                something special.
+
+            </p>
+
+            <div id="reasonsGrid">
+
+                <!-- JavaScript creates 23 envelopes -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    MAILBOX
+    ======================================== -->
+
+    <section
+        id="mailboxScreen"
+        class="screen">
+
+        <div class="screenContent">
+
+            <h1>
+
+                One Last Surprise 💌
+
+            </h1>
+
+            <p>
+
+                There's still something
+                I want to tell you.
+
+            </p>
+
+            <div id="mailbox">
+
+                <div class="mailFlag"></div>
+
+                <div class="mailBody"></div>
+
+                <div class="mailSlot"></div>
+
+            </div>
+
+            <div id="letterEnvelope"></div>
+
+            <div id="letterPaper">
+
+                <div id="typedLetter"></div>
+
+                <div id="signature">
+
+                    — Veilwalker 🤍
+
+                </div>
+
+            </div>
+
+            <button
+
+                id="continueJourney"
+
+                class="primaryButton">
+
+                Continue ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    MEMORY SKY
+    ======================================== -->
+
+    <section
+        id="endingScreen"
+        class="screen">
+
+        <div id="memorySky">
+
+            <div id="moon"></div>
+
+            <div id="stars"></div>
+
+            <div id="floatingHearts"></div>
+
+        </div>
+
+        <div id="finalWords">
+
+            <h1>
+
+                Happy Birthday
+
+                <br>
+
+                Busayo ❤️
+
+            </h1>
+
+            <p>
+
+                Thank you for taking this little journey.
+
+                I hope today reminds you how deeply loved,
+
+                appreciated and cherished you are.
+
+                May your smile never fade,
+
+                your dreams come true,
+
+                and your heart always find peace.
+
+            </p>
+
+            <button
+
+                id="restartJourney"
+
+                class="primaryButton">
+
+                Begin Again ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =======================================
+    PHOTO MODAL
+    ======================================== -->
+
+    <div id="photoModal">
+
+        <span id="closePhoto">
+
+            &times;
+
+        </span>
+
+        <img
+
+            id="modalImage"
+
+            src=""
+
+            alt="Memory">
+
+        <div id="modalCaption"></div>
+
     </div>
-    <p class="chest-hint">Tap the chest</p>
-  </div>
-  <div class="particles-field" id="chestParticles"></div>
-  <div class="flash-overlay" id="chestFlash"></div>
-</section>
 
-<!-- SCENE 7: MEMORY GALLERY -->
-<section id="scene-gallery" class="scene">
-  <h2 class="title-script scene-heading">Our Memories</h2>
-  <div class="gallery-grid" id="galleryGrid"></div>
-  <button class="btn-gold scene-next" id="galleryNextBtn">Continue ❤️</button>
-  <div class="polaroid-zoom-overlay" id="polaroidZoomOverlay">
-    <img id="polaroidZoomImg" src="" alt="">
-  </div>
-</section>
+    <!-- =======================================
+    JAVASCRIPT
+    ======================================== -->
 
-<!-- SCENE 8: VINTAGE PROJECTOR -->
-<section id="scene-projector" class="scene">
-  <div class="dust-field" id="dustField"></div>
-  <div class="projector-screen">
-    <div class="filmstrip" id="filmstrip"></div>
-  </div>
-  <img id="usImage" src="images/us.jpg" class="us-final-img" alt="Us" onerror="this.classList.add('img-fallback')">
-  <button class="btn-gold scene-next" id="projectorNextBtn">Continue ❤️</button>
-</section>
+    <script src="script.js"></script>
 
-<!-- SCENE 9: HEART GAME -->
-<section id="scene-heartgame" class="scene">
-  <h2 class="title-script scene-heading">Catch The Hearts</h2>
-  <div class="game-hud">
-    <span id="heartScore">Score: 0</span>
-    <span id="heartTimer">Time: 60</span>
-  </div>
-  <div class="heart-game-field" id="heartGameField"></div>
-  <button class="btn-gold" id="startHeartGameBtn">Start</button>
-  <div class="game-result" id="heartGameResult">
-    <p class="title-script">Well done! ❤️</p>
-    <button class="btn-gold scene-next" id="heartGameNextBtn">Continue</button>
-  </div>
-</section>
-
-<!-- SCENE 10: CAKE GAME -->
-<section id="scene-cakegame" class="scene">
-  <h2 class="title-script scene-heading">Decorate The Cake</h2>
-  <div class="cake-game-wrap">
-    <div class="cake-board" id="cakeBoard">
-      <div class="cake-base"></div>
-    </div>
-    <div class="decoration-tray" id="decorationTray"></div>
-  </div>
-  <div class="cake-complete-msg" id="cakeCompleteMsg">
-    <p class="title-script">Happy Birthday ❤️</p>
-    <button class="btn-gold scene-next" id="cakeNextBtn">Continue</button>
-  </div>
-</section>
-
-<!-- SCENE 11: 23 REASONS -->
-<section id="scene-reasons" class="scene">
-  <h2 class="title-script scene-heading">23 Reasons I Love You</h2>
-  <div class="envelope-grid" id="envelopeGrid"></div>
-  <div class="golden-envelope-wrap" id="goldenEnvelopeWrap">
-    <div class="golden-envelope" id="goldenEnvelope">✉️</div>
-    <p class="lock-hint">One last envelope...</p>
-  </div>
-  <button class="btn-gold scene-next" id="reasonsNextBtn">Continue ❤️</button>
-  <div class="reason-modal" id="reasonModal">
-    <div class="reason-modal-card">
-      <p id="reasonText"></p>
-      <button class="btn-gold" id="reasonCloseBtn">Close</button>
-    </div>
-  </div>
-</section>
-
-<!-- SCENE 12: MAILBOX -->
-<section id="scene-mailbox" class="scene">
-  <div class="mailbox-wrap" id="mailboxWrap">
-    <div class="mailbox" id="mailboxEl">📬</div>
-    <p class="lock-hint">Tap the mailbox</p>
-  </div>
-  <div class="letter-wrap" id="letterWrap">
-    <div class="letter-paper" id="letterPaper">
-      <p id="letterTyped"></p>
-      <p class="letter-signature" id="letterSignature">Forever yours ❤️</p>
-    </div>
-  </div>
-  <button class="btn-gold scene-next" id="mailboxNextBtn">Continue ❤️</button>
-</section>
-
-<!-- SCENE 13: MEMORY SKY -->
-<section id="scene-sky" class="scene">
-  <div class="moon"></div>
-  <div class="stars-field" id="starsField"></div>
-  <div class="floating-hearts-field" id="floatingHeartsSky"></div>
-  <p class="sky-message" id="skyMessage"></p>
-  <button class="btn-gold scene-next" id="skyNextBtn">Continue ❤️</button>
-</section>
-
-<!-- SCENE 14: ENDING -->
-<section id="scene-ending" class="scene">
-  <div class="ending-hearts" id="endingHearts"></div>
-  <h1 class="title-script ending-title">Happy Birthday<br>Busayo ❤️</h1>
-  <button class="btn-gold" id="restartBtn">Restart ↺</button>
-</section>
-
-<script src="script.js"></script>
 </body>
+
 </html>
