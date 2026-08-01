@@ -10,34 +10,34 @@
 
 <!-- Loading Screen -->
 <div id="loading-screen" class="screen active">
-  <div class="loader-container">
-    <div class="heart"></div>
+  <div class="loading-wrapper">
+    <div class="glowing-heart"></div>
     <div class="loading-text">Preparing something special...</div>
-    <div class="loading-bar-container">
-      <div class="loading-bar"></div>
+    <div class="loading-bar-background">
+      <div class="loading-progress"></div>
     </div>
   </div>
 </div>
 
 <!-- Countdown Screen -->
 <div id="countdown-screen" class="screen">
-  <div class="countdown">
-    <div class="number" id="countdown-number">3</div>
-    <div class="arrow">↓</div>
+  <div class="countdown-wrapper">
+    <div class="countdown-number" id="countdown-number">3</div>
+    <div class="countdown-arrow">↓</div>
   </div>
 </div>
 
 <!-- Birthday Reveal -->
 <div id="birthday-reveal" class="screen">
-  <div class="birthday-message">
+  <div class="birthday-content">
     <h1 class="big-text">HAPPY BIRTHDAY BUSAYO</h1>
-    <div class="baloons-container">
+    <div class="balloon-container">
       <div class="balloon white"></div>
       <div class="balloon white"></div>
       <div class="balloon gold"></div>
     </div>
     <div class="confetti"></div>
-    <div class="hearts"></div>
+    <div class="floating-hearts"></div>
     <div class="sparkles"></div>
     <button id="start-journey" class="btn">Begin The Journey ❤️</button>
   </div>
@@ -45,14 +45,14 @@
 
 <!-- Cover Page -->
 <div id="cover-page" class="screen">
-  <div class="cover-container">
-    <div class="cover-frame">
-      <img src="images/cover.jpg" alt="Cover" class="cover-image" />
+  <div class="cover-content">
+    <div class="white-frame">
+      <img src="images/cover.jpg" alt="Cover" class="cover-image"/>
     </div>
     <div class="cover-text">
       <h2>To Busayo,</h2>
-      <p>With Love 🤍</p>
-      <p>I made something for you...<br/>I hope it makes you smile.</p>
+      <p class="love-text">With Love 🤍</p>
+      <p class="intro-text">I made something for you...<br/>I hope it makes you smile.</p>
       <button class="btn" id="to-cover-next">Continue</button>
     </div>
   </div>
@@ -60,10 +60,10 @@
 
 <!-- Password Screen -->
 <div id="password-screen" class="screen">
-  <div class="password-container">
+  <div class="password-section">
     <div class="password-card">
       <div class="lock-icon">🔐</div>
-      <p>Every beautiful surprise deserves a little secret.</p>
+      <p class="password-instruction">Every beautiful surprise deserves a little secret.</p>
       <input type="password" id="password-input" placeholder="Enter Password" />
       <div class="password-buttons">
         <button id="unlock-btn" class="btn">Unlock</button>
@@ -74,19 +74,17 @@
 
 <!-- Treasure Chest -->
 <div id="treasure-screen" class="screen">
-  <div class="treasure-container">
+  <div class="treasure-section">
     <div class="chest" id="chest"></div>
-    <div class="message">"Every treasure tells a story..."</div>
+    <div class="treasure-message">"Every treasure tells a story..."</div>
     <button class="btn" id="open-chest">Continue</button>
   </div>
 </div>
 
 <!-- Memory Book -->
 <div id="memory-book" class="screen">
-  <div class="book-container">
-    <div class="book" id="book">
-      <!-- Pages will be generated dynamically -->
-    </div>
+  <div class="book-section">
+    <div class="book" id="book"></div>
     <div class="book-controls">
       <button id="prev-page" class="btn">Previous</button>
       <button id="next-page" class="btn">Next</button>
@@ -94,11 +92,11 @@
   </div>
 </div>
 
-<!-- Final Page with Photo -->
+<!-- Final Photo -->
 <div id="final-photo" class="screen">
-  <div class="final-photo-container">
-    <img src="images/us.jpg" alt="Us" class="final-photo" />
-    <div class="caption">
+  <div class="final-photo-section">
+    <img src="images/us.jpg" alt="Us" class="final-photo"/>
+    <div class="final-caption">
       <p>No matter how many memories we make...<br/>this will always be my favourite one.</p>
     </div>
     <button class="btn" id="to-final">Continue</button>
@@ -107,8 +105,8 @@
 
 <!-- Catch My Heart Game -->
 <div id="game-screen" class="screen">
-  <div class="game-container">
-    <div class="score-board">
+  <div class="game-section">
+    <div class="score-timer">
       <div>Score: <span id="score">0</span></div>
       <div>Time: <span id="timer">60</span>s</div>
     </div>
@@ -117,9 +115,9 @@
   </div>
 </div>
 
-<!-- Build My Birthday Cake -->
+<!-- Build Birthday Cake -->
 <div id="cake-screen" class="screen">
-  <div class="cake-container">
+  <div class="cake-section">
     <div class="cake">
       <div class="layers">
         <div class="layer" id="layer1"></div>
@@ -141,18 +139,16 @@
 
 <!-- 23 Reasons -->
 <div id="reasons-screen" class="screen">
-  <div class="reasons-container">
+  <div class="reasons-section">
     <h2>23 Reasons Why You Are Awesome ❤️</h2>
-    <div class="envelopes">
-      <!-- Envelopes will be generated dynamically -->
-    </div>
+    <div class="envelopes"></div>
     <button class="btn" id="to-mailbox">Next</button>
   </div>
 </div>
 
 <!-- Mailbox -->
 <div id="mailbox-screen" class="screen">
-  <div class="mailbox-container">
+  <div class="mailbox-section">
     <div class="mailbox" id="mailbox">
       <div class="flag" id="flag"></div>
       <div class="mailbox-body">
@@ -165,7 +161,7 @@
 
 <!-- Love Letter -->
 <div id="letter-screen" class="screen">
-  <div class="letter-container">
+  <div class="letter-section">
     <div class="letter" id="letter">
       <p>Dear Busayo,</p>
       <p>You're amazing and loved more than words can say.</p>
@@ -175,19 +171,19 @@
   </div>
 </div>
 
-<!-- Moon Ending -->
+<!-- Moon Scene -->
 <div id="moon-screen" class="screen">
-  <div class="moon-container">
+  <div class="moon-section">
     <div class="moon"></div>
     <div class="stars"></div>
-    <div class="hearts"></div>
+    <div class="floating-hearts"></div>
   </div>
   <button class="btn" id="to-final-message">Next</button>
 </div>
 
 <!-- Final Birthday Message -->
 <div id="final-message" class="screen">
-  <div class="final-message-container">
+  <div class="final-message-section">
     <h1>Happy Birthday Busayo ❤️</h1>
     <p>Wishing you all the love and happiness in the world.</p>
     <p>One Last Thing...</p>
@@ -195,9 +191,9 @@
   </div>
 </div>
 
-<!-- Final Love Message -->
+<!-- Love Final -->
 <div id="love-message" class="screen">
-  <div class="love-message">
+  <div class="love-final">
     <h2>I love you more than words could ever explain.</h2>
     <button class="btn" id="restart">Begin Again ❤️</button>
   </div>
