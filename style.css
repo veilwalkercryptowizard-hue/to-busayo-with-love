@@ -1150,6 +1150,32 @@ transform:translate(-50%,-50%) scale(2.2);
     line-height:1.8;
 }
 
+#treasureChest .lock{
+    position:absolute;
+    left:50%;
+    top:72px;
+    transform:translateX(-50%);
+    width:42px;
+    height:50px;
+    background:#d4af37;
+    border-radius:8px;
+    z-index:5;
+    box-shadow:0 0 15px rgba(212,175,55,.5);
+}
+
+#treasureChest .lock::before{
+    content:"";
+    position:absolute;
+    width:26px;
+    height:22px;
+    border:5px solid #d4af37;
+    border-bottom:none;
+    border-radius:20px 20px 0 0;
+    left:50%;
+    transform:translateX(-50%);
+    top:-18px;
+}
+
 /* ==========================================
    MEMORY BOOK
 ========================================== */
